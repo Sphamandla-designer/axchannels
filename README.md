@@ -1,45 +1,31 @@
 # AX-Channels — Website
 
-**We turn complexity into digital clarity.**
-
-Premium static website for AX-Channels, a digital product & experience studio in
-Johannesburg, South Africa. Built as dependency-free HTML/CSS/JS — no build step,
-deployable on any static host (GitHub Pages, Netlify, Vercel, Cloudflare Pages).
+Implementation of the uploaded AX-Channels design pages (`AX Home page.png`,
+`Service page.png`, `web design.png`) as a dependency-free static site.
 
 ## Structure
 
 ```
-index.html               Homepage — locked 13-section narrative
-work/                    Portfolio index
-work/finos/              Case study — FINOS (financial intelligence)
-work/wastemart/          Case study — WasteMart (recycling operations)
-work/managem/            Case study — ManaGem (management workspace)
-capabilities/            Four capabilities + FAQs
-insights/                Editorial essays
-johannesburg/            Local context page
-start-a-project/         Commercial entry / contact
-assets/css/main.css      Design system (palette, type, components, object language)
-assets/css/home.css      Homepage compositions & scroll scenes
-assets/css/page.css      Interior page layouts
-assets/js/main.js        Interaction system (hero assembly, scroll scenes, explorers)
+index.html                    Home (AX Home page.png)
+services/                     Services overview (Service page.png)
+services/web-design/          Web design service + packages + FAQ (web design.png)
+assets/css/site.css           Design system implementation
+assets/js/site.js             Nav, dropdown, carousels, FAQ accordion
+assets/img/                   Image assets extracted from the design files
 ```
 
-## Locked brand system
+Fonts: Poppins (sans) + EB Garamond (serif) via Google Fonts.
+Colors: dark #101317/#14181f · light #fafafa · cyan #00afd3.
 
-- Palette: `#020618` `#F8BD00` `#00AFD3` `#FFFFFF` `#FAFAFA` `#6A7181` (only)
-- Type: Lexend 400/500/600/700 (Google Fonts)
-- Core idea: **Complexity → Connection → Clarity**
+## Deployment
 
-## Before go-live
+Pushes to `claude/ax-channels-website-oycl4p` auto-publish to the `gh-pages`
+branch via GitHub Actions → served at GitHub Pages.
 
-- Confirm/replace contact email `hello@axchannels.co.za` (footer, start-a-project).
-- Replace domain `https://www.axchannels.co.za/` in `sitemap.xml` / `robots.txt`
-  if the production domain differs.
-- ManaGem case copy is written conservatively; drop in approved project detail
-  from the strategy documents when available.
+## Notes
 
-## Accessibility & performance
-
-- All motion honours `prefers-reduced-motion` (scenes render in their final state).
-- All visuals are inline SVG/CSS — no image payloads, no external JS dependencies.
-- All narrative content exists as real HTML text for SEO.
+- Copy is implemented verbatim from the design files (including as-designed
+  wording such as "How To Optimist Your Website" and "Stranger Brand Authority").
+- Contact points use hello@axchannels.co.za — update if the address differs.
+- FAQ answers beyond the first (open) one are not visible in the design and
+  were written to match the shown copy/pricing.
