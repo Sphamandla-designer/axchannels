@@ -6,8 +6,8 @@
 
 :root {
   /* Accent ramp — single hue, varied lightness */
-  --flame: #e8541c;
-  --flame-hot: #ff6b1a;
+  --flame: #cc430c;          /* 4.80:1 with white text */
+  --flame-hot: #ff6b1a;      /* decorative + text on dark only */
   --flame-deep: #c33f0e;
   --ember: #f7a072;
 
@@ -18,7 +18,8 @@
   --cream: #fff6f0;
   --paper: #ffffff;
   --muted: #b9a79c;
-  --muted-dark: #6d5a50;
+  --muted-dark: #6d5a50;     /* on light surfaces only */
+  --muted-on-dark: #9a8377;  /* 5.49:1 on --ink-deep */
 
   --gutter: clamp(1.1rem, 3.5vw, 2.5rem);
   --shell: min(1320px, 100% - 2 * var(--gutter));
@@ -63,7 +64,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   display: inline-flex; align-items: center; gap: 0.55rem;
   font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
   padding: 0.45rem 0.95rem; border-radius: 999px;
-  border: 1px solid rgba(232, 84, 28, 0.45); color: var(--flame-hot);
+  border: 1px solid rgba(204, 67, 12, 0.55); color: var(--flame-hot);
 }
 .eyebrow::before {
   content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--flame-hot);
@@ -78,10 +79,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .btn:hover { transform: translateY(-2px); }
 .btn__ico {
-  width: 2.1rem; height: 2.1rem; border-radius: 50%;
-  display: inline-grid; place-content: center; font-size: 0.95rem;
+  width: 2.1rem; height: 2.1rem; border-radius: 50%; flex: none;
+  display: inline-grid; place-content: center;
   transition: transform 0.25s ease;
 }
+.btn__ico svg { width: 1rem; height: 1rem; }
 .btn:hover .btn__ico { transform: rotate(45deg); }
 
 .btn--flame { background: var(--flame); color: #fff; }
@@ -145,10 +147,19 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   position: absolute; right: clamp(4%, 13%, 16%); bottom: 0; z-index: 1;
   height: min(94%, 780px); width: auto;
   object-fit: contain; object-position: bottom right;
-  filter: saturate(1.05) contrast(1.04) sepia(0.3) hue-rotate(-12deg) brightness(0.98)
+  filter: saturate(1.08) contrast(1.12) sepia(0.32) hue-rotate(-12deg) brightness(0.72)
            drop-shadow(-34px 10px 70px rgba(86, 22, 4, 0.5));
   pointer-events: none;
 }
+/* Keeps white copy legible where it crosses the figure and the brighter
+   lower half of the gradient. Sits above the photo, below the content. */
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(104deg,
+    rgba(70, 18, 3, 0.52) 0%, rgba(70, 18, 3, 0.42) 34%,
+    rgba(70, 18, 3, 0.22) 58%, rgba(70, 18, 3, 0) 78%);
+}
+
 /* Warm light wrapping the cut-out figure */
 .hero__glow {
   position: absolute; right: 2%; bottom: 0; z-index: 0;
@@ -158,7 +169,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 
 .hero__inner {
-  position: relative; z-index: 2;
+  position: relative; z-index: 3;
   padding: clamp(1.1rem, 2vw, 1.6rem) 0 clamp(1.6rem, 3vw, 2.4rem);
   flex: 1 0 auto; display: flex; flex-direction: column;
 }
@@ -211,7 +222,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .hero__kicker {
   position: absolute; left: 0; top: 0.75em;
   font-size: 0.72rem; font-weight: 500; line-height: 1.25;
-  color: rgba(255, 255, 255, 0.8);
+  color: #fff;
 }
 
 .hero h1 {
@@ -221,20 +232,20 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .hero__lead {
   margin-top: 1.5rem; max-width: 40ch;
-  font-size: clamp(0.97rem, 1.2vw, 1.08rem); color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(0.97rem, 1.2vw, 1.08rem); color: #fff;
   text-wrap: pretty;
 }
 .hero__cta { margin-top: 1.9rem; display: flex; flex-wrap: wrap; gap: 0.8rem; }
 
 /* proof cluster, top right of the hero body */
 .hero__proof {
-  position: absolute; right: 0; top: clamp(6rem, 11vw, 9rem); z-index: 3;
+  position: absolute; right: 0; top: clamp(6rem, 11vw, 9rem); z-index: 4;
   width: var(--shell); left: 50%; transform: translateX(-50%);
   display: flex; justify-content: flex-end;
   pointer-events: none;
 }
 .proof { display: inline-flex; align-items: center; gap: 0.8rem; pointer-events: auto; }
-.proof p { font-size: 0.78rem; line-height: 1.35; color: rgba(255, 255, 255, 0.92); }
+.proof p { font-size: 0.78rem; line-height: 1.35; color: #fff; }
 .proof b { display: block; font-size: 0.9rem; font-weight: 700; }
 
 /* --- hero stat cards --- */
@@ -256,16 +267,16 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .stat--paper .stat__note { color: var(--muted-dark); }
 
 .stat--glass {
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.26);
+  background: rgba(42, 16, 6, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(12px);
   color: #fff;
 }
-.stat--glass .stat__note { color: rgba(255, 255, 255, 0.78); }
+.stat--glass .stat__note { color: #fff; }
 
 /* --- floating contact card --- */
 .hero__card {
-  position: absolute; right: calc(var(--gutter) + 0.5rem); bottom: clamp(1.5rem, 3.5vw, 2.6rem); z-index: 3;
+  position: absolute; right: calc(var(--gutter) + 0.5rem); bottom: clamp(1.5rem, 3.5vw, 2.6rem); z-index: 4;
   width: min(304px, 38vw);
   background: var(--cream); color: var(--ink);
   border-radius: 24px; padding: 0.85rem;
@@ -280,8 +291,14 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   border-radius: 999px; background: var(--cream); color: var(--muted-dark);
 }
 .badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #18b26a; }
-.hero__card figure { border-radius: 16px; overflow: hidden; background: #2a1109; }
-.hero__card figure img { width: 100%; aspect-ratio: 1 / 1.06; height: auto; object-fit: cover; object-position: center 30%; }
+.hero__card figure {
+  border-radius: 16px; overflow: hidden; aspect-ratio: 1 / 1.06;
+  background: linear-gradient(165deg, #f0842a 0%, #d6500f 55%, #a83309 100%);
+}
+.hero__card figure img {
+  width: 100%; height: 100%;
+  object-fit: contain; object-position: center bottom;
+}
 .hero__card-meta { text-align: center; padding: 0.95rem 0.4rem 1.05rem; }
 .hero__card-meta b { display: block; font-size: 0.86rem; }
 .hero__card-meta span { display: block; font-size: 0.78rem; color: var(--muted-dark); }
@@ -378,7 +395,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   display: flex; flex-direction: column; gap: 0.7rem;
   transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
 }
-.svc:hover { background: rgba(232, 84, 28, 0.12); border-color: rgba(232, 84, 28, 0.5); transform: translateY(-3px); }
+.svc:hover { background: rgba(204, 67, 12, 0.16); border-color: rgba(204, 67, 12, 0.6); transform: translateY(-3px); }
 .svc__num { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; color: var(--flame-hot); }
 .svc h3 { font-size: clamp(1.15rem, 1.8vw, 1.45rem); font-weight: 700; letter-spacing: -0.01em; }
 .svc p { font-size: 0.92rem; color: var(--muted); text-wrap: pretty; }
@@ -412,7 +429,13 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .work__cat { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ember); }
 .work h3 { margin-top: 0.5rem; font-size: clamp(1.05rem, 1.6vw, 1.35rem); font-weight: 700; letter-spacing: -0.01em; }
 .work p { margin-top: 0.35rem; font-size: 0.82rem; color: rgba(255, 255, 255, 0.76); text-wrap: pretty; }
-.work__link { margin-top: 0.9rem; display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.8rem; font-weight: 600; color: #fff; border-bottom: 1px solid rgba(255, 255, 255, 0.45); padding-bottom: 2px; }
+.work__link {
+  margin-top: 0.7rem; display: inline-flex; align-items: center; gap: 0.45rem;
+  min-height: 44px; padding: 0.55rem 0;
+  font-size: 0.8rem; font-weight: 600; color: #fff;
+}
+.work__link span { border-bottom: 1px solid rgba(255, 255, 255, 0.45); padding-bottom: 2px; }
+.work__link:hover span { border-bottom-color: #fff; }
 
 /* ---------- Process ---------- */
 
@@ -454,16 +477,19 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .footer { background: var(--ink-deep); color: #fff; padding-block: clamp(2.5rem, 5vw, 4rem); }
 .footer__grid { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 2rem; }
-.footer__grid h4 { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--flame-hot); margin-bottom: 1rem; }
-.footer__grid li + li { margin-top: 0.5rem; }
-.footer__grid a, .footer__grid li { font-size: 0.88rem; color: var(--muted); }
+.footer__grid h3 { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--flame-hot); margin-bottom: 1rem; }
+.footer__grid li + li { margin-top: 0.15rem; }
+.footer__grid li { font-size: 0.88rem; color: var(--muted); }
+.footer__grid a { font-size: 0.88rem; color: var(--muted);
+  display: inline-flex; align-items: center; min-height: 44px; }
+.footer__grid li:not(:has(a)) { min-height: 44px; display: flex; align-items: center; }
 .footer__grid a:hover { color: #fff; }
 .footer__about p { margin-top: 0.9rem; font-size: 0.88rem; color: var(--muted); max-width: 34ch; text-wrap: pretty; }
 .footer__base {
   margin-top: clamp(2rem, 4vw, 3rem); padding-top: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
-  font-size: 0.8rem; color: var(--muted-dark);
+  font-size: 0.8rem; color: var(--muted-on-dark);
 }
 
 /* ============================================================
