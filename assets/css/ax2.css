@@ -91,6 +91,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .btn--paper { background: var(--paper); color: var(--ink); }
 .btn--paper .btn__ico { background: var(--flame); color: #fff; }
 
+.btn--outline { border: 1px solid rgba(255, 255, 255, 0.55); color: #fff; }
+.btn--outline .btn__ico { background: var(--paper); color: var(--flame); }
+.btn--outline:hover { background: rgba(255, 255, 255, 0.12); }
+
 .btn--ghost { border: 1px solid rgba(255, 255, 255, 0.35); color: #fff; }
 .btn--ghost .btn__ico { background: rgba(255, 255, 255, 0.16); color: #fff; }
 .btn--ghost:hover { background: rgba(255, 255, 255, 0.1); }
@@ -120,26 +124,29 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   border-radius: var(--r-lg);
   overflow: hidden;
   background:
-    radial-gradient(120% 90% at 82% 18%, #ff8a2b 0%, #ef5a18 32%, #cf3f0d 58%, #7d2408 100%),
-    var(--flame);
+    radial-gradient(85% 115% at 100% 55%, rgba(150, 40, 16, 0.78) 0%, rgba(150, 40, 16, 0) 58%),
+    linear-gradient(178deg, #ae3315 0%, #cc4503 30%, #dd5a02 58%, #e96e0b 80%, #f07f11 100%);
   color: #fff;
   isolation: isolate;
+  min-height: min(50vw, 760px);
+  display: flex; flex-direction: column;
 }
 
 /* Oversized watermark letterforms behind the content */
 .hero__mark {
-  position: absolute; left: -2vw; bottom: -12vw; z-index: 0;
-  font-size: clamp(16rem, 34vw, 34rem); font-weight: 700; line-height: 0.78;
-  letter-spacing: -0.05em; color: rgba(255, 255, 255, 0.07);
+  position: absolute; left: 6%; bottom: -8%; z-index: 0;
+  font-size: clamp(14rem, 30vw, 30rem); font-weight: 700; line-height: 0.78;
+  letter-spacing: -0.04em; color: rgba(255, 255, 255, 0.085);
   user-select: none; pointer-events: none;
 }
 
 .hero__photo {
-  position: absolute; right: 0; bottom: 0; z-index: 1;
-  height: min(88%, 720px); width: auto;
+  /* Sits left of the profile card, as in the reference, so the face stays clear */
+  position: absolute; right: clamp(4%, 13%, 16%); bottom: 0; z-index: 1;
+  height: min(94%, 780px); width: auto;
   object-fit: contain; object-position: bottom right;
-  filter: saturate(1.1) contrast(1.05) sepia(0.42) hue-rotate(-18deg) brightness(1.02)
-           drop-shadow(-30px 0 60px rgba(90, 24, 4, 0.45));
+  filter: saturate(1.05) contrast(1.04) sepia(0.3) hue-rotate(-12deg) brightness(0.98)
+           drop-shadow(-34px 10px 70px rgba(86, 22, 4, 0.5));
   pointer-events: none;
 }
 /* Warm light wrapping the cut-out figure */
@@ -150,7 +157,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   pointer-events: none;
 }
 
-.hero__inner { position: relative; z-index: 2; padding: clamp(1.1rem, 2vw, 1.6rem) 0 clamp(2rem, 4vw, 3rem); }
+.hero__inner {
+  position: relative; z-index: 2;
+  padding: clamp(1.1rem, 2vw, 1.6rem) 0 clamp(1.6rem, 3vw, 2.4rem);
+  flex: 1 0 auto; display: flex; flex-direction: column;
+}
 
 /* --- top bar --- */
 .topbar {
@@ -191,32 +202,33 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 /* --- hero body --- */
 .hero__body {
+  position: relative;
   width: var(--shell); margin-inline: auto;
-  margin-top: clamp(2.5rem, 6vw, 5rem);
-  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.4rem;
+  margin-top: clamp(1.8rem, 4vw, 3.2rem);
 }
 
+/* Two small lines parked at the left margin, beside the headline's first line */
 .hero__kicker {
-  writing-mode: vertical-rl; transform: rotate(180deg);
-  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.72); align-self: start; margin-top: 0.4rem;
+  position: absolute; left: 0; top: 0.75em;
+  font-size: 0.72rem; font-weight: 500; line-height: 1.25;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .hero h1 {
-  font-size: clamp(2.6rem, 7vw, 5.6rem);
-  font-weight: 700; line-height: 1.02; letter-spacing: -0.028em;
-  text-wrap: balance; max-width: 14ch;
+  font-size: clamp(2.6rem, 7.2vw, 5.8rem);
+  font-weight: 700; line-height: 0.98; letter-spacing: -0.03em;
+  max-width: 20ch; text-indent: clamp(4.5rem, 7vw, 7rem);
 }
 .hero__lead {
-  margin-top: 1.6rem; max-width: 42ch;
+  margin-top: 1.5rem; max-width: 40ch;
   font-size: clamp(0.97rem, 1.2vw, 1.08rem); color: rgba(255, 255, 255, 0.9);
   text-wrap: pretty;
 }
-.hero__cta { margin-top: 2.2rem; display: flex; flex-wrap: wrap; gap: 0.8rem; }
+.hero__cta { margin-top: 1.9rem; display: flex; flex-wrap: wrap; gap: 0.8rem; }
 
 /* proof cluster, top right of the hero body */
 .hero__proof {
-  position: absolute; right: 0; top: clamp(7rem, 13vw, 10rem); z-index: 3;
+  position: absolute; right: 0; top: clamp(6rem, 11vw, 9rem); z-index: 3;
   width: var(--shell); left: 50%; transform: translateX(-50%);
   display: flex; justify-content: flex-end;
   pointer-events: none;
@@ -228,17 +240,17 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* --- hero stat cards --- */
 .hero__stats {
   width: var(--shell); margin-inline: auto;
-  margin-top: clamp(3rem, 8vw, 6rem);
+  margin-top: auto; padding-top: clamp(2rem, 5vw, 4rem);
   display: flex; flex-wrap: wrap; gap: 1rem;
 }
 .stat {
-  flex: 0 1 260px; min-height: 190px;
-  padding: 1.5rem; border-radius: var(--r-md);
+  flex: 0 1 252px; min-height: 188px;
+  padding: 1.35rem; border-radius: var(--r-md);
   display: flex; flex-direction: column; justify-content: space-between;
 }
 .stat b { font-size: clamp(2.1rem, 3.6vw, 3rem); font-weight: 700; line-height: 1; letter-spacing: -0.02em; display: block; }
 .stat .stat__label { font-size: 0.95rem; font-weight: 500; margin-top: 0.3rem; }
-.stat .stat__note { font-size: 0.76rem; line-height: 1.5; margin-top: 1.6rem; }
+.stat .stat__note { font-size: 0.76rem; line-height: 1.5; margin-top: 1rem; }
 
 .stat--paper { background: var(--paper); color: var(--ink); }
 .stat--paper .stat__note { color: var(--muted-dark); }
@@ -253,11 +265,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 /* --- floating contact card --- */
 .hero__card {
-  position: absolute; right: var(--gutter); bottom: clamp(1.5rem, 4vw, 3rem); z-index: 3;
-  width: min(300px, 40vw);
-  background: var(--paper); color: var(--ink);
-  border-radius: var(--r-md); padding: 0.75rem;
-  box-shadow: 0 30px 70px -25px rgba(60, 16, 2, 0.6);
+  position: absolute; right: calc(var(--gutter) + 0.5rem); bottom: clamp(1.5rem, 3.5vw, 2.6rem); z-index: 3;
+  width: min(304px, 38vw);
+  background: var(--cream); color: var(--ink);
+  border-radius: 24px; padding: 0.85rem;
+  box-shadow: 0 34px 80px -28px rgba(60, 16, 2, 0.66);
 }
 .hero__card-top { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; margin-bottom: 0.7rem; }
 .hero__card-top .brand { font-size: 0.9rem; color: var(--ink); }
@@ -268,9 +280,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   border-radius: 999px; background: var(--cream); color: var(--muted-dark);
 }
 .badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #18b26a; }
-.hero__card figure { border-radius: var(--r-sm); overflow: hidden; background: var(--ink); }
-.hero__card figure img { width: 100%; height: 132px; object-fit: cover; object-position: center 22%; }
-.hero__card-meta { text-align: center; padding: 0.9rem 0.4rem 1rem; }
+.hero__card figure { border-radius: 16px; overflow: hidden; background: #2a1109; }
+.hero__card figure img { width: 100%; aspect-ratio: 1 / 1.06; height: auto; object-fit: cover; object-position: center 30%; }
+.hero__card-meta { text-align: center; padding: 0.95rem 0.4rem 1.05rem; }
 .hero__card-meta b { display: block; font-size: 0.86rem; }
 .hero__card-meta span { display: block; font-size: 0.78rem; color: var(--muted-dark); }
 .hero__card-meta p { margin-top: 0.5rem; font-size: 0.72rem; color: var(--muted-dark); line-height: 1.5; }
@@ -478,14 +490,19 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .nav-toggle { display: grid; }
   .socials { display: none; }
 
-  /* The cut-out figure becomes a backdrop rather than a side-by-side element.
-     z-index 0 keeps it behind the stacked cards, which lose their positioning here. */
-  .hero__photo { height: 62%; opacity: 0.32; right: -6%; z-index: 0; }
+  /* No room for a side-by-side figure at this width, so she joins the flow
+     between the copy and the contact card instead of hiding behind it. */
+  .hero__photo {
+    position: static; order: 1;
+    height: auto; width: auto; max-height: 360px;
+    margin: 1.75rem auto -1.6rem; opacity: 1;
+  }
+  .hero__inner { order: 0; }
   .hero__body { grid-template-columns: 1fr; }
   .hero__kicker { writing-mode: horizontal-tb; transform: none; }
   .hero__proof { position: static; transform: none; width: auto; justify-content: flex-start; margin-top: 2rem; }
-  .hero__card { position: relative; z-index: 3; width: auto; margin: 2rem auto 0; max-width: 340px; inset: auto; }
-  .hero__stats { margin-top: 2.5rem; }
+  .hero__card { position: relative; z-index: 3; order: 2; width: auto; margin: 0 auto; max-width: 340px; inset: auto; }
+  .hero__stats { margin-top: 2.5rem; padding-top: 0; }
   .stat { flex: 1 1 100%; min-height: 0; }
   .stat .stat__note { margin-top: 1rem; }
 
