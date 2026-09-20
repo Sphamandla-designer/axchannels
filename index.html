@@ -3,434 +3,486 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AX-Channels — UX-Led Digital Design Studio in South Africa</title>
-<meta name="description" content="AX-Channels is a UX-led digital design studio in Johannesburg creating websites, interfaces and digital products that are easier to understand, easier to use and built to perform.">
+<title>AX-Channels — UX-Led Digital Design Studio in Johannesburg</title>
+<meta name="description" content="AX-Channels is a UX-led digital design studio in Johannesburg. We design websites, user interfaces and digital products that are easy to understand, easy to use and built to perform.">
+<link rel="canonical" href="https://www.axchannels.co.za/">
+<meta name="theme-color" content="#d8dddb">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AX-Channels">
+<meta property="og:title" content="AX-Channels — UX-Led Digital Design Studio in Johannesburg">
+<meta property="og:description" content="We design websites, user interfaces and digital products that are easy to understand, easy to use and built to perform.">
+<meta property="og:url" content="https://www.axchannels.co.za/">
+<meta property="og:image" content="https://www.axchannels.co.za/assets/img/home/hero-bg.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/ax2.css">
+<link rel="preload" as="image" href="assets/img/home/hero-bg.jpg" fetchpriority="high">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/home.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- ============ HERO ============ -->
-<header class="hero">
-  <span class="hero__mark" aria-hidden="true">AX</span>
-  <span class="hero__glow" aria-hidden="true"></span>
-  <img class="hero__photo" src="assets/img/home/portrait.webp" alt="Sphamandla Xaba, founder of AX-Channels" width="700" height="900">
+<!-- ======================================================== HERO / HEADER -->
+<header class="hero" id="top">
+  <img class="hero__portrait" src="assets/img/home/hero-portrait.webp"
+       alt="AX-Channels client portrait" width="888" height="940" fetchpriority="high" decoding="async">
 
-  <div class="hero__inner">
-    <div class="topbar">
-      <a class="brand" href="index.html">
-        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-          <rect width="32" height="32" rx="8" fill="#fff"/>
-          <path d="M9 23 16 9l7 14" stroke="#e8541c" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M12.2 18.4h7.6" stroke="#e8541c" stroke-width="2.6" stroke-linecap="round"/>
-        </svg>
-        AX-Channels
+  <div class="masthead">
+    <a class="brand" href="#top" aria-label="AX-Channels home"><b>AX</b><span>- Channels</span></a>
+
+    <nav class="nav" id="site-nav" aria-label="Primary">
+      <a class="nav__link" href="#top" aria-current="page">Home</a>
+      <a class="nav__link" href="#about">About Us</a>
+      <a class="nav__link" href="#services">Services</a>
+      <a class="nav__link" href="#case-studies">Case Studies</a>
+      <a class="nav__link" href="#contact">Contact Us</a>
+    </nav>
+
+    <div class="socials">
+      <a href="mailto:info@axchannels.co.za" aria-label="Email AX-Channels">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2.5"/><path d="m3 7 9 6 9-6"/></svg>
       </a>
-
-      <nav class="nav" id="nav" aria-label="Primary">
-        <a href="#top" aria-current="page">Home</a>
-        <a href="#about">About us</a>
-        <a href="services/">Services</a>
-        <a href="#work">Work</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <div class="socials">
-        <a href="mailto:hello@axchannels.co.za" aria-label="Email AX-Channels">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m3 7 9 6 9-6"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/" aria-label="AX-Channels on LinkedIn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v5M8 8v.01M12 16v-3a2 2 0 0 1 4 0v3"/></svg>
-        </a>
-        <a href="https://wa.me/" aria-label="AX-Channels on WhatsApp">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.7A8.5 8.5 0 1 1 21 11.5Z"/></svg>
-        </a>
-      </div>
-
-      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
+      <a href="tel:+27601020774" aria-label="Call AX-Channels on +27 60 102 0774">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1Z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/" aria-label="AX-Channels on LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0ZM.22 8.25h4.53V24H.22V8.25Zm7.5 0h4.34v2.15h.06c.6-1.14 2.08-2.35 4.28-2.35 4.58 0 5.43 3.01 5.43 6.93V24h-4.53v-7.9c0-1.88-.03-4.3-2.62-4.3-2.62 0-3.02 2.05-3.02 4.16V24H7.72V8.25Z"/></svg>
+      </a>
     </div>
 
-    <div class="hero__body" id="top">
-      <p class="hero__kicker">UX-Led Studio · Johannesburg</p>
-      <div>
-        <h1>Digital experiences that perform</h1>
-        <p class="hero__lead">AX-Channels is a UX-led digital design studio creating websites, interfaces and digital products that are easier to understand, easier to use and built to perform.</p>
-        <div class="hero__cta">
-          <a class="btn btn--paper" href="mailto:hello@axchannels.co.za?subject=Start%20a%20Project">Start a project <span class="btn__ico" aria-hidden="true">↗</span></a>
-          <a class="btn btn--ghost" href="#work">Explore our work <span class="btn__ico" aria-hidden="true">↗</span></a>
-        </div>
-      </div>
-    </div>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="visually-hidden">Menu</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
 
-    <div class="hero__proof">
-      <div class="proof">
-        <span class="faces">
-          <img src="assets/img/avatar-1.jpg" alt="">
-          <img src="assets/img/avatar-2.jpg" alt="">
-          <img src="assets/img/avatar-3.jpg" alt="">
-          <span>9+</span>
-        </span>
-        <p><b>22+ projects delivered</b>Across web, mobile and enterprise</p>
-      </div>
-    </div>
+  <p class="locale"><b>JHB</b> | Johannesburg</p>
 
-    <div class="hero__stats">
-      <div class="stat stat--paper">
-        <div>
-          <b>25+</b>
-          <span class="stat__label">Happy clients</span>
-        </div>
-        <p class="stat__note">Startups, scale-ups and forward-thinking teams across South Africa.</p>
-      </div>
-      <div class="stat stat--glass">
-        <div>
-          <b>5.0</b>
-          <span class="stat__label">Google rating</span>
-        </div>
-        <p class="stat__note">Based on 25+ reviews from clients we have designed and shipped for.</p>
-      </div>
+  <p class="hero__rail"><span>Design + Strategy</span></p>
+
+  <div class="hero__body">
+    <h1 class="h1">Digital experiences<br>that <em>perform</em></h1>
+    <p class="hero__lead lead">We Design Websites, User Interfaces And Digital Products That Are Easy To Understand, Easy To Use And Built To Perform.</p>
+    <p class="hero__cats">Web&nbsp; |&nbsp; Apps&nbsp; |&nbsp; User Experience | User Interface | Graphic Design</p>
+    <div class="hero__cta">
+      <a class="btn btn--light" href="#contact">Start a Project
+        <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a>
+      <a class="btn btn--outline" href="#about">Learn About Us
+        <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a>
     </div>
   </div>
 
-  <aside class="hero__card">
-    <div class="hero__card-top">
-      <span class="brand">
-        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-          <rect width="32" height="32" rx="8" fill="#e8541c"/>
-          <path d="M9 23 16 9l7 14" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M12.2 18.4h7.6" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
-        </svg>
-        AX
-      </span>
-      <span class="badge">Available for new projects</span>
-    </div>
-    <figure><img class="graded" src="assets/img/mockups/ax-channels.jpg" alt="An AX-Channels website design shown on a laptop"></figure>
-    <div class="hero__card-meta">
-      <b>hello@axchannels.co.za</b>
-      <span>Founder &amp; Lead Designer</span>
-      <p>Helping South African businesses grow through UX, design and strategy.</p>
-    </div>
-    <a class="btn btn--flame" href="mailto:hello@axchannels.co.za?subject=Start%20a%20Project">Get started <span class="btn__ico" aria-hidden="true">↗</span></a>
-  </aside>
+  <div class="hero__foot">
+    <p class="display">UX - Led Studio</p>
+    <p class="hero__tag">South African Design Studio</p>
+  </div>
 </header>
 
 <main id="main">
 
-<!-- ============ ABOUT ============ -->
-<section class="slab" id="about" aria-labelledby="about-title">
-  <div class="shell">
-    <div class="slab__head">
-      <span class="eyebrow">About us</span>
-      <span class="brand">AX-Channels</span>
-    </div>
+  <!-- ================================================ UX-LED STUDIO INTRO -->
+  <section class="studio" id="about" aria-labelledby="studio-title">
+    <div class="wrap">
+      <h2 class="h2 studio__title" id="studio-title">We Design Digital Experiences Around People And Business</h2>
 
-    <h2 class="display" id="about-title">We design digital experiences <span class="indent"><span class="warm">around people and business</span></span></h2>
+      <div class="studio__grid">
+        <figure class="studio__figure">
+          <img src="assets/img/home/work-finos.jpg"
+               alt="The FINOS financial operating system dashboard shown on a laptop"
+               width="1500" height="1125" loading="lazy" decoding="async">
+        </figure>
 
-    <div class="about__grid">
-      <figure class="about__photo">
-        <img class="graded" src="assets/img/mockups/cmaxx-dark.jpg" alt="The CMAXX website redesign shown on a laptop">
-      </figure>
+        <div class="studio__copy">
+          <p class="lead">From Websites And Mobile Interfaces To Dashboards And Digital Products, We Combine User Experience, Interface Design And Business Thinking To Create Digital Experiences That Work For Both People And Businesses.</p>
 
-      <div class="about__copy">
-        <p class="big">We bring UX research, structure and interface design together to create digital products that feel right and perform even better. Every decision balances what users need to accomplish with what the business needs to achieve.</p>
-        <p class="small">A studio focused on real outcomes, not just visuals — websites, interfaces and products that are validated with real users before they ship, and measured after they launch.</p>
-        <div class="about__meta">
-          <span class="faces">
-            <img src="assets/img/avatar-1.jpg" alt="">
-            <img src="assets/img/avatar-2.jpg" alt="">
-            <img src="assets/img/avatar-3.jpg" alt="">
-            <span>9+</span>
-          </span>
-          <a class="btn btn--flame" href="#work">See the work <span class="btn__ico" aria-hidden="true">↗</span></a>
+          <p class="body-s">We Bring UX Research, Structure And Interface Design Together To Create Digital Products That Feel Right And Perform Even Better. Every Decision Balances What Users Need To Accomplish With What The Business Needs To Achieve.</p>
+
+          <div class="proof">
+            <span class="faces" aria-hidden="true">
+              <img src="assets/img/home/avatar-team-1.jpg" alt="" width="160" height="160" loading="lazy">
+              <img src="assets/img/home/avatar-team-2.jpg" alt="" width="160" height="160" loading="lazy">
+              <img src="assets/img/home/avatar-mbalenhle.jpg" alt="" width="240" height="240" loading="lazy">
+              <span class="faces__more">+9</span>
+            </span>
+            <a class="btn btn--dark" href="#case-studies">See Our Work
+              <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+            </a>
+          </div>
+
+          <div class="stats-pair">
+            <article class="stat-card">
+              <span class="stat-card__wm" aria-hidden="true">Experience</span>
+              <p class="stat-card__num">3+</p>
+              <h3 class="stat-card__label">Years In Business</h3>
+              <p class="stat-card__note">From First Brief To Launch And Beyond: Johannesburg, South Africa.</p>
+            </article>
+
+            <article class="stat-card stat-card--media">
+              <img src="assets/img/home/clients-phone.jpg" alt="" width="1000" height="750" loading="lazy" decoding="async">
+              <p class="stat-card__num">25+</p>
+              <h3 class="stat-card__label">Happy Clients</h3>
+              <p class="stat-card__note">Startups And Scale-Ups Across South Africa.</p>
+            </article>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="about__cards">
-          <div class="partners">
-            <div>
-              <b>9+</b>
-              <span class="stat__label">Partner brands</span>
-              <p class="stat__note">Companies that chose us for long-term digital work.</p>
-            </div>
-            <ul class="wordmarks">
-              <li>Ori Capital</li>
-              <li>NeuraUX</li>
-              <li>Mondora</li>
-              <li>Lash Ramush</li>
-              <li>Eagle Drone Services</li>
-              <li>Famous Kitchen</li>
-              <li>B-Travel</li>
-              <li>JobBridge</li>
-              <li>Nonkosi House Plan</li>
+  <!-- ============================================================ SERVICES -->
+  <section class="services" id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="h2" id="services-title">Services Built On UX,<br>Not Decoration</h2>
+        <p class="sec-head__sub">We Design The Structure, Interface And Experience Behind Websites, Applications And Digital Products, From The First Idea To The Final Experience</p>
+      </div>
+
+      <div class="services__grid">
+
+        <article class="svc">
+          <div class="svc__head"><p class="eyebrow">UX - Led Process</p></div>
+          <div class="svc__body">
+            <h3 class="svc__title">Website Design &amp; Development</h3>
+            <p class="svc__desc">Conversion-driven architecture, SEO structure, performance optimization&hellip;</p>
+            <ul class="chips">
+              <li class="chip">Responsive design</li>
+              <li class="chip">UI/UX Design</li>
+              <li class="chip">CMS</li>
+              <li class="chip">Development</li>
+              <li class="chip">Testing</li>
+              <li class="chip">Launch</li>
+              <li class="chip">WordPress</li>
             </ul>
-            <a class="btn btn--flame" href="mailto:hello@axchannels.co.za?subject=Start%20a%20Project">Get started <span class="btn__ico" aria-hidden="true">↗</span></a>
           </div>
-
-          <div class="photo-stat">
-            <img class="graded" src="assets/img/mockups/lungelo.jpg" alt="The Lungelo multilingual field application shown on a phone">
-            <div>
-              <b>3+</b>
-              <span class="stat__label">Years in business</span>
-              <p class="stat__note">From first brief to launch and beyond — Johannesburg, South Africa.</p>
-            </div>
+          <div class="svc__media">
+            <img src="assets/img/home/svc-website.jpg" alt="Inceku energy infrastructure website shown on a laptop" width="1400" height="1054" loading="lazy" decoding="async">
+            <a class="btn btn--light svc__cta" href="services/web-design/">Explore Web Design
+              <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+            </a>
           </div>
-        </div>
+        </article>
+
+        <article class="svc">
+          <div class="svc__head"><p class="eyebrow">UX - Led Process</p></div>
+          <div class="svc__body">
+            <h3 class="svc__title">Digital Product Design</h3>
+            <p class="svc__desc">Experiences for apps, platforms, SaaS products and digital services.</p>
+            <ul class="chips">
+              <li class="chip">Product UX</li>
+              <li class="chip">User Journeys</li>
+              <li class="chip">Feature architecture</li>
+              <li class="chip">UI Systems</li>
+              <li class="chip">Interaction design</li>
+            </ul>
+          </div>
+          <div class="svc__media">
+            <img src="assets/img/home/svc-product.jpg" alt="A mobile product interface displayed on a phone resting on concrete" width="1400" height="1050" loading="lazy" decoding="async">
+            <a class="btn btn--light svc__cta" href="services/">Explore Product Design
+              <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+            </a>
+          </div>
+        </article>
+
+        <article class="svc">
+          <div class="svc__head"><p class="eyebrow">UX - Led Process</p></div>
+          <div class="svc__body">
+            <h3 class="svc__title">UI/UX Design &amp; UX Strategy</h3>
+            <p class="svc__desc">Clear interfaces built around how people actually use digital products.</p>
+            <ul class="chips">
+              <li class="chip">UX Strategy</li>
+              <li class="chip">User Flow</li>
+              <li class="chip">Prototypes</li>
+              <li class="chip">IA</li>
+              <li class="chip">Wireframes</li>
+            </ul>
+          </div>
+          <div class="svc__media">
+            <img src="assets/img/home/svc-uxui.jpg" alt="UI and UX interface panels being arranged on screen" width="1280" height="720" loading="lazy" decoding="async">
+            <a class="btn btn--light svc__cta" href="services/">Explore UX/UI Design
+              <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+            </a>
+          </div>
+        </article>
+
+        <article class="svc">
+          <div class="svc__head"><p class="eyebrow">UX - Led Process</p></div>
+          <div class="svc__body">
+            <h3 class="svc__title">Brand Identity Systems</h3>
+            <p class="svc__desc">Digital-first brand systems built for clarity, consistency, and growth.</p>
+            <ul class="chips">
+              <li class="chip">Social media system</li>
+              <li class="chip">Brand strategy</li>
+              <li class="chip">Graphic elements</li>
+              <li class="chip">Email Signature</li>
+              <li class="chip">Brand guidelines</li>
+              <li class="chip">Colour system</li>
+            </ul>
+          </div>
+          <div class="svc__media">
+            <img src="assets/img/home/svc-brand.jpg" alt="Castro Capital printed brand identity collateral" width="1400" height="788" loading="lazy" decoding="async">
+            <a class="btn btn--light svc__cta" href="services/">Explore Brand Systems
+              <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+            </a>
+          </div>
+        </article>
+
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ SERVICES ============ -->
-<section class="slab slab--deep" id="services" aria-labelledby="services-title">
-  <div class="shell">
-    <div class="slab__head">
-      <span class="eyebrow">What we do</span>
-      <span class="brand">AX-Channels</span>
-    </div>
+  <!-- ======================================================= SELECTED WORK -->
+  <section class="work band--dark" id="case-studies" aria-labelledby="work-title">
+    <span class="work__wm" aria-hidden="true">AX</span>
 
-    <h2 class="display" id="services-title">Services built on <span class="warm">UX, not decoration</span></h2>
+    <div class="wrap">
+      <p class="work__eyebrow">Selected Work</p>
 
-    <div class="svc-grid">
-      <article class="svc">
-        <p class="svc__num">01 — UX-LED PROCESS</p>
-        <h3>UX/UI Design</h3>
-        <p>Clear interfaces built around how people actually use digital products.</p>
-        <ul><li>UX strategy</li><li>User flows</li><li>IA</li><li>Wireframes</li><li>Prototypes</li><li>Design systems</li></ul>
-        <a class="btn btn--flame" href="mailto:hello@axchannels.co.za?subject=UX%2FUI%20Design">Explore UX/UI Design <span class="btn__ico" aria-hidden="true">↗</span></a>
-      </article>
-
-      <article class="svc">
-        <p class="svc__num">02 — UX-LED PROCESS</p>
-        <h3>Website Design</h3>
-        <p>Websites structured around users, business objectives and meaningful actions.</p>
-        <ul><li>UX strategy</li><li>Sitemaps</li><li>Wireframes</li><li>Responsive UI</li><li>Conversion journeys</li></ul>
-        <a class="btn btn--flame" href="services/web-design/">Explore Website Design <span class="btn__ico" aria-hidden="true">↗</span></a>
-      </article>
-
-      <article class="svc">
-        <p class="svc__num">03 — UX-LED PROCESS</p>
-        <h3>Digital Product Design</h3>
-        <p>Experiences for apps, platforms, SaaS products and digital services.</p>
-        <ul><li>Product UX</li><li>User journeys</li><li>Feature architecture</li><li>Interaction design</li><li>UI systems</li></ul>
-        <a class="btn btn--flame" href="mailto:hello@axchannels.co.za?subject=Digital%20Product%20Design">Explore Product Design <span class="btn__ico" aria-hidden="true">↗</span></a>
-      </article>
-
-      <article class="svc">
-        <p class="svc__num">04 — UX-LED PROCESS</p>
-        <h3>Website Design &amp; Development</h3>
-        <p>From experience strategy through to a responsive, production-ready website.</p>
-        <ul><li>UX</li><li>UI</li><li>Responsive design</li><li>Development</li><li>CMS</li><li>Testing</li><li>Launch</li></ul>
-        <a class="btn btn--flame" href="services/">Explore Website + Development <span class="btn__ico" aria-hidden="true">↗</span></a>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ WORK ============ -->
-<section class="slab" id="work" aria-labelledby="work-title">
-  <div class="shell">
-    <div class="slab__head">
-      <span class="eyebrow">Selected work</span>
-      <span class="brand">AX-Channels</span>
-    </div>
-
-    <h2 class="display" id="work-title">Projects designed around <span class="warm">real users</span></h2>
-
-    <div class="work-grid">
-      <article class="work">
-        <img class="graded" src="assets/img/mockups/cmaxx-dark.jpg" alt="CMAXX WiFi Solutions website shown on a laptop">
-        <div class="work__meta">
-          <p class="work__cat">Website · WiFi, Network &amp; Security</p>
-          <h3>Connectivity, Made Clear — CMAXX</h3>
-          <p>Redesigning the CMAXX digital experience to make its connectivity offering easier to understand, with a stronger path from discovery to conversion.</p>
-          <a class="work__link" href="https://sphamandla-designer.github.io/sphamandlaxaba/cmaxx.html">View case study →</a>
-        </div>
-      </article>
-
-      <article class="work">
-        <img class="graded" src="assets/img/mockups/lungelo.jpg" alt="Lungelo multilingual field app on a phone">
-        <div class="work__meta">
-          <p class="work__cat">Mobile App · Field Operations</p>
-          <h3>Lungelo</h3>
-          <p>A multilingual Flutter field application designed for low-bandwidth, on-site use.</p>
-          <a class="work__link" href="https://sphamandla-designer.github.io/sphamandlaxaba/">View case study →</a>
-        </div>
-      </article>
-
-      <article class="work">
-        <img class="graded" src="assets/img/home/work-finos.jpg" alt="FINOS financial operating system on a laptop and tablet">
-        <div class="work__meta">
-          <p class="work__cat">Web Platform · Fintech &amp; AI</p>
-          <h3>Financial Operation System — FINOS</h3>
-          <p>An AI-powered financial operating system bringing intelligence, decision-making and portfolio management into one connected experience.</p>
-          <a class="work__link" href="https://sphamandla-designer.github.io/sphamandlaxaba/finos.html">View case study →</a>
-        </div>
-      </article>
-
-      <article class="work">
-        <img class="graded" src="assets/img/home/work-wastemart.jpg" alt="WasteMart driver app open on a phone">
-        <div class="work__meta">
-          <p class="work__cat">Mobile App · Waste Services</p>
-          <h3>Smarter Waste Systems — WasteMart</h3>
-          <p>Connecting customers, services and operational workflows through a clearer digital experience.</p>
-          <a class="work__link" href="https://sphamandla-designer.github.io/sphamandlaxaba/wastemart.html">View case study →</a>
-        </div>
-      </article>
-
-      <article class="work">
-        <img class="graded" src="assets/img/home/work-managem.jpg" alt="ManaGem enterprise dashboard on a desktop monitor">
-        <div class="work__meta">
-          <p class="work__cat">Web Platform · Enterprise ERP</p>
-          <h3>Clarity For Enterprise — ManaGem</h3>
-          <p>Structuring information, workflows and operational processes into a clearer, more usable enterprise experience.</p>
-          <a class="work__link" href="https://sphamandla-designer.github.io/sphamandlaxaba/managem.html">View case study →</a>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PROCESS ============ -->
-<section class="slab slab--deep" id="process" aria-labelledby="process-title">
-  <div class="shell">
-    <div class="slab__head">
-      <span class="eyebrow">Our approach</span>
-      <span class="brand">AX-Channels</span>
-    </div>
-
-    <h2 class="display" id="process-title">We design from the <span class="warm">experience backwards</span></h2>
-
-    <div class="steps">
-      <div class="step">
-        <b>01</b>
-        <h3>Understand</h3>
-        <p>Users, business, goals, context.</p>
+      <div class="sec-head">
+        <h2 class="h2" id="work-title">A Look At The Digital Experiences We Have Designed For Real Businesses And Products.</h2>
+        <p class="sec-head__sub">Explore Selected Projects Across Websites, Applications, Dashboards And Digital Products, And See How We Approach Real Design Problems.</p>
       </div>
-      <div class="step">
-        <b>02</b>
-        <h3>Structure</h3>
-        <p>Information architecture, user journeys, content hierarchy.</p>
+
+      <div class="work__viewport">
+        <div class="work__track" id="work-track" tabindex="0" role="group" aria-label="Selected projects">
+
+          <article class="project">
+            <a class="project__media" href="#case-studies">
+              <img src="assets/img/home/work-cmaxx.jpg" alt="The CMAXX website homepage shown on a laptop in a dark studio setting" width="1500" height="1125" loading="lazy" decoding="async">
+            </a>
+            <span class="project__cat">Website · WiFi, Network &amp; Security</span>
+            <h3 class="project__title">Connectivity, Made Clear: CMAXX</h3>
+            <p class="project__desc">Redesigning the CMAXX digital experience to make its connectivity offering easier to understand, with a stronger path from discovery to conversion.</p>
+            <a class="tlink" href="#case-studies">View Case Study</a>
+          </article>
+
+          <article class="project">
+            <a class="project__media" href="#case-studies">
+              <img src="assets/img/home/work-finos.jpg" alt="The FINOS financial operating system dashboard shown on a laptop" width="1500" height="1125" loading="lazy" decoding="async">
+            </a>
+            <span class="project__cat">Web Platform · Fintech &amp; AI</span>
+            <h3 class="project__title">Financial Operation System: FINOS</h3>
+            <p class="project__desc">An AI-powered financial operating system bringing intelligence, decision-making and portfolio management into one connected experience.</p>
+            <a class="tlink" href="#case-studies">View Case Study</a>
+          </article>
+
+        </div>
+
+        <div class="work__nav">
+          <button class="carousel-btn carousel-btn--prev" type="button" data-work-prev>
+            <span class="visually-hidden">Previous project</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+          </button>
+          <button class="carousel-btn carousel-btn--next" type="button" data-work-next>
+            <span class="visually-hidden">Next project</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            <span class="carousel-btn__label" aria-hidden="true">Swap</span>
+          </button>
+        </div>
       </div>
-      <div class="step">
-        <b>03</b>
-        <h3>Design</h3>
-        <p>Wireframes, interaction, UI, design systems.</p>
-      </div>
-      <div class="step">
-        <b>04</b>
-        <h3>Validate</h3>
-        <p>Testing, feedback, iteration.</p>
-      </div>
-      <div class="step">
-        <b>05</b>
-        <h3>Deliver</h3>
-        <p>Development, launch, optimisation.</p>
+
+      <div class="work__more">
+        <a class="btn btn--light" href="#case-studies">See All Projects
+          <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+        </a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ TESTIMONIALS ============ -->
-<section class="slab" id="testimonials" aria-labelledby="testi-title">
-  <div class="shell">
-    <div class="slab__head">
-      <span class="eyebrow">Testimonials</span>
-      <span class="brand">5.0 · 25+ reviews</span>
+  <!-- ======================================================== TESTIMONIALS -->
+  <section class="voices" aria-labelledby="voices-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="h2" id="voices-title">What Our Clients Say About Working With AX-Channels.</h2>
+        <p class="sec-head__sub">Real Feedback From Businesses And Teams We Have Worked With.</p>
+      </div>
     </div>
 
-    <h2 class="display" id="testi-title">What our <span class="warm">clients say</span></h2>
+    <div class="voices__track" tabindex="0" role="group" aria-label="Client testimonials">
 
-    <div class="testi-grid">
-      <figure class="testi">
-        <div class="testi__who">
-          <img src="assets/img/avatar-1.jpg" alt="">
-          <div><b>Mbalenhle Sikhosana</b><span>Managing Attorney</span></div>
+      <article class="voice">
+        <div class="voice__top">
+          <img class="voice__avatar" src="assets/img/home/avatar-mbalenhle.jpg" alt="Mbalenhle Sikhosana" width="240" height="240" loading="lazy">
+          <span class="voice__quote-mark" aria-hidden="true">&rdquo;</span>
         </div>
-        <p class="testi__stars" aria-label="5 out of 5">★★★★★</p>
-        <blockquote><p>I used the services to create a website for my law firm and I was very impressed with the efficiency of service I received.</p></blockquote>
-      </figure>
+        <h3 class="voice__name">Mbalenhle Sikhosana</h3>
+        <p class="voice__role">Manager Attorney</p>
+        <p class="rating" role="img" aria-label="Rated 5 out of 5 — verified client">
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="verified" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 1.6 2.3 1.7 2.8-.3 1 2.7 2.4 1.5-.9 2.7.9 2.7-2.4 1.5-1 2.7-2.8-.3L12 18.6l-2.3-1.7-2.8.3-1-2.7-2.4-1.5.9-2.7-.9-2.7 2.4-1.5 1-2.7 2.8.3L12 1.6Z"/><path d="m8.6 10.4 2.2 2.2 4.3-4.3" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </p>
+        <p class="voice__text">I used the services to create a website for my law firm and I was very impressed with the efficiency of service I received……</p>
+      </article>
 
-      <figure class="testi">
-        <div class="testi__who">
-          <img src="assets/img/avatar-2.jpg" alt="">
-          <div><b>Queen Mali</b><span>Founder — Lili CPRO</span></div>
+      <article class="voice">
+        <div class="voice__top">
+          <img class="voice__avatar" src="assets/img/home/avatar-queen.jpg" alt="Queen Mali" width="240" height="240" loading="lazy">
+          <span class="voice__quote-mark" aria-hidden="true">&rdquo;</span>
         </div>
-        <p class="testi__stars" aria-label="5 out of 5">★★★★★</p>
-        <blockquote><p>It was nice working with Sphamandla, he was respectful and easy to work with. My website and company profile look great.</p></blockquote>
-      </figure>
+        <h3 class="voice__name">Queen Mali</h3>
+        <p class="voice__role">Founder - Lili CPRO</p>
+        <p class="rating" role="img" aria-label="Rated 5 out of 5 — verified client">
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="verified" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 1.6 2.3 1.7 2.8-.3 1 2.7 2.4 1.5-.9 2.7.9 2.7-2.4 1.5-1 2.7-2.8-.3L12 18.6l-2.3-1.7-2.8.3-1-2.7-2.4-1.5.9-2.7-.9-2.7 2.4-1.5 1-2.7 2.8.3L12 1.6Z"/><path d="m8.6 10.4 2.2 2.2 4.3-4.3" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </p>
+        <p class="voice__text">I was nice working with Sphamandla, he was respectful and easy to work with. My website and company profile looks great 😊….</p>
+      </article>
 
-      <figure class="testi">
-        <div class="testi__who">
-          <img src="assets/img/avatar-3.jpg" alt="">
-          <div><b>Amahle Nonhlanhla</b><span>Co-founder</span></div>
+      <article class="voice">
+        <div class="voice__top">
+          <img class="voice__avatar" src="assets/img/home/avatar-amahle.jpg" alt="Amahle Nonhlanhla" width="240" height="240" loading="lazy">
+          <span class="voice__quote-mark" aria-hidden="true">&rdquo;</span>
         </div>
-        <p class="testi__stars" aria-label="5 out of 5">★★★★★</p>
-        <blockquote><p>I had a great experience working with AX-Channels. They respected my feedback and designed the website in a way that I like.</p></blockquote>
-      </figure>
+        <h3 class="voice__name">Amahle Nonhlanhla</h3>
+        <p class="voice__role">Co-founder</p>
+        <p class="rating" role="img" aria-label="Rated 5 out of 5 — verified client">
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="verified" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 1.6 2.3 1.7 2.8-.3 1 2.7 2.4 1.5-.9 2.7.9 2.7-2.4 1.5-1 2.7-2.8-.3L12 18.6l-2.3-1.7-2.8.3-1-2.7-2.4-1.5.9-2.7-.9-2.7 2.4-1.5 1-2.7 2.8.3L12 1.6Z"/><path d="m8.6 10.4 2.2 2.2 4.3-4.3" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </p>
+        <p class="voice__text">I had a great experience working with axchannels. They respected my feedback and designed the website in a way that I like…</p>
+      </article>
+
+      <article class="voice">
+        <div class="voice__top">
+          <span class="voice__avatar voice__avatar--initials" aria-hidden="true">PB</span>
+          <span class="voice__quote-mark" aria-hidden="true">&rdquo;</span>
+        </div>
+        <h3 class="voice__name">Paballo</h3>
+        <p class="voice__role">Founder</p>
+        <p class="rating" role="img" aria-label="Rated 5 out of 5 — verified client">
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg class="verified" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 1.6 2.3 1.7 2.8-.3 1 2.7 2.4 1.5-.9 2.7.9 2.7-2.4 1.5-1 2.7-2.8-.3L12 18.6l-2.3-1.7-2.8.3-1-2.7-2.4-1.5.9-2.7-.9-2.7 2.4-1.5 1-2.7 2.8.3L12 1.6Z"/><path d="m8.6 10.4 2.2 2.2 4.3-4.3" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </p>
+        <p class="voice__text">The website, our business cards and our company portfolio was designed and executed as per our vision. I am really impressed and 100% satisfied.</p>
+      </article>
+
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ CONTACT ============ -->
-<section class="contact" id="contact" aria-labelledby="contact-title">
-  <div class="shell">
-    <h2 class="display" id="contact-title">Have a digital experience that needs rethinking?</h2>
-    <p>Whether you are building something new or improving something that already exists, let's start with the problem. We reply within two working days.</p>
-    <div class="contact__cta">
-      <a class="btn btn--paper" href="mailto:hello@axchannels.co.za?subject=Start%20a%20Project">Start a project <span class="btn__ico" aria-hidden="true">↗</span></a>
-      <a class="btn btn--ghost" href="#work">Explore our work <span class="btn__ico" aria-hidden="true">↗</span></a>
+  <!-- ===================================================== WORK IN NUMBERS -->
+  <section class="numbers" aria-labelledby="numbers-title">
+    <div class="wrap numbers__grid">
+      <div class="numbers__intro">
+        <h2 class="h2" id="numbers-title">The Work In Numbers</h2>
+        <p class="body">A Growing Track Record Of Designing Digital Experiences That Work.</p>
+      </div>
+
+      <dl class="numbers__stats">
+        <div>
+          <dt class="num__label">Digital Projects Delivered</dt>
+          <dd class="num__value">25+</dd>
+        </div>
+        <div>
+          <dt class="num__label">Years of Experience</dt>
+          <dd class="num__value">3+</dd>
+        </div>
+        <div>
+          <dt class="num__label">Partner brands</dt>
+          <dd class="num__value">9+</dd>
+        </div>
+        <div>
+          <dt class="num__label">Industries Served</dt>
+          <dd class="num__value">15+</dd>
+        </div>
+      </dl>
     </div>
-  </div>
-</section>
+  </section>
 
 </main>
 
-<!-- ============ FOOTER ============ -->
-<footer class="footer">
-  <div class="shell">
-    <div class="footer__grid">
-      <div class="footer__about">
-        <span class="brand">AX-Channels</span>
-        <p>UX-led digital design studio crafting websites, interfaces and digital products for ambitious South African businesses.</p>
-      </div>
-      <div>
-        <h4>Our services</h4>
-        <ul>
-          <li><a href="mailto:hello@axchannels.co.za?subject=UX%2FUI%20Design">UX/UI Design</a></li>
-          <li><a href="services/web-design/">Website Design</a></li>
-          <li><a href="mailto:hello@axchannels.co.za?subject=Digital%20Product%20Design">Digital Product Design</a></li>
-          <li><a href="services/">Website + Development</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Company</h4>
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#process">Our process</a></li>
-          <li><a href="#work">Work</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="mailto:hello@axchannels.co.za">hello@axchannels.co.za</a></li>
-          <li>Johannesburg, South Africa</li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer__base">
-      <span>© 2026 AX-Channels. All rights reserved.</span>
-      <span>Easier to understand. Easier to use. Built to perform.</span>
-    </div>
-  </div>
-</footer>
+<!-- ===================================================== CONTACT + FOOTER -->
+<div class="block--dark" id="contact">
+  <div class="closing">
 
-<script src="assets/js/ax2.js"></script>
+    <section class="cta" aria-labelledby="cta-title">
+      <div>
+        <h2 class="h2 cta__title" id="cta-title">Have A Digital Experience That Needs Rethinking?</h2>
+        <p class="cta__text">Whether You Are Building Something New Or Improving Something That Already Exists, Let's Start With The Problem. We Reply Within Two Working Days.</p>
+      </div>
+      <div class="cta__links">
+        <a href="mailto:info@axchannels.co.za?subject=Discuss%20A%20Project">Discuss A Project</a>
+        <a href="mailto:info@axchannels.co.za?subject=Partner%20With%20Us">Partner With Us</a>
+        <a href="mailto:info@axchannels.co.za?subject=Saying%20Hi">Just Want To Say Hi</a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a class="brand" href="#top"><b>AX</b><span>- Channels</span></a>
+          <p class="footer__about">UX-Led Digital Design Studio Crafting Websites, Interfaces And Digital Products For Ambitious South African Businesses.</p>
+        </div>
+
+        <div>
+          <h2 class="footer__head">Our Services</h2>
+          <ul class="footer__list">
+            <li><a href="services/">UX/UI Design &amp; UX Strategy</a></li>
+            <li><a href="services/web-design/">Web Design &amp; Development</a></li>
+            <li><a href="services/">Digital Product Design</a></li>
+            <li><a href="services/">Brand Identity System</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="footer__head">Company</h2>
+          <ul class="footer__list">
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Our Process</a></li>
+            <li><a href="#case-studies">Case Studies</a></li>
+            <li><a href="mailto:info@axchannels.co.za?subject=Document%20request">Documents</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="footer__head">Contact</h2>
+          <ul class="footer__list">
+            <li><a href="mailto:info@axchannels.co.za">info@axchannels.co.za</a></li>
+            <li><a href="tel:+27601020774">+27 60 102 0774</a></li>
+            <li><span>Johannesburg</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="footer__head">Socials</h2>
+          <ul class="footer__list">
+            <li><a href="https://www.linkedin.com/" rel="noopener">Linkedin</a></li>
+            <li><a href="https://www.instagram.com/" rel="noopener">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="legal">
+        <p>Copyright © 2026</p>
+        <p class="legal__links">
+          <a href="#contact">Privacy Policy</a>
+          <a href="#contact">Terms</a>
+        </p>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script src="assets/js/home.js" defer></script>
 </body>
 </html>
