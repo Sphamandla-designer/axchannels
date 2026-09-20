@@ -76,11 +76,12 @@ mobile (≤720, single-column cards, stacked CTA links, stacked footer).
 
 ## Known deviations from the design
 
-- **Contrast.** Two greys taken verbatim from the design fall below WCAG AA for
-  normal-size text: the service-card eyebrow `#b4b8bf` and the testimonial role
-  `#aaabae` on white (~2:1), and the project category `#727775` on `#1f1f23`
-  (3.6:1). They were kept because the design is the source of truth; darkening
-  them (e.g. `#8c9098` and `#848985`) would clear AA with a small visual change.
+- **Contrast.** Two greys from the design were darkened for WCAG AA: the
+  service-card eyebrow `#b4b8bf` → `#73767a` and the testimonial role
+  `#aaabae` → `#757678` (both ~2:1 → 4.6:1 on white; the lightest same-hue
+  values that pass). Still below AA for normal-size text: the project
+  category `#727775` on `#1f1f23` (3.6:1 — passes only the 3:1 large-text
+  bar); lightening it (e.g. `#9296a0`) would clear AA if wanted.
 - **Case-study pages** do not exist yet, so `View Case Study` and
   `See All Projects` link to the selected-work section.
 - **Social URLs** point at linkedin.com / instagram.com — replace with the real

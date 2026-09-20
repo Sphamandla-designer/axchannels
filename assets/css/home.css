@@ -15,8 +15,8 @@
   --ink-2:       #1f1f23;   /* dark sections                                 */
   --hero-ink:    #030303;   /* hero block base                               */
   --muted:       #697080;   /* body copy inside service cards                */
-  --muted-2:     #b4b8bf;   /* card eyebrow                                  */
-  --muted-3:     #aaabae;   /* testimonial role                              */
+  --muted-2:     #73767a;   /* card eyebrow — design #b4b8bf darkened to 4.6:1 AA */
+  --muted-3:     #757678;   /* testimonial role — design #aaabae darkened to 4.6:1 AA */
   --on-dark:     #ffffff;
   --on-dark-dim: #727775;   /* muted copy on dark                            */
   --watermark:   #29292d;
