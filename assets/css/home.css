@@ -387,7 +387,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   background: #fff;
   color: #000;
 }
-.nav-toggle svg { width: 46%; height: 46%; }
+.nav-toggle svg { width: 46%; height: 46%; grid-area: 1 / 1; }
+.nav-toggle__close { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .nav-toggle__open { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .nav-toggle__close { opacity: 1; }
 
 /* --------------------------------------------------------------------------
    8. Hero
@@ -1246,6 +1249,17 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .btn:hover .btn__icon svg,
   .btn:focus-visible .btn__icon svg { transform: translate(2px, -2px); }
   .btn:active { transform: translateY(0) scale(.985); }
+
+  /* menu icon crossfades between hamburger and close */
+  .nav-toggle svg {
+    transition: opacity var(--dur-fast) var(--ease-out), transform .3s var(--ease-out);
+  }
+  .nav-toggle[aria-expanded="true"] .nav-toggle__open  { transform: rotate(45deg); }
+  .nav-toggle[aria-expanded="false"] .nav-toggle__close { transform: rotate(-45deg); }
+
+  /* "View Case Study": underline steps away from the text on hover/focus */
+  .tlink { transition: opacity .25s var(--ease), text-underline-offset var(--dur-fast) var(--ease-out); }
+  .tlink:hover, .tlink:focus-visible { text-underline-offset: .42em; }
 
   .nav__link,
   .socials a,
