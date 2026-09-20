@@ -736,3 +736,32 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   *, *::before, *::after { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
   .trusted__scroll { animation: none; }
 }
+
+/* ============================================================
+   Motion — services pages. Gated on html.js-motion (added by JS)
+   and prefers-reduced-motion: no-preference; transform/opacity only.
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+  .js-motion .m-rv {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .8s var(--ease-out, cubic-bezier(.22,.61,.36,1)) var(--d, 0s),
+                transform .8s var(--ease-out, cubic-bezier(.22,.61,.36,1)) var(--d, 0s);
+    will-change: transform, opacity;
+  }
+  .js-motion .m-rv.is-in { opacity: 1; transform: none; will-change: auto; }
+  @media (max-width: 720px) {
+    .js-motion .m-rv { transform: translateY(12px); }
+  }
+
+  .btn .arr { transition: transform .22s ease; display: inline-block; }
+  .btn:hover .arr, .btn:focus-visible .arr { transform: translateX(3px); }
+  .btn:active { transform: translateY(0) scale(.985); }
+
+  .svc-detail__media img { transition: transform .7s cubic-bezier(.22,.61,.36,1); }
+  @media (hover: hover) {
+    .svc-detail__media:hover img { transform: scale(1.03); }
+    .pkg { transition: transform .35s cubic-bezier(.22,.61,.36,1), box-shadow .35s cubic-bezier(.22,.61,.36,1); }
+    .pkg:hover { transform: translateY(-4px); }
+  }
+}

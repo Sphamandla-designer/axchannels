@@ -90,6 +90,13 @@
   --sp-18:  clamp(10px,   .938vw,  18px);
 
   --ease: cubic-bezier(.22, .61, .36, 1);
+
+  /* Motion system ---------------------------------------------------------- */
+  --dur-fast: .22s;   /* micro-interactions            */
+  --dur-med:  .45s;   /* component transitions         */
+  --dur-slow: .85s;   /* large editorial reveals       */
+  --ease-out: cubic-bezier(.22, .61, .36, 1);
+  --ease-io:  cubic-bezier(.65, .05, .36, 1);
 }
 
 /* --------------------------------------------------------------------------
@@ -186,6 +193,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   text-transform: uppercase;
 }
 .h1 em { font-style: normal; font-weight: 880; }
+
+/* structural: each headline line is its own mask (replaces the design's <br>) */
+.h1__line { display: block; overflow: clip; }
+.h1__seg  { display: block; }
 
 .h2 {
   font-size: var(--fs-h2);
@@ -1149,4 +1160,170 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .stats-pair { grid-template-columns: minmax(0, 1fr); }
   .socials a { width: 34px; height: 34px; }
   .footer__grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* --------------------------------------------------------------------------
+   16. Motion — "keep the design, add life"
+   Everything here is gated on html.js-motion (added by JS, so a no-JS visit
+   sees the finished page) and on prefers-reduced-motion: no-preference.
+   Only transform / opacity are animated.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+
+  /* ---- reveal system ---------------------------------------------------- */
+  .js-motion [data-reveal],
+  .js-motion .m-child {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity var(--dur-slow) var(--ease-out) var(--d, 0s),
+      transform var(--dur-slow) var(--ease-out) var(--d, 0s);
+    will-change: transform, opacity;
+  }
+  .js-motion [data-reveal="fade"] { transform: none; }
+  .js-motion [data-reveal].is-in,
+  .js-motion .m-child.is-in {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+
+  /* image reveal: frame fades up while the image settles from a soft zoom */
+  .js-motion [data-reveal="img"] { transform: translateY(16px); }
+  .js-motion [data-reveal="img"] img {
+    transform: scale(1.06);
+    transition: transform 1.15s var(--ease-out) var(--d, 0s);
+  }
+  .js-motion [data-reveal="img"].is-in img { transform: none; }
+
+  /* project / service imagery settles the same way inside stagger groups */
+  .js-motion .work__track.m-group .project__media img { transform: scale(1.05); }
+  .js-motion .work__track .project.is-in .project__media img { transform: none; }
+
+  @media (max-width: 720px) {
+    .js-motion [data-reveal],
+    .js-motion .m-child { transform: translateY(14px); }
+  }
+
+  /* ---- hero entrance ----------------------------------------------------- */
+  .js-motion body:not(.is-in) .masthead        { opacity: 0; transform: translateY(-14px); }
+  .js-motion body:not(.is-in) .locale          { opacity: 0; }
+  .js-motion body:not(.is-in) .hero__rail span { opacity: 0; }
+  .js-motion body:not(.is-in) .hero__rail::before,
+  .js-motion body:not(.is-in) .hero__rail::after { transform: scaleY(0); }
+  .js-motion body:not(.is-in) .h1__seg         { transform: translateY(112%); }
+  .js-motion body:not(.is-in) .hero__lead,
+  .js-motion body:not(.is-in) .hero__cats,
+  .js-motion body:not(.is-in) .hero__cta       { opacity: 0; transform: translateY(18px); }
+  .js-motion body:not(.is-in) .hero__portrait  { opacity: 0; transform: translateY(26px); }
+  .js-motion body:not(.is-in) .display         { opacity: 0; transform: translateY(24px); }
+  .js-motion body:not(.is-in) .hero__tag       { opacity: 0; }
+
+  .js-motion .masthead        { transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
+  .js-motion .locale          { transition: opacity .7s var(--ease-out) .25s; }
+  .js-motion .hero__rail span { transition: opacity .7s var(--ease-out) .55s; }
+  .js-motion .hero__rail::before,
+  .js-motion .hero__rail::after {
+    transform-origin: center;
+    transition: transform .9s var(--ease-io) .35s;
+  }
+  .js-motion .h1__seg { transition: transform .9s var(--ease-io) .15s; }
+  .js-motion .h1__line:nth-child(2) .h1__seg { transition-delay: .27s; }
+  .js-motion .hero__lead     { transition: opacity .8s var(--ease-out) .5s,  transform .8s var(--ease-out) .5s; }
+  .js-motion .hero__cats     { transition: opacity .8s var(--ease-out) .62s, transform .8s var(--ease-out) .62s; }
+  .js-motion .hero__cta      { transition: opacity .8s var(--ease-out) .74s, transform .8s var(--ease-out) .74s; }
+  .js-motion .hero__portrait { transition: opacity .9s var(--ease-out) .35s, transform 1.1s var(--ease-out) .35s; }
+  .js-motion .display        { transition: opacity .9s var(--ease-out) .6s,  transform .9s var(--ease-out) .6s; }
+  .js-motion .hero__tag      { transition: opacity .8s var(--ease-out) .85s; }
+
+  /* the hero parallax layer set from JS (custom properties, compositor only) */
+  .js-motion .hero__portrait { translate: 0 var(--par-portrait, 0px); }
+  .js-motion .hero__body     { translate: 0 var(--par-body, 0px); opacity: var(--par-fade, 1); }
+  .js-motion .work__wm       { translate: 0 var(--par-wm, 0px); }
+
+  /* ---- micro-interactions ------------------------------------------------ */
+  .btn__icon svg { transition: transform var(--dur-fast) var(--ease-out); }
+  .btn:hover .btn__icon svg,
+  .btn:focus-visible .btn__icon svg { transform: translate(2px, -2px); }
+  .btn:active { transform: translateY(0) scale(.985); }
+
+  .nav__link,
+  .socials a,
+  .cta__links a,
+  .carousel-btn { -webkit-tap-highlight-color: transparent; }
+
+  .cta__links a { display: inline-block; transition: color .28s var(--ease-out), transform .28s var(--ease-out); }
+  .cta__links a:hover { transform: translateX(-6px); }
+
+  .carousel-btn { transition: background-color .25s var(--ease-out), transform .25s var(--ease-out); }
+  .carousel-btn:hover { transform: translateY(-50%) scale(1.06); }
+  .carousel-btn svg { transition: transform var(--dur-fast) var(--ease-out); }
+  .carousel-btn--next:hover svg { transform: translateX(2px); }
+  .carousel-btn--prev:hover svg { transform: translateX(-2px); }
+
+  @media (hover: hover) {
+    .svc__media { overflow: hidden; }
+    .svc__media img { transition: transform .7s var(--ease-out); }
+    .svc:hover .svc__media img { transform: scale(1.04); }
+
+    .voice { transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out); }
+    .voice:hover { transform: translateY(-4px); box-shadow: 0 26px 52px -32px rgba(9, 12, 20, .55); }
+
+    .stat-card { transition: transform .35s var(--ease-out); }
+    .stat-card:hover { transform: translateY(-3px); }
+  }
+
+  /* ---- selected-work swap (directional crossfade) ------------------------ */
+  .work__track {
+    transition: opacity .22s var(--ease-out), transform .22s var(--ease-out);
+  }
+  .work__track.is-swapping        { opacity: 0; transform: translateX(-20px); }
+  .work__track.is-swapping--back  { transform: translateX(20px); }
+
+  /* ---- mobile nav panel --------------------------------------------------- */
+  @media (max-width: 1100px) {
+    .nav {
+      display: flex;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-10px);
+      pointer-events: none;
+      transition:
+        opacity .32s var(--ease-out),
+        transform .32s var(--ease-out),
+        visibility 0s linear .32s;
+    }
+    .nav[data-open="true"] {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+      transition:
+        opacity .32s var(--ease-out),
+        transform .32s var(--ease-out),
+        visibility 0s;
+    }
+    .nav .nav__link {
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity .3s var(--ease-out), transform .3s var(--ease-out),
+                  background-color .28s var(--ease), color .28s var(--ease);
+    }
+    .nav[data-open="true"] .nav__link {
+      opacity: 1;
+      transform: none;
+    }
+    .nav[data-open="true"] .nav__link:nth-child(1) { transition-delay: .05s; }
+    .nav[data-open="true"] .nav__link:nth-child(2) { transition-delay: .09s; }
+    .nav[data-open="true"] .nav__link:nth-child(3) { transition-delay: .13s; }
+    .nav[data-open="true"] .nav__link:nth-child(4) { transition-delay: .17s; }
+    .nav[data-open="true"] .nav__link:nth-child(5) { transition-delay: .21s; }
+  }
+}
+
+/* Reduced motion: the pre-reveal states above never apply, and the global
+   kill-switch in §2 flattens every remaining transition. The swap fallback
+   below keeps the work carousel usable without its slide. */
+@media (prefers-reduced-motion: reduce) {
+  .work__track.is-swapping { opacity: 0; }
 }

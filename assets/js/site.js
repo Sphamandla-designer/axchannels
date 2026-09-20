@@ -96,3 +96,39 @@
     el.textContent = new Date().getFullYear();
   });
 })();
+
+/* Motion: scroll reveals for the services pages. Additive — without JS or
+   with prefers-reduced-motion the pages render complete and static. */
+(function () {
+  'use strict';
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced || !('IntersectionObserver' in window)) return;
+  document.documentElement.classList.add('js-motion');
+
+  var selectors = [
+    '.phero .kicker', '.phero h1', '.phero .lead', '.phero .btn', '.phero .btns',
+    '.phero__micro', '.whero .kicker', '.whero h1', '.whero .lead', '.whero .btns',
+    '.section-head', '.packages__head', '.services-head',
+    '.svc-detail__copy', '.svc-detail__media', '.foundations__grid > *',
+    '.pkg', '.pkg-grid__aside', '.p-step', '.t-card', '.faq-item',
+    '.growth__center > *', '.location .container > *', '.structcta .container > *',
+    '.case-track-wrap', '.footer__grid > *'
+  ];
+  var els = document.querySelectorAll(selectors.join(','));
+  var byParent = new Map();
+  els.forEach(function (el) {
+    el.classList.add('m-rv');
+    var siblings = byParent.get(el.parentElement) || 0;
+    el.style.setProperty('--d', (Math.min(siblings, 7) * 0.07).toFixed(2) + 's');
+    byParent.set(el.parentElement, siblings + 1);
+  });
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      en.target.classList.add('is-in');
+      io.unobserve(en.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+  els.forEach(function (el) { io.observe(el); });
+})();

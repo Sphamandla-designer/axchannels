@@ -42,10 +42,31 @@ the work in numbers · contact CTA · footer.
 `AX Background.png`, `AX Image hero.png`, `Mockup 14 (3) 1.png` and
 `1758105469086.png`. No stock or placeholder imagery.
 
-**Interactions** — restrained, as in the design: nav/button/link hover states,
-a project-card image zoom, the `SWAP` control on selected work (rotates the
-pair on desktop, scrolls the track on smaller screens) and a mobile nav panel.
-Testimonials and selected work are scroll-snapped and keyboard reachable.
+**Interactions & motion** — the design is unchanged; a motion layer
+(`home.css` §16 + `home.js`) adds life on top of it:
+
+- *Tokens*: fast .22s / medium .45s / slow .85s, two easing curves — every
+  animation uses them. Only `transform`/`opacity` are animated.
+- *Entrance* (≤1.2s): masthead drops in, the Design+Strategy rail draws,
+  the H1 reveals line-by-line through masks, lead → categories → CTAs
+  stagger in, the portrait and display type settle last.
+- *Scroll reveals*: one IntersectionObserver; `data-reveal` /
+  `data-reveal="img"` (frame rises while the image settles from 1.06×) /
+  `data-stagger` (children auto-delay 70ms, capped at 8). Reveal once.
+- *Counters*: the Work In Numbers values count up (900ms ease-out cubic)
+  to exactly the approved figures, once, on entry.
+- *Depth*: hero portrait lags scroll 10%, hero copy 5% with a gentle fade,
+  the AX watermark drifts ±36px — desktop fine-pointers only, one
+  rAF-throttled passive listener, custom properties consumed by CSS.
+- *Micro*: arrow icons nudge ↗ on button hover/focus, press scales .985,
+  service/work imagery scales ≤1.04 on hover, testimonial/stat cards lift,
+  the work `SWAP` is a directional crossfade, the mobile nav panel fades
+  and staggers its links.
+- *Safety nets*: all pre-reveal states are gated on `html.js-motion`
+  (added by JS) so no-JS visitors get the finished page, and on
+  `prefers-reduced-motion: no-preference` — reduced-motion users get the
+  complete static page. The services pages share the same language via
+  `site.css`/`site.js`.
 
 **Responsive** — four intentional layouts rather than a shrunk desktop:
 large desktop (≥1401), standard desktop (1101–1400), tablet (721–1100,
