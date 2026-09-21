@@ -9,17 +9,21 @@
    1. Tokens
    -------------------------------------------------------------------------- */
 :root {
-  /* Colour ---------------------------------------------------------------- */
-  --page:        #d8dddb;   /* page background                               */
+  /* Colour — the families below are derived from hero-bg.jpg so the whole
+     page shares the hero's world: base near-black #0d0d0f–#111014, teal glow
+     #006275, magenta glow #3e1229, cool neutrals. ------------------------- */
+  --page:        #dadde1;   /* page background — hero-neutral cool grey      */
   --ink:         #0a0a0a;   /* headings on light                             */
-  --ink-2:       #1f1f23;   /* dark sections                                 */
+  --ink-2:       #101014;   /* dark sections — hero base                     */
   --hero-ink:    #030303;   /* hero block base                               */
+  --glow-teal:   0, 98, 117;   /* hero teal glow (rgb)                       */
+  --glow-mag:    62, 18, 41;   /* hero magenta glow (rgb)                    */
   --muted:       #697080;   /* body copy inside service cards                */
   --muted-2:     #73767a;   /* card eyebrow — design #b4b8bf darkened to 4.6:1 AA */
   --muted-3:     #757678;   /* testimonial role — design #aaabae darkened to 4.6:1 AA */
   --on-dark:     #ffffff;
-  --on-dark-dim: #727775;   /* muted copy on dark                            */
-  --watermark:   #29292d;
+  --on-dark-dim: #8a8d95;   /* muted copy on dark — hero-cool, 5.7:1 AA      */
+  --watermark:   #1d1e24;
   --rule-dark:   rgba(255, 255, 255, .14);
   --rule-light:  rgba(10, 10, 10, .22);
   --gold:        #f8bc00;
@@ -54,24 +58,26 @@
   --r-soft:  clamp(14px, 1.1458vw, 22px);      /* stat cards, work images    */
   --r-card:  8px;                              /* service / testimonial card */
 
-  /* Vertical rhythm — each value is a gap measured in the design ---------- */
-  --sp-225: clamp(72px, 11.719vw, 225px);
-  --sp-221: clamp(72px, 11.510vw, 221px);
-  --sp-204: clamp(64px, 10.625vw, 204px);
-  --sp-203: clamp(64px, 10.573vw, 203px);
-  --sp-197: clamp(64px, 10.260vw, 197px);
-  --sp-169: clamp(56px,  8.802vw, 169px);
-  --sp-160: clamp(56px,  8.333vw, 160px);
-  --sp-143: clamp(48px,  7.448vw, 143px);
-  --sp-136: clamp(52px,  7.083vw, 136px);
-  --sp-135: clamp(52px,  7.031vw, 135px);
-  --sp-134: clamp(48px,  6.979vw, 134px);
-  --sp-131: clamp(48px,  6.823vw, 131px);
-  --sp-128: clamp(48px,  6.667vw, 128px);
-  --sp-123: clamp(44px,  6.406vw, 123px);
-  --sp-114: clamp(44px,  5.938vw, 114px);
-  --sp-101: clamp(40px,  5.260vw, 101px);
-  --sp-91:  clamp(40px,  4.740vw,  91px);
+  /* Vertical rhythm — originally measured off the artboard; the large gaps
+     are tightened ~1/3 so sections read as one continuous page while the
+     hierarchy between them is preserved. --------------------------------- */
+  --sp-225: clamp(60px, 7.8vw, 150px);
+  --sp-221: clamp(60px, 7.7vw, 148px);
+  --sp-204: clamp(56px, 7.1vw, 136px);
+  --sp-203: clamp(56px, 7.1vw, 136px);
+  --sp-197: clamp(56px, 6.9vw, 132px);
+  --sp-169: clamp(48px, 5.9vw, 113px);
+  --sp-160: clamp(48px, 5.6vw, 107px);
+  --sp-143: clamp(40px, 5.0vw,  96px);
+  --sp-136: clamp(44px, 4.8vw,  92px);
+  --sp-135: clamp(44px, 4.7vw,  91px);
+  --sp-134: clamp(40px, 4.7vw,  90px);
+  --sp-131: clamp(40px, 4.6vw,  88px);
+  --sp-128: clamp(40px, 4.5vw,  86px);
+  --sp-123: clamp(38px, 4.3vw,  83px);
+  --sp-114: clamp(38px, 4.0vw,  77px);
+  --sp-101: clamp(34px, 3.6vw,  68px);
+  --sp-91:  clamp(34px, 3.2vw,  62px);
   --sp-69:  clamp(32px,  3.594vw,  69px);
   --sp-68:  clamp(32px,  3.542vw,  68px);
   --sp-62:  clamp(24px,  3.229vw,  62px);
@@ -173,11 +179,22 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   padding-inline: var(--gutter);
 }
 
-.band--dark { background: var(--ink-2); color: var(--on-dark); }
+/* Dark surfaces echo the hero's glows at very low strength so the hero,
+   work band and closing block read as one continuous environment. */
+.band--dark {
+  background:
+    radial-gradient(58% 46% at 88% 0%,  rgba(var(--glow-teal), .14), transparent 68%),
+    radial-gradient(46% 42% at 4% 100%, rgba(var(--glow-mag),  .20), transparent 66%),
+    var(--ink-2);
+  color: var(--on-dark);
+}
 
 .block--dark {
   margin: 0 var(--shell) var(--shell);
-  background: var(--ink-2);
+  background:
+    radial-gradient(52% 40% at 78% 0%,  rgba(var(--glow-teal), .12), transparent 66%),
+    radial-gradient(44% 38% at 8% 96%,  rgba(var(--glow-mag),  .16), transparent 64%),
+    var(--ink-2);
   color: var(--on-dark);
   border-radius: var(--r-block);
 }
