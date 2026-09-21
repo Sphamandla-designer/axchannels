@@ -1401,3 +1401,183 @@ a.project__media:hover img { transform: scale(1.03); }
 
 /* Reduced motion: the pre-reveal states above never apply, and the global
    kill-switch in §2 flattens every remaining transition. */
+
+/* --------------------------------------------------------------------------
+   17. Accent layer — the art direction of the GEMIS Studio reference applied
+   to this design: hot accent words in the editorial headings (the accent is
+   the hero's own magenta glow, brightened), a mono micro-label system,
+   underlined arrow CTAs, a marquee word ticker, numbered service cards and
+   a live SAST clock. Layout, content and palette above are unchanged.
+   -------------------------------------------------------------------------- */
+:root {
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --accent:     #ff3d8a;  /* hero magenta glow, brightened — dark surfaces (5.7:1) */
+  --accent-ink: #e0176b;  /* deeper accent for light surfaces (3.4:1 large / 4.7:1 vs #fff) */
+}
+
+/* Accent words inside headings ------------------------------------------- */
+.mark { color: var(--accent-ink); }
+.band--dark .mark,
+.block--dark .mark,
+.h1 em { color: var(--accent); }
+
+/* Mono micro-label system ------------------------------------------------- */
+.locale,
+.hero__cats,
+.eyebrow,
+.work__eyebrow,
+.project__cat,
+.num__label,
+.voice__role,
+.footer__head,
+.legal,
+.svc__num,
+.marquee__micro,
+.marquee__pause,
+.tlink { font-family: var(--mono); }
+
+.hero__cats { font-weight: 500; letter-spacing: .06em; }
+
+.eyebrow { color: var(--accent-ink); letter-spacing: .08em; }
+
+.work__eyebrow {
+  font-size: var(--fs-md);
+  letter-spacing: .14em;
+  color: var(--accent);
+}
+
+.project__cat { font-size: var(--fs-sm); letter-spacing: .06em; }
+
+.voice__role {
+  font-size: var(--fs-sm);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.num__label {
+  font-size: var(--fs-sm);
+  letter-spacing: .08em;
+}
+
+.footer__head {
+  font-size: var(--fs-sm);
+  letter-spacing: .1em;
+  color: rgba(255, 255, 255, .62);
+}
+
+.legal {
+  font-size: var(--fs-xs);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--on-dark-dim);
+}
+.legal__clock-arrow { color: var(--accent); }
+
+/* Underlined arrow CTAs (case-study links) -------------------------------- */
+.tlink {
+  display: inline-flex;
+  align-items: center;
+  gap: .9em;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding-bottom: .55em;
+  border-bottom: 1px solid rgba(255, 255, 255, .45);
+  transition: color .25s var(--ease), border-color .25s var(--ease);
+}
+.tlink::after { content: "\2192"; transition: translate .25s var(--ease); }
+.tlink:hover { opacity: 1; color: var(--accent); border-color: var(--accent); }
+.tlink:hover::after { translate: .35em 0; }
+.tlink--soon { border-bottom-style: dashed; }
+.tlink--soon::after { content: none; }
+
+/* Numbered service cards -------------------------------------------------- */
+.svc { border-top: 2px solid var(--accent-ink); }
+.svc__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.svc__num {
+  font-size: var(--fs-xs);
+  letter-spacing: .08em;
+  color: var(--muted-2);
+}
+
+/* Marquee word ticker ------------------------------------------------------ */
+.marquee {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(44px, 4.8vw, 92px) 0 clamp(24px, 2.6vw, 50px);
+}
+.marquee.band--dark {
+  background:
+    radial-gradient(56% 90% at 50% 42%, rgba(var(--glow-mag), .55), transparent 74%),
+    radial-gradient(40% 70% at 88% 100%, rgba(var(--glow-teal), .30), transparent 70%),
+    var(--ink-2);
+}
+.marquee__viewport { overflow: hidden; }
+.marquee__row {
+  display: flex;
+  width: max-content;
+  animation: mq-scroll 30s linear infinite;
+}
+.marquee.is-paused .marquee__row { animation-play-state: paused; }
+.marquee__seq {
+  display: flex;
+  align-items: center;
+  gap: clamp(28px, 3.2vw, 62px);
+  padding-right: clamp(28px, 3.2vw, 62px);
+}
+.marquee__word {
+  font-size: clamp(44px, 6.2vw, 118px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -.02em;
+  white-space: nowrap;
+  color: #fff;
+}
+.marquee__word--acc { color: var(--accent); }
+.marquee__plus {
+  font-size: clamp(20px, 2.2vw, 42px);
+  line-height: 1;
+  color: var(--accent);
+}
+@keyframes mq-scroll { to { transform: translateX(-50%); } }
+
+.marquee__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: clamp(26px, 2.8vw, 54px);
+}
+.marquee__micro {
+  font-size: var(--fs-xs);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--on-dark-dim);
+}
+.marquee__pause {
+  font-size: var(--fs-2xs);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, .3);
+  border-radius: 999px;
+  color: #fff;
+  padding: .65em 1.3em;
+  cursor: pointer;
+  transition: border-color .25s var(--ease), color .25s var(--ease);
+}
+.marquee__pause:hover,
+.marquee__pause:focus-visible { border-color: var(--accent); color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__row { animation: none; }
+  .marquee__pause { display: none; }
+}

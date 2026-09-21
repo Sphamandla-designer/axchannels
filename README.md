@@ -62,6 +62,14 @@ the work in numbers · contact CTA · footer.
   service/work imagery scales ≤1.04 on hover, testimonial/stat cards lift,
   the work `SWAP` is a directional crossfade, the mobile nav panel fades
   and staggers its links.
+- *Accent layer* (`home.css` §17): art direction from the GEMIS Studio
+  reference — one hot accent word per editorial heading (the accent
+  `#ff3d8a` / `#e0176b` is the hero's own magenta glow, brightened),
+  a JetBrains Mono micro-label system (eyebrows, categories, footer
+  heads, legal), underlined mono arrow CTAs on the case-study links,
+  a full-bleed marquee word ticker with a Pause Motion control,
+  numbered service cards with accent top rules, and a live SAST clock
+  in the footer.
 - *Safety nets*: all pre-reveal states are gated on `html.js-motion`
   (added by JS) so no-JS visitors get the finished page, and on
   `prefers-reduced-motion: no-preference` — reduced-motion users get the

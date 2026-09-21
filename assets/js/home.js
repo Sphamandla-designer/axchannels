@@ -68,6 +68,31 @@
     update();
   }
 
+  /* ------------------------------------------------------ marquee ticker -- */
+  var mq = document.querySelector(".marquee");
+  var mqBtn = document.querySelector("[data-marquee-pause]");
+  if (mq && mqBtn) {
+    mqBtn.addEventListener("click", function () {
+      var paused = mq.classList.toggle("is-paused");
+      mqBtn.setAttribute("aria-pressed", String(paused));
+      mqBtn.textContent = paused ? "Play Motion" : "Pause Motion";
+    });
+  }
+
+  /* --------------------------------------------------------- SAST clock -- */
+  var clockTime = document.querySelector("[data-clock-time]");
+  if (clockTime && window.Intl && Intl.DateTimeFormat) {
+    try {
+      var clockFmt = new Intl.DateTimeFormat("en-ZA", {
+        hour: "2-digit", minute: "2-digit", hour12: false,
+        timeZone: "Africa/Johannesburg"
+      });
+      var tickClock = function () { clockTime.textContent = clockFmt.format(new Date()); };
+      tickClock();
+      window.setInterval(tickClock, 30000);
+    } catch (e) { /* unsupported timezone data — leave the placeholder */ }
+  }
+
   if (!motionOK) return;
 
   /* ------------------------------------------- masked line reveals ------ */
@@ -90,16 +115,28 @@
           frag.appendChild(s);
         });
         el.replaceChild(frag, n);
+      } else if (n.nodeType === 1 && n.tagName !== "BR") {
+        /* inline elements (accent .mark spans) travel as one word */
+        var wrap = document.createElement("span");
+        wrap.className = "w";
+        el.replaceChild(wrap, n);
+        wrap.appendChild(n);
       }
     });
+    /* Rebuild line by line, keeping the original spacing (no space is
+       invented before punctuation that follows an accent span). */
     var lines = [], top = null;
-    el.querySelectorAll(".w").forEach(function (s) {
-      if (s.offsetTop !== top) { lines.push([]); top = s.offsetTop; }
-      lines[lines.length - 1].push(s.textContent);
+    Array.prototype.forEach.call(el.childNodes, function (n) {
+      if (n.nodeType === 1 && n.classList.contains("w")) {
+        if (n.offsetTop !== top) { lines.push(""); top = n.offsetTop; }
+        lines[lines.length - 1] += n.innerHTML;
+      } else if (n.nodeType === 3 && lines.length) {
+        lines[lines.length - 1] += " ";
+      }
     });
     if (lines.length < 1) { el.innerHTML = original; return; }
     el.innerHTML = lines.map(function (ws, i) {
-      return '<span class="rl"><span class="rl-in" style="--ln:' + i + '">' + ws.join(" ") + "</span></span>";
+      return '<span class="rl"><span class="rl-in" style="--ln:' + i + '">' + ws.trim() + "</span></span>";
     }).join("");
     el.classList.add("split-done");
     splitData.set(el, { html: original, lines: lines.length, armed: false });

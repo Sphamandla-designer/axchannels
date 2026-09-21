@@ -20,8 +20,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="assets/img/home/hero-bg.jpg" fetchpriority="high">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/home.css?v=6">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/home.css?v=7">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -90,7 +90,7 @@
   <!-- ================================================ UX-LED STUDIO INTRO -->
   <section class="studio" id="about" aria-labelledby="studio-title">
     <div class="wrap">
-      <h2 class="h2 studio__title" id="studio-title" data-reveal>We Design Digital Experiences Around People And Business</h2>
+      <h2 class="h2 studio__title" id="studio-title" data-reveal>We Design Digital Experiences Around <span class="mark">People</span> And Business</h2>
 
       <div class="studio__grid">
         <figure class="studio__figure" data-reveal="img">
@@ -140,14 +140,14 @@
   <section class="services" id="services" aria-labelledby="services-title">
     <div class="wrap">
       <div class="sec-head" data-stagger>
-        <h2 class="h2" id="services-title">Services Built On UX,<br>Not Decoration</h2>
+        <h2 class="h2" id="services-title">Services Built On <span class="mark">UX</span>,<br>Not Decoration</h2>
         <p class="sec-head__sub">We Design The Structure, Interface And Experience Behind Websites, Applications And Digital Products, From The First Idea To The Final Experience</p>
       </div>
 
       <div class="services__grid" data-stagger>
 
         <article class="svc">
-          <div class="svc__head"><p class="eyebrow">UX - Led Process</p></div>
+          <div class="svc__head"><p class="eyebrow">UX - Led Process</p><span class="svc__num" aria-hidden="true">01</span></div>
           <div class="svc__body">
             <h3 class="svc__title">Website Design &amp; Development</h3>
             <p class="svc__desc">Conversion-driven architecture, SEO structure, performance optimization&hellip;</p>
@@ -170,7 +170,7 @@
         </article>
 
         <article class="svc">
-          <div class="svc__head"><p class="eyebrow">UX - Led Process</p></div>
+          <div class="svc__head"><p class="eyebrow">UX - Led Process</p><span class="svc__num" aria-hidden="true">02</span></div>
           <div class="svc__body">
             <h3 class="svc__title">Digital Product Design</h3>
             <p class="svc__desc">Experiences for apps, platforms, SaaS products and digital services.</p>
@@ -191,7 +191,7 @@
         </article>
 
         <article class="svc">
-          <div class="svc__head"><p class="eyebrow">UX - Led Process</p></div>
+          <div class="svc__head"><p class="eyebrow">UX - Led Process</p><span class="svc__num" aria-hidden="true">03</span></div>
           <div class="svc__body">
             <h3 class="svc__title">UI/UX Design &amp; UX Strategy</h3>
             <p class="svc__desc">Clear interfaces built around how people actually use digital products.</p>
@@ -212,7 +212,7 @@
         </article>
 
         <article class="svc">
-          <div class="svc__head"><p class="eyebrow">UX - Led Process</p></div>
+          <div class="svc__head"><p class="eyebrow">UX - Led Process</p><span class="svc__num" aria-hidden="true">04</span></div>
           <div class="svc__body">
             <h3 class="svc__title">Brand Identity Systems</h3>
             <p class="svc__desc">Digital-first brand systems built for clarity, consistency, and growth.</p>
@@ -237,6 +237,32 @@
     </div>
   </section>
 
+  <!-- ====================================================== MARQUEE TICKER -->
+  <section class="marquee band--dark" aria-label="What we design">
+    <div class="marquee__viewport">
+      <div class="marquee__row">
+        <span class="marquee__seq">
+          <span class="marquee__word">Websites</span><span class="marquee__plus" aria-hidden="true">+</span>
+          <span class="marquee__word marquee__word--acc">Products</span><span class="marquee__plus" aria-hidden="true">+</span>
+          <span class="marquee__word">Interfaces</span><span class="marquee__plus" aria-hidden="true">+</span>
+          <span class="marquee__word">Brands</span><span class="marquee__plus" aria-hidden="true">+</span>
+          <span class="marquee__word">Dashboards</span><span class="marquee__plus" aria-hidden="true">+</span>
+        </span>
+        <span class="marquee__seq" aria-hidden="true">
+          <span class="marquee__word">Websites</span><span class="marquee__plus">+</span>
+          <span class="marquee__word marquee__word--acc">Products</span><span class="marquee__plus">+</span>
+          <span class="marquee__word">Interfaces</span><span class="marquee__plus">+</span>
+          <span class="marquee__word">Brands</span><span class="marquee__plus">+</span>
+          <span class="marquee__word">Dashboards</span><span class="marquee__plus">+</span>
+        </span>
+      </div>
+    </div>
+    <div class="wrap marquee__foot">
+      <p class="marquee__micro">&#10022; Research. Design. Build. Perform.</p>
+      <button class="marquee__pause" type="button" data-marquee-pause aria-pressed="false">Pause Motion</button>
+    </div>
+  </section>
+
   <!-- ======================================================= SELECTED WORK -->
   <section class="work band--dark" id="case-studies" aria-labelledby="work-title">
     <span class="work__wm" aria-hidden="true">AX</span>
@@ -245,7 +271,7 @@
       <p class="work__eyebrow" data-reveal="fade">Selected Work</p>
 
       <div class="sec-head" data-stagger>
-        <h2 class="h2" id="work-title">A Look At The Digital Experiences We Have Designed For Real Businesses And Products.</h2>
+        <h2 class="h2" id="work-title">A Look At The Digital Experiences We Have <span class="mark">Designed</span> For Real Businesses And Products.</h2>
         <p class="sec-head__sub">Explore Selected Projects Across Websites, Applications, Dashboards And Digital Products, And See How We Approach Real Design Problems.</p>
       </div>
 
@@ -328,7 +354,7 @@
   <section class="voices" aria-labelledby="voices-title">
     <div class="wrap">
       <div class="sec-head" data-stagger>
-        <h2 class="h2" id="voices-title">What Our Clients Say About Working With AX-Channels.</h2>
+        <h2 class="h2" id="voices-title">What Our <span class="mark">Clients</span> Say About Working With AX-Channels.</h2>
         <p class="sec-head__sub">Real Feedback From Businesses And Teams We Have Worked With.</p>
       </div>
     </div>
@@ -414,7 +440,7 @@
   <section class="numbers" aria-labelledby="numbers-title">
     <div class="wrap numbers__grid">
       <div class="numbers__intro" data-stagger>
-        <h2 class="h2" id="numbers-title">The Work In Numbers</h2>
+        <h2 class="h2" id="numbers-title">The Work In <span class="mark">Numbers</span></h2>
         <p class="body">A Growing Track Record Of Designing Digital Experiences That Work.</p>
       </div>
 
@@ -447,7 +473,7 @@
 
     <section class="cta" aria-labelledby="cta-title">
       <div data-stagger>
-        <h2 class="h2 cta__title" id="cta-title">Have A Digital Experience That Needs Rethinking?</h2>
+        <h2 class="h2 cta__title" id="cta-title">Have A Digital Experience That Needs <span class="mark">Rethinking?</span></h2>
         <p class="cta__text">Whether You Are Building Something New Or Improving Something That Already Exists, Let's Start With The Problem. We Reply Within Two Working Days.</p>
       </div>
       <div class="cta__links" data-stagger>
@@ -504,6 +530,7 @@
 
       <div class="legal">
         <p>Copyright © 2026</p>
+        <p class="legal__clock">SAST <span class="legal__clock-arrow" aria-hidden="true">&rarr;</span> <span data-clock-time>--:--</span></p>
         <p class="legal__links">
           <a href="#contact">Privacy Policy</a>
           <a href="#contact">Terms</a>
@@ -513,6 +540,6 @@
   </div>
 </div>
 
-<script src="assets/js/home.js?v=6" defer></script>
+<script src="assets/js/home.js?v=7" defer></script>
 </body>
 </html>
