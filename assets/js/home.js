@@ -95,6 +95,68 @@
 
   if (!motionOK) return;
 
+  /* ------------------------------------- testimonials: smooth auto-slide -- */
+  /* The card set is cloned once for a seamless loop and scrollLeft drifts
+     forward each frame; hovering, touching or the Pause Reviews button
+     pauses it. Clones are added before the reveal setup so they join the
+     group reveal like the originals. */
+  var vTrack = document.querySelector(".voices__track");
+  var vBtn = document.querySelector("[data-voices-pause]");
+  if (vTrack && vTrack.children.length > 1) {
+    var vCount = vTrack.children.length;
+    Array.prototype.slice.call(vTrack.children).forEach(function (card) {
+      var clone = card.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      vTrack.appendChild(clone);
+    });
+    vTrack.classList.add("is-auto");
+
+    var vDist = 0, vRaf = null, vLast = null;
+    var vHover = false, vStopped = false, vManualTs = -1e9;
+    var V_SPEED = 34; /* px per second */
+
+    var vMeasure = function () {
+      vDist = vTrack.children[vCount].offsetLeft - vTrack.children[0].offsetLeft;
+    };
+    var vStep = function (now) {
+      vRaf = requestAnimationFrame(vStep);
+      if (vLast === null) { vLast = now; return; }
+      var dt = Math.min((now - vLast) / 1000, .1);
+      vLast = now;
+      if (vHover || vStopped || !vDist || now - vManualTs < 4000) return;
+      var x = vTrack.scrollLeft + V_SPEED * dt;
+      if (x >= vDist) x -= vDist;
+      vTrack.scrollLeft = x;
+    };
+    var vStart = function () { if (!vRaf) { vLast = null; vRaf = requestAnimationFrame(vStep); } };
+    var vStop = function () { if (vRaf) { cancelAnimationFrame(vRaf); vRaf = null; } };
+
+    var vVisible = false;
+    var vio = new IntersectionObserver(function (entries) {
+      vVisible = entries[0].isIntersecting;
+      vVisible ? vStart() : vStop();
+    });
+    vio.observe(vTrack);
+
+    vMeasure();
+    window.addEventListener("resize", vMeasure);
+    vTrack.addEventListener("pointerenter", function () { vHover = true; });
+    vTrack.addEventListener("pointerleave", function () { vHover = false; });
+    vTrack.addEventListener("touchstart", function () { vManualTs = performance.now(); }, { passive: true });
+    vTrack.addEventListener("wheel", function () { vManualTs = performance.now(); }, { passive: true });
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) vStop(); else if (vVisible) vStart();
+    });
+
+    if (vBtn) {
+      vBtn.addEventListener("click", function () {
+        vStopped = !vStopped;
+        vBtn.setAttribute("aria-pressed", String(vStopped));
+        vBtn.textContent = vStopped ? "Play Reviews" : "Pause Reviews";
+      });
+    }
+  }
+
   /* ------------------------------------------- masked line reveals ------ */
   /* Big editorial headings reveal line-by-line through masks (split at
      runtime, honouring <br>, and reverted to the original markup after the
