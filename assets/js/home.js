@@ -45,44 +45,33 @@
     wide.addEventListener ? wide.addEventListener("change", sync) : wide.addListener(sync);
   }
 
-  /* ------------------------------------------------- selected work swap -- */
+  /* -------------------------------------------- selected work carousel -- */
+  /* The arrows page the scroll-snapped track: they always reveal the next /
+     previous projects, and disable at either end of the list. */
   var track = document.getElementById("work-track");
   var prev = document.querySelector("[data-work-prev]");
   var next = document.querySelector("[data-work-next]");
 
   if (track && prev && next) {
-    var cards = function () {
-      return Array.prototype.slice.call(track.children);
+    var step = function () {
+      var first = track.children[0];
+      if (!first) return track.clientWidth;
+      return first.getBoundingClientRect().width +
+        parseFloat(getComputedStyle(track).columnGap || 0);
     };
-
-    var swap = function (forward) {
-      var items = cards();
-      if (items.length < 2) return;
-
-      // A horizontally scrolled track moves; otherwise the pair rotates.
-      if (track.scrollWidth - track.clientWidth > 8) {
-        var step = items[0].getBoundingClientRect().width +
-          parseFloat(getComputedStyle(track).columnGap || 0);
-        track.scrollBy({ left: forward ? step : -step, behavior: reduced ? "auto" : "smooth" });
-        return;
-      }
-
-      // Directional crossfade: slide out with the pressed direction,
-      // reorder, then slide back in from the opposite side.
-      track.classList.add("is-swapping");
-      track.classList.toggle("is-swapping--back", !forward);
-      window.setTimeout(function () {
-        if (forward) track.appendChild(items[0]);
-        else track.insertBefore(items[items.length - 1], items[0]);
-        track.classList.remove("is-swapping--back");
-        track.classList.toggle("is-swapping--back", forward);
-        void track.offsetWidth; // land on the entering side before releasing
-        track.classList.remove("is-swapping", "is-swapping--back");
-      }, reduced ? 0 : 220);
+    var update = function () {
+      var max = track.scrollWidth - track.clientWidth;
+      prev.disabled = track.scrollLeft <= 4;
+      next.disabled = track.scrollLeft >= max - 4;
     };
-
-    next.addEventListener("click", function () { swap(true); });
-    prev.addEventListener("click", function () { swap(false); });
+    var go = function (dir) {
+      track.scrollBy({ left: dir * step(), behavior: reduced ? "auto" : "smooth" });
+    };
+    next.addEventListener("click", function () { go(1); });
+    prev.addEventListener("click", function () { go(-1); });
+    track.addEventListener("scroll", function () { requestAnimationFrame(update); }, { passive: true });
+    window.addEventListener("resize", update);
+    update();
   }
 
   if (!motionOK) return;

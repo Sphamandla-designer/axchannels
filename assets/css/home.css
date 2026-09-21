@@ -179,12 +179,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   padding-inline: var(--gutter);
 }
 
-/* Dark surfaces echo the hero's glows at very low strength so the hero,
-   work band and closing block read as one continuous environment. */
+/* Dark surfaces echo the hero's glows so the hero, work band and closing
+   block read as one continuous environment. */
 .band--dark {
   background:
-    radial-gradient(58% 46% at 88% 0%,  rgba(var(--glow-teal), .14), transparent 68%),
-    radial-gradient(46% 42% at 4% 100%, rgba(var(--glow-mag),  .20), transparent 66%),
+    radial-gradient(58% 46% at 88% 0%,  rgba(var(--glow-teal), .26), transparent 68%),
+    radial-gradient(46% 42% at 4% 100%, rgba(var(--glow-mag),  .30), transparent 66%),
     var(--ink-2);
   color: var(--on-dark);
 }
@@ -192,11 +192,34 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .block--dark {
   margin: 0 var(--shell) var(--shell);
   background:
-    radial-gradient(52% 40% at 78% 0%,  rgba(var(--glow-teal), .12), transparent 66%),
-    radial-gradient(44% 38% at 8% 96%,  rgba(var(--glow-mag),  .16), transparent 64%),
+    radial-gradient(52% 40% at 78% 0%,  rgba(var(--glow-teal), .22), transparent 66%),
+    radial-gradient(44% 38% at 8% 96%,  rgba(var(--glow-mag),  .26), transparent 64%),
     var(--ink-2);
   color: var(--on-dark);
   border-radius: var(--r-block);
+}
+
+/* The light sections carry the same glows as a soft ambient wash, so the
+   hero's colour world runs through the whole page. */
+.studio {
+  background:
+    radial-gradient(44% 60% at 96% 4%,  rgba(var(--glow-teal), .10), transparent 70%),
+    radial-gradient(38% 52% at 0% 92%,  rgba(var(--glow-mag),  .09), transparent 70%);
+}
+.services {
+  background:
+    radial-gradient(40% 55% at 2% 8%,   rgba(var(--glow-mag),  .08), transparent 70%),
+    radial-gradient(46% 60% at 100% 70%, rgba(var(--glow-teal), .10), transparent 70%);
+}
+.voices {
+  background:
+    radial-gradient(42% 58% at 0% 30%,  rgba(var(--glow-teal), .09), transparent 70%),
+    radial-gradient(36% 50% at 100% 90%, rgba(var(--glow-mag), .08), transparent 70%);
+}
+.numbers {
+  background:
+    radial-gradient(44% 62% at 92% 12%, rgba(var(--glow-teal), .10), transparent 70%),
+    radial-gradient(34% 48% at 4% 100%, rgba(var(--glow-mag),  .08), transparent 70%);
 }
 
 /* --------------------------------------------------------------------------
@@ -653,7 +676,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   margin-top: var(--sp-91);
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(16px, 2.135vw, 41px);
+  gap: clamp(12px, 1.1vw, 21px);
 }
 
 .svc {
@@ -760,10 +783,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   padding-bottom: 2px;
-  transition: opacity .18s var(--ease);
 }
 .work__track::-webkit-scrollbar { display: none; }
-.work__track.is-swapping { opacity: 0; }
 
 .project { scroll-snap-align: start; text-align: center; }
 .project__media {
@@ -772,6 +793,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   overflow: hidden;
   background: #101014;
 }
+.project__media { display: block; }
 .project__media img {
   width: 100%;
   height: auto;
@@ -779,7 +801,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   object-fit: cover;
   transition: transform .6s var(--ease);
 }
-.project__media:hover img { transform: scale(1.03); }
+a.project__media:hover img { transform: scale(1.03); }
+
+.tlink--soon { opacity: .6; text-decoration-style: dashed; cursor: default; }
 
 .project__cat {
   display: block;
@@ -825,23 +849,13 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   transition: background-color .25s var(--ease);
 }
 .carousel-btn svg { width: 46%; height: 46%; }
-.carousel-btn--prev {
-  left: -12px;
+.carousel-btn--prev { left: -12px; }
+.carousel-btn--next { right: -3px; }
+.carousel-btn:hover:not([disabled]) { background: #e4e4e4; }
+.carousel-btn[disabled] {
   background: rgba(255, 255, 255, .22);
   color: rgba(16, 16, 20, .92);
-}
-.carousel-btn--prev:hover { background: rgba(255, 255, 255, .55); }
-.carousel-btn--next { right: -3px; }
-.carousel-btn--next:hover { background: #e4e4e4; }
-.carousel-btn__label {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: var(--fs-md);
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: #fff;
+  cursor: default;
 }
 
 .work__more { margin-top: var(--sp-128); display: flex; justify-content: flex-end; }
@@ -1304,13 +1318,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
     .stat-card:hover { transform: translateY(-3px); }
   }
 
-  /* ---- selected-work swap (directional crossfade) ------------------------ */
-  .work__track {
-    transition: opacity .22s var(--ease-out), transform .22s var(--ease-out);
-  }
-  .work__track.is-swapping        { opacity: 0; transform: translateX(-20px); }
-  .work__track.is-swapping--back  { transform: translateX(20px); }
-
   /* ---- mobile nav panel --------------------------------------------------- */
   @media (max-width: 1100px) {
     .nav {
@@ -1353,8 +1360,4 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 
 /* Reduced motion: the pre-reveal states above never apply, and the global
-   kill-switch in §2 flattens every remaining transition. The swap fallback
-   below keeps the work carousel usable without its slide. */
-@media (prefers-reduced-motion: reduce) {
-  .work__track.is-swapping { opacity: 0; }
-}
+   kill-switch in §2 flattens every remaining transition. */
