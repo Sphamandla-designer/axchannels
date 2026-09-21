@@ -183,8 +183,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
    block read as one continuous environment. */
 .band--dark {
   background:
-    radial-gradient(58% 46% at 88% 0%,  rgba(var(--glow-teal), .26), transparent 68%),
-    radial-gradient(46% 42% at 4% 100%, rgba(var(--glow-mag),  .30), transparent 66%),
+    radial-gradient(62% 52% at 88% 0%,  rgba(var(--glow-teal), .50), transparent 70%),
+    radial-gradient(52% 48% at 4% 100%, rgba(var(--glow-mag),  .55), transparent 68%),
     var(--ink-2);
   color: var(--on-dark);
 }
@@ -192,34 +192,34 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .block--dark {
   margin: 0 var(--shell) var(--shell);
   background:
-    radial-gradient(52% 40% at 78% 0%,  rgba(var(--glow-teal), .22), transparent 66%),
-    radial-gradient(44% 38% at 8% 96%,  rgba(var(--glow-mag),  .26), transparent 64%),
+    radial-gradient(56% 46% at 78% 0%,  rgba(var(--glow-teal), .44), transparent 68%),
+    radial-gradient(50% 44% at 8% 96%,  rgba(var(--glow-mag),  .50), transparent 66%),
     var(--ink-2);
   color: var(--on-dark);
   border-radius: var(--r-block);
 }
 
-/* The light sections carry the same glows as a soft ambient wash, so the
+/* The light sections carry the same glows as an ambient wash, so the
    hero's colour world runs through the whole page. */
 .studio {
   background:
-    radial-gradient(44% 60% at 96% 4%,  rgba(var(--glow-teal), .10), transparent 70%),
-    radial-gradient(38% 52% at 0% 92%,  rgba(var(--glow-mag),  .09), transparent 70%);
+    radial-gradient(46% 62% at 96% 4%,  rgba(var(--glow-teal), .22), transparent 72%),
+    radial-gradient(40% 55% at 0% 92%,  rgba(var(--glow-mag),  .20), transparent 72%);
 }
 .services {
   background:
-    radial-gradient(40% 55% at 2% 8%,   rgba(var(--glow-mag),  .08), transparent 70%),
-    radial-gradient(46% 60% at 100% 70%, rgba(var(--glow-teal), .10), transparent 70%);
+    radial-gradient(42% 58% at 2% 8%,    rgba(var(--glow-mag),  .18), transparent 72%),
+    radial-gradient(48% 62% at 100% 70%, rgba(var(--glow-teal), .22), transparent 72%);
 }
 .voices {
   background:
-    radial-gradient(42% 58% at 0% 30%,  rgba(var(--glow-teal), .09), transparent 70%),
-    radial-gradient(36% 50% at 100% 90%, rgba(var(--glow-mag), .08), transparent 70%);
+    radial-gradient(44% 60% at 0% 30%,   rgba(var(--glow-teal), .20), transparent 72%),
+    radial-gradient(38% 52% at 100% 90%, rgba(var(--glow-mag),  .18), transparent 72%);
 }
 .numbers {
   background:
-    radial-gradient(44% 62% at 92% 12%, rgba(var(--glow-teal), .10), transparent 70%),
-    radial-gradient(34% 48% at 4% 100%, rgba(var(--glow-mag),  .08), transparent 70%);
+    radial-gradient(46% 64% at 92% 12%, rgba(var(--glow-teal), .22), transparent 72%),
+    radial-gradient(36% 50% at 4% 100%, rgba(var(--glow-mag),  .18), transparent 72%);
 }
 
 /* --------------------------------------------------------------------------
@@ -871,7 +871,7 @@ a.project__media:hover img { transform: scale(1.03); }
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 29.7%;
-  gap: clamp(14px, 1.77vw, 34px);
+  gap: clamp(10px, .9vw, 17px);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-padding-inline: var(--gutter);
@@ -1230,6 +1230,10 @@ a.project__media:hover img { transform: scale(1.03); }
   }
   .js-motion [data-reveal="img"].is-in img { transform: none; }
 
+  /* split headings animate via their line masks, never the block fade */
+  .js-motion [data-reveal].split-done,
+  .js-motion .m-group > .split-done { opacity: 1; transform: none; }
+
   /* project / service imagery settles the same way inside stagger groups */
   .js-motion .work__track.m-group .project__media img { transform: scale(1.05); }
   .js-motion .work__track .project.is-in .project__media img { transform: none; }
@@ -1316,6 +1320,42 @@ a.project__media:hover img { transform: scale(1.03); }
 
     .stat-card { transition: transform .35s var(--ease-out); }
     .stat-card:hover { transform: translateY(-3px); }
+  }
+
+  /* ---- masked line reveals (big editorial headings) ---------------------- */
+  .js-motion .rl { display: block; overflow: clip; }
+  .js-motion .rl-in {
+    display: block;
+    transform: translateY(112%);
+    transition: transform .85s var(--ease-io);
+    transition-delay: calc(var(--ln, 0) * .09s);
+  }
+  .js-motion .split-done.is-in .rl-in { transform: none; }
+
+  /* ---- magnetic buttons + trailing cursor (fine pointers only) ----------- */
+  @media (pointer: fine) {
+    .btn { transition-property: translate, transform, background-color, color, border-color;
+           transition-duration: .22s, .3s, .3s, .3s, .3s; }
+
+    .js-motion .cursor {
+      position: fixed; top: 0; left: 0; z-index: 999;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: #fff; mix-blend-mode: difference;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity .3s ease;
+      will-change: transform;
+    }
+    .js-motion .cursor.on { opacity: 1; }
+    .js-motion.cursor-live body,
+    .js-motion.cursor-live a,
+    .js-motion.cursor-live button { cursor: none; }
+
+    /* inner-image parallax: images rest slightly zoomed inside their
+       clipped frames so the scroll drift never exposes edges */
+    .js-motion .project__media img,
+    .js-motion .studio__figure img { scale: 1.07; translate: 0 var(--plx, 0px); }
   }
 
   /* ---- mobile nav panel --------------------------------------------------- */
