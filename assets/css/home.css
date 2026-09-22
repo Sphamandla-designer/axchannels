@@ -30,9 +30,6 @@
   /* numbers panel — measured off the supplied reference */
   --numbers-panel: #0d0d0d;
   --numbers-rule:  rgba(255, 255, 255, .16);
-  --gold:        #f8bc00;
-  --verified:    #0e6cfc;
-  --initials:    #235089;
 
   /* Type ------------------------------------------------------------------ */
   --font: "Archivo", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
@@ -890,8 +887,8 @@ a.project__media:hover img { transform: scale(1.03); }
   margin-top: var(--sp-69);
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: 29.7%;
-  gap: clamp(10px, .9vw, 17px);
+  grid-auto-columns: 31.4%;
+  gap: clamp(14px, 1.25vw, 24px);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-padding-inline: var(--gutter);
@@ -901,19 +898,73 @@ a.project__media:hover img { transform: scale(1.03); }
 }
 .voices__track::-webkit-scrollbar { display: none; }
 
+/* A testimonial card, minimal: the quote leads, set large; the attribution
+   sits quiet at the foot behind a hairline; nothing coloured competes with
+   it. The card is white on white, so a 1px rule rather than a shadow gives
+   it its edge, and the shadow is kept for the hover state only. */
 .voice {
   scroll-snap-align: start;
+  position: relative;
   display: flex;
   flex-direction: column;
-  padding: clamp(18px, 1.51vw, 29px) clamp(18px, 1.51vw, 29px) clamp(24px, 2.2vw, 42px);
+  padding: clamp(24px, 2.2vw, 42px);
   background: #fff;
-  border-radius: var(--r-card);
-  box-shadow: 0 18px 44px -32px rgba(9, 12, 20, .5);
+  border-radius: var(--r-soft);
+  overflow: hidden;
 }
-.voice__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+
+/* The accent hairline across the top, drawn from the left on hover.
+   It wipes via background-size rather than a scaleX transform: the card
+   itself lifts on hover, and a transformed pseudo-element inside a
+   transformed, rounded, overflow-hidden parent gets its composited layer
+   clipped away, so the rule silently never painted. Animating the paint
+   keeps it on the parent's layer, where it always draws. */
+.voice::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--accent-ink), rgba(var(--cyan), .75))
+              no-repeat left center / 0% 100%;
+}
+
+.voice__stars {
+  display: flex;
+  gap: clamp(3px, .26vw, 5px);
+  margin: 0 0 clamp(18px, 1.6vw, 30px);
+}
+/* ink rather than gold: the rating is proof, not decoration */
+.voice__stars .star {
+  width:  clamp(13px, .94vw, 18px);
+  height: clamp(13px, .94vw, 18px);
+  color: rgba(10, 10, 10, .34);
+}
+
+/* the quote is the largest thing in the card */
+.voice__text {
+  margin: 0;
+  flex: 1 1 auto;
+  font-size: var(--fs-lg);
+  font-weight: 400;
+  line-height: 1.62;
+  letter-spacing: -.005em;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+.voice__by {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1vw, 18px);
+  margin-top: clamp(24px, 2.2vw, 42px);
+  padding-top: clamp(18px, 1.6vw, 30px);
+  border-top: 1px solid rgba(10, 10, 10, .1);
+}
 .voice__avatar {
-  width:  clamp(62px, 5.31vw, 102px);
-  height: clamp(62px, 5.31vw, 102px);
+  flex: none;
+  width:  clamp(40px, 3.02vw, 58px);
+  height: clamp(40px, 3.02vw, 58px);
   border-radius: 50%;
   object-fit: cover;
   background: #e6e6e6;
@@ -921,44 +972,39 @@ a.project__media:hover img { transform: scale(1.03); }
 .voice__avatar--initials {
   display: grid;
   place-items: center;
-  background: var(--initials);
+  background: var(--ink-2);
   color: #fff;
-  font-size: clamp(28px, 2.5vw, 48px);
-  font-weight: 700;
-  letter-spacing: .01em;
-}
-.voice__quote-mark {
-  font-size: clamp(42px, 3.9vw, 75px);
-  line-height: .85;
-  font-weight: 700;
-  color: #b1b6bc;
-  user-select: none;
-}
-.voice__name {
-  margin-top: clamp(20px, 2.24vw, 43px);
-  font-size: var(--fs-h4);
+  font-family: var(--mono);
+  font-size: clamp(12px, .83vw, 16px);
   font-weight: 500;
-  line-height: 1.1;
+  letter-spacing: .06em;
+}
+.voice__id { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.voice__name {
+  font-size: var(--fs-md);
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.2;
   letter-spacing: -.01em;
+  color: var(--ink);
 }
 .voice__role {
-  margin-top: clamp(6px, .57vw, 11px);
-  font-size: var(--fs-lg);
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: .08em;
+  text-transform: uppercase;
   color: var(--muted-3);
 }
-.rating {
-  display: flex;
-  align-items: center;
-  gap: clamp(6px, .68vw, 13px);
-  margin-top: clamp(12px, 1.3vw, 25px);
-}
-.rating svg { width: clamp(18px, 1.72vw, 33px); height: clamp(18px, 1.72vw, 33px); }
-.rating .star { color: var(--gold); }
-.rating .verified { color: var(--verified); }
-.voice__text {
-  margin-top: clamp(20px, 2.71vw, 52px);
-  font-size: var(--fs-lg);
-  line-height: 1.71;
+/* replaces the blue tick — same claim, in the page's own micro-label voice */
+.voice__verified {
+  margin-left: auto;
+  align-self: flex-start;
+  flex: none;
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted-3);
 }
 
 /* --------------------------------------------------------------------------
@@ -1202,6 +1248,17 @@ a.project__media:hover img { transform: scale(1.03); }
   .svc__media { aspect-ratio: 16 / 10; }
 
   .voices__track { grid-auto-columns: 84%; }
+
+  /* On a narrow card the VERIFIED label steals enough of the row to wrap
+     both the name and the role. It moves up onto the rating line instead,
+     which leaves the attribution the full width. */
+  .voice__verified {
+    position: absolute;
+    top: clamp(24px, 2.2vw, 42px);
+    right: clamp(24px, 2.2vw, 42px);
+    margin-left: 0;
+  }
+  .voice__by { gap: clamp(12px, 3vw, 18px); }
   .stat-card__wm { top: 14%; }
 
   .numbers__stats { gap: var(--sp-45) 24px; }
@@ -1332,8 +1389,44 @@ a.project__media:hover img { transform: scale(1.03); }
     .svc__media img { transition: transform .7s var(--ease-out); }
     .svc:hover .svc__media img { transform: scale(1.04); }
 
-    .voice { transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out); }
-    .voice:hover { transform: translateY(-4px); box-shadow: 0 26px 52px -32px rgba(9, 12, 20, .55); }
+    /* Testimonial hover. The card lifts on a soft brand-tinted shadow, the
+       accent hairline draws across its top, the rating warms from grey to
+       the accent and the portrait eases up to full contrast. Each property
+       is transform/opacity/colour only, so none of it costs layout. */
+    .voice {
+      transition: transform .5s var(--ease-out), box-shadow .5s var(--ease-out);
+      will-change: transform;
+    }
+    .voice::before { transition: background-size .55s var(--ease-out); }
+    .voice .star { transition: color .4s var(--ease-out), transform .45s var(--ease-out); }
+    .voice__avatar { transition: transform .5s var(--ease-out), filter .5s var(--ease-out); }
+    .voice__verified { transition: color .4s var(--ease-out); }
+    .voice__avatar:not(.voice__avatar--initials) { filter: grayscale(1) contrast(1.02); }
+
+    /* Scoped through .js-motion so this out-weighs the reveal system's
+       `.m-child.is-in { transform: none }`, which otherwise cancels the lift
+       once the card has finished revealing. */
+    .js-motion .voice:hover,
+    .js-motion .voice:focus-within {
+      transform: translateY(-6px);
+      box-shadow:
+        0 30px 60px -38px rgba(9, 12, 20, .5),
+        0 0 0 1px rgba(var(--cyan), .14);
+    }
+    .voice:hover::before,
+    .voice:focus-within::before { background-size: 100% 100%; }
+    .voice:hover .star,
+    .voice:focus-within .star { color: var(--accent-ink); }
+    /* the five stars warm left to right rather than all at once */
+    .voice:hover .star:nth-child(1) { transition-delay: 0s;    }
+    .voice:hover .star:nth-child(2) { transition-delay: .045s; }
+    .voice:hover .star:nth-child(3) { transition-delay: .09s;  }
+    .voice:hover .star:nth-child(4) { transition-delay: .135s; }
+    .voice:hover .star:nth-child(5) { transition-delay: .18s;  }
+    .voice:hover .voice__avatar,
+    .voice:focus-within .voice__avatar { transform: scale(1.06); filter: grayscale(0) contrast(1); }
+    .voice:hover .voice__verified,
+    .voice:focus-within .voice__verified { color: var(--accent-ink); }
 
     .stat-card { transition: transform .35s var(--ease-out); }
     .stat-card:hover { transform: translateY(-3px); }
@@ -2260,6 +2353,7 @@ a.project__media:hover img { transform: scale(1.03); }
    -------------------------------------------------------------------------- */
 .voice,
 .stat-card { border: 1px solid rgba(10, 10, 10, .1); }
+.voice { transition: border-color .45s var(--ease-out); }
 .svc {
   border: 1px solid rgba(10, 10, 10, .1);
   border-top: 2px solid var(--accent-ink);
