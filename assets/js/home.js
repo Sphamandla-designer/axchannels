@@ -219,7 +219,7 @@
   var STAGGER = 0.07;
 
   var setupReveals = function () {
-    document.querySelectorAll(".studio__title, .sec-head .h2, .cta__title, #numbers-title")
+    document.querySelectorAll(".studio__title, .sec-head .h2, .cta__title")
       .forEach(splitLines);
 
     document.querySelectorAll("[data-stagger]").forEach(function (group) {

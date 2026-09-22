@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="assets/img/home/ax-background.png" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/home.css?v=16">
+<link rel="stylesheet" href="assets/css/home.css?v=17">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -489,10 +489,12 @@
 
   <!-- ===================================================== WORK IN NUMBERS -->
   <section class="numbers" aria-labelledby="numbers-title">
-    <div class="wrap numbers__grid">
-      <div class="numbers__intro" data-stagger>
-        <h2 class="h2" id="numbers-title">The Work In <span class="mark">Numbers</span></h2>
-        <p class="body">A Growing Track Record Of Designing Digital Experiences That Work.</p>
+    <p class="numbers__wall" aria-hidden="true" data-reveal="fade">The Work</p>
+
+    <div class="wrap numbers__mid">
+      <div class="numbers__intro" data-reveal>
+        <h2 class="numbers__title" id="numbers-title">The Work In <span class="mark">Numbers</span></h2>
+        <p class="numbers__sub">A Growing Track Record Of Designing Digital Experiences That Work.</p>
       </div>
 
       <dl class="numbers__stats" data-stagger>
@@ -514,6 +516,8 @@
         </div>
       </dl>
     </div>
+
+    <p class="numbers__wall numbers__wall--b" aria-hidden="true" data-reveal="fade">In Numbers</p>
   </section>
 
 </main>
@@ -591,6 +595,6 @@
   </div>
 </div>
 
-<script src="assets/js/home.js?v=16" defer></script>
+<script src="assets/js/home.js?v=17" defer></script>
 </body>
 </html>
