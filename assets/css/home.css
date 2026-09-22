@@ -80,6 +80,15 @@
   --sp-160: clamp(48px, 5.6vw, 107px);
   --sp-143: clamp(40px, 5.0vw,  96px);
   --sp-136: clamp(44px, 4.8vw,  92px);
+  /* The rhythm between page sections. The section below a break carries the
+     whole gap in its padding-top and the one above closes at 0, so the space
+     between any two sections is this one value rather than a sum of two. */
+  --sec-gap: clamp(44px, 4.8vw, 92px);
+
+  /* Button metrics, taken from the hero pill and shared by every button. */
+  --btn-h:   clamp(42px, 3.1vw, 52px);
+  --btn-pad: clamp(18px, 1.55vw, 27px);
+  --btn-fs:  clamp(14px, .9vw, 16px);
   --sp-135: clamp(44px, 4.7vw,  91px);
   --sp-134: clamp(40px, 4.7vw,  90px);
   --sp-131: clamp(40px, 4.6vw,  88px);
@@ -302,47 +311,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* --------------------------------------------------------------------------
    5. Buttons, chips
    -------------------------------------------------------------------------- */
-.btn {
-  --btn-h: clamp(46px, 3.958vw, 76px);
-  display: inline-flex;
-  align-items: center;
-  gap: clamp(14px, 1.77vw, 34px);
-  height: var(--btn-h);
-  padding-inline: clamp(18px, 1.51vw, 29px) clamp(4px, .26vw, 5px);
-  border: 1px solid transparent;
-  border-radius: 999px;
-  font-size: var(--fs-md);
-  font-weight: 500;
-  line-height: 1;
-  white-space: nowrap;
-  transition: transform .3s var(--ease), background-color .3s var(--ease),
-              color .3s var(--ease), border-color .3s var(--ease);
-}
-.btn__icon {
-  display: grid;
-  place-items: center;
-  flex: none;
-  width:  calc(var(--btn-h) - clamp(6px, .42vw, 8px));
-  height: calc(var(--btn-h) - clamp(6px, .42vw, 8px));
-  border-radius: 50%;
-  transition: inherit;
-}
-.btn__icon svg { width: 42%; height: 42%; }
-
-.btn--light { background: #fff; color: #000; }
-.btn--light .btn__icon { background: #000; color: #fff; }
-
-.btn--dark { background: #000; color: #fff; }
-.btn--dark .btn__icon { background: #fff; color: #000; }
-
-.btn--outline { background: transparent; color: #fff; border-color: rgba(255, 255, 255, .85); }
-.btn--outline .btn__icon { background: #fff; color: #000; }
-
-.btn:hover  { transform: translateY(-2px); }
-.btn--light:hover   { background: #ececec; }
-.btn--dark:hover    { background: #16161a; }
-.btn--outline:hover { background: rgba(255, 255, 255, .1); }
-.btn:active { transform: translateY(0); }
 
 .tlink {
   font-size: var(--fs-md);
@@ -726,7 +694,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* --------------------------------------------------------------------------
    10. Services
    -------------------------------------------------------------------------- */
-.services { padding-top: var(--sp-204); padding-bottom: var(--sp-225); }
+.services { padding-top: var(--sec-gap); padding-bottom: var(--sp-225); }
 .services__grid {
   margin-top: var(--sp-91);
   display: grid;
@@ -774,14 +742,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   background: #0c0c0c;
 }
 .svc__media img { width: 100%; height: 100%; object-fit: cover; }
+/* placement only — the pill above supplies its size and type */
 .svc__cta {
   position: absolute;
   top: clamp(10px, 1.09vw, 21px);
   right: clamp(8px, .94vw, 18px);
-  --btn-h: clamp(38px, 2.81vw, 54px);
-  font-size: var(--fs-sm);
-  gap: clamp(10px, 1.9vw, 36px);
-  padding-inline: clamp(12px, 1.12vw, 22px) clamp(3px, .21vw, 4px);
   box-shadow: 0 10px 26px -14px rgba(0, 0, 0, .55);
 }
 
@@ -1230,7 +1195,6 @@ a.project__media:hover img { transform: scale(1.03); }
   .hero__lead { max-width: 26ch; }
   .hero__cats { font-size: 11px; letter-spacing: .1em; }
   .hero__cta { gap: 10px; }
-  .btn { --btn-h: 48px; font-size: 14px; }
   .hero__tag { margin-top: 6px; }
   .display { letter-spacing: .06em; }
 
@@ -1337,10 +1301,6 @@ a.project__media:hover img { transform: scale(1.03); }
   .js-motion .work__wm       { translate: 0 var(--par-wm, 0px); }
 
   /* ---- micro-interactions ------------------------------------------------ */
-  .btn__icon svg { transition: transform var(--dur-fast) var(--ease-out); }
-  .btn:hover .btn__icon svg,
-  .btn:focus-visible .btn__icon svg { transform: translate(2px, -2px); }
-  .btn:active { transform: translateY(0) scale(.985); }
 
   /* menu icon crossfades between hamburger and close */
   .nav-toggle svg {
@@ -1391,8 +1351,6 @@ a.project__media:hover img { transform: scale(1.03); }
 
   /* ---- magnetic buttons (fine pointers only; the native cursor stays) --- */
   @media (pointer: fine) {
-    .btn { transition-property: translate, transform, background-color, color, border-color;
-           transition-duration: .22s, .3s, .3s, .3s, .3s; }
 
     /* inner-image parallax: images rest slightly zoomed inside their
        clipped frames so the scroll drift never exposes edges */
@@ -1800,12 +1758,8 @@ a.project__media:hover img { transform: scale(1.03); }
 }
 
 /* Interactive accent — a restrained cyan glow on the primary controls. */
-.btn {
-  transition-property: translate, transform, background-color, color, border-color, box-shadow;
-  transition-duration: .22s, .3s, .3s, .3s, .3s, .35s;
-}
-.btn:hover,
-.btn:focus-visible {
+.cta-pill:hover,
+.cta-pill:focus-visible {
   box-shadow: 0 0 0 1px rgba(var(--cyan), .28), 0 10px 34px -12px rgba(var(--cyan), .4);
 }
 
@@ -1939,18 +1893,27 @@ a.project__media:hover img { transform: scale(1.03); }
   gap: clamp(10px, .9vw, 16px);
 }
 
+/* Buttons ------------------------------------------------------------------
+   Every button on the page is this pill. Its metrics are the hero pair's,
+   which are the reference, so the masthead, the studio, the service cards
+   and the work section all read as one control rather than four sizes. */
 .cta-pill {
   display: inline-flex;
   align-items: center;
   gap: .55em;
-  height: clamp(42px, 3.1vw, 52px);
-  padding-inline: clamp(18px, 1.55vw, 27px);
+  height: var(--btn-h);
+  padding-inline: var(--btn-pad);
   border-radius: 999px;
-  font-size: clamp(14px, .9vw, 16px);
+  font-size: var(--btn-fs);
   font-weight: 500;
   line-height: 1;
+  white-space: nowrap;
   transition: transform .25s var(--ease), box-shadow .3s var(--ease), background-color .25s var(--ease);
 }
+/* on light sections, where a white pill would disappear */
+.cta-pill--dark { background: #000; color: #fff; }
+.cta-pill--dark:hover,
+.cta-pill--dark:focus-visible { background: #16161a; }
 .cta-pill--accent { background: var(--accent-ink); color: #fff; }
 .cta-pill--accent:hover,
 .cta-pill--accent:focus-visible { background: #f32079; }
@@ -2027,19 +1990,11 @@ a.project__media:hover img { transform: scale(1.03); }
   font-size: var(--fs-sm);
 }
 
-.masthead__cta {
-  height: clamp(38px, 2.5vw, 46px);
-  padding-inline: clamp(15px, 1.2vw, 22px);
-  font-size: clamp(13px, .83vw, 15px);
-  white-space: nowrap;
-}
+.masthead__cta { white-space: nowrap; }
 
 @media (max-width: 1100px) {
   .masthead__cta { order: 3; }
   .nav__link { font-size: 15px; padding: 13px 16px; }
-}
-@media (max-width: 480px) {
-  .masthead__cta { height: 36px; padding-inline: 13px; font-size: 12.5px; }
 }
 /* --------------------------------------------------------------------------
    21. Work In Numbers — implemented from the supplied reference panel.
@@ -2054,7 +2009,7 @@ a.project__media:hover img { transform: scale(1.03); }
   overflow: visible;
   aspect-ratio: auto;
   background: none;
-  padding: var(--sp-136) 0 var(--sp-221);
+  padding: var(--sec-gap) 0 0;
 }
 /* The panel is a block in its own right, like the hero and the footer, so it
    spans the hero card's width rather than the narrower content measure. Its
