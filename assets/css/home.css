@@ -1457,7 +1457,7 @@ a.project__media:hover img { transform: scale(1.03); }
     .js-motion [data-reveal="img"] .studio__slide {
       transition:
         transform 1.15s var(--ease-out) var(--d, 0s),
-        opacity 1.1s cubic-bezier(.4, 0, .2, 1);
+        opacity .8s cubic-bezier(.4, 0, .2, 1);
     }
 
     /* The slow drift lives on the stack rather than on the active slide.
@@ -1468,7 +1468,7 @@ a.project__media:hover img { transform: scale(1.03); }
        different property from the `scale` and `translate` above, so the
        frame's 1.07 headroom and the scroll parallax both keep working. */
     .js-motion .studio__slides {
-      animation: studio-drift 24s ease-in-out infinite alternate;
+      animation: studio-drift 18s ease-in-out infinite alternate;
     }
   }
 

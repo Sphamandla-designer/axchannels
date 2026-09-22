@@ -451,7 +451,7 @@
     var slides = Array.prototype.slice.call(slideBox.querySelectorAll(".studio__slide"));
 
     if (slides.length > 1) {
-      var HOLD = 4600;               /* time a slide is held, fade included */
+      var HOLD = 3200;               /* time a slide is held, fade included */
       var cur = 0;
       var timer = null;
 
