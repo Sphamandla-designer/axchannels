@@ -26,6 +26,10 @@
   --watermark:   #1d1e24;
   --rule-dark:   rgba(255, 255, 255, .14);
   --rule-light:  rgba(10, 10, 10, .22);
+
+  /* numbers panel — measured off the supplied reference */
+  --numbers-panel: #0d0d0d;
+  --numbers-rule:  rgba(255, 255, 255, .16);
   --gold:        #f8bc00;
   --verified:    #0e6cfc;
   --initials:    #235089;
@@ -55,6 +59,7 @@
   --wrap:    1808px;                           /* 56 → 1864                  */
 
   --r-block: clamp(16px, 1.25vw, 24px);        /* hero / footer block        */
+  --npad:    clamp(20px, 3.28vw, 63px);        /* numbers panel cell inset   */
   --r-soft:  clamp(14px, 1.1458vw, 22px);      /* stat cards, work images    */
   --r-card:  8px;                              /* service / testimonial card */
 
@@ -1955,161 +1960,239 @@ a.project__media:hover img { transform: scale(1.03); }
 @media (max-width: 480px) {
   .masthead__cta { height: 36px; padding-inline: 13px; font-size: 12.5px; }
 }
-
 /* --------------------------------------------------------------------------
-   21. Work In Numbers — implemented from "stats design.png" (Final Stats
-   Design). Geometry is transcribed from the 1910x911 artwork as
-   percentages of the section: two giant fully-visible words on a white
-   canvas, a white knockout panel over their centre carrying the text
-   (slicing DESIGN's glyph bottoms and WALL's glyph tops, with the final
-   L's stem escaping the panel at full height), and a left-aligned stats
-   column on the right edge, evenly spaced. Counters still count up.
+   21. Work In Numbers — implemented from the supplied reference panel.
+   A dark inset panel divided by hairlines into a 3 x 3 asymmetric grid:
+   the heading across the two upper left cells, a lit statement field bottom
+   left, three statistics and a photograph bleeding into the bottom right
+   corner. Every ratio below is measured off the reference (1.763 : 1 panel,
+   columns 33.4 / 33.2 / 33.4, rows 24.7 / 33.2 / 42.1).
    -------------------------------------------------------------------------- */
 .numbers {
-  position: relative;
-  overflow: hidden;
-  padding: 0;
-  background: #fff;
-  aspect-ratio: 1910 / 911;
+  position: static;
+  overflow: visible;
+  aspect-ratio: auto;
+  background: none;
+  padding: var(--sp-136) 0 var(--sp-221);
 }
 
-.numbers__wall {
-  position: absolute;
-  margin: 0;
-  font-weight: 900;
-  text-transform: uppercase;
-  white-space: nowrap;
-  letter-spacing: -.01em;
-  color: #0a0a0a;
-  line-height: .72; /* line box hugs the caps so top % maps to glyph tops */
-  font-size: 19.6vw;
-  z-index: 1;
-}
-.numbers__wall--top  { left: 7%;  top: 13%; }
-.numbers__wall--bottom { left: 18%; top: 53.8%; }
-
-/* The span carries the artwork's wider letterforms (scaleX), the scroll
-   parallax (translateX var set by JS) and the hover glow: a cyan->magenta
-   gradient hidden under solid ink that fades through on hover with soft
-   brand-glow shadows. */
-.numbers__wall > span {
-  display: inline-block;
-  transform-origin: left top;
-  background: linear-gradient(100deg, rgb(var(--cyan)) 8%, #ff3d8a 88%);
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 0 22px rgba(var(--cyan), .28))
-          drop-shadow(0 0 60px rgba(255, 61, 138, .2));
-  transition: filter .5s var(--ease);
-}
-.numbers__wall--top  > span { transform: translateX(var(--nw1, 0px)) scaleX(1.052); }
-.numbers__wall--bottom > span { transform: translateX(var(--nw2, 0px)) scaleX(1.06); }
-.numbers__wall:hover > span {
-  filter: drop-shadow(0 0 30px rgba(var(--cyan), .55))
-          drop-shadow(0 0 85px rgba(255, 61, 138, .4));
-}
-
-/* White knockout panel over the centre of both words */
 .numbers__panel {
-  position: absolute;
-  z-index: 2;
-  left: 26.2%;
-  top: 33.5%;
-  width: 42%; /* right edge stops just short of the final L's stem, which
-                 escapes the panel at full height as in the artwork */
-  height: 30.6%;
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  left: auto; top: auto; width: auto; height: auto;
+  text-align: left;
+  border-radius: var(--r-block);
+  background: var(--numbers-panel);
+  color: var(--on-dark);
+  aspect-ratio: 1920 / 1089;
+  display: grid;
+  grid-template-columns: 33.4% 33.2% 33.4%;
+  grid-template-rows: 24.7% 33.2% 42.1%;
 }
+
+/* Hairline grid ----------------------------------------------------------- */
+.nrule { position: absolute; z-index: 1; background: var(--numbers-rule); pointer-events: none; }
+.nrule--v1 { left: 33.4%; top: 7%;    bottom: 0; width: 1px; }
+.nrule--v2 { left: 66.6%; top: 0;     bottom: 0; width: 1px; }
+.nrule--h1 { top: 24.7%; left: 33.4%; right: 0;  height: 1px; }
+.nrule--h2 { top: 57.9%; left: 0;     right: 0;  height: 1px; }
+
+/* Cells ------------------------------------------------------------------- */
+.ncell { position: relative; z-index: 2; padding: var(--npad); display: flex; }
+.ncell--title     { grid-area: 1 / 1 / 3 / 2; align-items: flex-start; }
+.ncell--statement {
+  grid-area: 3 / 1 / 4 / 2;
+  flex-direction: column;
+  gap: var(--sp-28);
+  /* the footnote is small type sitting close to the panel edge, as in the
+     reference, so the lit field above it reaches nearly the full cell */
+  padding-bottom: var(--sp-28);
+}
+.ncell--a         { grid-area: 2 / 2 / 3 / 3; }
+.ncell--b         { grid-area: 3 / 2 / 4 / 3; }
+.ncell--c         { grid-area: 2 / 3 / 3 / 4; }
+.ncell--media     { grid-area: 3 / 3 / 4 / 4; padding: 0; overflow: hidden; }
+
+/* The lit field behind the statement. In the reference this is a vertical
+   gradient clipped hard to the cell — flat across its width, cut off at the
+   column rule — not a soft bleed. It lives on its own element so it always
+   ends exactly where the footnote begins, whatever the statement wraps to. */
+.numbers__field {
+  position: relative;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: flex-start;
+  /* room for the flare to resolve below the last line when the cell is
+     short — without it the brightest stop lands behind the type          */
+  padding-bottom: clamp(40px, 4.5vw, 86px);
+}
+.numbers__field::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: calc(1px - var(--npad));        /* clears the hairline above it */
+  left: calc(-1 * var(--npad));
+  right: calc(-1 * var(--npad));
+  bottom: 0;
+  /* The reference's own ramp brightens under its last line of type. These
+     stops keep its hue and its flare at the foot of the cell but hold the
+     band the statement sits on dark enough to clear AA at every width.   */
+  background: linear-gradient(
+    to bottom,
+    #0d0d0d   0%,
+    #0a1120  14%,
+    #131d30  30%,
+    #1e2a42  46%,
+    #2b3750  60%,
+    #3d4a62  72%,
+    #5d6a80  83%,
+    #8b99a6  92%,
+    #b7c5ca  98%,
+    #c2cfd4 100%
+  );
+}
+
+/* Type -------------------------------------------------------------------- */
 .numbers__title {
-  font-size: var(--fs-lg);
-  font-weight: 800;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  line-height: 1.2;
-  color: var(--ink);
+  margin: 0;
+  max-width: 13ch;
+  font-family: var(--font);
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1.12;
+  text-transform: none;
+  color: var(--on-dark);
 }
 .numbers__sub {
-  margin-top: 1.6em;
-  font-size: var(--fs-sm);
-  line-height: 1.6;
-  font-weight: 400;
-  color: var(--muted-2);
-  white-space: nowrap;
+  margin: 0;
+  max-width: 16ch;
+  white-space: normal;
+  font-size: var(--fs-h4);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -.01em;
+  color: var(--on-dark);
+}
+.numbers__note {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  line-height: 1.5;
+  letter-spacing: .04em;
+  color: rgba(255, 255, 255, .62);
 }
 
-/* Right-edge stats column: left-aligned, evenly distributed */
-.numbers__stats {
-  position: absolute;
-  z-index: 3;
-  right: 3.4%;
-  top: 43.2%;
-  height: 44.8%;
+/* Statistic --------------------------------------------------------------- */
+.nstat {
   margin: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 0;
-  text-align: left;
+  flex-direction: column-reverse;   /* source order label→value reads correctly,
+                                       the reference stacks value over label   */
+  align-items: flex-start;
+  gap: var(--sp-28);
 }
-.numbers__stats > div { display: flex; flex-direction: column; }
-.num__value {
-  order: -1;
+/* the two cells of the middle band centre on it; the lower statistic
+   top-aligns with the statement it sits beside, as in the reference.
+   (column-reverse, so flex-end is the visual top)                        */
+.ncell--a, .ncell--c { justify-content: center; }
+.ncell--b { justify-content: flex-end; }
+
+.numbers__panel .num__value {
+  order: 0;
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: var(--fs-h5);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -.01em;
-  color: var(--ink);
+  font-size: var(--fs-num);
+  font-weight: 200;
+  line-height: .88;
+  letter-spacing: -.015em;
+  color: var(--on-dark);
+  font-variant-numeric: lining-nums tabular-nums;
 }
-.num__label {
-  margin-top: .7em;
-  white-space: nowrap;
-  max-width: none;
+/* the suffix is a quarter of the numeral, hung off its cap line */
+.numbers__panel .num__value {
+  display: flex;
+  align-items: flex-start;
+}
+.numbers__panel .num__suffix {
+  font-size: .26em;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+  margin-left: .12em;
+  padding-top: .30em;
+}
+.numbers__panel .num__label {
+  margin: 0;
+  max-width: 16ch;
+  white-space: normal;
   font-family: var(--mono);
-  font-size: var(--fs-2xs);
-  font-weight: 500;
-  letter-spacing: .06em;
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: .04em;
   text-transform: uppercase;
-  line-height: 1.3;
-  color: var(--muted-2);
+  color: rgba(255, 255, 255, .64);
 }
 
-/* Small screens: the fixed-canvas composition cannot hold; words shrink
-   with the viewport and the blocks stack in flow. */
-@media (max-width: 720px) {
-  .numbers { aspect-ratio: auto; padding: 26px 0 30px; }
-  .numbers__wall { position: static; text-align: center; font-size: 21vw; line-height: .8; transform: none; }
-  .numbers__wall > span { transform: none; }
-  .numbers__wall--bottom { order: 3; }
+/* Media ------------------------------------------------------------------- */
+/* absolutely placed so the photograph fills the cell the grid gives it
+   rather than its own 4:3 setting the row height                           */
+.ncell--media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Tablet: the panel stops holding its ratio and becomes a 2-column stack --- */
+@media (max-width: 1100px) {
   .numbers__panel {
-    position: static;
-    width: auto;
-    height: auto;
-    padding: 22px var(--gutter) 26px;
+    aspect-ratio: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto auto auto auto;
   }
-  .numbers__sub { white-space: normal; }
-  .numbers { display: flex; flex-direction: column; }
-  .numbers__stats {
-    position: static;
-    height: auto;
-    order: 4;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px 40px;
-    text-align: center;
-    padding: 26px var(--gutter) 0;
+  .ncell--title     { grid-area: 1 / 1 / 2 / 3; }
+  .ncell--a         { grid-area: 2 / 1 / 3 / 2; }
+  .ncell--c         { grid-area: 2 / 2 / 3 / 3; }
+  .ncell--statement { grid-area: 3 / 1 / 4 / 2; }
+  .ncell--b         { grid-area: 3 / 2 / 4 / 3; }
+  .ncell--media     { grid-area: 4 / 1 / 5 / 3; aspect-ratio: 16 / 7; }
+  .numbers__title   { max-width: none; }
+  .numbers__sub     { max-width: 24ch; }
+  .nstat            { min-height: clamp(150px, 22vw, 240px); }
+
+  /* absolute hairlines can't track a stacked grid, so the cells carry
+     their own rules from here down */
+  .nrule { display: none; }
+  .ncell--a, .ncell--c, .ncell--b, .ncell--statement {
+    border-top: 1px solid var(--numbers-rule);
   }
-  .numbers__stats > div { align-items: center; }
-  .num__label { white-space: normal; }
+  .ncell--c, .ncell--b { border-left: 1px solid var(--numbers-rule); }
+}
+
+/* Mobile: one statistic at a time — the grid would shrink the numerals past
+   the point where the light weight still holds together. */
+@media (max-width: 720px) {
+  .numbers { padding: var(--sp-91) 0 var(--sp-114); }
+  .numbers__panel {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: repeat(6, auto);
+    padding: 0;
+  }
+  .ncell--title     { grid-area: 1 / 1 / 2 / 2; }
+  .ncell--a         { grid-area: 2 / 1 / 3 / 2; }
+  .ncell--c         { grid-area: 3 / 1 / 4 / 2; }
+  .ncell--b         { grid-area: 4 / 1 / 5 / 2; }
+  .ncell--statement { grid-area: 5 / 1 / 6 / 2; }
+  .ncell--media     { grid-area: 6 / 1 / 7 / 2; aspect-ratio: 16 / 9; }
+  .nstat            { min-height: 0; }
+  .numbers__sub     { max-width: none; }
+  .ncell--c, .ncell--b { border-left: 0; }
 }
 
 /* --------------------------------------------------------------------------

@@ -38,6 +38,25 @@ position.
 experience/clients stats · services (4 cards) · selected work · testimonials ·
 the work in numbers · contact CTA · footer.
 
+**The work in numbers** is implemented from a separately supplied reference
+panel, not from the PDF: a dark inset panel divided by hairlines into a 3 × 3
+asymmetric grid (columns 33.4 / 33.2 / 33.4, rows 24.7 / 33.2 / 42.1, panel
+ratio 1.763 : 1), with the heading across the two upper left cells, a lit
+statement field bottom left, three statistics and a photograph bleeding into
+the bottom right corner. Grid ratios, rule positions, the numeral weight
+(Archivo 200, from a 0.077 stroke-to-cap measurement), the raised suffix at
+26% of the numeral and the gradient stops behind the statement were all
+measured off that reference. It replaces the earlier `stats design.png`
+"Design Wall" composition. `Industries Served` was dropped at the client's
+request; the remaining figures and all copy are unchanged.
+
+*Deliberate deviation.* The reference's own gradient brightens under its last
+line of type, which would put white on roughly `#95a4ae` (2.6 : 1). The stops
+in `home.css` §21 keep its hue and its flare at the foot of the cell but hold
+the band the statement sits on dark enough to clear AA at every width (worst
+case measured 9.4 : 1). Restoring the literal ramp is a one-line change to
+that `linear-gradient`.
+
 **Images** — extracted from `AX DESIGN HOME PAGE.pdf` and from the uploaded
 `AX Background.png`, `AX Image hero.png`, `Mockup 14 (3) 1.png` and
 `1758105469086.png`. No stock or placeholder imagery.
@@ -54,7 +73,10 @@ the work in numbers · contact CTA · footer.
   `data-reveal="img"` (frame rises while the image settles from 1.06×) /
   `data-stagger` (children auto-delay 70ms, capped at 8). Reveal once.
 - *Counters*: the Work In Numbers values count up (900ms ease-out cubic)
-  to exactly the approved figures, once, on entry.
+  to exactly the approved figures, once, on entry. The `+` is a separate
+  `.num__suffix` element present in the markup, so the panel is already
+  correct with JS off and under reduced motion; the counter writes only
+  the digits.
 - *Depth*: hero portrait lags scroll 10%, hero copy 5% with a gentle fade,
   the AX watermark drifts ±36px — desktop fine-pointers only, one
   rAF-throttled passive listener, custom properties consumed by CSS.
