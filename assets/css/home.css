@@ -12,7 +12,7 @@
   /* Colour — the families below are derived from hero-bg.jpg so the whole
      page shares the hero's world: base near-black #0d0d0f–#111014, teal glow
      #006275, magenta glow #3e1229, cool neutrals. ------------------------- */
-  --page:        #dadde1;   /* page background — hero-neutral cool grey      */
+  --page:        #ffffff;   /* page background — white, matching the stats design */
   --ink:         #0a0a0a;   /* headings on light                             */
   --ink-2:       #101014;   /* dark sections — hero base                     */
   --hero-ink:    #030303;   /* hero block base                               */
