@@ -269,14 +269,34 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 
 /* Centred section header (services · work · testimonials) */
-.sec-head { text-align: center; }
-.sec-head .h2 { margin-inline: auto; }
+/* Section head: the heading holds the page's content line on the left and
+   its statement sits opposite on the right, the two meeting on a common
+   baseline. Below --bp-sec-head the pair stacks and the statement returns to
+   the left, since a right-ragged column is hard to read at narrow widths. */
+.sec-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 44ch);
+  column-gap: clamp(24px, 4vw, 96px);
+  align-items: end;
+  text-align: left;
+}
+.sec-head .h2 { margin-inline: 0; }
 .sec-head__sub {
-  margin: var(--sp-32) auto 0;
+  margin: 0;
+  justify-self: end;
+  text-align: right;
   font-size: var(--fs-lg);
   line-height: 1.833;
   max-width: 70ch;
   text-wrap: balance;
+}
+@media (max-width: 900px) {
+  .sec-head { grid-template-columns: minmax(0, 1fr); }
+  .sec-head__sub {
+    justify-self: start;
+    text-align: left;
+    margin-top: var(--sp-32);
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -766,7 +786,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .work__eyebrow {
   display: block;
-  text-align: center;
+  text-align: left;
   font-size: var(--fs-lg);
   font-weight: 400;
   letter-spacing: .01em;
