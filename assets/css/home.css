@@ -1957,46 +1957,44 @@ a.project__media:hover img { transform: scale(1.03); }
 }
 
 /* --------------------------------------------------------------------------
-   21. Work In Numbers — White-Wall-reference anatomy: two giant cropped
-   display lines bracket a middle band holding a small centred text block,
-   with a compact bold-number / tiny-label stats stack on the right.
-   The counters still count up on entry.
+   21. Work In Numbers — implemented from "stats reference.png":
+   a giant top word cropped at the TOP edge spanning the full width, a
+   giant bottom-left word (~70% width) cropped at the BOTTOM edge, a small
+   centred text block in the gap between them, and the stats stack pinned
+   to the right edge beside the bottom word. Counters still count up.
    -------------------------------------------------------------------------- */
 .numbers {
+  position: relative;
   overflow: hidden;
-  padding-top: clamp(40px, 4.6vw, 88px);
-  padding-bottom: clamp(40px, 4.6vw, 88px);
+  padding: 0;
 }
 
 .numbers__wall {
-  font-weight: 870;
+  font-weight: 880;
   text-transform: uppercase;
   white-space: nowrap;
-  line-height: .82;
-  letter-spacing: -.015em;
+  letter-spacing: -.02em;
   color: var(--ink-2);
-  text-align: center;
-  width: 106%;
-  margin-left: -3%;
-  font-size: min(17.8vw, 342px);
+  line-height: .78;
 }
-.numbers__wall--b { font-size: min(14.6vw, 280px); }
+.numbers__wall--top {
+  font-size: min(24.2vw, 465px);
+  text-align: center;
+  margin-top: -.155em;   /* glyph tops bleed off the section edge */
+}
+.numbers__wall--bottom {
+  font-size: min(15.6vw, 300px);
+  text-align: left;
+  padding-left: 1.5%;
+  margin-bottom: -.14em; /* glyph bottoms bleed off the section edge */
+}
 
 .numbers__mid {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  column-gap: clamp(24px, 4vw, 72px);
-  padding-block: clamp(26px, 3vw, 58px);
+  display: flex;
+  justify-content: center;
+  padding-block: clamp(16px, 2vw, 40px) clamp(48px, 4.8vw, 92px);
 }
-
-.numbers__intro {
-  justify-self: center;
-  text-align: center;
-  max-width: 46ch;
-  /* re-centres the block on the page (the stats column narrows its cell) */
-  transform: translateX(min(4vw, 110px));
-}
+.numbers__intro { text-align: center; max-width: 46ch; }
 .numbers__title {
   font-size: clamp(15px, 1.05vw, 20px);
   font-weight: 800;
@@ -2012,11 +2010,14 @@ a.project__media:hover img { transform: scale(1.03); }
 }
 
 .numbers__stats {
+  position: absolute;
+  z-index: 2;
+  right: max(20px, 3.3%);
+  top: min(16vw, 308px); /* just under the top word, like the reference */
   margin-top: 0;
   display: flex;
   flex-direction: column;
-  gap: clamp(16px, 1.6vw, 28px);
-  row-gap: clamp(16px, 1.6vw, 28px);
+  gap: clamp(8px, .8vw, 14px);
 }
 .numbers__stats > div { display: flex; flex-direction: column; }
 .num__value {
@@ -2024,34 +2025,34 @@ a.project__media:hover img { transform: scale(1.03); }
   margin-top: 0;
   padding-top: 0;
   border-top: 0;
-  font-size: clamp(20px, 1.7vw, 32px);
+  font-size: clamp(17px, 1.4vw, 26px);
   font-weight: 750;
   line-height: 1.1;
   letter-spacing: -.01em;
 }
 .num__label {
-  margin-top: .35em;
+  margin-top: .25em;
   white-space: normal;
-  max-width: 17ch;
+  max-width: 14ch;
   font-size: var(--fs-2xs);
   font-weight: 500;
-  letter-spacing: .05em;
-  line-height: 1.5;
+  letter-spacing: .04em;
+  line-height: 1.4;
   color: var(--muted-2);
 }
 
 @media (max-width: 720px) {
-  .numbers__mid {
-    grid-template-columns: 1fr;
-    row-gap: clamp(28px, 7vw, 40px);
-  }
-  .numbers__intro { justify-self: stretch; transform: none; }
+  .numbers__mid { padding-block: clamp(18px, 4vw, 28px); }
+  .numbers__intro { padding-inline: var(--gutter); }
   .numbers__stats {
+    position: static;
+    transform: none;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 22px 40px;
+    gap: 20px 40px;
     text-align: center;
+    padding: 6px var(--gutter) clamp(18px, 5vw, 30px);
   }
   .numbers__stats > div { align-items: center; }
 }
