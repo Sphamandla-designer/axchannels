@@ -439,7 +439,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   position: relative;
   margin: var(--shell) var(--shell) 0;
   border-radius: var(--r-block);
-  background: var(--hero-ink) url("../img/home/hero-bg.jpg") center / cover no-repeat;
+  background: var(--hero-ink) url("../img/home/hero-bg-ring.jpg") center / cover no-repeat;
   color: #fff;
   overflow: hidden;
   isolation: isolate;
@@ -1600,38 +1600,42 @@ a.project__media:hover img { transform: scale(1.03); }
 .voices__pause:hover,
 .voices__pause:focus-visible { border-color: var(--accent-ink); color: var(--accent-ink); }
 
-/* Hero — rotating glow ring. The ring baked into hero-bg.jpg gets a live
-   counterpart: a blurred conic-gradient ring aligned over the same ellipse
-   whose highlights sweep smoothly around it. Decorative (aria-hidden);
-   under reduced motion the global kill-switch freezes it as a lit ring. -- */
+/* Hero — rotating glow ring, aligned to the ring in the provided
+   AX Background.png (hero-bg-ring.jpg): centre 47.5% / 52%, a tall ellipse
+   ~88% of the hero's height, teal-white peak at the top and a magenta peak
+   at the bottom. At rest the overlay sits on the baked ring; as it spins,
+   its highlights sweep around it. Decorative (aria-hidden); the
+   reduced-motion kill-switch freezes it as a lit ring. ------------------ */
 .hero__ring {
   position: absolute;
   z-index: 1;
-  left: 42%;
-  top: 54%;
-  width: min(68%, 1000px);
+  left: 47.5%;
+  top: 52%;
+  height: 88%;
   aspect-ratio: 1;
-  transform: translate(-50%, -50%) scaleY(.62) rotate(-6deg);
+  transform: translate(-50%, -50%) scaleX(.78) rotate(-3deg);
   pointer-events: none;
-  filter: blur(7px);
+  filter: blur(6px);
   mix-blend-mode: screen;
 }
 .hero__ring > span {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: conic-gradient(from 210deg,
-    transparent 0deg,
-    rgba(160, 236, 255, .16) 55deg,
-    rgba(214, 248, 255, .80) 105deg,
-    rgba(255, 255, 255, .95) 125deg,
-    rgba(160, 236, 255, .28) 170deg,
-    transparent 215deg,
-    rgba(255, 90, 160, .22) 260deg,
-    rgba(255, 61, 138, .40) 300deg,
-    transparent 345deg);
-  -webkit-mask: radial-gradient(closest-side, transparent 90.5%, #000 93.5%, #000 96.5%, transparent 99%);
-          mask: radial-gradient(closest-side, transparent 90.5%, #000 93.5%, #000 96.5%, transparent 99%);
+  background: conic-gradient(
+    rgba(255, 255, 255, .95) 0deg,
+    rgba(120, 225, 255, .45) 32deg,
+    transparent 85deg,
+    transparent 118deg,
+    rgba(255, 61, 138, .30) 152deg,
+    rgba(255, 130, 200, .80) 180deg,
+    rgba(255, 61, 138, .30) 208deg,
+    transparent 242deg,
+    transparent 275deg,
+    rgba(120, 225, 255, .45) 328deg,
+    rgba(255, 255, 255, .95) 360deg);
+  -webkit-mask: radial-gradient(closest-side, transparent 91%, #000 94%, #000 96.5%, transparent 99%);
+          mask: radial-gradient(closest-side, transparent 91%, #000 94%, #000 96.5%, transparent 99%);
   animation: hero-ring-spin 30s linear infinite;
 }
 @keyframes hero-ring-spin { to { rotate: 1turn; } }
