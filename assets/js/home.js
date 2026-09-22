@@ -3,6 +3,7 @@
    2. Selected-work carousel (arrows page the track)
    3. Motion system: entrance, masked line reveals, scroll reveals, counters,
       scroll depth, inner-image parallax, magnetic buttons, trailing cursor.
+   4. Brand-material slideshow in the studio section.
    Additive: without JS, or with prefers-reduced-motion, the page renders
    complete and static. Only transform/opacity/translate are animated. */
 (function () {
@@ -435,6 +436,67 @@
       });
       document.addEventListener("visibilitychange", function () {
         if (document.hidden && sRaf) { cancelAnimationFrame(sRaf); sRaf = null; }
+      });
+    }
+  }
+
+  /* ------------------------------------------ brand-material slideshow -- */
+  /* Cross-fades the studio frame through the brand-material photographs.
+     The markup ships with the first slide already carrying .is-active, so
+     without JS — or with prefers-reduced-motion, where motionOK is false —
+     the frame simply shows that one photograph and nothing moves. */
+  var slideBox = document.querySelector("[data-slides]");
+
+  if (slideBox && motionOK) {
+    var slides = Array.prototype.slice.call(slideBox.querySelectorAll(".studio__slide"));
+
+    if (slides.length > 1) {
+      var HOLD = 4600;               /* time a slide is held, fade included */
+      var cur = 0;
+      var timer = null;
+
+      var show = function (next) {
+        slides.forEach(function (img) { img.classList.remove("is-prev"); });
+        /* the slide being replaced stays opaque one layer down while the new
+           one fades up over it, so the frame is covered the whole way */
+        slides[cur].classList.remove("is-active");
+        slides[cur].classList.add("is-prev");
+        slides[next].classList.add("is-active");
+        cur = next;
+      };
+
+      var advance = function () { show((cur + 1) % slides.length); };
+
+      var start = function () {
+        if (timer === null) timer = setInterval(advance, HOLD);
+      };
+      var stop = function () {
+        if (timer !== null) { clearInterval(timer); timer = null; }
+      };
+
+      /* Decode the slide after the current one ahead of its turn, so the
+         first pass through the set cross-fades as smoothly as later ones. */
+      slides.forEach(function (img, i) {
+        if (i > 0) { img.loading = "eager"; }
+      });
+
+      /* Only run while the frame is on screen, and never in a hidden tab. */
+      var vio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !document.hidden) { start(); } else { stop(); }
+        });
+      }, { threshold: 0.25 });
+      vio.observe(slideBox);
+
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) { stop(); }
+      });
+
+      /* Holding the pointer still on the frame pauses it, so a visitor can
+         look at one material without it sliding away. */
+      slideBox.addEventListener("pointerenter", stop);
+      slideBox.addEventListener("pointerleave", function () {
+        if (slideBox.getBoundingClientRect().top < window.innerHeight) { start(); }
       });
     }
   }
