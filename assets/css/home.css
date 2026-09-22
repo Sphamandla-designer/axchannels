@@ -1599,3 +1599,39 @@ a.project__media:hover img { transform: scale(1.03); }
 }
 .voices__pause:hover,
 .voices__pause:focus-visible { border-color: var(--accent-ink); color: var(--accent-ink); }
+
+/* Hero — rotating glow ring. The ring baked into hero-bg.jpg gets a live
+   counterpart: a blurred conic-gradient ring aligned over the same ellipse
+   whose highlights sweep smoothly around it. Decorative (aria-hidden);
+   under reduced motion the global kill-switch freezes it as a lit ring. -- */
+.hero__ring {
+  position: absolute;
+  z-index: 1;
+  left: 42%;
+  top: 54%;
+  width: min(68%, 1000px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) scaleY(.62) rotate(-6deg);
+  pointer-events: none;
+  filter: blur(7px);
+  mix-blend-mode: screen;
+}
+.hero__ring > span {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 210deg,
+    transparent 0deg,
+    rgba(160, 236, 255, .16) 55deg,
+    rgba(214, 248, 255, .80) 105deg,
+    rgba(255, 255, 255, .95) 125deg,
+    rgba(160, 236, 255, .28) 170deg,
+    transparent 215deg,
+    rgba(255, 90, 160, .22) 260deg,
+    rgba(255, 61, 138, .40) 300deg,
+    transparent 345deg);
+  -webkit-mask: radial-gradient(closest-side, transparent 90.5%, #000 93.5%, #000 96.5%, transparent 99%);
+          mask: radial-gradient(closest-side, transparent 90.5%, #000 93.5%, #000 96.5%, transparent 99%);
+  animation: hero-ring-spin 30s linear infinite;
+}
+@keyframes hero-ring-spin { to { rotate: 1turn; } }
