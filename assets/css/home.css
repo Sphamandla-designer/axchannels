@@ -1613,7 +1613,10 @@ a.project__media:hover img { transform: scale(1.03); }
   top: 52%;
   height: 88%;
   aspect-ratio: 1;
-  transform: translate(-50%, -50%) scaleX(.78) rotate(-3deg);
+  transform: translate(-50%, -50%)
+             translate3d(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * 4px), 0)
+             scaleX(.78) rotate(-3deg);
+  transition: transform .9s var(--ease-out);
   pointer-events: none;
   filter: blur(6px);
   mix-blend-mode: screen;
@@ -1636,6 +1639,123 @@ a.project__media:hover img { transform: scale(1.03); }
     rgba(255, 255, 255, .95) 360deg);
   -webkit-mask: radial-gradient(closest-side, transparent 91%, #000 94%, #000 96.5%, transparent 99%);
           mask: radial-gradient(closest-side, transparent 91%, #000 94%, #000 96.5%, transparent 99%);
-  animation: hero-ring-spin 30s linear infinite;
+  animation: hero-ring-spin 22s linear infinite;
 }
 @keyframes hero-ring-spin { to { rotate: 1turn; } }
+
+/* --------------------------------------------------------------------------
+   18. Living hero — layered atmosphere over AX Background.png.
+   The artwork stays the untouched foundation; three overlay layers give it
+   life: a colour-evolution layer (cyan/magenta washes slowly trading
+   intensity and position), the rotating ring (§ above), and a cloud-light
+   layer (soft volumetric light drifting through the centre fog). All
+   layers animate transform/opacity only, sit under the readability scrim
+   (.hero::after, z-2) and the content (z-4+), and hold a calm lit state
+   when frozen. Pointer parallax moves them a few pixels at most.
+   -------------------------------------------------------------------------- */
+:root {
+  --cyan: 92, 209, 240;      /* electric cyan sampled from the ring's top arc */
+  --accent-cyan: #5cd1f0;
+}
+
+/* Colour evolution — two washes on ~14s/18s alternating ease-in-out cycles,
+   never both at full strength at once. */
+.hero__atmo {
+  position: absolute;
+  inset: -4%;
+  z-index: 1;
+  pointer-events: none;
+  transform: translate3d(calc(var(--mx, 0) * 4px), calc(var(--my, 0) * 3px), 0);
+  transition: transform 1.1s var(--ease-out);
+}
+.hero__atmo i {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: screen;
+}
+.hero__atmo-cy {
+  background: radial-gradient(42% 46% at 70% 22%, rgba(var(--cyan), .15), transparent 70%);
+  animation: hero-atmo-cy 14s ease-in-out infinite alternate;
+}
+@keyframes hero-atmo-cy {
+  from { opacity: .35; transform: translate3d(-1.6%, 1%, 0); }
+  to   { opacity: 1;   transform: translate3d(1.6%, -1%, 0); }
+}
+.hero__atmo-mg {
+  background: radial-gradient(46% 44% at 30% 80%, rgba(255, 61, 138, .11), transparent 70%);
+  animation: hero-atmo-mg 18s ease-in-out infinite alternate;
+}
+@keyframes hero-atmo-mg {
+  from { opacity: 1;   transform: translate3d(1.4%, -1%, 0); }
+  to   { opacity: .3;  transform: translate3d(-1.4%, 1.2%, 0); }
+}
+
+/* Cloud lighting — two soft blurred light bodies drifting through the fog
+   band on offset cycles; distant illumination, never a flash. */
+.hero__cloudlight {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translate3d(calc(var(--mx, 0) * 2.5px), calc(var(--my, 0) * 2px), 0);
+  transition: transform 1.3s var(--ease-out);
+}
+.hero__cloudlight i {
+  position: absolute;
+  width: 46%;
+  aspect-ratio: 1.7;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(206, 226, 242, .10), transparent 72%);
+  filter: blur(26px);
+  mix-blend-mode: screen;
+}
+.hero__cloudlight i:nth-child(1) {
+  left: 10%;
+  top: 14%;
+  animation: hero-cloud-a 9.5s ease-in-out infinite alternate;
+}
+@keyframes hero-cloud-a {
+  from { opacity: .25; transform: translate3d(0, 0, 0) scale(1); }
+  to   { opacity: .8;  transform: translate3d(9%, 6%, 0) scale(1.12); }
+}
+.hero__cloudlight i:nth-child(2) {
+  right: 4%;
+  top: 26%;
+  animation: hero-cloud-b 12.5s ease-in-out infinite alternate;
+  animation-delay: -6s;
+}
+@keyframes hero-cloud-b {
+  from { opacity: .6;  transform: translate3d(-1%, -2%, 0) scale(1.06); }
+  to   { opacity: .15; transform: translate3d(-9%, 4%, 0) scale(.96); }
+}
+
+/* Interactive accent — a restrained cyan glow on the primary controls. */
+.btn {
+  transition-property: translate, transform, background-color, color, border-color, box-shadow;
+  transition-duration: .22s, .3s, .3s, .3s, .3s, .35s;
+}
+.btn:hover,
+.btn:focus-visible {
+  box-shadow: 0 0 0 1px rgba(var(--cyan), .28), 0 10px 34px -12px rgba(var(--cyan), .4);
+}
+
+/* Reduced motion: hard-stop the continuous loops (not just near-zero
+   durations) and hold each layer's calm lit state. Parallax vars are never
+   set because the pointer script is motion-gated. */
+@media (prefers-reduced-motion: reduce) {
+  .hero__ring > span,
+  .hero__atmo i,
+  .hero__cloudlight i:nth-child(1),
+  .hero__cloudlight i:nth-child(2) { animation: none; }
+  .hero__atmo i { opacity: .55; }
+  .hero__cloudlight i:nth-child(1),
+  .hero__cloudlight i:nth-child(2) { opacity: .35; }
+}
+
+/* Small screens: same identity, lighter load — one cloud light, and the
+   washes ride without the oversize inset. */
+@media (max-width: 720px) {
+  .hero__cloudlight i:nth-child(2) { display: none; }
+  .hero__atmo { inset: 0; }
+}

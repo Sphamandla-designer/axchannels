@@ -70,6 +70,14 @@ the work in numbers · contact CTA · footer.
   a full-bleed marquee word ticker with a Pause Motion control,
   numbered service cards with accent top rules, and a live SAST clock
   in the footer.
+- *Living hero* (`home.css` §18): the uploaded `AX Background.png` is the
+  untouched hero foundation (served as `hero-bg-ring.jpg`); layered
+  overlays give it life — the neon ring's highlights rotate seamlessly
+  (22s, linear), cyan/magenta washes slowly trade intensity and position
+  (14s/18s alternating), and two soft light bodies drift through the fog
+  (9.5s/12.5s). All layers animate transform/opacity only, sit under the
+  readability scrim and content, hold a calm lit state under reduced
+  motion, and drift a few pixels with the pointer on desktop.
 - *Safety nets*: all pre-reveal states are gated on `html.js-motion`
   (added by JS) so no-JS visitors get the finished page, and on
   `prefers-reduced-motion: no-preference` — reduced-motion users get the

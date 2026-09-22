@@ -343,6 +343,28 @@
     apply();
   }
 
+  /* ----------------------------------------------- hero pointer parallax -- */
+  /* The hero's atmosphere layers drift a few pixels toward the pointer
+     (ring ±6px, washes ±4px, cloud light ±2.5px — set in CSS). Event-driven
+     and rAF-coalesced: no continuous loop runs. Desktop fine pointers only. */
+  if (hero && deskFine.matches) {
+    var pmx = 0, pmy = 0, pRaf = null;
+    hero.addEventListener("pointermove", function (e) {
+      var r = hero.getBoundingClientRect();
+      pmx = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width - .5) * 2));
+      pmy = Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height - .5) * 2));
+      if (!pRaf) pRaf = requestAnimationFrame(function () {
+        pRaf = null;
+        hero.style.setProperty("--mx", pmx.toFixed(3));
+        hero.style.setProperty("--my", pmy.toFixed(3));
+      });
+    }, { passive: true });
+    hero.addEventListener("pointerleave", function () {
+      hero.style.setProperty("--mx", "0");
+      hero.style.setProperty("--my", "0");
+    });
+  }
+
   /* --------------------------------------------------- magnetic buttons -- */
   if (finePointer.matches) {
     document.querySelectorAll(".btn").forEach(function (btn) {
