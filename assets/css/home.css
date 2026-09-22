@@ -1769,3 +1769,159 @@ a.project__media:hover img { transform: scale(1.03); }
 @media (prefers-reduced-motion: reduce), (pointer: coarse) {
   .hero__smoke { display: none; }
 }
+
+/* --------------------------------------------------------------------------
+   19. Hero — Stodio-reference anatomy: badge pill over a huge sentence-case
+   headline at regular weight (upper left), a small helper line, a mono
+   "+ fact" row along the bottom left, and a statement + compact pill CTAs
+   in the bottom-right corner. The AX background and living layers stay.
+   -------------------------------------------------------------------------- */
+.hero__body {
+  justify-content: flex-start;
+  padding-top: clamp(28px, 4.6vw, 92px);
+  padding-bottom: clamp(120px, 12vw, 220px);
+}
+
+.h1 {
+  font-size: clamp(38px, 5.2vw, 104px);
+  font-weight: 470;
+  line-height: 1.07;
+  letter-spacing: -.015em;
+  text-transform: none;
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .8em;
+  align-self: flex-start;
+  margin-bottom: clamp(20px, 2.4vw, 46px);
+  padding: .5em 1.15em .5em .55em;
+  border-radius: 999px;
+  background: #e9eaee;
+  color: #131318;
+  font-family: var(--mono);
+  font-size: clamp(11px, .73vw, 14px);
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.hero__badge-ic {
+  display: grid;
+  place-items: center;
+  width: 1.75em;
+  height: 1.75em;
+  border-radius: 5px;
+  background: var(--accent-ink);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1em;
+  line-height: 1;
+}
+
+.hero__lead {
+  margin-top: clamp(18px, 2vw, 38px);
+  max-width: 52ch;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, .88);
+}
+
+/* Bottom-right statement + CTAs */
+.hero__corner {
+  position: absolute;
+  z-index: 4;
+  right: max(20px, 6.51%);
+  bottom: clamp(22px, 2.9vw, 56px);
+  max-width: min(520px, 42%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(18px, 2.1vw, 40px);
+}
+.hero__statement {
+  font-size: clamp(19px, 1.68vw, 32px);
+  font-weight: 500;
+  line-height: 1.32;
+  color: #fff;
+}
+.hero__cta {
+  margin-top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(10px, .9vw, 16px);
+}
+
+.cta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: .55em;
+  height: clamp(42px, 3.1vw, 52px);
+  padding-inline: clamp(18px, 1.55vw, 27px);
+  border-radius: 999px;
+  font-size: clamp(14px, .9vw, 16px);
+  font-weight: 500;
+  line-height: 1;
+  transition: transform .25s var(--ease), box-shadow .3s var(--ease), background-color .25s var(--ease);
+}
+.cta-pill--accent { background: var(--accent-ink); color: #fff; }
+.cta-pill--accent:hover,
+.cta-pill--accent:focus-visible { background: #f32079; }
+.cta-pill--light { background: #fff; color: var(--ink); }
+.cta-pill:hover,
+.cta-pill:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(var(--cyan), .28), 0 12px 30px -12px rgba(var(--cyan), .4);
+}
+.cta-pill__arr { font-size: 1.05em; transition: translate .25s var(--ease); }
+.cta-pill:hover .cta-pill__arr { translate: .14em -.14em; }
+
+/* Bottom-left mono fact row */
+.hero__micro {
+  position: absolute;
+  z-index: 4;
+  left: max(20px, 6.51%);
+  bottom: clamp(24px, 3vw, 58px);
+  display: flex;
+  gap: clamp(24px, 7vw, 132px);
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--on-dark-dim);
+  white-space: nowrap;
+}
+
+/* Entrance: badge leads, headline masks follow (3rd line delay added),
+   then lead, statement, CTAs and the fact row settle. */
+@media (prefers-reduced-motion: no-preference) {
+  .js-motion .h1__line:nth-child(3) .h1__seg { transition-delay: .39s; }
+  .js-motion body:not(.is-in) .hero__badge,
+  .js-motion body:not(.is-in) .hero__statement,
+  .js-motion body:not(.is-in) .hero__micro { opacity: 0; transform: translateY(16px); }
+  .js-motion .hero__badge     { transition: opacity .7s var(--ease-out) .3s,  transform .7s var(--ease-out) .3s; }
+  .js-motion .hero__statement { transition: opacity .8s var(--ease-out) .62s, transform .8s var(--ease-out) .62s; }
+  .js-motion .hero__micro     { transition: opacity .8s var(--ease-out) .85s, transform .8s var(--ease-out) .85s; }
+}
+
+/* Tablet / mobile: the corner and fact row leave their anchors and stack
+   in flow under the headline block. */
+@media (max-width: 1100px) {
+  .hero__corner {
+    position: static;
+    max-width: none;
+    padding: 0 max(20px, 6.51%);
+    margin-top: clamp(26px, 5vw, 44px);
+  }
+  .hero__micro {
+    position: static;
+    padding: 0 max(20px, 6.51%);
+    margin: clamp(26px, 5vw, 40px) 0 clamp(22px, 4vw, 36px);
+    flex-wrap: wrap;
+    gap: 12px 28px;
+    white-space: normal;
+  }
+  .hero__body { padding-bottom: 0; }
+}
