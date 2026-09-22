@@ -55,8 +55,13 @@
 
   /* Layout ---------------------------------------------------------------- */
   --shell:   clamp(12px, 1.25vw, 24px);        /* inset of hero/footer block */
-  --gutter:  clamp(20px, 2.9167vw, 56px);      /* page gutter (56)           */
-  --wrap:    1808px;                           /* 56 → 1864                  */
+  /* Inset from a block's edge in to its content. This is the measure that
+     places the logo inside the hero, and every other content column is
+     derived from it below, so the masthead, the hero copy, each section and
+     the panel cells all begin on one vertical line. ---------------------- */
+  --block-pad: clamp(16px, 1.5625vw, 30px);
+  --gutter:  calc(var(--shell) + var(--block-pad));  /* content starts on the logo */
+  --wrap:    1812px;                           /* 54 → 1866, the hero's inner measure */
 
   --r-block: clamp(16px, 1.25vw, 24px);        /* hero / footer block        */
   --npad:    clamp(20px, 3.28vw, 63px);        /* numbers panel cell inset   */
@@ -264,14 +269,34 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 
 /* Centred section header (services · work · testimonials) */
-.sec-head { text-align: center; }
-.sec-head .h2 { margin-inline: auto; }
+/* Section head: the heading holds the page's content line on the left and
+   its statement sits opposite on the right, the two meeting on a common
+   baseline. Below --bp-sec-head the pair stacks and the statement returns to
+   the left, since a right-ragged column is hard to read at narrow widths. */
+.sec-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 44ch);
+  column-gap: clamp(24px, 4vw, 96px);
+  align-items: end;
+  text-align: left;
+}
+.sec-head .h2 { margin-inline: 0; }
 .sec-head__sub {
-  margin: var(--sp-32) auto 0;
+  margin: 0;
+  justify-self: end;
+  text-align: right;
   font-size: var(--fs-lg);
   line-height: 1.833;
   max-width: 70ch;
   text-wrap: balance;
+}
+@media (max-width: 900px) {
+  .sec-head { grid-template-columns: minmax(0, 1fr); }
+  .sec-head__sub {
+    justify-self: start;
+    text-align: left;
+    margin-top: var(--sp-32);
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -367,7 +392,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   display: flex;
   align-items: center;
   gap: clamp(12px, 1.25vw, 24px);
-  padding: clamp(14px, 1.41vw, 27px) max(16px, 1.6%) 0;
+  padding: clamp(14px, 1.41vw, 27px) var(--block-pad) 0;
   color: #fff;
 }
 
@@ -412,7 +437,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .locale {
   position: relative;
   z-index: 6;
-  margin: clamp(8px, .68vw, 13px) max(16px, 1.6%) 0 auto;
+  margin: clamp(8px, .68vw, 13px) var(--block-pad) 0 auto;
   padding-top: clamp(8px, .89vw, 17px);
   width: min(420px, 24%);
   border-top: 1px solid rgba(255, 255, 255, .45);
@@ -512,7 +537,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 max(20px, 6.51%);
+  padding: 0 var(--block-pad);
 }
 
 .hero__lead {
@@ -538,7 +563,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .hero__foot {
   position: relative;
   z-index: 4;
-  padding: 0 max(20px, 6.51%) clamp(10px, .83vw, 16px);
+  padding: 0 var(--block-pad) clamp(10px, .83vw, 16px);
 }
 .display {
   display: block;
@@ -761,7 +786,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .work__eyebrow {
   display: block;
-  text-align: center;
+  text-align: left;
   font-size: var(--fs-lg);
   font-weight: 400;
   letter-spacing: .01em;
@@ -986,7 +1011,7 @@ a.project__media:hover img { transform: scale(1.03); }
 /* --------------------------------------------------------------------------
    14. Contact CTA + footer (one dark block)
    -------------------------------------------------------------------------- */
-.closing { padding: var(--sp-169) max(20px, 4.43%) var(--sp-134); }
+.closing { padding: var(--sp-169) var(--block-pad) var(--sp-134); }
 
 .cta {
   display: grid;
@@ -1085,7 +1110,9 @@ a.project__media:hover img { transform: scale(1.03); }
 
 /* Tablet ------------------------------------------------------------------ */
 @media (max-width: 1100px) {
-  :root { --wrap: 960px; }
+  /* --wrap is a ceiling for wide screens only. Capping it here made the
+     measure narrower than the viewport, so .wrap re-centred itself and the
+     content drifted off the logo line; below this width the gutter governs. */
 
   /* the pill nav becomes a panel */
   .masthead { padding-top: 16px; }
@@ -1120,7 +1147,7 @@ a.project__media:hover img { transform: scale(1.03); }
     flex-direction: row;
     align-items: center;
     gap: 0;
-    padding: clamp(26px, 5vw, 48px) max(20px, 6.51%) 0;
+    padding: clamp(26px, 5vw, 48px) var(--block-pad) 0;
     font-size: 12px;
     font-weight: 600;
     letter-spacing: .14em;
@@ -1169,8 +1196,8 @@ a.project__media:hover img { transform: scale(1.03); }
 
 /* Mobile ------------------------------------------------------------------ */
 @media (max-width: 720px) {
-  :root { --gutter: 20px; }
-
+  /* --gutter stays derived from --shell + --block-pad here too, so section
+     content keeps meeting the logo at mobile widths as well. */
   .hero { border-radius: 16px; }
   .hero__body { padding-bottom: clamp(32px, 9vw, 56px); }
   .hero__portrait { width: 68%; right: -6%; opacity: .9; }
@@ -1189,7 +1216,6 @@ a.project__media:hover img { transform: scale(1.03); }
 
   .numbers__stats { gap: var(--sp-45) 24px; }
 
-  .closing { padding-inline: 20px; }
   .legal { font-size: var(--fs-md); }
   .legal__links { gap: 24px; }
 }
@@ -1837,7 +1863,7 @@ a.project__media:hover img { transform: scale(1.03); }
 .hero__corner {
   position: absolute;
   z-index: 4;
-  right: max(20px, 6.51%);
+  right: var(--block-pad);
   bottom: clamp(22px, 2.9vw, 56px);
   max-width: min(520px, 42%);
   display: flex;
@@ -1886,7 +1912,7 @@ a.project__media:hover img { transform: scale(1.03); }
 .hero__micro {
   position: absolute;
   z-index: 4;
-  left: max(20px, 6.51%);
+  left: var(--block-pad);
   bottom: clamp(24px, 3vw, 58px);
   display: flex;
   gap: clamp(24px, 7vw, 132px);
@@ -1917,12 +1943,12 @@ a.project__media:hover img { transform: scale(1.03); }
   .hero__corner {
     position: static;
     max-width: none;
-    padding: 0 max(20px, 6.51%);
+    padding: 0 var(--block-pad);
     margin-top: clamp(26px, 5vw, 44px);
   }
   .hero__micro {
     position: static;
-    padding: 0 max(20px, 6.51%);
+    padding: 0 var(--block-pad);
     margin: clamp(26px, 5vw, 40px) 0 clamp(22px, 4vw, 36px);
     flex-wrap: wrap;
     gap: 12px 28px;
@@ -1975,6 +2001,13 @@ a.project__media:hover img { transform: scale(1.03); }
   background: none;
   padding: var(--sp-136) 0 var(--sp-221);
 }
+/* The panel is a block in its own right, like the hero and the footer, so it
+   spans the hero card's width rather than the narrower content measure. Its
+   cells then carry --block-pad, which lands their type on the logo line. */
+.numbers > .wrap {
+  max-width: none;
+  padding-inline: var(--shell);
+}
 
 .numbers__panel {
   position: relative;
@@ -1983,7 +2016,14 @@ a.project__media:hover img { transform: scale(1.03); }
   left: auto; top: auto; width: auto; height: auto;
   text-align: left;
   border-radius: var(--r-block);
-  background: var(--numbers-panel);
+  /* Lit like the hero: a teal glow off the top-right shoulder and a magenta
+     one rising from the bottom-left, over the panel's near-black base. Kept
+     low in alpha so the hairline grid and the statistics stay the subject. */
+  background:
+    radial-gradient(52% 62% at 88% 6%,   rgba(var(--glow-teal), .42), transparent 72%),
+    radial-gradient(46% 58% at 4% 96%,   rgba(var(--glow-mag),  .55), transparent 74%),
+    radial-gradient(38% 46% at 62% 108%, rgba(255, 61, 138, .16),     transparent 70%),
+    var(--numbers-panel);
   color: var(--on-dark);
   aspect-ratio: 1920 / 1089;
   display: grid;
@@ -2000,6 +2040,10 @@ a.project__media:hover img { transform: scale(1.03); }
 
 /* Cells ------------------------------------------------------------------- */
 .ncell { position: relative; z-index: 2; padding: var(--npad); display: flex; }
+/* the left column sits against the panel edge, so its inset is the block
+   inset — putting the heading and the statement on the page's content line */
+.ncell--title,
+.ncell--statement { padding-left: var(--block-pad); }
 .ncell--title     { grid-area: 1 / 1 / 3 / 2; align-items: flex-start; }
 .ncell--statement {
   grid-area: 3 / 1 / 4 / 2;
@@ -2021,6 +2065,11 @@ a.project__media:hover img { transform: scale(1.03); }
 .numbers__field {
   position: relative;
   flex: 1 1 auto;
+  /* Without this the field cannot shrink past its own content box, so at the
+     widths where the footnote wraps to two lines the cell overflowed the
+     panel's fixed row and the panel's overflow:hidden cut the last line off.
+     Shrinking is absorbed by the decorative flare space below, not the type. */
+  min-height: 0;
   display: flex;
   align-items: flex-start;
   /* room for the flare to resolve below the last line when the cell is
@@ -2032,7 +2081,7 @@ a.project__media:hover img { transform: scale(1.03); }
   position: absolute;
   z-index: -1;
   top: calc(1px - var(--npad));        /* clears the hairline above it */
-  left: calc(-1 * var(--npad));
+  left: calc(-1 * var(--block-pad));
   right: calc(-1 * var(--npad));
   bottom: 0;
   /* The reference's own ramp brightens under its last line of type. These
@@ -2041,15 +2090,15 @@ a.project__media:hover img { transform: scale(1.03); }
   background: linear-gradient(
     to bottom,
     #0d0d0d   0%,
-    #0a1120  14%,
-    #131d30  30%,
-    #1e2a42  46%,
-    #2b3750  60%,
-    #3d4a62  72%,
-    #5d6a80  83%,
-    #8b99a6  92%,
-    #b7c5ca  98%,
-    #c2cfd4 100%
+    #160a11  14%,
+    #24101d  30%,
+    #3e1229  46%,   /* --glow-mag, the hero's own magenta */
+    #5c1a3a  60%,
+    #8a2352  72%,
+    #c13070  83%,
+    #ff3d8a  92%,   /* --accent */
+    #ff8fbc  98%,
+    #ffb3d1 100%
   );
 }
 
