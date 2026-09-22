@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="assets/img/home/ax-background.png" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/home.css?v=34">
+<link rel="stylesheet" href="assets/css/home.css?v=36">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -739,142 +739,183 @@
   </div>
 </div>
 
-<script src="assets/js/home.js?v=34" defer></script>
+<script src="assets/js/home.js?v=36" defer></script>
 <dialog class="drawer" id="drawer-project" aria-labelledby="drawer-project-title">
-  <div class="drawer__inner">
-    <header class="drawer__head">
-      <p class="drawer__eyebrow">AX-Channels</p>
-      <h2 class="drawer__title" id="drawer-project-title">Discuss A Project</h2>
-      <p class="drawer__intro">Tell us what you are building and where it is stuck. We reply within two working days.</p>
-      <button class="drawer__close" type="button" data-drawer-close aria-label="Close">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
-      </button>
-    </header>
+  <div class="drawer__body">
+    <div class="drawer__panel">
+      <header class="drawer__head">
+        <p class="drawer__eyebrow">AX-Channels</p>
+        <h2 class="drawer__title" id="drawer-project-title">Discuss A Project</h2>
+        <p class="drawer__intro">Tell us what you are building and where it is stuck.</p>
+        <button class="drawer__close" type="button" data-drawer-close aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+        </button>
+      </header>
 
-    <form class="drawer__form" data-drawer-form data-subject="Discuss A Project" novalidate>
-        <p class="drawer__field">
-          <label class="drawer__label" for="p-name">Your Name <span class="drawer__req" aria-hidden="true">*</span></label>
-          <input class="drawer__control" id="p-name" name="Your Name" type="text" placeholder="Alex Reed" required>
+      <form class="drawer__form" data-drawer-form data-subject="Discuss A Project" novalidate>
+          <fieldset class="ff-group">
+            <legend class="ff-group__legend">Name <span class="ff-group__req">(required)</span></legend>
+            <div class="ff-row">
+<p class="ff">
+              <label class="ff__label" for="p-first">First Name</label>
+              <input class="ff__control" id="p-first" name="First Name" type="text" placeholder="Thabo" required>
+            </p>
+<p class="ff">
+              <label class="ff__label" for="p-last">Last Name</label>
+              <input class="ff__control" id="p-last" name="Last Name" type="text" placeholder="Mokoena" required>
+            </p>
+            </div>
+          </fieldset>
+          <p class="ff ff--select">
+              <label class="ff__label" for="p-service">Service</label>
+              <select class="ff__control" id="p-service" name="Service" required>
+                <option value="" disabled selected></option>
+                <option value="Website Design & Development">Website Design & Development</option>
+                <option value="Digital Product Design">Digital Product Design</option>
+                <option value="UI/UX Design & UX Strategy">UI/UX Design & UX Strategy</option>
+                <option value="Brand Identity System">Brand Identity System</option>
+                <option value="Not Sure Yet">Not Sure Yet</option>
+              </select>
+            </p>
+          <p class="ff">
+              <label class="ff__label" for="p-email">Email <span class="ff__req">(required)</span></label>
+              <input class="ff__control" id="p-email" name="Email" type="email" placeholder="you@company.co.za" required>
+            </p>
+          <p class="ff ff--select">
+              <label class="ff__label" for="p-budget">Budget Range</label>
+              <select class="ff__control" id="p-budget" name="Budget Range">
+                <option value="" disabled selected></option>
+                <option value="Under R3,000">Under R3,000</option>
+                <option value="R3,000 – R6,000">R3,000 – R6,000</option>
+                <option value="R6,000 – R9,000">R6,000 – R9,000</option>
+                <option value="R9,000+">R9,000+</option>
+                <option value="Still Deciding">Still Deciding</option>
+              </select>
+            </p>
+          <p class="ff-check">
+            <input class="ff-check__box" id="p-news" name="Sign up for news and updates" type="checkbox" value="Yes">
+            <label class="ff-check__label" for="p-news">Sign me up for occasional notes on new work</label>
+          </p>
+          <p class="ff">
+              <label class="ff__label" for="p-brief">Project description</label>
+              <textarea class="ff__control" id="p-brief" name="Project description" rows="2" placeholder="What it is for, who it is for, and what success looks like." required></textarea>
+            </p>
+        <p class="drawer__actions">
+          <button class="ff-submit" type="submit">Submit</button>
+          <span class="drawer__note" data-drawer-note role="status"></span>
         </p>
-        <p class="drawer__field">
-          <label class="drawer__label" for="p-email">Email <span class="drawer__req" aria-hidden="true">*</span></label>
-          <input class="drawer__control" id="p-email" name="Email" type="email" placeholder="you@company.co.za" required>
-        </p>
-        <p class="drawer__field">
-          <label class="drawer__label" for="p-company">Company</label>
-          <input class="drawer__control" id="p-company" name="Company" type="text" placeholder="Optional">
-        </p>
-        <p class="drawer__field">
-          <label class="drawer__label" for="p-service">What You Need <span class="drawer__req" aria-hidden="true">*</span></label>
-          <select class="drawer__control" id="p-service" name="What You Need" required>
-            <option value="" disabled selected>Select one</option>
-            <option value="Website Design & Development">Website Design & Development</option>
-            <option value="Digital Product Design">Digital Product Design</option>
-            <option value="UI/UX Design & UX Strategy">UI/UX Design & UX Strategy</option>
-            <option value="Brand Identity System">Brand Identity System</option>
-            <option value="Not Sure Yet">Not Sure Yet</option>
-          </select>
-        </p>
-        <p class="drawer__field">
-          <label class="drawer__label" for="p-budget">Budget Range</label>
-          <select class="drawer__control" id="p-budget" name="Budget Range">
-            <option value="" disabled selected>Select one</option>
-            <option value="Under R3,000">Under R3,000</option>
-            <option value="R3,000 – R6,000">R3,000 – R6,000</option>
-            <option value="R6,000 – R9,000">R6,000 – R9,000</option>
-            <option value="R9,000+">R9,000+</option>
-            <option value="Still Deciding">Still Deciding</option>
-          </select>
-        </p>
-        <p class="drawer__field">
-          <label class="drawer__label" for="p-brief">About The Project <span class="drawer__req" aria-hidden="true">*</span></label>
-          <textarea class="drawer__control" id="p-brief" name="About The Project" rows="5" placeholder="What it is for, who it is for, and what success looks like." required></textarea>
-        </p>
-      <p class="drawer__actions">
-        <button class="cta-pill cta-pill--accent" type="submit">Send Message <span class="cta-pill__arr" aria-hidden="true">&#8599;</span></button>
-        <span class="drawer__note" data-drawer-note role="status"></span>
-      </p>
-      <p class="drawer__fine">Opens in your email app, addressed to info@axchannels.co.za, with everything above filled in. Nothing is sent until you press send there.</p>
-    </form>
+        <p class="drawer__fine">Opens in your email app, addressed to info@axchannels.co.za, with everything above filled in. Nothing is sent until you press send there.</p>
+      </form>
+    </div>
   </div>
 </dialog>
 <dialog class="drawer" id="drawer-partner" aria-labelledby="drawer-partner-title">
-  <div class="drawer__inner">
-    <header class="drawer__head">
-      <p class="drawer__eyebrow">AX-Channels</p>
-      <h2 class="drawer__title" id="drawer-partner-title">Partner With Us</h2>
-      <p class="drawer__intro">Studios, agencies and developers we can build alongside. Tell us what you do.</p>
-      <button class="drawer__close" type="button" data-drawer-close aria-label="Close">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
-      </button>
-    </header>
+  <div class="drawer__body">
+    <div class="drawer__panel">
+      <header class="drawer__head">
+        <p class="drawer__eyebrow">AX-Channels</p>
+        <h2 class="drawer__title" id="drawer-partner-title">Partner With Us</h2>
+        <p class="drawer__intro">Studios, agencies and developers we can build alongside.</p>
+        <button class="drawer__close" type="button" data-drawer-close aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+        </button>
+      </header>
 
-    <form class="drawer__form" data-drawer-form data-subject="Partner With Us" novalidate>
-        <p class="drawer__field">
-          <label class="drawer__label" for="pa-name">Your Name <span class="drawer__req" aria-hidden="true">*</span></label>
-          <input class="drawer__control" id="pa-name" name="Your Name" type="text" placeholder="Alex Reed" required>
+      <form class="drawer__form" data-drawer-form data-subject="Partner With Us" novalidate>
+          <fieldset class="ff-group">
+            <legend class="ff-group__legend">Name <span class="ff-group__req">(required)</span></legend>
+            <div class="ff-row">
+<p class="ff">
+              <label class="ff__label" for="pa-first">First Name</label>
+              <input class="ff__control" id="pa-first" name="First Name" type="text" placeholder="Thabo" required>
+            </p>
+<p class="ff">
+              <label class="ff__label" for="pa-last">Last Name</label>
+              <input class="ff__control" id="pa-last" name="Last Name" type="text" placeholder="Mokoena" required>
+            </p>
+            </div>
+          </fieldset>
+          <p class="ff">
+              <label class="ff__label" for="pa-org">Organisation</label>
+              <input class="ff__control" id="pa-org" name="Organisation" type="text" placeholder="Company or studio name" required>
+            </p>
+          <p class="ff ff--select">
+              <label class="ff__label" for="pa-type">Partnership Type</label>
+              <select class="ff__control" id="pa-type" name="Partnership Type" required>
+                <option value="" disabled selected></option>
+                <option value="Referral Partner">Referral Partner</option>
+                <option value="White-Label Design">White-Label Design</option>
+                <option value="Development Partner">Development Partner</option>
+                <option value="Content Or Marketing">Content Or Marketing</option>
+                <option value="Something Else">Something Else</option>
+              </select>
+            </p>
+          <p class="ff">
+              <label class="ff__label" for="pa-email">Email <span class="ff__req">(required)</span></label>
+              <input class="ff__control" id="pa-email" name="Email" type="email" placeholder="you@company.co.za" required>
+            </p>
+          <p class="ff-check">
+            <input class="ff-check__box" id="pa-news" name="Sign up for news and updates" type="checkbox" value="Yes">
+            <label class="ff-check__label" for="pa-news">Sign me up for occasional notes on new work</label>
+          </p>
+          <p class="ff">
+              <label class="ff__label" for="pa-note">How you see us working together</label>
+              <textarea class="ff__control" id="pa-note" name="How you see us working together" rows="2" placeholder="What you bring, and what you are looking for." required></textarea>
+            </p>
+        <p class="drawer__actions">
+          <button class="ff-submit" type="submit">Submit</button>
+          <span class="drawer__note" data-drawer-note role="status"></span>
         </p>
-        <p class="drawer__field">
-          <label class="drawer__label" for="pa-email">Email <span class="drawer__req" aria-hidden="true">*</span></label>
-          <input class="drawer__control" id="pa-email" name="Email" type="email" placeholder="you@company.co.za" required>
-        </p>
-        <p class="drawer__field">
-          <label class="drawer__label" for="pa-org">Organisation <span class="drawer__req" aria-hidden="true">*</span></label>
-          <input class="drawer__control" id="pa-org" name="Organisation" type="text" placeholder="Company or studio name" required>
-        </p>
-        <p class="drawer__field">
-          <label class="drawer__label" for="pa-type">Partnership Type <span class="drawer__req" aria-hidden="true">*</span></label>
-          <select class="drawer__control" id="pa-type" name="Partnership Type" required>
-            <option value="" disabled selected>Select one</option>
-            <option value="Referral Partner">Referral Partner</option>
-            <option value="White-Label Design">White-Label Design</option>
-            <option value="Development Partner">Development Partner</option>
-            <option value="Content Or Marketing">Content Or Marketing</option>
-            <option value="Something Else">Something Else</option>
-          </select>
-        </p>
-        <p class="drawer__field">
-          <label class="drawer__label" for="pa-note">How You See Us Working Together <span class="drawer__req" aria-hidden="true">*</span></label>
-          <textarea class="drawer__control" id="pa-note" name="How You See Us Working Together" rows="5" placeholder="What you bring, and what you are looking for." required></textarea>
-        </p>
-      <p class="drawer__actions">
-        <button class="cta-pill cta-pill--accent" type="submit">Send Message <span class="cta-pill__arr" aria-hidden="true">&#8599;</span></button>
-        <span class="drawer__note" data-drawer-note role="status"></span>
-      </p>
-      <p class="drawer__fine">Opens in your email app, addressed to info@axchannels.co.za, with everything above filled in. Nothing is sent until you press send there.</p>
-    </form>
+        <p class="drawer__fine">Opens in your email app, addressed to info@axchannels.co.za, with everything above filled in. Nothing is sent until you press send there.</p>
+      </form>
+    </div>
   </div>
 </dialog>
 <dialog class="drawer" id="drawer-hello" aria-labelledby="drawer-hello-title">
-  <div class="drawer__inner">
-    <header class="drawer__head">
-      <p class="drawer__eyebrow">AX-Channels</p>
-      <h2 class="drawer__title" id="drawer-hello-title">Just Want To Say Hi</h2>
-      <p class="drawer__intro">No brief, no budget, no pressure. Say hello and we will write back.</p>
-      <button class="drawer__close" type="button" data-drawer-close aria-label="Close">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
-      </button>
-    </header>
+  <div class="drawer__body">
+    <div class="drawer__panel">
+      <header class="drawer__head">
+        <p class="drawer__eyebrow">AX-Channels</p>
+        <h2 class="drawer__title" id="drawer-hello-title">Just Want To Say Hi</h2>
+        <p class="drawer__intro">No brief, no budget, no pressure. Say hello and we will write back.</p>
+        <button class="drawer__close" type="button" data-drawer-close aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+        </button>
+      </header>
 
-    <form class="drawer__form" data-drawer-form data-subject="Just Want To Say Hi" novalidate>
-        <p class="drawer__field">
-          <label class="drawer__label" for="h-name">Your Name <span class="drawer__req" aria-hidden="true">*</span></label>
-          <input class="drawer__control" id="h-name" name="Your Name" type="text" placeholder="Alex Reed" required>
+      <form class="drawer__form" data-drawer-form data-subject="Just Want To Say Hi" novalidate>
+          <fieldset class="ff-group">
+            <legend class="ff-group__legend">Name <span class="ff-group__req">(required)</span></legend>
+            <div class="ff-row">
+<p class="ff">
+              <label class="ff__label" for="h-first">First Name</label>
+              <input class="ff__control" id="h-first" name="First Name" type="text" placeholder="Thabo" required>
+            </p>
+<p class="ff">
+              <label class="ff__label" for="h-last">Last Name</label>
+              <input class="ff__control" id="h-last" name="Last Name" type="text" placeholder="Mokoena" required>
+            </p>
+            </div>
+          </fieldset>
+          <p class="ff">
+              <label class="ff__label" for="h-email">Email <span class="ff__req">(required)</span></label>
+              <input class="ff__control" id="h-email" name="Email" type="email" placeholder="you@company.co.za" required>
+            </p>
+          <p class="ff-check">
+            <input class="ff-check__box" id="h-news" name="Sign up for news and updates" type="checkbox" value="Yes">
+            <label class="ff-check__label" for="h-news">Sign me up for occasional notes on new work</label>
+          </p>
+          <p class="ff">
+              <label class="ff__label" for="h-note">Your message</label>
+              <textarea class="ff__control" id="h-note" name="Your message" rows="2" placeholder="Anything at all." required></textarea>
+            </p>
+        <p class="drawer__actions">
+          <button class="ff-submit" type="submit">Submit</button>
+          <span class="drawer__note" data-drawer-note role="status"></span>
         </p>
-        <p class="drawer__field">
-          <label class="drawer__label" for="h-email">Email <span class="drawer__req" aria-hidden="true">*</span></label>
-          <input class="drawer__control" id="h-email" name="Email" type="email" placeholder="you@company.co.za" required>
-        </p>
-        <p class="drawer__field">
-          <label class="drawer__label" for="h-note">Your Message <span class="drawer__req" aria-hidden="true">*</span></label>
-          <textarea class="drawer__control" id="h-note" name="Your Message" rows="6" placeholder="Anything at all." required></textarea>
-        </p>
-      <p class="drawer__actions">
-        <button class="cta-pill cta-pill--accent" type="submit">Send Message <span class="cta-pill__arr" aria-hidden="true">&#8599;</span></button>
-        <span class="drawer__note" data-drawer-note role="status"></span>
-      </p>
-      <p class="drawer__fine">Opens in your email app, addressed to info@axchannels.co.za, with everything above filled in. Nothing is sent until you press send there.</p>
-    </form>
+        <p class="drawer__fine">Opens in your email app, addressed to info@axchannels.co.za, with everything above filled in. Nothing is sent until you press send there.</p>
+      </form>
+    </div>
   </div>
 </dialog>
 
