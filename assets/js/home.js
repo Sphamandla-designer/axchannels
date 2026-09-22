@@ -273,11 +273,28 @@
       var target = parseInt(el.getAttribute("data-count"), 10) || 0;
       var suffix = el.getAttribute("data-suffix") || "";
       var t0 = null, dur = 900;
+      /* The suffix is its own element so the stats panel can hang it off the
+         numeral's cap line. The markup may already supply it — that is what
+         keeps the panel correct with JS off and under reduced motion — so
+         only build it when it is missing, and write the digits alone. */
+      var digits;
+      if (suffix && !el.querySelector(".num__suffix")) {
+        el.textContent = "";
+        digits = el.appendChild(document.createTextNode(String(target)));
+        var sfx = document.createElement("span");
+        sfx.className = "num__suffix";
+        sfx.textContent = suffix;
+        el.appendChild(sfx);
+      } else if (el.firstChild && el.firstChild.nodeType === 3) {
+        digits = el.firstChild;
+      } else {
+        digits = el.insertBefore(document.createTextNode(""), el.firstChild);
+      }
       var tick = function (now) {
         if (t0 === null) t0 = now;
         var p = Math.min((now - t0) / dur, 1);
         var eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.round(eased * target) + suffix;
+        digits.nodeValue = String(Math.round(eased * target));
         if (p < 1) requestAnimationFrame(tick);
       };
       requestAnimationFrame(tick);
@@ -295,7 +312,6 @@
   /* ---------------------------------------------- scroll depth layers -- */
   var hero = document.querySelector(".hero");
   var workSection = document.querySelector(".work");
-  var numbersSection = document.querySelector(".numbers");
   var root = document.documentElement;
   var plxImgs = Array.prototype.map.call(
     document.querySelectorAll(".project__media img, .studio__figure img"),
@@ -311,8 +327,6 @@
         root.style.removeProperty("--par-body");
         root.style.removeProperty("--par-fade");
         root.style.removeProperty("--par-wm");
-        root.style.removeProperty("--nw1");
-        root.style.removeProperty("--nw2");
         return;
       }
       var vh = window.innerHeight;
@@ -329,15 +343,6 @@
         if (r.top < vh && r.bottom > 0) {
           var wp = 1 - (r.top + r.height / 2) / (vh / 2 + r.height / 2);
           root.style.setProperty("--par-wm", (wp * 36).toFixed(1) + "px");
-        }
-      }
-      /* stats wordmarks drift apart gently with scroll */
-      if (numbersSection) {
-        var nr = numbersSection.getBoundingClientRect();
-        if (nr.top < vh && nr.bottom > 0) {
-          var np = 1 - 2 * ((nr.top + nr.height / 2) / (vh + nr.height));
-          root.style.setProperty("--nw1", (np * 34).toFixed(1) + "px");
-          root.style.setProperty("--nw2", (np * -28).toFixed(1) + "px");
         }
       }
       plxImgs.forEach(function (o) {
