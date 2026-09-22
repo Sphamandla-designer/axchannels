@@ -1957,105 +1957,146 @@ a.project__media:hover img { transform: scale(1.03); }
 }
 
 /* --------------------------------------------------------------------------
-   21. Work In Numbers — implemented from "stats reference.png":
-   a giant top word cropped at the TOP edge spanning the full width, a
-   giant bottom-left word (~70% width) cropped at the BOTTOM edge, a small
-   centred text block in the gap between them, and the stats stack pinned
-   to the right edge beside the bottom word. Counters still count up.
+   21. Work In Numbers — implemented from "stats design.png" (Final Stats
+   Design). Geometry is transcribed from the 1910x911 artwork as
+   percentages of the section: two giant fully-visible words on a white
+   canvas, a white knockout panel over their centre carrying the text
+   (slicing DESIGN's glyph bottoms and WALL's glyph tops, with the final
+   L's stem escaping the panel at full height), and a left-aligned stats
+   column on the right edge, evenly spaced. Counters still count up.
    -------------------------------------------------------------------------- */
 .numbers {
   position: relative;
   overflow: hidden;
   padding: 0;
-  background: #fff; /* the reference sits on a clean white canvas */
+  background: #fff;
+  aspect-ratio: 1910 / 911;
 }
 
 .numbers__wall {
+  position: absolute;
+  margin: 0;
   font-weight: 900;
   text-transform: uppercase;
   white-space: nowrap;
-  letter-spacing: -.025em;
-  color: var(--ink-2);
-  line-height: .78;
+  letter-spacing: -.01em;
+  color: #0a0a0a;
+  line-height: .72; /* line box hugs the caps so top % maps to glyph tops */
+  font-size: 19.6vw;
+  z-index: 1;
 }
 .numbers__wall--top {
-  font-size: min(24.2vw, 465px);
-  text-align: center;
-  margin-top: -.155em;   /* glyph tops bleed off the section edge */
+  left: 7%;
+  top: 13%;
+  transform: scaleX(1.052); /* matches the artwork's wider letterforms */
+  transform-origin: left top;
 }
 .numbers__wall--bottom {
-  font-size: min(15.6vw, 300px);
-  text-align: left;
-  padding-left: 1.5%;
-  margin-bottom: -.14em; /* glyph bottoms bleed off the section edge */
+  left: 18%;
+  top: 53.8%;
+  transform: scaleX(1.06);
+  transform-origin: left top;
 }
 
-.numbers__mid {
-  display: flex;
-  justify-content: center;
-  padding-block: clamp(16px, 2vw, 40px) clamp(48px, 4.8vw, 92px);
-}
-.numbers__intro { text-align: center; max-width: 46ch; }
-.numbers__title {
-  font-size: clamp(15px, 1.05vw, 20px);
-  font-weight: 800;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  line-height: 1.3;
-}
-.numbers__sub {
-  margin-top: .8em;
-  max-width: 36ch;
-  margin-inline: auto;
-  font-size: var(--fs-xs);
-  line-height: 1.7;
-  color: var(--muted-2);
-}
-
-.numbers__stats {
+/* White knockout panel over the centre of both words */
+.numbers__panel {
   position: absolute;
   z-index: 2;
-  right: max(20px, 3.3%);
-  top: min(16vw, 308px); /* just under the top word, like the reference */
-  margin-top: 0;
+  left: 26.2%;
+  top: 33.5%;
+  width: 42%; /* right edge stops just short of the final L's stem, which
+                 escapes the panel at full height as in the artwork */
+  height: 30.6%;
+  background: #fff;
   display: flex;
   flex-direction: column;
-  gap: clamp(8px, .8vw, 14px);
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 2.4%;
+  padding-left: 6.6%; /* re-centres the text block on the canvas */
+  text-align: center;
+}
+.numbers__title {
+  font-size: clamp(17px, 1.88vw, 40px);
+  font-weight: 800;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: #0a0a0a;
+}
+.numbers__sub {
+  margin-top: 1.6em;
+  font-size: clamp(12px, 1.3vw, 27px);
+  line-height: 1.4;
+  font-weight: 400;
+  color: #8d8d8d;
+  white-space: nowrap;
+}
+
+/* Right-edge stats column: left-aligned, evenly distributed */
+.numbers__stats {
+  position: absolute;
+  z-index: 3;
+  right: 3.4%;
+  top: 43.2%;
+  height: 44.8%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0;
+  text-align: left;
 }
 .numbers__stats > div { display: flex; flex-direction: column; }
 .num__value {
   order: -1;
-  margin-top: 0;
-  padding-top: 0;
-  border-top: 0;
-  font-size: clamp(17px, 1.4vw, 26px);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: clamp(18px, 2.1vw, 44px);
   font-weight: 750;
-  line-height: 1.1;
+  line-height: 1;
   letter-spacing: -.01em;
+  color: #0a0a0a;
 }
 .num__label {
-  margin-top: .25em;
-  white-space: normal;
-  max-width: 14ch;
-  font-size: var(--fs-2xs);
-  font-weight: 500;
-  letter-spacing: .04em;
-  line-height: 1.4;
-  color: var(--muted-2);
+  margin-top: .8em;
+  white-space: nowrap;
+  max-width: none;
+  font-family: var(--font);
+  font-size: clamp(10px, .89vw, 19px);
+  font-weight: 400;
+  letter-spacing: .01em;
+  text-transform: none;
+  line-height: 1.2;
+  color: #8d8d8d;
 }
 
+/* Small screens: the fixed-canvas composition cannot hold; words shrink
+   with the viewport and the blocks stack in flow. */
 @media (max-width: 720px) {
-  .numbers__mid { padding-block: clamp(18px, 4vw, 28px); }
-  .numbers__intro { padding-inline: var(--gutter); }
+  .numbers { aspect-ratio: auto; padding: 26px 0 30px; }
+  .numbers__wall { position: static; text-align: center; font-size: 21vw; line-height: .8; transform: none; }
+  .numbers__wall--bottom { order: 3; }
+  .numbers__panel {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 22px var(--gutter) 26px;
+  }
+  .numbers__sub { white-space: normal; }
+  .numbers { display: flex; flex-direction: column; }
   .numbers__stats {
     position: static;
-    transform: none;
+    height: auto;
+    order: 4;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px 40px;
     text-align: center;
-    padding: 6px var(--gutter) clamp(18px, 5vw, 30px);
+    padding: 26px var(--gutter) 0;
   }
   .numbers__stats > div { align-items: center; }
+  .num__label { white-space: normal; }
 }
