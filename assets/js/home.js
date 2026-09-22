@@ -380,41 +380,45 @@
     });
   }
 
-  /* ---------------------------------------------------- trailing cursor -- */
-  if (finePointer.matches) {
-    var cur = document.createElement("div");
-    cur.className = "cursor";
-    cur.setAttribute("aria-hidden", "true");
-    document.body.appendChild(cur);
-    root.classList.add("cursor-live");
+  /* ----------------------------------------------------- hero smoke trail -- */
+  /* A soft cyan/magenta glow drifts after the pointer inside the hero like
+     smoke: heavily blurred, screen-blended, lagging well behind the cursor
+     and fading out on leave. The native cursor is untouched. */
+  if (finePointer.matches && hero) {
+    var smoke = document.querySelector(".hero__smoke");
+    if (smoke) {
+      var sx = 0, sy = 0, stx = 0, sty = 0, sRaf = null, sOn = false;
+      var sLoop = function () {
+        sx += (stx - sx) * 0.06;
+        sy += (sty - sy) * 0.06;
+        smoke.style.transform =
+          "translate3d(" + sx.toFixed(1) + "px," + sy.toFixed(1) + "px,0) translate(-50%,-50%)";
+        if (!sOn && Math.abs(stx - sx) < 0.5 && Math.abs(sty - sy) < 0.5) { sRaf = null; return; }
+        sRaf = requestAnimationFrame(sLoop);
+      };
+      var sWake = function () { if (!sRaf) sRaf = requestAnimationFrame(sLoop); };
 
-    var tx = -100, ty = -100, cx = -100, cy = -100, cs = 1, curRaf = null, overLink = false;
-    var loop = function () {
-      cx += (tx - cx) * 0.22;
-      cy += (ty - cy) * 0.22;
-      cs += ((overLink ? 3.4 : 1) - cs) * 0.2;
-      cur.style.transform =
-        "translate(" + cx.toFixed(1) + "px," + cy.toFixed(1) + "px) translate(-50%,-50%) scale(" + cs.toFixed(3) + ")";
-      var settled = Math.abs(tx - cx) < 0.2 && Math.abs(ty - cy) < 0.2 &&
-        Math.abs((overLink ? 3.4 : 1) - cs) < 0.01;
-      curRaf = settled ? null : requestAnimationFrame(loop);
-    };
-    var wake = function () { if (!curRaf) curRaf = requestAnimationFrame(loop); };
-
-    window.addEventListener("pointermove", function (e) {
-      tx = e.clientX; ty = e.clientY;
-      cur.classList.add("on");
-      wake();
-    }, { passive: true });
-    document.addEventListener("pointerover", function (e) {
-      overLink = !!e.target.closest("a, button");
-      wake();
-    });
-    document.documentElement.addEventListener("pointerleave", function () {
-      cur.classList.remove("on");
-    });
-    document.addEventListener("visibilitychange", function () {
-      if (document.hidden && curRaf) { cancelAnimationFrame(curRaf); curRaf = null; }
-    });
+      hero.addEventListener("pointerenter", function (e) {
+        var r = hero.getBoundingClientRect();
+        sx = stx = e.clientX - r.left;
+        sy = sty = e.clientY - r.top;
+        sOn = true;
+        hero.classList.add("smoke-on");
+        sWake();
+      });
+      hero.addEventListener("pointermove", function (e) {
+        var r = hero.getBoundingClientRect();
+        stx = e.clientX - r.left;
+        sty = e.clientY - r.top;
+        sWake();
+      }, { passive: true });
+      hero.addEventListener("pointerleave", function () {
+        sOn = false;
+        hero.classList.remove("smoke-on");
+      });
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden && sRaf) { cancelAnimationFrame(sRaf); sRaf = null; }
+      });
+    }
   }
 })();
