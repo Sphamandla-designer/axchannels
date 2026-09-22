@@ -1985,17 +1985,28 @@ a.project__media:hover img { transform: scale(1.03); }
   font-size: 19.6vw;
   z-index: 1;
 }
-.numbers__wall--top {
-  left: 7%;
-  top: 13%;
-  transform: scaleX(1.052); /* matches the artwork's wider letterforms */
+.numbers__wall--top  { left: 7%;  top: 13%; }
+.numbers__wall--bottom { left: 18%; top: 53.8%; }
+
+/* The span carries the artwork's wider letterforms (scaleX), the scroll
+   parallax (translateX var set by JS) and the hover glow: a cyan->magenta
+   gradient hidden under solid ink that fades through on hover with soft
+   brand-glow shadows. */
+.numbers__wall > span {
+  display: inline-block;
   transform-origin: left top;
+  background: linear-gradient(100deg, rgb(var(--cyan)) 8%, #ff3d8a 88%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: var(--ink-2);
+  transition: color .5s var(--ease), filter .5s var(--ease);
 }
-.numbers__wall--bottom {
-  left: 18%;
-  top: 53.8%;
-  transform: scaleX(1.06);
-  transform-origin: left top;
+.numbers__wall--top  > span { transform: translateX(var(--nw1, 0px)) scaleX(1.052); }
+.numbers__wall--bottom > span { transform: translateX(var(--nw2, 0px)) scaleX(1.06); }
+.numbers__wall:hover > span {
+  color: transparent;
+  filter: drop-shadow(0 0 26px rgba(var(--cyan), .45))
+          drop-shadow(0 0 70px rgba(255, 61, 138, .35));
 }
 
 /* White knockout panel over the centre of both words */
@@ -2017,19 +2028,19 @@ a.project__media:hover img { transform: scale(1.03); }
   text-align: center;
 }
 .numbers__title {
-  font-size: clamp(17px, 1.88vw, 40px);
+  font-size: var(--fs-lg);
   font-weight: 800;
-  letter-spacing: .01em;
+  letter-spacing: .04em;
   text-transform: uppercase;
   line-height: 1.2;
-  color: #0a0a0a;
+  color: var(--ink);
 }
 .numbers__sub {
   margin-top: 1.6em;
-  font-size: clamp(12px, 1.3vw, 27px);
-  line-height: 1.4;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
   font-weight: 400;
-  color: #8d8d8d;
+  color: var(--muted-2);
   white-space: nowrap;
 }
 
@@ -2053,23 +2064,23 @@ a.project__media:hover img { transform: scale(1.03); }
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: clamp(18px, 2.1vw, 44px);
-  font-weight: 750;
+  font-size: var(--fs-h5);
+  font-weight: 700;
   line-height: 1;
   letter-spacing: -.01em;
-  color: #0a0a0a;
+  color: var(--ink);
 }
 .num__label {
-  margin-top: .8em;
+  margin-top: .7em;
   white-space: nowrap;
   max-width: none;
-  font-family: var(--font);
-  font-size: clamp(10px, .89vw, 19px);
-  font-weight: 400;
-  letter-spacing: .01em;
-  text-transform: none;
-  line-height: 1.2;
-  color: #8d8d8d;
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--muted-2);
 }
 
 /* Small screens: the fixed-canvas composition cannot hold; words shrink
@@ -2077,6 +2088,7 @@ a.project__media:hover img { transform: scale(1.03); }
 @media (max-width: 720px) {
   .numbers { aspect-ratio: auto; padding: 26px 0 30px; }
   .numbers__wall { position: static; text-align: center; font-size: 21vw; line-height: .8; transform: none; }
+  .numbers__wall > span { transform: none; }
   .numbers__wall--bottom { order: 3; }
   .numbers__panel {
     position: static;
@@ -2099,4 +2111,15 @@ a.project__media:hover img { transform: scale(1.03); }
   }
   .numbers__stats > div { align-items: center; }
   .num__label { white-space: normal; }
+}
+
+/* --------------------------------------------------------------------------
+   22. Hairline card borders — definition for the white cards on the white
+   page (service, testimonial and stat cards).
+   -------------------------------------------------------------------------- */
+.voice,
+.stat-card { border: 1px solid rgba(10, 10, 10, .1); }
+.svc {
+  border: 1px solid rgba(10, 10, 10, .1);
+  border-top: 2px solid var(--accent-ink);
 }

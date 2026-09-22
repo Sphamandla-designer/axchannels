@@ -295,6 +295,7 @@
   /* ---------------------------------------------- scroll depth layers -- */
   var hero = document.querySelector(".hero");
   var workSection = document.querySelector(".work");
+  var numbersSection = document.querySelector(".numbers");
   var root = document.documentElement;
   var plxImgs = Array.prototype.map.call(
     document.querySelectorAll(".project__media img, .studio__figure img"),
@@ -310,6 +311,8 @@
         root.style.removeProperty("--par-body");
         root.style.removeProperty("--par-fade");
         root.style.removeProperty("--par-wm");
+        root.style.removeProperty("--nw1");
+        root.style.removeProperty("--nw2");
         return;
       }
       var vh = window.innerHeight;
@@ -326,6 +329,15 @@
         if (r.top < vh && r.bottom > 0) {
           var wp = 1 - (r.top + r.height / 2) / (vh / 2 + r.height / 2);
           root.style.setProperty("--par-wm", (wp * 36).toFixed(1) + "px");
+        }
+      }
+      /* stats wordmarks drift apart gently with scroll */
+      if (numbersSection) {
+        var nr = numbersSection.getBoundingClientRect();
+        if (nr.top < vh && nr.bottom > 0) {
+          var np = 1 - 2 * ((nr.top + nr.height / 2) / (vh + nr.height));
+          root.style.setProperty("--nw1", (np * 34).toFixed(1) + "px");
+          root.style.setProperty("--nw2", (np * -28).toFixed(1) + "px");
         }
       }
       plxImgs.forEach(function (o) {
