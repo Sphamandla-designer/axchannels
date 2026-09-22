@@ -113,7 +113,7 @@
       if (!dlg) return false;
       dlg.showModal();
       /* focus the first control rather than the close button */
-      var first = dlg.querySelector(".drawer__control");
+      var first = dlg.querySelector(".ff__control");
       if (first) { try { first.focus({ preventScroll: true }); } catch (e) { first.focus(); } }
       return true;
     };
@@ -153,7 +153,13 @@
 
         var lines = [];
         Array.prototype.forEach.call(form.elements, function (el) {
-          if (!el.name || !el.value) return;
+          if (!el.name) return;
+          /* an unchecked box still reports a value, so it is tested first */
+          if (el.type === "checkbox") {
+            if (el.checked) lines.push(el.name + ":\nYes");
+            return;
+          }
+          if (!el.value) return;
           lines.push(el.name + ":\n" + el.value);
         });
 

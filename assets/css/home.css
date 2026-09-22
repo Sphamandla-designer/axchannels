@@ -1410,7 +1410,10 @@ a.project__media:hover img { transform: scale(1.03); }
     .cta__link:hover .cta__arr { translate: .16em -.16em; }
     .drawer__close { transition: transform .3s var(--ease-out), border-color .3s var(--ease-out), color .3s var(--ease-out); }
     .drawer__close:hover { transform: rotate(90deg); border-color: var(--accent-ink); color: var(--accent-ink); }
-    .drawer__control { transition: border-color .25s var(--ease-out), box-shadow .25s var(--ease-out); }
+    .ff__control { transition: border-bottom-color .25s var(--ease-out); }
+    .ff-submit { transition: background-color .3s var(--ease-out), transform .25s var(--ease-out); }
+    .ff-submit:hover { transform: translateY(-2px); }
+    .ff-check__box { transition: border-color .2s var(--ease-out), background-color .2s var(--ease-out); }
 
     /* FAQ. The row tints and shifts a hair on hover, the marker rotates into
        a minus as the panel opens, and the answer eases down. The height is
@@ -2400,9 +2403,9 @@ a.project__media:hover img { transform: scale(1.03); }
 
 /* --------------------------------------------------------------------------
    Contact drawers — a <dialog> attached to the right edge, the full height of
-   the viewport and half its width. Native dialog carries the focus trap, the
-   Esc key, inertness behind it and the backdrop, so none of that is scripted;
-   the JS only opens the right one and composes the mail.
+   the viewport and half its width, split into a photograph and the form.
+   Fields are underlines rather than boxes, with the label sitting above the
+   rule, so the panel reads as stationery rather than as a web form.
    -------------------------------------------------------------------------- */
 .cta__arr {
   display: inline-block;
@@ -2412,9 +2415,7 @@ a.project__media:hover img { transform: scale(1.03); }
 }
 
 .drawer {
-  margin: 0 0 0 auto;                 /* pinned to the right edge */
-  /* half the viewport, capped so the fields do not stretch on very wide
-     screens — it is exactly half up to about 1640px */
+  margin: 0 0 0 auto;
   width: min(50vw, 820px);
   max-width: 100%;
   height: 100dvh;
@@ -2430,14 +2431,86 @@ a.project__media:hover img { transform: scale(1.03); }
 .drawer::backdrop { background: rgba(8, 9, 12, 0); }
 .drawer[open]::backdrop { background: rgba(8, 9, 12, .55); }
 
-.drawer__inner {
+.drawer__split {
+  display: grid;
+  grid-template-columns: minmax(0, 34fr) minmax(0, 66fr);
   height: 100%;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  padding: clamp(28px, 3.1vw, 60px) clamp(24px, 2.9vw, 56px) clamp(32px, 3.4vw, 64px);
 }
 
-.drawer__head { position: relative; padding-right: 48px; }
+/* ---- left panel ---------------------------------------------------------
+   Until the photographs exist this carries the hero's own lit world, so it
+   reads as designed rather than as an empty slot. A photograph dropped in as
+   the background-image sits behind the same overlay and mark. */
+.drawer__figure {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(18px, 1.8vw, 32px);
+  background-color: var(--hero-ink);
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  isolation: isolate;
+}
+.drawer__figure::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60% 46% at 74% 8%,  rgba(var(--glow-teal), .60), transparent 70%),
+    radial-gradient(56% 44% at 10% 96%, rgba(var(--glow-mag),  .66), transparent 70%),
+    linear-gradient(180deg, rgba(3, 3, 3, .30), rgba(3, 3, 3, .82));
+}
+/* The photographs are not in the repository yet. Save them to
+   assets/img/contact/ and uncomment these three lines — nothing else changes,
+   because the overlay, the mark and the meta block already sit on top.
+   Portrait crops work best; the panel is tall and narrow on desktop.
+
+.drawer__figure--office  { background-image: url("../img/contact/office.webp");  }
+.drawer__figure--team    { background-image: url("../img/contact/team.webp");    }
+.drawer__figure--meeting { background-image: url("../img/contact/meeting.webp"); }
+*/
+
+.drawer__mark {
+  position: absolute;
+  top: clamp(-6px, -.4vw, 0px);
+  left: clamp(10px, 1vw, 18px);
+  z-index: -1;
+  font-weight: 700;
+  font-size: clamp(90px, 9vw, 170px);
+  line-height: .8;
+  letter-spacing: -.04em;
+  color: rgba(255, 255, 255, .07);
+  user-select: none;
+}
+.drawer__meta {
+  display: grid;
+  gap: 2px;
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  line-height: 1.55;
+  letter-spacing: .04em;
+  color: rgba(255, 255, 255, .72);
+}
+.drawer__meta-title {
+  margin-top: 1.1em;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .42);
+}
+.drawer__meta-title:first-child { margin-top: 0; }
+
+/* ---- right panel -------------------------------------------------------- */
+.drawer__panel {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(26px, 2.9vw, 54px) clamp(22px, 2.6vw, 48px) clamp(30px, 3.2vw, 58px);
+}
+.drawer__head { position: relative; padding-right: 46px; }
 .drawer__eyebrow {
   margin: 0;
   font-family: var(--mono);
@@ -2447,27 +2520,27 @@ a.project__media:hover img { transform: scale(1.03); }
   color: var(--accent-ink);
 }
 .drawer__title {
-  margin: clamp(10px, .9vw, 16px) 0 0;
-  font-size: var(--fs-h4);
+  margin: clamp(8px, .8vw, 14px) 0 0;
+  font-size: var(--fs-h5);
   font-weight: 500;
   line-height: 1.12;
   letter-spacing: -.015em;
 }
 .drawer__intro {
-  margin: clamp(10px, .9vw, 16px) 0 0;
-  max-width: 44ch;
-  font-size: var(--fs-md);
+  margin: clamp(8px, .8vw, 14px) 0 0;
+  max-width: 40ch;
+  font-size: var(--fs-sm);
   line-height: 1.6;
   color: var(--muted);
 }
 .drawer__close {
   position: absolute;
-  top: -4px;
+  top: -2px;
   right: 0;
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border: 1px solid rgba(10, 10, 10, .16);
   border-radius: 50%;
   background: transparent;
@@ -2478,59 +2551,127 @@ a.project__media:hover img { transform: scale(1.03); }
 .drawer__close:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
 
 .drawer__form {
-  margin-top: clamp(24px, 2.4vw, 46px);
-  padding-top: clamp(24px, 2.4vw, 46px);
-  border-top: 1px solid rgba(10, 10, 10, .14);
+  margin-top: clamp(22px, 2.2vw, 40px);
+  padding-top: clamp(22px, 2.2vw, 40px);
+  border-top: 1px solid rgba(10, 10, 10, .12);
 }
-.drawer__field { margin: 0 0 clamp(16px, 1.5vw, 26px); }
-.drawer__label {
-  display: block;
-  margin-bottom: 8px;
-  font-family: var(--mono);
-  font-size: var(--fs-2xs);
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--muted-3);
-}
-.drawer__req { color: var(--accent-ink); }
 
-.drawer__control {
+/* ---- the underline field ------------------------------------------------ */
+.ff { margin: 0 0 clamp(18px, 1.8vw, 30px); }
+.ff__label,
+.ff-group__legend {
+  display: block;
+  margin-bottom: clamp(16px, 1.5vw, 26px);   /* the air the reference leaves */
+  font-size: var(--fs-sm);
+  line-height: 1.2;
+  color: var(--muted);
+}
+.ff__req, .ff-group__req { color: var(--muted-3); }
+
+.ff-group { margin: 0 0 clamp(18px, 1.8vw, 30px); padding: 0; border: 0; }
+.ff-group__legend {
+  padding: 0;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: clamp(12px, 1.1vw, 18px);
+}
+.ff-group .ff__label { font-weight: 400; color: var(--muted); }
+.ff-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(16px, 1.6vw, 28px);
+}
+.ff-row .ff { margin-bottom: 0; }
+
+.ff__control {
+  display: block;
   width: 100%;
-  padding: clamp(11px, 1vw, 15px) clamp(12px, 1.1vw, 16px);
-  border: 1px solid rgba(10, 10, 10, .18);
-  border-radius: 10px;
-  background: #fff;
+  padding: 0 0 8px;
+  border: 0;
+  border-bottom: 1px solid rgba(10, 10, 10, .34);
+  border-radius: 0;
+  background: transparent;
   font-family: var(--font);
   font-size: var(--fs-md);
-  line-height: 1.45;
+  line-height: 1.4;
   color: var(--ink);
   appearance: none;
 }
-.drawer__control::placeholder { color: rgba(10, 10, 10, .34); }
-.drawer__control:focus-visible {
-  outline: none;
+.ff__control::placeholder { color: rgba(10, 10, 10, .26); }
+.ff__control:focus { outline: none; border-bottom-color: var(--accent-ink); }
+.ff__control:focus-visible { outline: none; }
+textarea.ff__control { resize: vertical; min-height: 2.6em; }
+
+/* the chevron the reference puts at the right of a select */
+.ff--select { position: relative; }
+.ff--select::after {
+  content: "";
+  position: absolute;
+  right: 2px;
+  bottom: 14px;
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  rotate: 45deg;
+  pointer-events: none;
+}
+select.ff__control { padding-right: 24px; cursor: pointer; }
+
+/* only flag a field once a submit has actually been attempted */
+.drawer__form.is-checked .ff__control:invalid { border-bottom-color: var(--accent-ink); }
+
+/* ---- the opt-in ---------------------------------------------------------- */
+.ff-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0 0 clamp(18px, 1.8vw, 30px);
+}
+.ff-check__box {
+  flex: none;
+  width: 15px;
+  height: 15px;
+  margin: 2px 0 0;
+  border: 1px solid rgba(10, 10, 10, .4);
+  border-radius: 50%;
+  background: transparent;
+  appearance: none;
+  cursor: pointer;
+}
+.ff-check__box:checked {
   border-color: var(--accent-ink);
-  box-shadow: 0 0 0 3px rgba(224, 23, 107, .14);
+  background: radial-gradient(circle, var(--accent-ink) 0 44%, transparent 46%);
 }
-/* the select needs its own chevron once appearance is stripped */
-select.drawer__control {
-  background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%),
-                    linear-gradient(135deg, var(--ink) 50%, transparent 50%);
-  background-position: calc(100% - 20px) calc(50% + 2px), calc(100% - 14px) calc(50% + 2px);
-  background-size: 6px 6px, 6px 6px;
-  background-repeat: no-repeat;
-  padding-right: 40px;
+.ff-check__box:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+.ff-check__label { font-size: var(--fs-sm); line-height: 1.45; color: var(--muted); cursor: pointer; }
+
+/* ---- submit -------------------------------------------------------------- */
+.ff-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 132px;
+  height: var(--btn-h);
+  padding-inline: var(--btn-pad);
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink-2);
+  color: #fff;
+  font-family: var(--font);
+  font-size: var(--btn-fs);
+  font-weight: 500;
+  cursor: pointer;
 }
-textarea.drawer__control { resize: vertical; min-height: 7em; }
-/* only flag a field once the form has actually been submitted */
-.drawer__form.is-checked .drawer__control:invalid { border-color: var(--accent-ink); }
+.ff-submit:hover { background: var(--accent-ink); }
+.ff-submit:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
 
 .drawer__actions {
   display: flex;
   align-items: center;
-  gap: clamp(14px, 1.4vw, 24px);
+  gap: clamp(12px, 1.2vw, 20px);
   flex-wrap: wrap;
-  margin: clamp(22px, 2vw, 34px) 0 0;
+  margin: clamp(20px, 1.9vw, 32px) 0 0;
 }
 .drawer__note {
   font-family: var(--mono);
@@ -2541,16 +2682,26 @@ textarea.drawer__control { resize: vertical; min-height: 7em; }
 }
 .drawer__note[data-state="sent"] { color: var(--accent-ink); }
 .drawer__fine {
-  margin: clamp(14px, 1.2vw, 20px) 0 0;
-  max-width: 52ch;
+  margin: clamp(12px, 1.1vw, 18px) 0 0;
+  max-width: 50ch;
   font-size: var(--fs-2xs);
   line-height: 1.6;
   color: var(--muted-3);
 }
 
-/* below the split the panel takes the whole screen */
+/* the name pair needs its own line once the panel narrows */
+@media (max-width: 1200px) {
+  .ff-row { grid-template-columns: minmax(0, 1fr); row-gap: clamp(18px, 1.8vw, 30px); }
+  .ff-row .ff { margin-bottom: 0; }
+}
+
+/* below the split the panel takes the screen and the photo becomes a band */
 @media (max-width: 900px) {
   .drawer { width: 100%; }
+  .drawer__split { grid-template-columns: minmax(0, 1fr); grid-template-rows: 150px minmax(0, 1fr); }
+  .drawer__figure { flex-direction: row; align-items: flex-end; justify-content: space-between; }
+  .drawer__meta { grid-template-columns: repeat(2, auto); gap: 2px clamp(20px, 6vw, 40px); }
+  .drawer__meta-title { margin-top: 0; }
 }
 
 /* --------------------------------------------------------------------------
