@@ -4,6 +4,7 @@
    3. Motion system: entrance, masked line reveals, scroll reveals, counters,
       scroll depth, inner-image parallax, magnetic buttons, trailing cursor.
    4. Brand-material slideshow in the studio section.
+   5. Contact drawers — the three closing links open a right-hand panel.
    Additive: without JS, or with prefers-reduced-motion, the page renders
    complete and static. Only transform/opacity/translate are animated. */
 (function () {
@@ -92,6 +93,79 @@
       tickClock();
       window.setInterval(tickClock, 30000);
     } catch (e) { /* unsupported timezone data — leave the placeholder */ }
+  }
+
+  /* ------------------------------------------------- contact drawers -- */
+  /* The three closing links stay real mailto: anchors, so without JS they
+     still open a composer. With JS the click is intercepted and the matching
+     drawer opens instead; on submit the same address is used, with the
+     answers written into the body. To post to a form service later, replace
+     the body of `send` — the markup and validation do not change. */
+  var drawerLinks = document.querySelectorAll("[data-form]");
+
+  if (drawerLinks.length && typeof HTMLDialogElement === "function" &&
+      HTMLDialogElement.prototype.showModal) {
+
+    var MAIL = "info@axchannels.co.za";
+
+    var openDrawer = function (key) {
+      var dlg = document.getElementById("drawer-" + key);
+      if (!dlg) return false;
+      dlg.showModal();
+      /* focus the first control rather than the close button */
+      var first = dlg.querySelector(".drawer__control");
+      if (first) { try { first.focus({ preventScroll: true }); } catch (e) { first.focus(); } }
+      return true;
+    };
+
+    Array.prototype.forEach.call(drawerLinks, function (link) {
+      link.addEventListener("click", function (e) {
+        /* let a modified click through to the mail client */
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+        if (openDrawer(link.getAttribute("data-form"))) e.preventDefault();
+      });
+    });
+
+    document.querySelectorAll("[data-drawer-close]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var d = btn.closest("dialog"); if (d) d.close();
+      });
+    });
+
+    /* clicking the backdrop closes: the dialog box itself is the only child
+       that receives clicks inside, so a hit on the element is a hit outside */
+    document.querySelectorAll(".drawer").forEach(function (dlg) {
+      dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
+    });
+
+    document.querySelectorAll("[data-drawer-form]").forEach(function (form) {
+      var note = form.querySelector("[data-drawer-note]");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        form.classList.add("is-checked");
+        if (!form.checkValidity()) {
+          var bad = form.querySelector(":invalid");
+          if (bad) bad.focus();
+          if (note) { note.textContent = "Check the highlighted fields"; note.removeAttribute("data-state"); }
+          return;
+        }
+
+        var lines = [];
+        Array.prototype.forEach.call(form.elements, function (el) {
+          if (!el.name || !el.value) return;
+          lines.push(el.name + ":\n" + el.value);
+        });
+
+        var subject = form.getAttribute("data-subject") || "Enquiry";
+        var href = "mailto:" + MAIL +
+          "?subject=" + encodeURIComponent(subject) +
+          "&body=" + encodeURIComponent(lines.join("\n\n") + "\n\n\u2014\nSent from axchannels.co.za");
+
+        if (note) { note.textContent = "Opening your email app\u2026"; note.setAttribute("data-state", "sent"); }
+        window.location.href = href;
+      });
+    });
   }
 
   if (!motionOK) return;

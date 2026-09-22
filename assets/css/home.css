@@ -1390,6 +1390,28 @@ a.project__media:hover img { transform: scale(1.03); }
     .svc__media img { transition: transform .7s var(--ease-out); }
     .svc:hover .svc__media img { transform: scale(1.04); }
 
+    /* The drawer slides in from the right. `allow-discrete` plus
+       @starting-style lets a dialog animate on the way in as well as out,
+       which display:none alone cannot do. */
+    .drawer {
+      transition: translate .42s var(--ease-out),
+                  display .42s allow-discrete,
+                  overlay .42s allow-discrete;
+    }
+    .drawer::backdrop { transition: background-color .42s var(--ease-out),
+                                    display .42s allow-discrete,
+                                    overlay .42s allow-discrete; }
+    @starting-style {
+      .drawer[open] { translate: 100% 0; }
+      .drawer[open]::backdrop { background: rgba(8, 9, 12, 0); }
+    }
+
+    .cta__arr { transition: translate .28s var(--ease-out); }
+    .cta__link:hover .cta__arr { translate: .16em -.16em; }
+    .drawer__close { transition: transform .3s var(--ease-out), border-color .3s var(--ease-out), color .3s var(--ease-out); }
+    .drawer__close:hover { transform: rotate(90deg); border-color: var(--accent-ink); color: var(--accent-ink); }
+    .drawer__control { transition: border-color .25s var(--ease-out), box-shadow .25s var(--ease-out); }
+
     /* FAQ. The row tints and shifts a hair on hover, the marker rotates into
        a minus as the panel opens, and the answer eases down. The height is
        animated with grid-template-rows 0fr -> 1fr, which transitions cleanly
@@ -2374,6 +2396,161 @@ a.project__media:hover img { transform: scale(1.03); }
   .nstat            { min-height: 0; }
   .numbers__sub     { max-width: none; }
   .ncell--c, .ncell--b { border-left: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   Contact drawers — a <dialog> attached to the right edge, the full height of
+   the viewport and half its width. Native dialog carries the focus trap, the
+   Esc key, inertness behind it and the backdrop, so none of that is scripted;
+   the JS only opens the right one and composes the mail.
+   -------------------------------------------------------------------------- */
+.cta__arr {
+  display: inline-block;
+  margin-left: .3em;
+  font-size: .72em;
+  vertical-align: .08em;
+}
+
+.drawer {
+  margin: 0 0 0 auto;                 /* pinned to the right edge */
+  /* half the viewport, capped so the fields do not stretch on very wide
+     screens — it is exactly half up to about 1640px */
+  width: min(50vw, 820px);
+  max-width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  padding: 0;
+  border: 0;
+  background: var(--page);
+  color: var(--ink);
+  overflow: hidden;
+  translate: 100% 0;
+}
+.drawer[open] { translate: 0 0; }
+.drawer::backdrop { background: rgba(8, 9, 12, 0); }
+.drawer[open]::backdrop { background: rgba(8, 9, 12, .55); }
+
+.drawer__inner {
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(28px, 3.1vw, 60px) clamp(24px, 2.9vw, 56px) clamp(32px, 3.4vw, 64px);
+}
+
+.drawer__head { position: relative; padding-right: 48px; }
+.drawer__eyebrow {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+.drawer__title {
+  margin: clamp(10px, .9vw, 16px) 0 0;
+  font-size: var(--fs-h4);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -.015em;
+}
+.drawer__intro {
+  margin: clamp(10px, .9vw, 16px) 0 0;
+  max-width: 44ch;
+  font-size: var(--fs-md);
+  line-height: 1.6;
+  color: var(--muted);
+}
+.drawer__close {
+  position: absolute;
+  top: -4px;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(10, 10, 10, .16);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.drawer__close svg { width: 44%; height: 44%; }
+.drawer__close:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
+
+.drawer__form {
+  margin-top: clamp(24px, 2.4vw, 46px);
+  padding-top: clamp(24px, 2.4vw, 46px);
+  border-top: 1px solid rgba(10, 10, 10, .14);
+}
+.drawer__field { margin: 0 0 clamp(16px, 1.5vw, 26px); }
+.drawer__label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted-3);
+}
+.drawer__req { color: var(--accent-ink); }
+
+.drawer__control {
+  width: 100%;
+  padding: clamp(11px, 1vw, 15px) clamp(12px, 1.1vw, 16px);
+  border: 1px solid rgba(10, 10, 10, .18);
+  border-radius: 10px;
+  background: #fff;
+  font-family: var(--font);
+  font-size: var(--fs-md);
+  line-height: 1.45;
+  color: var(--ink);
+  appearance: none;
+}
+.drawer__control::placeholder { color: rgba(10, 10, 10, .34); }
+.drawer__control:focus-visible {
+  outline: none;
+  border-color: var(--accent-ink);
+  box-shadow: 0 0 0 3px rgba(224, 23, 107, .14);
+}
+/* the select needs its own chevron once appearance is stripped */
+select.drawer__control {
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%),
+                    linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+  background-position: calc(100% - 20px) calc(50% + 2px), calc(100% - 14px) calc(50% + 2px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 40px;
+}
+textarea.drawer__control { resize: vertical; min-height: 7em; }
+/* only flag a field once the form has actually been submitted */
+.drawer__form.is-checked .drawer__control:invalid { border-color: var(--accent-ink); }
+
+.drawer__actions {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 1.4vw, 24px);
+  flex-wrap: wrap;
+  margin: clamp(22px, 2vw, 34px) 0 0;
+}
+.drawer__note {
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted-3);
+}
+.drawer__note[data-state="sent"] { color: var(--accent-ink); }
+.drawer__fine {
+  margin: clamp(14px, 1.2vw, 20px) 0 0;
+  max-width: 52ch;
+  font-size: var(--fs-2xs);
+  line-height: 1.6;
+  color: var(--muted-3);
+}
+
+/* below the split the panel takes the whole screen */
+@media (max-width: 900px) {
+  .drawer { width: 100%; }
 }
 
 /* --------------------------------------------------------------------------
