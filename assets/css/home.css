@@ -439,7 +439,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   position: relative;
   margin: var(--shell) var(--shell) 0;
   border-radius: var(--r-block);
-  background: var(--hero-ink) url("../img/home/hero-bg-ring.jpg") center / cover no-repeat;
+  background: var(--hero-ink) url("../img/home/ax-background.png") center / cover no-repeat;
   color: #fff;
   overflow: hidden;
   isolation: isolate;
@@ -1601,7 +1601,7 @@ a.project__media:hover img { transform: scale(1.03); }
 .voices__pause:focus-visible { border-color: var(--accent-ink); color: var(--accent-ink); }
 
 /* Hero — rotating glow ring, aligned to the ring in the provided
-   AX Background.png (hero-bg-ring.jpg): centre 47.5% / 52%, a tall ellipse
+   AX Background.png (ax-background.png): centre 47.5% / 52%, a tall ellipse
    ~88% of the hero's height, teal-white peak at the top and a magenta peak
    at the bottom. At rest the overlay sits on the baked ring; as it spins,
    its highlights sweep around it. Decorative (aria-hidden); the
