@@ -1998,15 +1998,16 @@ a.project__media:hover img { transform: scale(1.03); }
   background: linear-gradient(100deg, rgb(var(--cyan)) 8%, #ff3d8a 88%);
   -webkit-background-clip: text;
           background-clip: text;
-  color: var(--ink-2);
-  transition: color .5s var(--ease), filter .5s var(--ease);
+  color: transparent;
+  filter: drop-shadow(0 0 22px rgba(var(--cyan), .28))
+          drop-shadow(0 0 60px rgba(255, 61, 138, .2));
+  transition: filter .5s var(--ease);
 }
 .numbers__wall--top  > span { transform: translateX(var(--nw1, 0px)) scaleX(1.052); }
 .numbers__wall--bottom > span { transform: translateX(var(--nw2, 0px)) scaleX(1.06); }
 .numbers__wall:hover > span {
-  color: transparent;
-  filter: drop-shadow(0 0 26px rgba(var(--cyan), .45))
-          drop-shadow(0 0 70px rgba(255, 61, 138, .35));
+  filter: drop-shadow(0 0 30px rgba(var(--cyan), .55))
+          drop-shadow(0 0 85px rgba(255, 61, 138, .4));
 }
 
 /* White knockout panel over the centre of both words */
@@ -2023,8 +2024,6 @@ a.project__media:hover img { transform: scale(1.03); }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-bottom: 2.4%;
-  padding-left: 6.6%; /* re-centres the text block on the canvas */
   text-align: center;
 }
 .numbers__title {
