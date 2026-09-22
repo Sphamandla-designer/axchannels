@@ -685,7 +685,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(180deg, rgba(8, 8, 10, .25) 0%, rgba(8, 8, 10, .62) 100%);
+  /* deep enough at the top that a bright highlight in the photograph cannot
+     thin the number sitting over it */
+  background: linear-gradient(180deg, rgba(8, 8, 10, .46) 0%, rgba(8, 8, 10, .72) 100%);
 }
 
 /* --------------------------------------------------------------------------
@@ -2015,10 +2017,13 @@ a.project__media:hover img { transform: scale(1.03); }
   color: rgba(255, 255, 255, .88);
 }
 
-/* Bottom-right statement + CTAs */
+/* Bottom-right statement + CTAs.
+   Above .hero__body, which is z-index 5 and flex:1 and therefore stretches
+   across the whole hero — at z-index 4 it covered these, and neither hero
+   button could be clicked at all. */
 .hero__corner {
   position: absolute;
-  z-index: 4;
+  z-index: 6;
   right: var(--block-pad);
   bottom: clamp(22px, 2.9vw, 56px);
   max-width: min(520px, 42%);
@@ -2073,10 +2078,10 @@ a.project__media:hover img { transform: scale(1.03); }
 .cta-pill__arr { font-size: 1.05em; transition: translate .25s var(--ease); }
 .cta-pill:hover .cta-pill__arr { translate: .14em -.14em; }
 
-/* Bottom-left mono fact row */
+/* Bottom-left mono fact row — above .hero__body for the same reason */
 .hero__micro {
   position: absolute;
-  z-index: 4;
+  z-index: 6;
   left: var(--block-pad);
   bottom: clamp(24px, 3vw, 58px);
   display: flex;
