@@ -1621,22 +1621,20 @@ a.project__media:hover img { transform: scale(1.03); }
   filter: blur(6px);
   mix-blend-mode: screen;
 }
+/* A neutral white energy shimmer travels the band: it brightens whichever
+   arc it passes over, so the artwork's own teal-top / magenta-bottom ring
+   is never recoloured — the image always reads exactly as provided. */
 .hero__ring > span {
   position: absolute;
   inset: 0;
   border-radius: 50%;
   background: conic-gradient(
-    rgba(255, 255, 255, .95) 0deg,
-    rgba(120, 225, 255, .45) 32deg,
-    transparent 85deg,
-    transparent 118deg,
-    rgba(255, 61, 138, .30) 152deg,
-    rgba(255, 130, 200, .80) 180deg,
-    rgba(255, 61, 138, .30) 208deg,
-    transparent 242deg,
-    transparent 275deg,
-    rgba(120, 225, 255, .45) 328deg,
-    rgba(255, 255, 255, .95) 360deg);
+    transparent 0deg,
+    rgba(255, 255, 255, .10) 26deg,
+    rgba(255, 255, 255, .52) 52deg,
+    rgba(255, 255, 255, .10) 84deg,
+    transparent 116deg,
+    transparent 360deg);
   -webkit-mask: radial-gradient(closest-side, transparent 91%, #000 94%, #000 96.5%, transparent 99%);
           mask: radial-gradient(closest-side, transparent 91%, #000 94%, #000 96.5%, transparent 99%);
   animation: hero-ring-spin 22s linear infinite;
