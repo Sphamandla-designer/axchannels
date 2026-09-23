@@ -33,6 +33,17 @@ invents no tokens: it arranges the home page's colours, type steps, radii,
 easings and spacing into the layouts a service page needs. Each page adds a
 page-specific file only for what is genuinely new to it.
 
+**Hero imagery.** The service hero photograph is atmosphere rather than a
+framed picture beside the copy: it fills the right of the block, sits under
+the text at low opacity, and is masked back with a single radial gradient so
+the headline always lands on clean dark. It carries no meaning at that
+opacity, so the markup marks it decorative and it carries no alt text. The
+headline is the largest element painted above the fold now, so the photograph
+no longer takes the preload slot or `fetchpriority="high"`. Measured under the
+actual glyphs rather than over the text's bounding box, every hero element
+clears WCAG AA at 1920 / 1440 / 1100 / 768 / 390 on both pages — eyebrow
+6.2:1, headline 12–20:1, lead 8.4–10.3:1.
+
 **Digital Product Design** (`services/digital-product-design/`) positions the
 studio for SaaS platforms, web and mobile applications, dashboards, customer
 portals and internal platforms — task-based software, as distinct from the

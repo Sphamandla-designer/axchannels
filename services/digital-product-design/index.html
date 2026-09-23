@@ -18,14 +18,10 @@
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- The hero image is the largest element painted above the fold, so it is
-     the one worth preloading. The home page's 815KB background is never
-     painted here and is deliberately not preloaded. -->
-<link rel="preload" as="image" href="../../assets/img/home/svc-product.jpg" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/home.css?v=43">
-<link rel="stylesheet" href="../../assets/css/service.css?v=1">
-<link rel="stylesheet" href="../../assets/css/product.css?v=3">
+<link rel="stylesheet" href="../../assets/css/service.css?v=2">
+<link rel="stylesheet" href="../../assets/css/product.css?v=4">
 
 <!-- Breadcrumbs. The trail matches the visible one under the masthead. -->
 <script type="application/ld+json">
@@ -148,11 +144,11 @@
       </div>
     </div>
 
-    <figure class="svc-hero__media" data-reveal="img">
-      <img src="../../assets/img/home/svc-product.jpg"
-           alt="A mobile product interface designed by AX-Channels, shown on a phone resting on concrete"
-           width="1400" height="1050" fetchpriority="high" decoding="async">
-    </figure>
+    <!-- Atmosphere, not a picture: masked back behind the copy, so it is
+         marked decorative and carries no alt text. -->
+    <div class="svc-hero__media" aria-hidden="true">
+      <img src="../../assets/img/home/svc-product.jpg" alt="" width="1400" height="1050" decoding="async">
+    </div>
   </div>
 
   <dl class="svc-hero__facts" data-stagger>
@@ -164,27 +160,6 @@
 </header>
 
 <main id="main">
-
-  <!-- ============================================================ PROBLEM -->
-  <section class="svc-problem" aria-labelledby="problem-t">
-    <div class="wrap">
-      <div class="sec-head" data-stagger>
-        <h2 class="h2" id="problem-t">Products Rarely Become Hard To Use All At <span class="mark">Once</span></h2>
-        <p class="sec-head__sub">They Get There One Reasonable Decision At A Time, Until Nobody Can Find Anything.</p>
-      </div>
-
-      <ul class="svc-problem__list" data-stagger>
-        <li><h3>Features arrive faster than structure</h3><p>Each release is sensible on its own. Nothing goes back and decides where the new thing belongs, so the navigation grows sideways.</p></li>
-        <li><h3>The interface mirrors the database</h3><p>Screens are organised around how the system stores things rather than around the task someone opened the product to finish.</p></li>
-        <li><h3>Journeys are broken across screens</h3><p>Every screen works. Getting from the first to the last one takes more steps, tabs and guesses than the job actually requires.</p></li>
-        <li><h3>Onboarding explains the product, not the first win</h3><p>New users are toured through the features instead of walked to the first thing that makes the product worth returning to.</p></li>
-        <li><h3>Screens drift apart</h3><p>Two buttons, three date pickers, four empty states. Without a system, each new screen is designed from memory and the product stops feeling like one thing.</p></li>
-        <li><h3>The hard screens were never designed</h3><p>Errors, empty states, loading, permissions, long tables. They are where people spend real time, and they are usually whatever the framework does by default.</p></li>
-      </ul>
-
-      <p class="svc-problem__turn" data-reveal>So we work the other way around. The product goal and the journeys decide the structure; the structure decides the screens; the system keeps them consistent as the product grows. <a href="../../#about">More on how the studio works</a>.</p>
-    </div>
-  </section>
 
   <!-- ====================================================== WHAT WE DESIGN -->
   <section class="svc-build" id="what-we-design" aria-labelledby="design-t">
@@ -423,26 +398,6 @@
     </div>
   </section>
 
-  <!-- ======================================================= UX AND UI -->
-  <section class="svc-ux" id="ux-ui" aria-labelledby="ux-t">
-    <div class="wrap svc-ux__in">
-      <div data-stagger>
-        <p class="svc-eyebrow">UX And UI Are Not The Same Job</p>
-        <h2 class="h2" id="ux-t">One Decides How It Works. The Other Decides How It <span class="mark">Speaks</span></h2>
-        <p class="svc-ux__lead">UX answers how the product should work: what happens, in what order, and what it is called. UI answers how it communicates and behaves: what you notice first, what a control looks like when it is disabled, what the screen does while it waits. A product needs both held to the same goal, which is the part that usually goes missing.</p>
-        <p class="svc-ux__link"><a href="../../#about">How we approach UX as a studio</a></p>
-      </div>
-
-      <ul class="svc-ux__list" data-stagger>
-        <li><h3>Can someone finish the task</h3><p>The measure that matters. Not whether the screen is admired, but whether the job gets done without a support ticket.</p></li>
-        <li><h3>Is the next step obvious</h3><p>At every point in a flow, one thing should clearly be the next thing. Two equal options is a decision you have handed to the user.</p></li>
-        <li><h3>Does it behave the same way twice</h3><p>The same control doing the same thing everywhere is what lets someone stop reading the interface and start using it.</p></li>
-        <li><h3>Is the hierarchy honest</h3><p>What is emphasised should be what matters, not what the loudest stakeholder asked for.</p></li>
-        <li><h3>What happens when it goes wrong</h3><p>An error that explains what happened and what to do next is interface design. One that says "something went wrong" is not.</p></li>
-        <li><h3>Does it survive the real data</h3><p>Designs made with tidy sample content fall over on a 400-row table and a name that is 60 characters long.</p></li>
-      </ul>
-    </div>
-  </section>
   <!-- ====================================================== SELECTED WORK -->
   <section class="svc-work" id="work" aria-labelledby="work-t">
     <div class="wrap">
