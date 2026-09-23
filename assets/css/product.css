@@ -16,22 +16,13 @@
    magenta glow on the left so no two consecutive light sections light the
    same way. These continue that alternation for the sections this page adds.
    The order below is the page's actual running order, so it stays checkable:
-   problem T · build M · anatomy T · [dark] · included T · ux M · complex T ·
-   ai M · vs T · work M · [dark] · who T · engagements M · proof T. */
+   problem T · build M · anatomy T · [dark] · included T · ux M · work T ·
+   [dark] · who T · engagements M · proof T. */
 .pd-anatomy,
-.pd-complex,
-.pd-ai,
-.pd-vs,
 .pd-who,
 .pd-eng { padding-top: var(--sec-gap); }
 
-/* A dark band follows each of these, so the white gap comes from above. */
-.pd-vs { padding-bottom: var(--sec-gap); }
-
 .pd-anatomy { background: radial-gradient(46% 62% at 100% 12%, rgba(var(--glow-teal), .20), transparent 72%); }
-.pd-complex { background: radial-gradient(46% 62% at 96% 10%, rgba(var(--glow-teal), .20), transparent 72%); }
-.pd-ai      { background: radial-gradient(42% 58% at 0% 84%,  rgba(var(--glow-mag),  .18), transparent 72%); }
-.pd-vs      { background: radial-gradient(44% 60% at 98% 8%,  rgba(var(--glow-teal), .20), transparent 72%); }
 .pd-who     { background: radial-gradient(44% 60% at 98% 10%, rgba(var(--glow-teal), .20), transparent 72%); }
 .pd-eng     { background: radial-gradient(42% 58% at 0% 86%,  rgba(var(--glow-mag),  .18), transparent 72%); }
 /* the engagements section lands between pd-who and the proof block, which
@@ -39,6 +30,9 @@
    for the website page, and this file only loads here, so flipping it to teal
    restores the alternation without affecting that page. */
 .svc-proof  { background: radial-gradient(44% 60% at 98% 8%, rgba(var(--glow-teal), .20), transparent 72%); }
+/* svc-work follows svc-ux directly now that the three sections between them
+   are gone, and service.css gives both a magenta glow. */
+.svc-work   { background: radial-gradient(46% 62% at 100% 12%, rgba(var(--glow-teal), .20), transparent 72%); }
 
 /* --------------------------------------------------------------------------
    The design chain — a product is not a pile of screens, it is one chain of
@@ -135,29 +129,6 @@
 }
 
 /* --------------------------------------------------------------------------
-   Comparison bullets — the fit card shell from service.css, but neutral.
-   --yes/--no carry a fit judgement, and neither service is the wrong one.
-   -------------------------------------------------------------------------- */
-.svc-fit__card--a { border-top: 2px solid var(--accent-ink); }
-.svc-fit__card--b { border-top: 2px solid rgba(var(--glow-teal), .55); }
-.svc-fit__card--a li::before { background: var(--accent-ink); }
-.svc-fit__card--b li::before { background: rgba(var(--glow-teal), .75); }
-.pd-vs__fine {
-  margin: clamp(18px, 1.8vw, 30px) 0 0;
-  font-size: var(--fs-sm);
-  line-height: 1.7;
-  color: var(--muted);
-}
-.pd-vs__fine a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: .22em; }
-
-/* --------------------------------------------------------------------------
-   Surfaces board — the screens a product is actually made of, as chip sets
-   so the breadth reads at a glance instead of as another list of paragraphs.
-   -------------------------------------------------------------------------- */
-.pd-set { margin: clamp(14px, 1.4vw, 24px) 0 0; }
-.pd-set .chip { background: rgba(10, 10, 10, .04); border-color: var(--svc-rule); color: var(--muted); }
-
-/* --------------------------------------------------------------------------
    Responsive — the chain is the only thing here that needs recomposing.
    -------------------------------------------------------------------------- */
 @media (max-width: 900px) {
@@ -177,58 +148,33 @@
 }
 
 /* --------------------------------------------------------------------------
-   Engagements — how a product project is shaped.
+   Engagements — the four routes into a product project, carried by the
+   package card from service.css so they read the same way the website
+   packages do. Everything here is an addition to that card, not a new one:
+   an index, a description in place of the price, and a four-across grid.
 
-   Deliberately NOT the priced package row from service.css: no card grid, no
-   recommended option, no badge, no figure. Product work is scoped per product,
-   so this reads as an editorial list of routes in, each one a row on a rule.
+   No price appears on these cards, because product work is scoped per
+   product; the note underneath answers the cost question with scope.
    -------------------------------------------------------------------------- */
-.pd-engs {
-  margin: clamp(30px, 3.4vw, 64px) 0 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid var(--svc-rule);
-}
-.pd-eng__item {
-  display: grid;
-  grid-template-columns: clamp(58px, 6.2vw, 116px) minmax(0, 36fr) minmax(0, 44fr);
-  column-gap: clamp(20px, 2.6vw, 52px);
-  align-items: start;
-  padding: clamp(26px, 2.8vw, 52px) 0;
-  border-bottom: 1px solid var(--svc-rule);
-}
-/* the index, set in the light numeral weight the numbers panel uses, so it
-   reads as a position in a list and never as a figure */
-.pd-eng__n {
-  font-size: clamp(30px, 3.1vw, 58px);
-  font-weight: 200;
-  line-height: .9;
-  letter-spacing: -.02em;
-  color: var(--ink);
-  font-variant-numeric: lining-nums tabular-nums;
-}
-.pd-eng__t {
-  margin: 0;
-  font-size: var(--fs-h5);
+.pd-plans { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.svc-plan__n {
+  margin: 0 0 clamp(12px, 1.2vw, 20px);
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
   font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -.02em;
-  color: var(--ink);
+  letter-spacing: .14em;
+  color: var(--accent-ink);
 }
-.pd-eng__p {
+/* the description sits where the package card carries its price */
+.pd-plan__p {
   margin: clamp(10px, 1vw, 16px) 0 0;
-  max-width: 44ch;
   font-size: var(--fs-sm);
-  line-height: 1.72;
+  line-height: 1.66;
   color: var(--muted);
 }
-.pd-eng__link { margin: clamp(16px, 1.6vw, 26px) 0 0; }
-.pd-eng__caps { margin: 0; }
-.pd-eng__caps .chip {
-  background: rgba(10, 10, 10, .04);
-  border-color: var(--svc-rule);
-  color: var(--muted);
-}
+/* the list already has flex:1 from service.css, which holds the buttons on
+   one line across the row whatever each description wraps to */
 
 /* Scope note — the answer to "what does it cost", given as scope rather than
    a number, so it carries weight without becoming a price panel. */
@@ -238,6 +184,8 @@
   column-gap: clamp(24px, 3.2vw, 72px);
   align-items: start;
   margin: clamp(30px, 3.4vw, 60px) 0 0;
+  padding-top: clamp(24px, 2.6vw, 44px);
+  border-top: 1px solid var(--svc-rule);
 }
 .pd-scope__t {
   margin: 0;
@@ -256,25 +204,17 @@
 .pd-scope__p + .pd-scope__p { margin-top: clamp(12px, 1.2vw, 20px); }
 .pd-eng__cta { margin: clamp(28px, 3vw, 54px) 0 0; }
 
+/* Responsive — four cards need their own breakpoints. service.css takes the
+   three packages to 3-up at 1100 and 1-up at 900; four engagements read
+   better 2-up, and holding that down to 720 keeps the row from becoming a
+   very long stack on a tablet. */
+@media (max-width: 1300px) {
+  .pd-plans { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 @media (max-width: 1100px) {
-  .pd-eng__item {
-    grid-template-columns: clamp(50px, 7vw, 80px) minmax(0, 1fr);
-    row-gap: clamp(16px, 1.8vw, 26px);
-  }
-  /* the capability set drops under the copy, still aligned to it */
-  .pd-eng__caps { grid-column: 2; }
   .pd-scope { grid-template-columns: minmax(0, 1fr); row-gap: clamp(14px, 1.6vw, 24px); }
   .pd-scope__t { max-width: none; }
 }
-
 @media (max-width: 720px) {
-  .pd-eng__item {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: clamp(12px, 3vw, 18px);
-  }
-  /* the index sits above the title rather than beside it, so the copy keeps
-     the full measure instead of being squeezed into a narrow column */
-  .pd-eng__caps { grid-column: 1; }
-  .pd-eng__n { font-size: clamp(26px, 7.4vw, 34px); }
-  .pd-eng__p { max-width: none; }
+  .pd-plans { grid-template-columns: minmax(0, 1fr); }
 }
