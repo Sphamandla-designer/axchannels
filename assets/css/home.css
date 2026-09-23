@@ -554,15 +554,78 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
    9. Studio introduction
    -------------------------------------------------------------------------- */
 .studio { padding-top: var(--sp-131); }
-.studio__title { max-width: 27ch; }
 
-.studio__grid {
-  margin-top: var(--sp-28);
+/* ---- the opening statement -----------------------------------------------
+   A small label held at the far left against one large statement in the
+   right-hand column: the opening clause in full ink, the rest a tone down,
+   so the sentence reads as a headline that keeps going. The supporting
+   copy and the proof line stay inside the statement's column, which is
+   what keeps the left third deliberately empty.
+   -------------------------------------------------------------------------- */
+.studio__top {
   display: grid;
-  grid-template-columns: 55.4fr 44.6fr;
-  column-gap: clamp(24px, 3.2vw, 62px);
+  grid-template-columns: minmax(0, 33fr) minmax(0, 67fr);
+  column-gap: clamp(24px, 4vw, 90px);
   align-items: start;
 }
+.studio__label {
+  grid-area: 1 / 1;
+  margin: 0;
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  line-height: 1.7;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.studio__title {
+  grid-area: 1 / 2;
+  margin: 0;
+  font-size: clamp(26px, 3.05vw, 58px);
+  font-weight: 500;
+  line-height: 1.16;
+  letter-spacing: -.022em;
+  text-wrap: pretty;
+}
+/* The second tone. The statement never drops below 26px, so it is large text
+   for contrast purposes and needs 3:1. Judging that against white is wrong
+   here: the section's teal wash takes the ground under the statement down to
+   about #ccdfe3, where a lighter grey (#7f8592) measured only 2.69:1. --muted
+   clears it at 3.57:1 and still reads a clear tone below the ink beside it. */
+.studio__dim { color: var(--muted); }
+
+.studio__notes {
+  grid-area: 2 / 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 2.6vw, 52px);
+  max-width: min(100%, 68ch);
+  margin-top: clamp(30px, 3.4vw, 64px);
+}
+.studio__notes p {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.78;
+  color: var(--muted);
+}
+
+.studio__proof { grid-area: 3 / 2; }
+
+/* ---- the shelf below it -------------------------------------------------- */
+.studio__show {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2.135vw, 41px);
+  align-items: start;
+  margin-top: clamp(38px, 4.4vw, 84px);
+}
+/* The two figures take the photographs' own ratio here, so the three tiles
+   line up at the same height without any of the brand material being
+   cropped to fit. */
+/* min-height:0 matters: below 1100px .stat-card takes a min-height, and with
+   an aspect-ratio set that height drives the width instead of the other way
+   round — the cards grew past their columns and pushed the page sideways. */
+.studio__show .stat-card { aspect-ratio: 1174 / 912; min-height: 0; }
 .studio__figure {
   margin: 0;
   border-radius: var(--r-card);
@@ -596,10 +659,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .studio__slide.is-prev    { opacity: 1; z-index: 2; }
 .studio__slide.is-active  { opacity: 1; z-index: 3; }
 
-.studio__copy > * + * { margin-top: var(--sp-21); }
-.studio__copy .lead { max-width: min(100%, 38vw); }
-.studio__copy .body-s { color: var(--ink); max-width: min(100%, 35.5vw); }
-
 .proof {
   display: flex;
   align-items: center;
@@ -626,12 +685,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   font-weight: 500;
 }
 
-.stats-pair {
-  margin-top: var(--sp-32);
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(16px, 2.135vw, 41px);
-}
+
 .stat-card {
   position: relative;
   display: flex;
@@ -1202,11 +1256,19 @@ a.project__media:hover img { transform: scale(1.03); }
   .stat-card { aspect-ratio: auto; min-height: clamp(180px, 28vw, 337px); }
   .num__label { min-height: 2.4em; }
 
-  .studio__grid { grid-template-columns: minmax(0, 1fr); row-gap: var(--sp-45); }
+  /* The statement stops being held to the right at this width: the label
+     sits above it and the whole block runs the full measure. */
+  .studio__top { grid-template-columns: minmax(0, 1fr); }
+  .studio__label { grid-area: auto; margin-bottom: clamp(14px, 2.4vw, 24px); }
+  .studio__title,
+  .studio__notes,
+  .studio__proof { grid-area: auto; }
+  .studio__title { max-width: none; }
+  /* the shelf keeps its three columns to 900px; below that the photograph
+     runs the full width and the two figures pair off under it */
+  .studio__show { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   /* keep the material photographs' own ratio here too, so nothing is cropped */
   .studio__slides { aspect-ratio: 1174 / 912; }
-  .studio__title { max-width: none; }
-  .studio__copy .lead, .studio__copy .body-s { max-width: none; }
 
   .services__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
@@ -1234,6 +1296,11 @@ a.project__media:hover img { transform: scale(1.03); }
   .footer__list { margin-top: var(--sp-28); }
 }
 
+@media (max-width: 900px) {
+  .studio__show { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .studio__figure { grid-column: 1 / -1; }
+}
+
 /* Mobile ------------------------------------------------------------------ */
 @media (max-width: 720px) {
   /* --gutter stays derived from --shell + --block-pad here too, so section
@@ -1249,6 +1316,10 @@ a.project__media:hover img { transform: scale(1.03); }
 
   .services__grid { grid-template-columns: minmax(0, 1fr); }
   .svc__media { aspect-ratio: 16 / 10; }
+
+  .studio__notes { grid-template-columns: minmax(0, 1fr); }
+  .studio__show { grid-template-columns: minmax(0, 1fr); }
+  .studio__figure { grid-column: auto; }
 
   .voices__track { grid-auto-columns: 84%; }
 
@@ -1272,7 +1343,6 @@ a.project__media:hover img { transform: scale(1.03); }
 
 @media (max-width: 420px) {
   .voices__track { grid-auto-columns: 90%; }
-  .stats-pair { grid-template-columns: minmax(0, 1fr); }
   .socials a { width: 34px; height: 34px; }
   .footer__grid { grid-template-columns: minmax(0, 1fr); }
 }

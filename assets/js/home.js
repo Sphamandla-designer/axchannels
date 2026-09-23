@@ -371,8 +371,10 @@
   var STAGGER = 0.07;
 
   var setupReveals = function () {
-    document.querySelectorAll(".studio__title, .sec-head .h2, .cta__title")
-      .forEach(splitLines);
+    /* .studio__title is deliberately absent: splitLines treats an inline
+       element as a single unbreakable word, which would stop the statement's
+       second tone from wrapping at all. It reveals as a block instead. */
+    document.querySelectorAll(".sec-head .h2, .cta__title").forEach(splitLines);
 
     document.querySelectorAll("[data-stagger]").forEach(function (group) {
       group.classList.add("m-group");
