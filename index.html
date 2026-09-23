@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="assets/img/home/ax-background.png" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/home.css?v=38">
+<link rel="stylesheet" href="assets/css/home.css?v=39">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -142,6 +142,95 @@
 </header>
 
 <main id="main">
+
+  <!-- ========================================================= WORK BELT -->
+  <!-- Names the projects on a loop. Hovering or focusing a name stops the
+       belt and raises a card with what the project was. Without JS, or under
+       prefers-reduced-motion, the same names render as a static wrapped list
+       and the duplicate run is dropped. -->
+  <section class="belt" data-ticker aria-label="Projects we have delivered">
+    <div class="belt__in">
+      <p class="belt__label">
+        <span class="belt__spark" aria-hidden="true"></span>
+        Selected Work. 25+ Projects Delivered Since 2023.
+      </p>
+
+      <div class="belt__viewport">
+        <div class="belt__row">
+        <ul class="belt__seq">
+          <li class="belt__item"><a class="belt__chip" href="https://sphamandla-designer.github.io/sphamandlaxaba/finos.html"
+              data-type="Web Platform &middot; Fintech &amp; AI" data-two="Financial Intelligence"
+              data-img="assets/img/home/work-finos.jpg" data-alt="The FINOS financial operating system dashboard shown on a laptop"
+              data-w="1500" data-h="1125">FINOS</a></li>
+          <li class="belt__item"><a class="belt__chip" href="https://sphamandla-designer.github.io/sphamandlaxaba/wastemart.html"
+              data-type="Mobile App &middot; Service Design" data-two="Operations Simplified"
+              data-img="assets/img/home/work-wastemart.jpg" data-alt="WasteMart driver app open on a phone showing a collection workflow"
+              data-w="1100" data-h="825">WasteMart</a></li>
+          <li class="belt__item"><a class="belt__chip" href="https://sphamandla-designer.github.io/sphamandlaxaba/managem.html"
+              data-type="Web Platform &middot; Enterprise &amp; AI" data-two="Enterprise Clarity"
+              data-img="assets/img/home/work-managem.jpg" data-alt="ManaGem enterprise dashboard displayed on a desktop monitor"
+              data-w="800" data-h="600">ManaGem</a></li>
+          <li class="belt__item"><a class="belt__chip" href="https://sphamandla-designer.github.io/sphamandlaxaba/cmaxx.html"
+              data-type="Website &middot; Connectivity &amp; Security" data-two="Plainly Explained"
+              data-img="assets/img/home/work-cmaxx.jpg" data-alt="The CMAXX website homepage shown on a laptop in a dark studio setting"
+              data-w="1500" data-h="1125">CMAXX</a></li>
+          <li class="belt__item"><a class="belt__chip" href="#case-studies"
+              data-type="WhatsApp System &middot; Conversational AI" data-two="Conversational Service"
+              data-img="assets/img/home/work-whatsapp.jpg" data-alt="WhatsApp Home Assist conversation open on a phone"
+              data-w="1000" data-h="750">Home Assist</a></li>
+          <li class="belt__item"><a class="belt__chip" href="#case-studies"
+              data-type="Website &middot; Energy Infrastructure" data-two="Complexity Clarified"
+              data-img="assets/img/home/svc-website.jpg" data-alt="Inceku energy infrastructure website shown on a laptop"
+              data-w="1400" data-h="1054">Inceku Energy</a></li>
+          <li class="belt__item"><a class="belt__chip" href="#case-studies"
+              data-type="Brand Identity System" data-two="Consistent Everywhere"
+              data-img="assets/img/home/svc-brand.jpg" data-alt="Castro Capital printed brand identity collateral"
+              data-w="1400" data-h="788">Castro Capital</a></li>
+        </ul>
+        <ul class="belt__seq" aria-hidden="true">
+          <li class="belt__item"><a class="belt__chip" href="https://sphamandla-designer.github.io/sphamandlaxaba/finos.html" tabindex="-1"
+              data-type="Web Platform &middot; Fintech &amp; AI" data-two="Financial Intelligence"
+              data-img="assets/img/home/work-finos.jpg" data-alt="The FINOS financial operating system dashboard shown on a laptop"
+              data-w="1500" data-h="1125">FINOS</a></li>
+          <li class="belt__item"><a class="belt__chip" href="https://sphamandla-designer.github.io/sphamandlaxaba/wastemart.html" tabindex="-1"
+              data-type="Mobile App &middot; Service Design" data-two="Operations Simplified"
+              data-img="assets/img/home/work-wastemart.jpg" data-alt="WasteMart driver app open on a phone showing a collection workflow"
+              data-w="1100" data-h="825">WasteMart</a></li>
+          <li class="belt__item"><a class="belt__chip" href="https://sphamandla-designer.github.io/sphamandlaxaba/managem.html" tabindex="-1"
+              data-type="Web Platform &middot; Enterprise &amp; AI" data-two="Enterprise Clarity"
+              data-img="assets/img/home/work-managem.jpg" data-alt="ManaGem enterprise dashboard displayed on a desktop monitor"
+              data-w="800" data-h="600">ManaGem</a></li>
+          <li class="belt__item"><a class="belt__chip" href="https://sphamandla-designer.github.io/sphamandlaxaba/cmaxx.html" tabindex="-1"
+              data-type="Website &middot; Connectivity &amp; Security" data-two="Plainly Explained"
+              data-img="assets/img/home/work-cmaxx.jpg" data-alt="The CMAXX website homepage shown on a laptop in a dark studio setting"
+              data-w="1500" data-h="1125">CMAXX</a></li>
+          <li class="belt__item"><a class="belt__chip" href="#case-studies" tabindex="-1"
+              data-type="WhatsApp System &middot; Conversational AI" data-two="Conversational Service"
+              data-img="assets/img/home/work-whatsapp.jpg" data-alt="WhatsApp Home Assist conversation open on a phone"
+              data-w="1000" data-h="750">Home Assist</a></li>
+          <li class="belt__item"><a class="belt__chip" href="#case-studies" tabindex="-1"
+              data-type="Website &middot; Energy Infrastructure" data-two="Complexity Clarified"
+              data-img="assets/img/home/svc-website.jpg" data-alt="Inceku energy infrastructure website shown on a laptop"
+              data-w="1400" data-h="1054">Inceku Energy</a></li>
+          <li class="belt__item"><a class="belt__chip" href="#case-studies" tabindex="-1"
+              data-type="Brand Identity System" data-two="Consistent Everywhere"
+              data-img="assets/img/home/svc-brand.jpg" data-alt="Castro Capital printed brand identity collateral"
+              data-w="1400" data-h="788">Castro Capital</a></li>
+        </ul>
+        </div>
+      </div>
+
+      <button class="belt__pause" type="button" data-ticker-pause aria-pressed="false">Pause Motion</button>
+    </div>
+
+    <div class="belt__card" data-belt-card hidden>
+      <img class="belt__card-img" src="" alt="" width="1" height="1" decoding="async">
+      <div class="belt__card-body">
+        <p class="belt__card-type"></p>
+        <p class="belt__card-two"></p>
+      </div>
+    </div>
+  </section>
 
   <!-- ================================================ UX-LED STUDIO INTRO -->
   <section class="studio" id="about" aria-labelledby="studio-title">
@@ -342,8 +431,59 @@
     </div>
   </section>
 
+
+  <!-- ============================================================== WHY US -->
+  <section class="why" id="why" aria-labelledby="why-title">
+    <div class="wrap">
+      <div class="sec-head" data-stagger>
+        <h2 class="h2" id="why-title">Why Businesses Choose <span class="mark">AX-Channels</span></h2>
+        <p class="sec-head__sub">Four Things You Can Hold Us To, Written Down Before You Have Spent A Cent.</p>
+      </div>
+
+      <div class="why__grid" data-stagger>
+
+        <article class="why__anchor">
+          <span class="why__anchor-wm" aria-hidden="true">AX</span>
+          <p class="eyebrow">The Commitment</p>
+          <h3 class="why__anchor-t">A Reply In Two Working Days, And A Real Date In Writing.</h3>
+          <p class="why__anchor-p">Every enquiry gets an answer within two working days. Every proposal carries a timeline, a scope and a price, worked out after discovery rather than guessed before it. Website packages start at R2,999, and anything quoted against scope is quoted in writing.</p>
+          <a class="cta-pill cta-pill--accent cta__link" data-form="project" href="#contact">Start a Project <span class="cta-pill__arr" aria-hidden="true">&#8599;</span></a>
+        </article>
+
+        <article class="why-card">
+          <span class="why-card__wm" aria-hidden="true">01</span>
+          <span class="why-card__n" aria-hidden="true">01</span>
+          <h3 class="why-card__t">UX Decides The Layout</h3>
+          <p class="why-card__p">Research and structure come first, interface second. A layout drawn before the architecture is a guess with a colour scheme, and it is the visitor who pays for it.</p>
+        </article>
+
+        <article class="why-card">
+          <span class="why-card__wm" aria-hidden="true">02</span>
+          <span class="why-card__n" aria-hidden="true">02</span>
+          <h3 class="why-card__t">You See It At Every Stage</h3>
+          <p class="why-card__p">Five stages, and work is shown at the end of each one rather than saved for a reveal. Direction gets agreed while it is still cheap to change.</p>
+        </article>
+
+        <article class="why-card">
+          <span class="why-card__wm" aria-hidden="true">03</span>
+          <span class="why-card__n" aria-hidden="true">03</span>
+          <h3 class="why-card__t">You Own What We Build</h3>
+          <p class="why-card__p">Sites are handed over on a CMS with admin access and a walk-through. Maintenance is free after launch and optional after that, never a condition of keeping your own site running.</p>
+        </article>
+
+        <article class="why-card">
+          <span class="why-card__wm" aria-hidden="true">04</span>
+          <span class="why-card__n" aria-hidden="true">04</span>
+          <h3 class="why-card__t">Built To Be Found</h3>
+          <p class="why-card__p">The SEO structure is mapped alongside the UX architecture, before anything is drawn, then the build is tuned for speed, devices and search.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ====================================================== MARQUEE TICKER -->
-  <section class="marquee band--dark" aria-label="What we design">
+  <section class="marquee band--dark" data-ticker aria-label="What we design">
     <div class="marquee__viewport">
       <div class="marquee__row">
         <span class="marquee__seq">
@@ -364,7 +504,7 @@
     </div>
     <div class="wrap marquee__foot">
       <p class="marquee__micro">&#10022; Research. Design. Build. Perform.</p>
-      <button class="marquee__pause" type="button" data-marquee-pause aria-pressed="false">Pause Motion</button>
+      <button class="marquee__pause" type="button" data-ticker-pause aria-pressed="false">Pause Motion</button>
     </div>
   </section>
 
@@ -738,7 +878,7 @@
   </div>
 </div>
 
-<script src="assets/js/home.js?v=38" defer></script>
+<script src="assets/js/home.js?v=39" defer></script>
 <dialog class="drawer" id="drawer-project" aria-labelledby="drawer-project-title">
   <div class="drawer__body">
     <div class="drawer__panel">

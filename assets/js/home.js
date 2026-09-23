@@ -70,15 +70,86 @@
     update();
   }
 
-  /* ------------------------------------------------------ marquee ticker -- */
-  var mq = document.querySelector(".marquee");
-  var mqBtn = document.querySelector("[data-marquee-pause]");
-  if (mq && mqBtn) {
-    mqBtn.addEventListener("click", function () {
-      var paused = mq.classList.toggle("is-paused");
-      mqBtn.setAttribute("aria-pressed", String(paused));
-      mqBtn.textContent = paused ? "Play Motion" : "Pause Motion";
+  /* ------------------------------------------------------------ tickers -- */
+  /* Both looping rows — the word marquee and the work belt — carry the same
+     pause control, so one handler drives whichever are on the page. */
+  document.querySelectorAll("[data-ticker-pause]").forEach(function (btn) {
+    var host = btn.closest("[data-ticker]");
+    if (!host) return;
+    btn.addEventListener("click", function () {
+      var paused = host.classList.toggle("is-paused");
+      btn.setAttribute("aria-pressed", String(paused));
+      btn.textContent = paused ? "Play Motion" : "Pause Motion";
     });
+  });
+
+  /* --------------------------------------------------------- work belt -- */
+  /* Hovering or focusing a name stops the belt (CSS does that part) and
+     raises a card describing the project. The card is positioned here rather
+     than nested in the chip, because the belt's viewport clips to make the
+     loop and would cut a nested card off at the band's edge. */
+  var belt = document.querySelector(".belt");
+  var beltCard = belt && belt.querySelector("[data-belt-card]");
+
+  if (belt && beltCard) {
+    var cardImg  = beltCard.querySelector(".belt__card-img");
+    var cardType = beltCard.querySelector(".belt__card-type");
+    var cardTwo  = beltCard.querySelector(".belt__card-two");
+    var hideTimer = null;
+
+    var placeCard = function (chip) {
+      var c = chip.getBoundingClientRect();
+      var b = belt.getBoundingClientRect();
+      var w = beltCard.offsetWidth;
+      var left = c.left - b.left + c.width / 2 - w / 2;
+      /* keep the card inside the band even when the name is at either end */
+      var edge = 12;
+      left = Math.max(edge, Math.min(left, b.width - w - edge));
+      beltCard.style.left = Math.round(left) + "px";
+      beltCard.style.top = Math.round(c.bottom - b.top + 12) + "px";
+    };
+
+    var openCard = function (chip) {
+      window.clearTimeout(hideTimer);
+      var src = chip.getAttribute("data-img");
+      /* the thumbnails are already on the page further down, so this is a
+         cache hit rather than a new request */
+      if (src && cardImg.getAttribute("src") !== src) {
+        cardImg.src = src;
+        cardImg.alt = chip.getAttribute("data-alt") || "";
+        cardImg.width = chip.getAttribute("data-w") || 16;
+        cardImg.height = chip.getAttribute("data-h") || 9;
+      }
+      cardType.textContent = chip.getAttribute("data-type") || "";
+      cardTwo.textContent = chip.getAttribute("data-two") || "";
+      beltCard.hidden = false;
+      placeCard(chip);
+      /* one frame between display and the class, or the transition is skipped */
+      requestAnimationFrame(function () { beltCard.classList.add("is-up"); });
+    };
+
+    var closeCard = function () {
+      beltCard.classList.remove("is-up");
+      hideTimer = window.setTimeout(function () { beltCard.hidden = true; }, 300);
+    };
+
+    belt.querySelectorAll(".belt__chip").forEach(function (chip) {
+      /* the duplicate run is out of the tab order and hidden from assistive
+         tech, but it is still under the cursor, so it opens the card too */
+      chip.addEventListener("mouseenter", function () { openCard(chip); });
+      chip.addEventListener("focus", function () {
+        /* holds the belt still while the name is tabbed to; the CSS hover
+           rule only covers the viewport, so keyboard needs its own hold */
+        belt.classList.add("is-held");
+        openCard(chip);
+      });
+      chip.addEventListener("blur", function () {
+        belt.classList.remove("is-held");
+        closeCard();
+      });
+    });
+    belt.addEventListener("mouseleave", closeCard);
+    window.addEventListener("resize", closeCard);
   }
 
   /* --------------------------------------------------------- SAST clock -- */
