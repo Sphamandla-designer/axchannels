@@ -50,15 +50,14 @@ No new images, no new JavaScript and no libraries: the page reuses the
 existing photography, and the reveal, stagger, counter, drawer and accordion
 behaviour already in `home.js`.
 
-**Engagements.** "Ways We Can Work Together" sets out the four routes in — MVP,
-redesign, design systems, end to end — as an editorial list of rows on
-hairlines, deliberately the opposite form to the priced package row on the
-website page: no card grid, no recommended option, no badge, no figure. Each
-row carries its capabilities as neutral chips rather than ticked features, and
-its own text link; the section closes on the page's single primary pill so the
-four routes stay pathways rather than four competing buttons. Product work is
-scoped per product, so the section answers "what does it cost" with scope
-instead of a number, and publishes no price.
+**Engagements.** "Ways We Can Work Together" sets out the four routes in —
+MVP, redesign, design systems, end to end — on the same package card the
+website page uses for its priced packages, so the two services present their
+options the same way. The card is reused as-is; this page only adds an index,
+a description where the website card carries its price, and a four-across
+grid that goes 2-up from 1300 and single-column at 720. No price appears on
+these cards, because product work is scoped per product: the note underneath
+answers the cost question with what the scope depends on instead of a figure.
 
 **Proof.** The figures in the proof section are studio-wide across every kind
 of project, and the page says so rather than implying they are product-design
