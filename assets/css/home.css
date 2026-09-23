@@ -3035,6 +3035,12 @@ html:not(.js-motion) .belt__pause { display: none; }
    -------------------------------------------------------------------------- */
 .why {
   padding-top: var(--sec-gap);
+  /* A dark band follows. Its own padding-top sits INSIDE the dark, so it
+     contributes no white space at all — the page's usual rule, that the
+     section below a break carries the gap, only holds while both sections
+     are light. Against a band the gap has to come from above, or the cards
+     touch the dark edge. */
+  padding-bottom: var(--sec-gap);
   background:
     radial-gradient(40% 56% at 100% 8%, rgba(var(--glow-mag),  .18), transparent 72%),
     radial-gradient(44% 60% at 0% 88%,  rgba(var(--glow-teal), .20), transparent 72%);
