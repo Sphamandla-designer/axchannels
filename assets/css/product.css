@@ -16,8 +16,8 @@
    magenta glow on the left so no two consecutive light sections light the
    same way. These continue that alternation for the sections this page adds.
    The order below is the page's actual running order, so it stays checkable:
-   problem T · build M · anatomy T · [dark] · included T · ux M · work T ·
-   [dark] · who T · engagements M · proof T. */
+   build M · anatomy T · [dark] · included T · work M · [dark] · who T ·
+   engagements M · proof T. */
 .pd-anatomy,
 .pd-who,
 .pd-eng { padding-top: var(--sec-gap); }
@@ -30,9 +30,6 @@
    for the website page, and this file only loads here, so flipping it to teal
    restores the alternation without affecting that page. */
 .svc-proof  { background: radial-gradient(44% 60% at 98% 8%, rgba(var(--glow-teal), .20), transparent 72%); }
-/* svc-work follows svc-ux directly now that the three sections between them
-   are gone, and service.css gives both a magenta glow. */
-.svc-work   { background: radial-gradient(46% 62% at 100% 12%, rgba(var(--glow-teal), .20), transparent 72%); }
 
 /* --------------------------------------------------------------------------
    The design chain — a product is not a pile of screens, it is one chain of

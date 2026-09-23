@@ -18,13 +18,9 @@
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- The hero photograph is the largest element painted above the fold, so it
-     is the one worth preloading. (The home page preloads its own background
-     here; that file is 815KB and this page never paints it.) -->
-<link rel="preload" as="image" href="../../assets/img/home/svc-website.jpg" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/home.css?v=43">
-<link rel="stylesheet" href="../../assets/css/service.css?v=1">
+<link rel="stylesheet" href="../../assets/css/service.css?v=2">
 
 <!-- Breadcrumbs. The only markup on this page Google still shows a rich
      result for; the trail matches the visible one under the masthead. -->
@@ -220,11 +216,11 @@
       </div>
     </div>
 
-    <figure class="svc-hero__media" data-reveal="img">
-      <img src="../../assets/img/home/svc-website.jpg"
-           alt="The Inceku Energy infrastructure website designed by AX-Channels, shown on a laptop"
-           width="1400" height="1054" fetchpriority="high" decoding="async">
-    </figure>
+    <!-- Atmosphere, not a picture: masked back behind the copy, so it is
+         marked decorative and carries no alt text. -->
+    <div class="svc-hero__media" aria-hidden="true">
+      <img src="../../assets/img/home/svc-website.jpg" alt="" width="1400" height="1050" decoding="async">
+    </div>
   </div>
 
   <dl class="svc-hero__facts" data-stagger>
