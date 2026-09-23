@@ -2734,3 +2734,385 @@ select.ff__control { padding-right: 24px; cursor: pointer; }
   border: 1px solid rgba(10, 10, 10, .1);
   border-top: 2px solid var(--accent-ink);
 }
+
+/* --------------------------------------------------------------------------
+   Work belt — the project names on a loop directly under the hero.
+
+   Three states, in order of what the visitor's browser will give them:
+     1. JS and motion welcome: the row slides, hover or focus stops it, and
+        a card rises under the name that was chosen.
+     2. prefers-reduced-motion or no JS: the same names as a static wrapped
+        list, with the duplicate run dropped so nothing reads twice.
+   The card lives outside .belt__viewport, because the viewport clips to make
+   the loop and would cut the card off at the band's edge.
+   -------------------------------------------------------------------------- */
+.belt {
+  /* The band's own secondary grey. The glow wash tints the ground to about
+     #ebe6e9 at its deepest, where --muted measures 4.03:1 and --muted-2
+     4.12:1 — both under AA for the 11px mono this band uses. This clears it
+     at 4.97:1 without going to full --ink, which would flatten the hierarchy
+     against the project names. */
+  --belt-dim: #5d626c;
+  position: relative;
+  border-block: 1px solid var(--rule-light);
+  background:
+    radial-gradient(38% 160% at 12% 50%,  rgba(var(--glow-mag),  .10), transparent 70%),
+    radial-gradient(42% 170% at 88% 50%,  rgba(var(--glow-teal), .12), transparent 70%);
+}
+.belt__in {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: clamp(20px, 2.4vw, 46px);
+  width: 100%;
+  max-width: calc(var(--wrap) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding: clamp(14px, 1.5vw, 26px) var(--gutter);
+}
+
+.belt__label {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1vw, 16px);
+  max-width: 31ch;          /* two lines; 26ch broke it over four */
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  line-height: 1.75;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--belt-dim);
+}
+/* The eight-point star from the reference belt, drawn rather than shipped as
+   an asset: two bars crossed, and the same pair turned 45deg. */
+.belt__spark {
+  position: relative;
+  flex: none;
+  width: clamp(20px, 1.9vw, 30px);
+  aspect-ratio: 1;
+  color: var(--ink);
+}
+.belt__spark::before,
+.belt__spark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(currentColor, currentColor) no-repeat center / 1.5px 100%,
+    linear-gradient(currentColor, currentColor) no-repeat center / 100% 1.5px;
+}
+.belt__spark::after { transform: rotate(45deg); opacity: .62; }
+
+/* ---- the moving part ---------------------------------------------------- */
+.belt__viewport {
+  overflow: hidden;
+  /* the names fade out at both ends rather than being cut mid-letter */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+.belt__row { display: flex; width: max-content; }
+.belt__seq {
+  display: flex;
+  align-items: center;
+  gap: clamp(26px, 3vw, 58px);
+  margin: 0;
+  padding: 0 clamp(13px, 1.5vw, 29px);
+  list-style: none;
+}
+.belt__item { display: flex; }
+
+.belt__chip {
+  display: flex;
+  align-items: center;
+  gap: .7em;
+  white-space: nowrap;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  letter-spacing: -.012em;
+  color: var(--ink);
+}
+.belt__chip::before {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  rotate: 45deg;
+  background: var(--ink);
+}
+.belt__chip:hover::before,
+.belt__chip:focus-visible::before { background: var(--accent-ink); }
+.belt__chip:hover,
+.belt__chip:focus-visible { color: var(--accent-ink); }
+
+.belt__pause {
+  flex: none;
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border: 1px solid var(--rule-light);
+  border-radius: 999px;
+  color: var(--belt-dim);
+  padding: .65em 1.3em;
+  cursor: pointer;
+}
+.belt__pause:hover,
+.belt__pause:focus-visible { border-color: var(--accent-ink); color: var(--accent-ink); }
+
+/* ---- the card the chosen name raises ------------------------------------ */
+.belt__card {
+  position: absolute;
+  z-index: 8;
+  top: 0;
+  left: 0;
+  width: 296px;
+  /* JS sets top/left off the chosen chip; the card never takes the pointer,
+     so it cannot come between the cursor and the name underneath it. */
+  pointer-events: none;
+  overflow: hidden;
+  border: 1px solid var(--rule-light);
+  border-radius: var(--r-soft);
+  background: var(--page);
+  box-shadow: 0 26px 54px -26px rgba(10, 10, 10, .45);
+}
+.belt__card[hidden] { display: none; }
+.belt__card-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--numbers-panel);
+}
+.belt__card-body {
+  padding: clamp(12px, 1.1vw, 18px) clamp(14px, 1.3vw, 20px) clamp(14px, 1.3vw, 20px);
+  border-top: 2px solid var(--accent-ink);
+}
+.belt__card-type {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  line-height: 1.6;
+  letter-spacing: .08em;
+  text-wrap: balance;       /* keeps "AI" off a line of its own */
+  text-transform: uppercase;
+  color: var(--belt-dim);
+}
+.belt__card-two {
+  margin: 6px 0 0;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -.014em;
+  color: var(--ink);
+}
+
+/* ---- static fallback ---------------------------------------------------- */
+/* Without .js-motion there is nothing to pause and nothing to stop, so the
+   second run and the pause control are removed and the names simply wrap. */
+html:not(.js-motion) .belt__viewport { overflow: visible; -webkit-mask-image: none; mask-image: none; }
+html:not(.js-motion) .belt__row      { width: auto; flex-wrap: wrap; }
+html:not(.js-motion) .belt__seq      { flex-wrap: wrap; row-gap: clamp(8px, 1vw, 14px); padding-inline: 0; }
+html:not(.js-motion) .belt__seq[aria-hidden="true"],
+html:not(.js-motion) .belt__pause { display: none; }
+
+@media (max-width: 1100px) {
+  .belt__in { grid-template-columns: minmax(0, 1fr); row-gap: clamp(12px, 1.6vw, 20px); }
+  .belt__label { max-width: none; }
+  .belt__pause { justify-self: start; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js-motion .belt__row { animation: belt-slide 46s linear infinite; }
+  /* The row holds the run twice, so travelling exactly half its width lands
+     the copy where the original started and the seam never shows. */
+  @keyframes belt-slide {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-50%, 0, 0); }
+  }
+  /* Scoped to the viewport, not the whole band: hovering the label or the
+     pause control must not stop the belt, or clicking "Play Motion" appears
+     to do nothing while the cursor is still on the button.
+     .is-held is set by JS while a name has keyboard focus — :focus-within
+     would have included the pause button, which keeps focus after a click
+     and so left the belt frozen with the button reading "Pause Motion". */
+  .js-motion .belt__viewport:hover .belt__row,
+  .js-motion .belt.is-held .belt__row,
+  .js-motion .belt.is-paused .belt__row { animation-play-state: paused; }
+
+  .js-motion .belt__chip { transition: color .25s var(--ease-out); }
+  .js-motion .belt__chip::before { transition: rotate .45s var(--ease-out), background-color .25s var(--ease-out); }
+  .js-motion .belt__chip:hover::before,
+  .js-motion .belt__chip:focus-visible::before { rotate: 135deg; }
+  .js-motion .belt__pause { transition: border-color .25s var(--ease), color .25s var(--ease); }
+
+  .js-motion .belt__card {
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity .28s var(--ease-out), transform .28s var(--ease-out);
+  }
+  .js-motion .belt__card.is-up { opacity: 1; transform: none; }
+}
+
+/* --------------------------------------------------------------------------
+   Why us — one dark anchor carrying the commitment, four light cards
+   carrying the reasons. Distinct from the services grid: no media, no chips,
+   and a large ghosted numeral behind each card.
+   -------------------------------------------------------------------------- */
+.why {
+  padding-top: var(--sec-gap);
+  background:
+    radial-gradient(40% 56% at 100% 8%, rgba(var(--glow-mag),  .18), transparent 72%),
+    radial-gradient(44% 60% at 0% 88%,  rgba(var(--glow-teal), .20), transparent 72%);
+}
+.why__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 34fr) minmax(0, 33fr) minmax(0, 33fr);
+  gap: clamp(14px, 1.4vw, 24px);
+  margin-top: clamp(30px, 3.4vw, 64px);
+}
+
+.why__anchor {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  grid-area: 1 / 1 / 3 / 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(26px, 2.6vw, 48px);
+  border-radius: var(--r-soft);
+  color: var(--on-dark);
+  background:
+    radial-gradient(56% 44% at 92% 4%,  rgba(var(--glow-teal), .46), transparent 70%),
+    radial-gradient(52% 44% at 4% 98%,  rgba(var(--glow-mag),  .56), transparent 72%),
+    var(--ink-2);
+}
+.why__anchor .eyebrow { color: var(--accent); }
+.why__anchor-t {
+  margin: clamp(16px, 1.6vw, 28px) 0 0;
+  font-size: var(--fs-h5);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  text-wrap: balance;
+}
+.why__anchor-p {
+  margin: clamp(14px, 1.3vw, 22px) 0 clamp(24px, 2.4vw, 40px);
+  font-size: var(--fs-sm);
+  line-height: 1.74;
+  color: var(--on-dark-dim);
+}
+.why__anchor .cta-pill { margin-top: auto; }
+/* The card runs the full height of the two rows beside it, which left a large
+   empty middle. The house watermark fills it the way it fills the work band. */
+.why__anchor-wm {
+  position: absolute;
+  z-index: -1;
+  right: -.08em;
+  bottom: -.22em;
+  font-size: clamp(150px, 15vw, 280px);
+  font-weight: 700;
+  line-height: .73;
+  letter-spacing: -.04em;
+  color: rgba(255, 255, 255, .045);
+  pointer-events: none;
+  user-select: none;
+}
+
+.why-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(22px, 2.2vw, 40px);
+  border: 1px solid var(--rule-light);
+  border-radius: var(--r-soft);
+  background: rgba(255, 255, 255, .6);
+}
+/* the ghosted numeral, sitting behind the copy rather than beside it */
+.why-card__wm {
+  position: absolute;
+  z-index: -1;
+  right: clamp(10px, 1vw, 20px);
+  bottom: -.28em;
+  font-size: clamp(88px, 9vw, 168px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.06em;
+  color: rgba(10, 10, 10, .045);
+  user-select: none;
+}
+/* the lit rule, wiped on hover — a background-size wipe rather than a scaled
+   pseudo-element, which a rounded clipping parent would never paint */
+.why-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  height: 2px;
+  width: 100%;
+  background:
+    linear-gradient(90deg, var(--accent-ink), rgba(var(--cyan), .8))
+    no-repeat left center / 0% 100%;
+}
+.why-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  opacity: 0;
+  background:
+    radial-gradient(60% 80% at 100% 0%, rgba(var(--glow-teal), .30), transparent 70%),
+    radial-gradient(56% 76% at 0% 100%, rgba(var(--glow-mag),  .26), transparent 70%);
+}
+.why-card__n {
+  display: block;
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: .14em;
+  color: var(--accent-ink);
+}
+.why-card__t {
+  margin: clamp(14px, 1.4vw, 24px) 0 0;
+  font-size: var(--fs-h5);
+  font-weight: 500;
+  line-height: 1.22;
+  letter-spacing: -.018em;
+}
+.why-card__p {
+  margin: clamp(10px, 1vw, 16px) 0 0;
+  max-width: 44ch;
+  font-size: var(--fs-sm);
+  line-height: 1.72;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .why__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .why__anchor { grid-area: 1 / 1 / 2 / 3; }
+}
+@media (max-width: 620px) {
+  .why__grid { grid-template-columns: minmax(0, 1fr); }
+  .why__anchor { grid-area: auto; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js-motion .why-card {
+    transition:
+      transform .5s var(--ease-out),
+      box-shadow .5s var(--ease-out),
+      border-color .5s var(--ease-out);
+  }
+  .js-motion .why-card::before { transition: background-size .55s var(--ease-out); }
+  .js-motion .why-card::after  { transition: opacity .5s var(--ease-out); }
+  /* scoped through .js-motion so it out-specifies the reveal system's
+     `.m-child.is-in { transform: none }`, which cancels the lift otherwise */
+  .js-motion .why-card:hover,
+  .js-motion .why-card:focus-within {
+    transform: translateY(-6px);
+    border-color: rgba(10, 10, 10, .04);
+    box-shadow: 0 26px 54px -28px rgba(10, 10, 10, .42);
+  }
+  .js-motion .why-card:hover::before,
+  .js-motion .why-card:focus-within::before { background-size: 100% 100%; }
+  .js-motion .why-card:hover::after,
+  .js-motion .why-card:focus-within::after  { opacity: 1; }
+}
