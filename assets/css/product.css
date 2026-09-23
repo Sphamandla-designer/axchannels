@@ -14,21 +14,31 @@
 
 /* Section rhythm — service.css alternates a teal glow on the right with a
    magenta glow on the left so no two consecutive light sections light the
-   same way. These continue that alternation for the sections this page adds. */
+   same way. These continue that alternation for the sections this page adds.
+   The order below is the page's actual running order, so it stays checkable:
+   problem T · build M · anatomy T · [dark] · included T · ux M · complex T ·
+   ai M · vs T · work M · [dark] · who T · engagements M · proof T. */
 .pd-anatomy,
 .pd-complex,
 .pd-ai,
 .pd-vs,
-.pd-who { padding-top: var(--sec-gap); }
+.pd-who,
+.pd-eng { padding-top: var(--sec-gap); }
 
 /* A dark band follows each of these, so the white gap comes from above. */
 .pd-vs { padding-bottom: var(--sec-gap); }
 
 .pd-anatomy { background: radial-gradient(46% 62% at 100% 12%, rgba(var(--glow-teal), .20), transparent 72%); }
-.pd-complex { background: radial-gradient(42% 58% at 0% 84%,  rgba(var(--glow-mag),  .18), transparent 72%); }
-.pd-ai      { background: radial-gradient(46% 62% at 96% 10%, rgba(var(--glow-teal), .20), transparent 72%); }
-.pd-vs      { background: radial-gradient(40% 56% at 2% 88%,  rgba(var(--glow-mag),  .18), transparent 72%); }
+.pd-complex { background: radial-gradient(46% 62% at 96% 10%, rgba(var(--glow-teal), .20), transparent 72%); }
+.pd-ai      { background: radial-gradient(42% 58% at 0% 84%,  rgba(var(--glow-mag),  .18), transparent 72%); }
+.pd-vs      { background: radial-gradient(44% 60% at 98% 8%,  rgba(var(--glow-teal), .20), transparent 72%); }
 .pd-who     { background: radial-gradient(44% 60% at 98% 10%, rgba(var(--glow-teal), .20), transparent 72%); }
+.pd-eng     { background: radial-gradient(42% 58% at 0% 86%,  rgba(var(--glow-mag),  .18), transparent 72%); }
+/* the engagements section lands between pd-who and the proof block, which
+   would leave two magenta bands touching; service.css sets .svc-proof's glow
+   for the website page, and this file only loads here, so flipping it to teal
+   restores the alternation without affecting that page. */
+.svc-proof  { background: radial-gradient(44% 60% at 98% 8%, rgba(var(--glow-teal), .20), transparent 72%); }
 
 /* --------------------------------------------------------------------------
    The design chain — a product is not a pile of screens, it is one chain of
@@ -164,4 +174,107 @@
 @media (max-width: 720px) {
   .pd-stage { grid-template-columns: clamp(34px, 9vw, 46px) minmax(0, 1fr); }
   .pd-stage::before { left: clamp(9px, 2.4vw, 15px); }
+}
+
+/* --------------------------------------------------------------------------
+   Engagements — how a product project is shaped.
+
+   Deliberately NOT the priced package row from service.css: no card grid, no
+   recommended option, no badge, no figure. Product work is scoped per product,
+   so this reads as an editorial list of routes in, each one a row on a rule.
+   -------------------------------------------------------------------------- */
+.pd-engs {
+  margin: clamp(30px, 3.4vw, 64px) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--svc-rule);
+}
+.pd-eng__item {
+  display: grid;
+  grid-template-columns: clamp(58px, 6.2vw, 116px) minmax(0, 36fr) minmax(0, 44fr);
+  column-gap: clamp(20px, 2.6vw, 52px);
+  align-items: start;
+  padding: clamp(26px, 2.8vw, 52px) 0;
+  border-bottom: 1px solid var(--svc-rule);
+}
+/* the index, set in the light numeral weight the numbers panel uses, so it
+   reads as a position in a list and never as a figure */
+.pd-eng__n {
+  font-size: clamp(30px, 3.1vw, 58px);
+  font-weight: 200;
+  line-height: .9;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.pd-eng__t {
+  margin: 0;
+  font-size: var(--fs-h5);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+.pd-eng__p {
+  margin: clamp(10px, 1vw, 16px) 0 0;
+  max-width: 44ch;
+  font-size: var(--fs-sm);
+  line-height: 1.72;
+  color: var(--muted);
+}
+.pd-eng__link { margin: clamp(16px, 1.6vw, 26px) 0 0; }
+.pd-eng__caps { margin: 0; }
+.pd-eng__caps .chip {
+  background: rgba(10, 10, 10, .04);
+  border-color: var(--svc-rule);
+  color: var(--muted);
+}
+
+/* Scope note — the answer to "what does it cost", given as scope rather than
+   a number, so it carries weight without becoming a price panel. */
+.pd-scope {
+  display: grid;
+  grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
+  column-gap: clamp(24px, 3.2vw, 72px);
+  align-items: start;
+  margin: clamp(30px, 3.4vw, 60px) 0 0;
+}
+.pd-scope__t {
+  margin: 0;
+  font-size: var(--fs-h5);
+  font-weight: 500;
+  line-height: 1.24;
+  letter-spacing: -.02em;
+  max-width: 22ch;
+}
+.pd-scope__p {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.76;
+  color: var(--muted);
+}
+.pd-scope__p + .pd-scope__p { margin-top: clamp(12px, 1.2vw, 20px); }
+.pd-eng__cta { margin: clamp(28px, 3vw, 54px) 0 0; }
+
+@media (max-width: 1100px) {
+  .pd-eng__item {
+    grid-template-columns: clamp(50px, 7vw, 80px) minmax(0, 1fr);
+    row-gap: clamp(16px, 1.8vw, 26px);
+  }
+  /* the capability set drops under the copy, still aligned to it */
+  .pd-eng__caps { grid-column: 2; }
+  .pd-scope { grid-template-columns: minmax(0, 1fr); row-gap: clamp(14px, 1.6vw, 24px); }
+  .pd-scope__t { max-width: none; }
+}
+
+@media (max-width: 720px) {
+  .pd-eng__item {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: clamp(12px, 3vw, 18px);
+  }
+  /* the index sits above the title rather than beside it, so the copy keeps
+     the full measure instead of being squeezed into a narrow column */
+  .pd-eng__caps { grid-column: 1; }
+  .pd-eng__n { font-size: clamp(26px, 7.4vw, 34px); }
+  .pd-eng__p { max-width: none; }
 }

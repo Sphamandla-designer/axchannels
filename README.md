@@ -50,6 +50,16 @@ No new images, no new JavaScript and no libraries: the page reuses the
 existing photography, and the reveal, stagger, counter, drawer and accordion
 behaviour already in `home.js`.
 
+**Engagements.** "Ways We Can Work Together" sets out the four routes in — MVP,
+redesign, design systems, end to end — as an editorial list of rows on
+hairlines, deliberately the opposite form to the priced package row on the
+website page: no card grid, no recommended option, no badge, no figure. Each
+row carries its capabilities as neutral chips rather than ticked features, and
+its own text link; the section closes on the page's single primary pill so the
+four routes stay pathways rather than four competing buttons. Product work is
+scoped per product, so the section answers "what does it cost" with scope
+instead of a number, and publishes no price.
+
 **Proof.** The figures in the proof section are studio-wide across every kind
 of project, and the page says so rather than implying they are product-design
 numbers. No client quotes appear on the page, because every testimonial the
