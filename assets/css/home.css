@@ -747,7 +747,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* --------------------------------------------------------------------------
    10. Services
    -------------------------------------------------------------------------- */
-.services { padding-top: var(--sec-gap); padding-bottom: var(--sp-225); }
+/* Closes at 0, as every section above a break does: the section below it
+   carries the whole --sec-gap in its padding-top. This bottom padding was
+   here to hold services off the dark ticker when the two were neighbours;
+   with the why section between them it stacked on top of that section's own
+   gap and made the break 181px where every other one is 69px. */
+.services { padding-top: var(--sec-gap); padding-bottom: 0; }
 .services__grid {
   margin-top: var(--sp-91);
   display: grid;
