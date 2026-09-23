@@ -16,9 +16,47 @@ assets/js/home.js             Mobile nav panel + selected-work swap
 assets/img/home/              Images taken from the uploaded design materials
 services/                     Services overview  (Service page.png)
 services/web-design/          Web design service (web design.png)
+services/website-design-development/
+                              Website Design & Development service page
+services/digital-product-design/
+                              Digital Product Design service page
+assets/css/service.css        Shared service-page layouts (built on home.css)
+assets/css/product.css        Product-page-only additions (the design chain)
 assets/css/site.css           Design system for the services pages
 assets/js/site.js             Behaviour for the services pages
 ```
+
+## Service pages
+
+Both service pages are built on `home.css` + `service.css`. `service.css`
+invents no tokens: it arranges the home page's colours, type steps, radii,
+easings and spacing into the layouts a service page needs. Each page adds a
+page-specific file only for what is genuinely new to it.
+
+**Digital Product Design** (`services/digital-product-design/`) positions the
+studio for SaaS platforms, web and mobile applications, dashboards, customer
+portals and internal platforms — task-based software, as distinct from the
+content-based websites the other service page covers. The two are compared
+head to head on the page so a visitor can tell which one they need.
+
+`product.css` (5KB) adds three things and reuses everything else: the
+nine-stage design chain (a spine that descends 01–05 then 06–09, and becomes
+one continuous column below 900px), neutral comparison bullets — the existing
+fit cards carry a yes/no judgement, and neither service is the wrong one —
+and the section glow assignments that keep the page's light bands alternating
+teal-right / magenta-left the way `service.css` does.
+
+No new images, no new JavaScript and no libraries: the page reuses the
+existing photography, and the reveal, stagger, counter, drawer and accordion
+behaviour already in `home.js`.
+
+**Proof.** The figures in the proof section are studio-wide across every kind
+of project, and the page says so rather than implying they are product-design
+numbers. No client quotes appear on the page, because every testimonial the
+studio has published is about website work; product-specific references are
+offered on request instead. Real product-shaped projects (FINOS, ManaGem,
+WasteMart, Automation Conversation) carry the proof visually, and the two
+that were explorations rather than client deliveries still say so.
 
 ## Home page implementation notes
 
