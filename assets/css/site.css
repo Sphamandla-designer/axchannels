@@ -107,6 +107,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   padding-block: 1.05rem;
 }
 .brand { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); }
+/* the supplied logo artwork: the colour mark on the light nav, the full
+   lockup in the white footer */
+.brand--logo { display: inline-flex; }
+.brand--logo img { display: block; height: 2rem; width: auto; }
+.footer__brand img { display: block; height: 4rem; width: auto; }
 .nav__links { display: flex; align-items: center; gap: clamp(1.1rem, 2.4vw, 2.2rem); }
 .nav__links .nav__cta { display: none; }
 .nav__link {
