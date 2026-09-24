@@ -190,11 +190,9 @@
 .svc-proof,
 .svc-faq { padding-top: var(--sec-gap); }
 
-/* A dark band follows each of these, and a band's own padding-top sits inside
-   the dark, so the white gap has to come from above. */
-.svc-build,
-.svc-mobile,
-.svc-proof { padding-bottom: var(--sec-gap); }
+/* No light section closes with padding of its own. The white gap above a
+   dark band is that band's own margin-top (.svc-process, .svc-redesign), so a
+   bottom gap here stacked on top of it and doubled the break. */
 
 .svc-problem { background: radial-gradient(44% 60% at 98% 6%, rgba(var(--glow-teal), .20), transparent 72%); }
 .svc-build   { background: radial-gradient(40% 56% at 2% 88%, rgba(var(--glow-mag),  .18), transparent 72%); }
@@ -312,7 +310,7 @@
   isolation: isolate;
   overflow: hidden;
   margin-top: var(--sec-gap);
-  padding: clamp(56px, 6.4vw, 124px) 0;
+  padding: var(--sec-gap) 0;
   color: var(--on-dark);
   background: var(--ink-2);
 }
@@ -845,7 +843,7 @@
   isolation: isolate;
   overflow: hidden;
   margin: var(--sec-gap) var(--shell) 0;
-  padding: clamp(46px, 5.4vw, 104px) 0;
+  padding: var(--sec-gap) 0;
   border-radius: var(--r-block);
   color: var(--on-dark);
   background:

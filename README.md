@@ -104,6 +104,24 @@ The favicon and the 180px `apple-touch-icon.png` are the reversed mark on
 the site's ink. The Brand Identity page shows the whole family in its
 *One Logo, Built As A Family* section.
 
+**Section spacing.** One token, `--section-space` (defined in `home.css` and
+mirrored in `site.css` for the two legacy pages), sets the vertical rhythm:
+
+| Viewport | Gap |
+|---|---|
+| ≥1440px | 140px |
+| 1024–1439px | 120px |
+| 768–1023px | 96px |
+| 480–767px | 80px |
+| <480px | 72px |
+
+`--sec-gap` now points at it, so every existing use scales with it. One gap
+per break: a light section opens with the gap and closes at 0; a dark band
+carries the gap as its white margin above and as padding inside both edges.
+On the legacy pages every section pads both edges, so a section that follows
+one on the same ground drops its top. The project belt, the ticker's lower
+edge, the masthead and the footer are exempt.
+
 **Hero imagery.** The service hero photograph is atmosphere rather than a
 framed picture beside the copy: it fills the right of the block, sits under
 the text at low opacity, and is masked back with a single radial gradient so

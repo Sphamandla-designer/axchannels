@@ -80,7 +80,7 @@
   /* The rhythm between page sections. The section below a break carries the
      whole gap in its padding-top and the one above closes at 0, so the space
      between any two sections is this one value rather than a sum of two. */
-  --sec-gap: clamp(44px, 4.8vw, 92px);
+  --sec-gap: var(--section-space);
 
   /* Button metrics, taken from the hero pill and shared by every button. */
   --btn-h:   clamp(42px, 3.1vw, 52px);
@@ -119,7 +119,18 @@
   --dur-slow: .85s;   /* large editorial reveals       */
   --ease-out: cubic-bezier(.22, .61, .36, 1);
   --ease-io:  cubic-bezier(.65, .05, .36, 1);
+
+  /* Section spacing — the one vertical rhythm every page is built on. It is
+     the gap at every break between two major sections, and the padding a
+     dark band carries inside its own edge. Stepped rather than fluid so each
+     layout gets a deliberate value. Compact strips (the project belt, the
+     ticker's lower edge), the masthead and the footer are exempt. */
+  --section-space: 140px;                  /* large desktop  ≥1440    */
 }
+@media (max-width: 1439px) { :root { --section-space: 120px; } }  /* 1024–1439 */
+@media (max-width: 1023px) { :root { --section-space: 96px;  } }  /* 768–1023  */
+@media (max-width: 767px)  { :root { --section-space: 80px;  } }  /* <768      */
+@media (max-width: 479px)  { :root { --section-space: 72px;  } }  /* <480      */
 
 /* --------------------------------------------------------------------------
    2. Base
@@ -568,7 +579,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* --------------------------------------------------------------------------
    9. Studio introduction
    -------------------------------------------------------------------------- */
-.studio { padding-top: var(--sp-131); }
+.studio { padding-top: var(--sec-gap); }
 
 /* ---- the opening statement -----------------------------------------------
    A small label held at the far left against one large statement in the
@@ -829,7 +840,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .work {
   position: relative;
   padding-top: var(--sp-68);
-  padding-bottom: var(--sp-101);
+  padding-bottom: var(--sec-gap);
   overflow: hidden;
 }
 .work__wm {
@@ -957,7 +968,7 @@ a.project__media:hover img { transform: scale(1.03); }
    12. Testimonials
    -------------------------------------------------------------------------- */
 /* closes at 0 — the FAQ below it carries the whole break, per --sec-gap */
-.voices { padding-top: var(--sp-197); padding-bottom: 0; }
+.voices { padding-top: var(--sec-gap); padding-bottom: 0; }
 .voices .sec-head .h2 { max-width: 24ch; }
 
 .voices__track {
@@ -1124,7 +1135,7 @@ a.project__media:hover img { transform: scale(1.03); }
 /* --------------------------------------------------------------------------
    14. Contact CTA + footer (one dark block)
    -------------------------------------------------------------------------- */
-.closing { padding: var(--sp-169) var(--block-pad) var(--sp-134); }
+.closing { padding: var(--sec-gap) var(--block-pad) var(--sp-134); }
 
 .cta {
   display: grid;
@@ -1779,7 +1790,7 @@ a.project__media:hover img { transform: scale(1.03); }
 .marquee {
   position: relative;
   overflow: hidden;
-  padding: clamp(44px, 4.8vw, 92px) 0 clamp(24px, 2.6vw, 50px);
+  padding: var(--sec-gap) 0 clamp(24px, 2.6vw, 50px);
 }
 .marquee.band--dark {
   background:
@@ -2479,7 +2490,7 @@ a.project__media:hover img { transform: scale(1.03); }
 /* Mobile: one statistic at a time — the grid would shrink the numerals past
    the point where the light weight still holds together. */
 @media (max-width: 720px) {
-  .numbers { padding: var(--sp-91) 0 var(--sp-114); }
+  .numbers { padding: var(--sec-gap) 0 0; }
   .numbers__panel {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: repeat(6, auto);
@@ -2729,7 +2740,7 @@ select.ff__control { padding-right: 24px; cursor: pointer; }
    script. The aside holds the page's content line, the questions sit in the
    right-hand column on a comfortable measure.
    -------------------------------------------------------------------------- */
-.faq { padding-top: var(--sec-gap); padding-bottom: var(--sp-135); }
+.faq { padding-top: var(--sec-gap); padding-bottom: var(--sec-gap); }
 .faq .sec-head .h2 { max-width: 22ch; }
 
 .faq__grid {
