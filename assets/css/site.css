@@ -173,7 +173,17 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 /* ---------- Sections ---------- */
 
-.section { padding-block: clamp(3.5rem, 8vw, 6.5rem); }
+/* Section spacing — the same stepped scale as home.css (--section-space).
+   Every section pads both edges, so two neighbours on the same ground would
+   stack two gaps; the second one drops its top. */
+:root { --section-space: 140px; }
+@media (max-width: 1439px) { :root { --section-space: 120px; } }
+@media (max-width: 1023px) { :root { --section-space: 96px;  } }
+@media (max-width: 767px)  { :root { --section-space: 80px;  } }
+@media (max-width: 479px)  { :root { --section-space: 72px;  } }
+.section { padding-block: var(--section-space); }
+.section:not(.on-dark) + .section:not(.on-dark),
+.section.on-dark + .section.on-dark { padding-top: 0; }
 .on-dark { background: var(--dark); color: #fff; }
 .on-dark .kicker { color: #8a93a3; }
 
