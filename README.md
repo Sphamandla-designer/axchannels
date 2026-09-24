@@ -22,9 +22,12 @@ services/digital-product-design/
                               Digital Product Design service page
 services/ui-ux-design-ux-strategy/
                               UI/UX Design & UX Strategy service page
+services/brand-identity-systems/
+                              Brand Identity Systems service page
 assets/css/service.css        Shared service-page layouts (built on home.css)
 assets/css/product.css        Product-page-only additions (the design chain)
 assets/css/uxui.css           UX-page-only additions (the five-stage flow)
+assets/css/brand.css          Brand-page-only additions (specimen board, system panel, touchpoints)
 assets/css/site.css           Design system for the services pages
 assets/js/site.js             Behaviour for the services pages
 ```
@@ -52,6 +55,31 @@ adds the five-stage flow, neutral comparison bullets, the engagement-card
 additions, and one correction: the two-panel board's second panel is dark, but
 `.svc-seo__list` was only ever used in its light first panel, so its ink, body
 colour and rules were all tuned for white and vanished on the dark ground.
+
+**Brand Identity Systems** (`services/brand-identity-systems/`) sells a
+visual identity as a system rather than a logo: strategy defines the
+direction, identity makes it visible, guidelines keep it consistent. The
+identity is the core of the service; the strategy part is a focused brand
+discovery, and the page says plainly that market research, naming and
+trademark work are not included.
+
+It is a visual service, so the page shows rather than says. The hero swaps
+the usual faded photograph for a specimen board that takes the studio's own
+identity apart (guidelines, lockup, typeface, palette, accent), and the
+touchpoint section carries that same identity across the existing brand
+mockups plus three tiles set live in HTML, each labelled *Illustrative*.
+Nothing on the page presents concept material as client work. The only
+client identity shown is Castro Capital, using the collateral image and the
+verified testimonial the home page already publishes; it has no public case
+study, so it is not linked to one.
+
+`brand.css` adds the board, the three-layer definition, the four-part
+deliverables panel, the touchpoint mosaic and the work layout. Everything
+else is `service.css` as it is. No new images, no new JavaScript: the
+enquiry drawer, reveals, accordion and clock are `home.js`, and the project
+drawer opens with *Brand Identity System* preselected. No price is shown or
+marked up as an Offer; scope, feedback rounds and timeline are set per
+proposal.
 
 **Hero imagery.** The service hero photograph is atmosphere rather than a
 framed picture beside the copy: it fills the right of the block, sits under
