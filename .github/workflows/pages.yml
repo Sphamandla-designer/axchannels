@@ -26,4 +26,15 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -B gh-pages
+          # Publish the site only. Design sources kept in the repo (earlier
+          # design previews, screenshots, PDFs and logo uploads at the root)
+          # are dropped from the published branch, so no older design of
+          # the site is reachable at a URL.
+          keep=" index.html favicon.svg apple-touch-icon.png robots.txt sitemap.xml .nojekyll assets services case-studies .github "
+          for f in * .[!.]*; do
+            [ -e "$f" ] || continue
+            [ "$f" = ".git" ] && continue
+            case "$keep" in *" $f "*) ;; *) git rm -r -q --cached -- "$f" ;; esac
+          done
+          git commit -q -m "Publish the site only" || true
           git push -f origin gh-pages

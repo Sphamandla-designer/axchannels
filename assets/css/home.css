@@ -3223,3 +3223,76 @@ html:not(.js-motion) .belt__pause { display: none; }
   .js-motion .why-card:hover::after,
   .js-motion .why-card:focus-within::after  { opacity: 1; }
 }
+
+/* --------------------------------------------------------------------------
+   22. WhatsApp — a floating chat button, bottom right on every page.
+   WhatsApp's own green so it reads as WhatsApp at a glance; the glow is a
+   soft ring that breathes outward, and it stops under reduced motion,
+   leaving a static halo. Kept clear of the page edge by the shell inset and
+   of the iOS home indicator by the safe-area inset.
+   -------------------------------------------------------------------------- */
+.wa-float {
+  position: fixed;
+  right: max(var(--shell), env(safe-area-inset-right));
+  bottom: max(calc(var(--shell) + 4px), env(safe-area-inset-bottom));
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  width: clamp(52px, 3.6vw, 62px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, .18) inset,
+    0 10px 28px -8px rgba(37, 211, 102, .75),
+    0 0 26px 2px rgba(37, 211, 102, .45);
+  transition: transform .25s var(--ease), box-shadow .3s var(--ease);
+}
+.wa-float svg { width: 54%; height: 54%; }
+.wa-float::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 rgba(37, 211, 102, .55);
+}
+.wa-float:hover,
+.wa-float:focus-visible {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, .24) inset,
+    0 14px 34px -8px rgba(37, 211, 102, .85),
+    0 0 36px 6px rgba(37, 211, 102, .55);
+}
+.wa-float:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.wa-float__label {
+  position: absolute;
+  right: calc(100% + 12px);
+  padding: .5em .9em;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-size: var(--fs-2xs);
+  font-family: var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(6px);
+  pointer-events: none;
+  transition: opacity .25s var(--ease), transform .25s var(--ease);
+}
+.wa-float:hover .wa-float__label,
+.wa-float:focus-visible .wa-float__label { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .wa-float::before { animation: wa-glow 2.6s var(--ease-out) infinite; }
+  @keyframes wa-glow {
+    0%   { box-shadow: 0 0 0 0    rgba(37, 211, 102, .55); }
+    70%  { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0    rgba(37, 211, 102, 0); }
+  }
+}
+@media (hover: none) { .wa-float__label { display: none; } }
+@media print { .wa-float { display: none; } }
