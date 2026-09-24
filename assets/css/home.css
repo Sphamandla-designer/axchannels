@@ -348,6 +348,21 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .brand b { font-weight: 700; }
 .brand span { color: rgba(255, 255, 255, .72); }
 
+/* The supplied logo artwork. Every lockup in the set is stacked, so the
+   masthead carries the mark alone (the wordmark would set at ~9px there)
+   and the footer, which has the room, carries mark and wordmark together.
+   Both are the reversed versions, for the dark hero and closing block. */
+.brand--logo { display: inline-flex; flex: none; }
+.brand--logo img { display: block; width: auto; height: auto; }
+.masthead .brand--logo img { height: clamp(24px, 1.9vw, 36px); }
+.footer .brand--logo img { height: clamp(64px, 5.2vw, 96px); }
+/* Below 1100px the pill nav leaves the row to become a panel, so nothing
+   pushed the controls right; the text wordmark was wide enough to hide it,
+   the compact mark is not. */
+@media (max-width: 1100px) {
+  .masthead .brand--logo { margin-right: auto; }
+}
+
 /* --------------------------------------------------------------------------
    7. Header / navigation (inside the hero block)
    -------------------------------------------------------------------------- */

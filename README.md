@@ -81,6 +81,29 @@ drawer opens with *Brand Identity System* preselected. No price is shown or
 marked up as an Offer; scope, feedback rounds and timeline are set per
 proposal.
 
+**Logo.** The supplied logo files (the `AX-Channels logo [Vectorized]*.png`
+and `Group 9*.png` uploads at the root) are published, trimmed of their
+transparent margins, in `assets/img/logo/`:
+
+| File | Version |
+|---|---|
+| `ax-mark.png` · `-reversed` · `-white` | Mark only |
+| `ax-logo.png` · `-reversed` · `-white` | Mark + wordmark |
+| `ax-mark-tagline.png` · `-reversed` · `-white` | Mark + tagline |
+| `ax-logo-tagline.png` · `-reversed` · `-white` · `-black` | Mark + wordmark + tagline |
+
+*Reversed* is white with the magenta stroke, for dark grounds. The upload had
+no reversed version without the tagline, so `ax-mark-reversed` and
+`ax-logo-reversed` are `Group 925` / `Group 926` cropped above the tagline —
+cropped only, never recoloured; they come out at exactly the dimensions of
+their colour counterparts.
+
+Every lockup is stacked, so the masthead carries the mark alone (the
+wordmark would set at ~9px there) and the footer carries mark + wordmark.
+The favicon and the 180px `apple-touch-icon.png` are the reversed mark on
+the site's ink. The Brand Identity page shows the whole family in its
+*One Logo, Built As A Family* section.
+
 **Hero imagery.** The service hero photograph is atmosphere rather than a
 framed picture beside the copy: it fills the right of the block, sits under
 the text at low opacity, and is masked back with a single radial gradient so

@@ -18,12 +18,14 @@
    work M · [start] · faq. */
 .br-define,
 .br-system,
+.br-family,
 .br-touch,
 .br-who,
 .br-work { padding-top: var(--sec-gap); }
 
 .br-define { background: radial-gradient(40% 56% at 0% 50%,  rgba(var(--glow-mag),  .18), transparent 72%); }
 .br-system { background: radial-gradient(46% 62% at 98% 8%,  rgba(var(--glow-teal), .20), transparent 72%); }
+.br-family { background: radial-gradient(40% 56% at 0% 50%,  rgba(var(--glow-mag),  .18), transparent 72%); }
 .br-touch  { background: radial-gradient(46% 60% at 100% 6%, rgba(var(--glow-teal), .20), transparent 72%); }
 .br-who    { background: radial-gradient(40% 56% at 0% 56%,  rgba(var(--glow-mag),  .18), transparent 72%); }
 .br-work   { background: radial-gradient(40% 56% at 0% 52%,  rgba(var(--glow-mag),  .18), transparent 72%); }
@@ -91,19 +93,11 @@
 .br-lockup {
   position: relative;
   display: inline-flex;
-  align-items: baseline;
-  padding: clamp(8px, 2.6cqi, 16px) clamp(10px, 3.2cqi, 20px);
+  padding: clamp(6px, 2.2cqi, 14px) clamp(10px, 3.2cqi, 20px);
   outline: 1px dashed rgba(224, 23, 107, .55);
-  outline-offset: 0;
-  margin-bottom: clamp(10px, 3cqi, 18px);
-  font-size: clamp(15px, 5.4cqi, 30px);
-  line-height: 1;
-  letter-spacing: -.01em;
-  color: var(--ink);
-  white-space: nowrap;
+  margin-bottom: clamp(12px, 3.4cqi, 20px);
 }
-.br-lockup b { font-weight: 700; }
-.br-lockup span { font-weight: 400; color: #3b3d44; }
+.br-lockup img { display: block; width: auto; height: clamp(30px, 12cqi, 80px); }
 /* clear-space ticks at the corners */
 .br-lockup::before,
 .br-lockup::after {
@@ -365,6 +359,65 @@
 }
 
 /* --------------------------------------------------------------------------
+   Logo family — the supplied versions, each on the ground it was drawn for.
+   The two full lockups lead at double width; the rest pair up colour and
+   reversed so the difference reads across each row.
+   -------------------------------------------------------------------------- */
+.br-family__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(10px, 1.1vw, 20px);
+  margin-top: clamp(30px, 3.4vw, 64px);
+}
+.br-var {
+  position: relative;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  min-height: clamp(190px, 16vw, 290px);
+  padding: clamp(24px, 2.4vw, 44px) clamp(18px, 2vw, 36px) clamp(46px, 3.8vw, 64px);
+  border-radius: var(--r-soft);
+  border: 1px solid var(--svc-rule);
+}
+.br-var--wide { grid-column: span 2; min-height: clamp(240px, 22vw, 400px); }
+/* sized by what the version contains, so the family reads at one scale:
+   lockups by height, the wider mark-only and mark-and-tagline versions
+   a little shorter */
+.br-var img { display: block; max-width: 100%; width: auto; height: clamp(64px, 6.6vw, 124px); }
+.br-var--wide img { height: clamp(96px, 10vw, 184px); }
+.br-var--m img  { height: clamp(40px, 4vw, 74px); }
+.br-var--mt img { height: clamp(52px, 5.2vw, 96px); }
+.br-var--light { background: #fff; }
+.br-var--dark  { background: var(--hero-ink); border-color: transparent; }
+.br-var--teal  { background: #006275; border-color: transparent; }
+.br-var--stone { background: #e6e3dc; border-color: transparent; }
+.br-var__k {
+  position: absolute;
+  left: clamp(12px, 1.2vw, 20px);
+  bottom: clamp(12px, 1.1vw, 18px);
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+.br-var__k i { font-style: normal; color: var(--accent-ink); }
+.br-var--dark .br-var__k,
+.br-var--teal .br-var__k { color: rgba(255, 255, 255, .78); }
+.br-var--dark .br-var__k i,
+.br-var--teal .br-var__k i { color: var(--accent); }
+.br-var--stone .br-var__k { color: #5d5f64; }
+.br-family__fine {
+  margin: clamp(22px, 2.2vw, 40px) 0 0;
+  padding-top: clamp(14px, 1.4vw, 24px);
+  border-top: 1px solid var(--svc-rule);
+  max-width: 88ch;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* --------------------------------------------------------------------------
    Touchpoints — one identity across screen, print and product. Each row
    holds a fixed ratio so the tiles in it share a height whatever their
    source ratio; images are cropped to it with object-fit.
@@ -418,8 +471,7 @@
     var(--hero-ink);
 }
 .br-post--light { color: var(--ink); background: #fff; border: 1px solid var(--svc-rule); }
-.br-post__brand { font-size: clamp(11px, 6.5cqi, 18px); line-height: 1; }
-.br-post__brand b { font-weight: 700; }
+.br-post__brand { display: block; width: auto; height: clamp(16px, 9cqi, 30px); }
 .br-post__h {
   margin: 0;
   font-size: clamp(17px, 12cqi, 40px);
@@ -660,6 +712,7 @@
   .br-mosaic__row--b > .br-tp--tote  { aspect-ratio: 4 / 3; }
 }
 @media (max-width: 900px) {
+  .br-family__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .br-system__panel { grid-template-columns: minmax(0, 1fr); }
   .br-part:nth-child(odd) { border-right: 0; }
   .br-part:nth-child(-n+3) { border-bottom: 1px solid var(--svc-rule); }
@@ -682,6 +735,8 @@
   .br-hero .masthead__cta { display: none; }
 }
 @media (max-width: 420px) {
+  .br-var { min-height: 160px; padding-bottom: 60px; }
+  .br-var--wide { min-height: 200px; }
   .br-mosaic__row--b { grid-template-columns: minmax(0, 1fr); }
   .br-points { grid-template-columns: minmax(0, 1fr); }
 }
