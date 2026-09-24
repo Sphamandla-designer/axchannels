@@ -122,6 +122,29 @@ On the legacy pages every section pads both edges, so a section that follows
 one on the same ground drops its top. The project belt, the ticker's lower
 edge, the masthead and the footer are exempt.
 
+**Services overview and case studies.** `services/` is the services overview
+in the current design (it replaced the older template the service pages'
+"Services" link used to reach), and `case-studies/` is the full project page
+that the home page's "See All Projects" and every "Case Studies" link now
+open. Both are generated from the shared service-page shell and add only
+`assets/css/pages.css`. The seven projects carry the site's existing copy;
+each is labelled *Client Project* (a client whose feedback is published
+here), *Concept* or *Exploration*, and a small inline script filters them by
+discipline (without JS every project shows). Detailed write-ups still open
+on the portfolio where they were first published.
+
+**Older designs.** `services/web-design/` now forwards to Website Design &
+Development, and the old `site.css` / `site.js` / `ax2.*` are gone. The
+deploy workflow publishes an allowlist (`index.html`, the favicons,
+`robots.txt`, `sitemap.xml`, `assets/`, `services/`, `case-studies/`), so the
+design sources kept at the repo root — the v3 preview, screenshots, PDFs and
+logo uploads — stay in the repo but are no longer served.
+
+**WhatsApp and socials.** Every page carries a floating WhatsApp button
+(`home.css` §22) to 060 102 0774, bottom right, with a breathing glow that
+stops under reduced motion. The footer links the AX-Channels LinkedIn
+company page; Instagram is removed.
+
 **Hero imagery.** The service hero photograph is atmosphere rather than a
 framed picture beside the copy: it fills the right of the block, sits under
 the text at low opacity, and is masked back with a single radial gradient so
