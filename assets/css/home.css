@@ -460,7 +460,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   position: relative;
   margin: var(--shell) var(--shell) 0;
   border-radius: var(--r-block);
-  background: var(--hero-ink) url("../img/home/ax-background.png") center / cover no-repeat;
+  background: var(--hero-ink) url("../img/home/ax-background.webp") center / cover no-repeat;
   color: #fff;
   overflow: hidden;
   isolation: isolate;
@@ -1223,7 +1223,11 @@ a.project__media:hover img { transform: scale(1.03); }
   gap: clamp(12px, 1.25vw, 24px);
   font-size: var(--fs-lg);
 }
-.legal__links { display: flex; gap: clamp(18px, 2.71vw, 52px); }
+.legal__links { display: flex; align-items: center; gap: clamp(18px, 2.71vw, 52px); }
+/* These are the only standalone controls in the footer, and at the body size
+   they sat 19px tall. The padding brings the target to the 24px minimum
+   without moving the text. */
+.legal__links a { display: inline-block; padding: 3px 0; }
 .legal a { transition: opacity .25s var(--ease); }
 .legal a:hover { opacity: .7; }
 
