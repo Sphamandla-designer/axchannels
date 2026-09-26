@@ -141,3 +141,108 @@
    On the service pages a light FAQ sits between them; here the band holds
    the closing block off by the section gap itself, so the two never touch. */
 .page-end { margin-bottom: var(--sec-gap); }
+
+/* --------------------------------------------------------------------------
+   Legal documents (Privacy Policy, Terms Of Use)
+   A reading column rather than a landing page: one measure, a sticky contents
+   list beside it on wide screens, and the site's own type scale throughout.
+   -------------------------------------------------------------------------- */
+.svc-hero__in--solo { grid-template-columns: 1fr; }
+.svc-hero__in--solo .svc-hero__copy { max-width: 62ch; }
+
+/* a document, not a landing section: less air above the text */
+.legal-doc { padding: clamp(54px, 5vw, 96px) 0 var(--sec-gap); }
+
+/* Items only AX-Channels can confirm. Deliberately loud: this page must not
+   reach the public with a placeholder still in it. */
+.legal-doc__note {
+  max-width: 1080px;
+  margin: 0 0 clamp(36px, 3.4vw, 64px);
+  padding: clamp(18px, 1.6vw, 26px) clamp(20px, 1.8vw, 30px);
+  border: 1px solid var(--accent-ink);
+  border-radius: var(--r-card);
+  background: rgba(224, 23, 107, .045);
+}
+.legal-doc__note p { margin: 0; font-size: var(--fs-sm); line-height: 1.7; color: var(--ink); }
+.legal-doc__note b { font-weight: 600; }
+.todo {
+  padding: .12em .45em;
+  border-radius: 4px;
+  background: rgba(224, 23, 107, .12);
+  box-shadow: inset 0 0 0 1px rgba(224, 23, 107, .45);
+  font-family: var(--mono);
+  font-size: .9em;
+  font-weight: 400;
+  color: var(--accent-ink);
+}
+
+.legal-doc__grid {
+  display: grid;
+  gap: clamp(32px, 3vw, 64px);
+  max-width: 1080px;   /* a document does not use the full 1812px shell */
+}
+
+.legal-toc { font-size: var(--fs-sm); }
+.legal-toc__t {
+  margin: 0 0 14px;
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+.legal-toc ol { margin: 0; padding: 0 0 0 1.5em; list-style: decimal; }
+.legal-toc li { margin-bottom: 9px; }
+.legal-toc li::marker { color: var(--muted-2); font-family: var(--mono); font-size: .85em; }
+.legal-toc a { color: var(--muted); text-decoration: none; line-height: 1.5; }
+.legal-toc a:hover,
+.legal-toc a:focus-visible { color: var(--accent-ink); text-decoration: underline; }
+
+.legal-body { max-width: 72ch; color: var(--ink); }
+.legal-h2 { margin: 0; font-size: var(--fs-h4); line-height: 1.15; letter-spacing: -.02em; }
+.legal-meta {
+  margin: 10px 0 clamp(26px, 2.4vw, 40px);
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+.legal-lead { font-size: var(--fs-lg); line-height: 1.6; color: var(--ink); }
+.legal-h3 {
+  margin: clamp(38px, 3.4vw, 60px) 0 clamp(12px, 1.1vw, 18px);
+  font-size: var(--fs-h5);
+  line-height: 1.25;
+  letter-spacing: -.01em;
+  scroll-margin-top: 90px;
+}
+.legal-h4 {
+  margin: clamp(22px, 2vw, 32px) 0 10px;
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+.legal-body p { margin: 0 0 1em; font-size: var(--fs-md); line-height: 1.75; color: var(--muted); }
+.legal-body .legal-lead { color: var(--ink); }
+.legal-body b { font-weight: 600; color: var(--ink); }
+.legal-body a { color: var(--accent-ink); text-underline-offset: 3px; }
+.legal-list { margin: 0 0 1.2em; padding: 0 0 0 1.35em; list-style: disc; }
+.legal-list li { margin-bottom: 9px; font-size: var(--fs-md); line-height: 1.7; color: var(--muted); }
+.legal-list li::marker { color: var(--accent-ink); }
+.legal-fine {
+  margin: 0 0 1em;
+  padding-left: clamp(14px, 1.2vw, 20px);
+  border-left: 2px solid var(--svc-rule);
+  font-size: var(--fs-sm) !important;
+  line-height: 1.7;
+}
+.legal-back { margin-top: clamp(40px, 3.6vw, 68px); }
+
+@media (min-width: 1024px) {
+  .legal-doc__grid { grid-template-columns: minmax(200px, 250px) minmax(0, 1fr); }
+  .legal-toc { position: sticky; top: 32px; align-self: start; }
+}

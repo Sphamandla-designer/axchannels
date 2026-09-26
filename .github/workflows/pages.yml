@@ -30,7 +30,10 @@ jobs:
           # design previews, screenshots, PDFs and logo uploads at the root)
           # are dropped from the published branch, so no older design of
           # the site is reachable at a URL.
-          keep=" index.html favicon.svg apple-touch-icon.png robots.txt sitemap.xml .nojekyll assets services case-studies .github "
+          # CNAME is not a page, but it must survive: GitHub Pages reads it
+          # from the published branch to serve the custom domain, and a
+          # deploy that dropped it would silently unset the domain.
+          keep=" index.html favicon.svg apple-touch-icon.png robots.txt sitemap.xml CNAME .nojekyll assets services case-studies privacy terms .github "
           for f in * .[!.]*; do
             [ -e "$f" ] || continue
             [ "$f" = ".git" ] && continue
