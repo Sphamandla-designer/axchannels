@@ -693,8 +693,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   margin-top: var(--sp-28);
 }
 .faces { display: flex; align-items: center; }
-.faces img,
-.faces .faces__more {
+.faces img {
   width:  clamp(34px, 2.396vw, 46px);
   height: clamp(34px, 2.396vw, 46px);
   border-radius: 50%;
@@ -702,15 +701,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   border: 2px solid var(--page);
 }
 .faces > * + * { margin-left: clamp(-14px, -.63vw, -8px); }
-.faces .faces__more {
-  display: grid;
-  place-items: center;
-  background: #0a0a0a;
-  color: #fff;
-  font-size: var(--fs-2xs);
-  font-weight: 500;
-}
-
 
 .stat-card {
   position: relative;
@@ -909,14 +899,43 @@ a.project__media:hover img { transform: scale(1.03); }
 
 .tlink--soon { opacity: .6; text-decoration-style: dashed; cursor: default; }
 
+.project__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-top: var(--sp-35);
+}
 .project__cat {
   display: block;
-  margin-top: var(--sp-35);
   font-size: var(--fs-md);
   letter-spacing: .02em;
   text-transform: uppercase;
   color: var(--on-dark-dim);
 }
+/* The same labels the case studies page carries, in its dark-ground colours.
+   They say what a project is, so concept work is never read as a commission. */
+.project__tag {
+  flex: none;
+  padding: .35em .75em;
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--on-dark-dim);
+}
+.project__tag--client { border-color: var(--accent); color: var(--accent); }
+
+.work__note {
+  max-width: 78ch;
+  margin: clamp(26px, 2.4vw, 44px) 0 0;
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+  color: var(--on-dark-dim);
+}
+.work__note b { font-weight: 500; color: #fff; }
 .project__title {
   margin-top: var(--sp-18);
   font-size: var(--fs-h5);
@@ -1083,18 +1102,6 @@ a.project__media:hover img { transform: scale(1.03); }
   text-transform: uppercase;
   color: var(--muted-3);
 }
-/* replaces the blue tick — same claim, in the page's own micro-label voice */
-.voice__verified {
-  margin-left: auto;
-  align-self: flex-start;
-  flex: none;
-  font-family: var(--mono);
-  font-size: var(--fs-2xs);
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--muted-3);
-}
-
 /* --------------------------------------------------------------------------
    13. The work in numbers
    -------------------------------------------------------------------------- */
@@ -1353,16 +1360,6 @@ a.project__media:hover img { transform: scale(1.03); }
   .studio__figure { grid-column: auto; }
 
   .voices__track { grid-auto-columns: 84%; }
-
-  /* On a narrow card the VERIFIED label steals enough of the row to wrap
-     both the name and the role. It moves up onto the rating line instead,
-     which leaves the attribution the full width. */
-  .voice__verified {
-    position: absolute;
-    top: clamp(24px, 2.2vw, 42px);
-    right: clamp(24px, 2.2vw, 42px);
-    margin-left: 0;
-  }
   .voice__by { gap: clamp(12px, 3vw, 18px); }
   .stat-card__wm { top: 14%; }
 
@@ -1557,7 +1554,6 @@ a.project__media:hover img { transform: scale(1.03); }
     .voice::before { transition: background-size .55s var(--ease-out); }
     .voice .star { transition: color .4s var(--ease-out), transform .45s var(--ease-out); }
     .voice__avatar { transition: transform .5s var(--ease-out), filter .5s var(--ease-out); }
-    .voice__verified { transition: color .4s var(--ease-out); }
     .voice__avatar:not(.voice__avatar--initials) { filter: grayscale(1) contrast(1.02); }
 
     /* Scoped through .js-motion so this out-weighs the reveal system's
@@ -1582,9 +1578,6 @@ a.project__media:hover img { transform: scale(1.03); }
     .voice:hover .star:nth-child(5) { transition-delay: .18s;  }
     .voice:hover .voice__avatar,
     .voice:focus-within .voice__avatar { transform: scale(1.06); filter: grayscale(0) contrast(1); }
-    .voice:hover .voice__verified,
-    .voice:focus-within .voice__verified { color: var(--accent-ink); }
-
     .stat-card { transition: transform .35s var(--ease-out); }
     .stat-card:hover { transform: translateY(-3px); }
   }
