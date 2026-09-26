@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/css/home.css?v=46">
+<link rel="stylesheet" href="../../assets/css/home.css?v=47">
 <link rel="stylesheet" href="../../assets/css/service.css?v=3">
 <link rel="stylesheet" href="../../assets/css/product.css?v=4">
 
@@ -839,25 +839,26 @@
               <select class="ff__control" id="p-budget" name="Budget Range">
                 <option value="" disabled selected></option>
                 <option value="Under R3,000">Under R3,000</option>
-                <option value="R3,000 – R6,000">R3,000 – R6,000</option>
-                <option value="R6,000 – R9,000">R6,000 – R9,000</option>
-                <option value="R9,000+">R9,000+</option>
-                <option value="Still Deciding">Still Deciding</option>
+                <option value="R3,000 – R9,000">R3,000 – R9,000</option>
+                <option value="R9,000 – R15,000">R9,000 – R15,000</option>
+                <option value="R15,000 – R30,000">R15,000 – R30,000</option>
+                <option value="R30,000+">R30,000+</option>
+                <option value="Not sure yet">Not sure yet</option>
               </select>
             </p>
-          <p class="ff-check">
-            <input class="ff-check__box" id="p-news" name="Sign up for news and updates" type="checkbox" value="Yes">
-            <label class="ff-check__label" for="p-news">Sign me up for occasional notes on new work</label>
-          </p>
           <p class="ff">
               <label class="ff__label" for="p-brief">Project description</label>
               <textarea class="ff__control" id="p-brief" name="Project description" rows="2" placeholder="What it is for, who it is for, and what success looks like." required></textarea>
             </p>
+        <p class="ff-hp" aria-hidden="true">
+          <label for="hp-services-digital-product-design-1">Leave this field empty</label>
+          <input id="hp-services-digital-product-design-1" name="_gotcha" type="text" tabindex="-1" autocomplete="off" data-honeypot>
+        </p>
         <p class="drawer__actions">
           <button class="ff-submit" type="submit">Submit</button>
           <span class="drawer__note" data-drawer-note role="status"></span>
         </p>
-        <p class="drawer__fine">Opens in your email app, addressed to info@axchannels.co.za, with everything above filled in. Nothing is sent until you press send there.</p>
+        <p class="drawer__fine" data-fine-live="Sent straight to the AX-Channels inbox, and we reply within one working day.">Opens in your email app, addressed to info@axchannels.co.za, with everything above filled in. Nothing is sent until you press send there.</p>
       </form>
     </div>
   </div>
@@ -907,19 +908,19 @@
               <label class="ff__label" for="pa-email">Email <span class="ff__req">(required)</span></label>
               <input class="ff__control" id="pa-email" name="Email" type="email" placeholder="you@company.co.za" required>
             </p>
-          <p class="ff-check">
-            <input class="ff-check__box" id="pa-news" name="Sign up for news and updates" type="checkbox" value="Yes">
-            <label class="ff-check__label" for="pa-news">Sign me up for occasional notes on new work</label>
-          </p>
           <p class="ff">
               <label class="ff__label" for="pa-note">How you see us working together</label>
               <textarea class="ff__control" id="pa-note" name="How you see us working together" rows="2" placeholder="What you bring, and what you are looking for." required></textarea>
             </p>
+        <p class="ff-hp" aria-hidden="true">
+          <label for="hp-services-digital-product-design-2">Leave this field empty</label>
+          <input id="hp-services-digital-product-design-2" name="_gotcha" type="text" tabindex="-1" autocomplete="off" data-honeypot>
+        </p>
         <p class="drawer__actions">
           <button class="ff-submit" type="submit">Submit</button>
           <span class="drawer__note" data-drawer-note role="status"></span>
         </p>
-        <p class="drawer__fine">Opens in your email app, addressed to info@axchannels.co.za, with everything above filled in. Nothing is sent until you press send there.</p>
+        <p class="drawer__fine" data-fine-live="Sent straight to the AX-Channels inbox, and we reply within one working day.">Opens in your email app, addressed to info@axchannels.co.za, with everything above filled in. Nothing is sent until you press send there.</p>
       </form>
     </div>
   </div>
@@ -954,24 +955,24 @@
               <label class="ff__label" for="h-email">Email <span class="ff__req">(required)</span></label>
               <input class="ff__control" id="h-email" name="Email" type="email" placeholder="you@company.co.za" required>
             </p>
-          <p class="ff-check">
-            <input class="ff-check__box" id="h-news" name="Sign up for news and updates" type="checkbox" value="Yes">
-            <label class="ff-check__label" for="h-news">Sign me up for occasional notes on new work</label>
-          </p>
           <p class="ff">
               <label class="ff__label" for="h-note">Your message</label>
               <textarea class="ff__control" id="h-note" name="Your message" rows="2" placeholder="Anything at all." required></textarea>
             </p>
+        <p class="ff-hp" aria-hidden="true">
+          <label for="hp-services-digital-product-design-3">Leave this field empty</label>
+          <input id="hp-services-digital-product-design-3" name="_gotcha" type="text" tabindex="-1" autocomplete="off" data-honeypot>
+        </p>
         <p class="drawer__actions">
           <button class="ff-submit" type="submit">Submit</button>
           <span class="drawer__note" data-drawer-note role="status"></span>
         </p>
-        <p class="drawer__fine">Opens in your email app, addressed to info@axchannels.co.za, with everything above filled in. Nothing is sent until you press send there.</p>
+        <p class="drawer__fine" data-fine-live="Sent straight to the AX-Channels inbox, and we reply within one working day.">Opens in your email app, addressed to info@axchannels.co.za, with everything above filled in. Nothing is sent until you press send there.</p>
       </form>
     </div>
   </div>
 </dialog>
 
-<script src="../../assets/js/home.js?v=43" defer></script>
+<script src="../../assets/js/home.js?v=44" defer></script>
 </body>
 </html>

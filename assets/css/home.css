@@ -2701,6 +2701,21 @@ select.ff__control { padding-right: 24px; cursor: pointer; }
 }
 .ff-submit:hover { background: var(--accent-ink); }
 .ff-submit:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
+.ff-submit[disabled] { opacity: .55; cursor: progress; transform: none; }
+
+/* Spam trap. It stays in the layout tree for the bots that read the DOM and
+   ignore stylesheets, and is pushed out of sight and out of the tab order
+   for everyone else. `display: none` would hide it from those bots too. */
+.ff-hp {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px 0 0;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
 
 .drawer__actions {
   display: flex;
@@ -2717,6 +2732,7 @@ select.ff__control { padding-right: 24px; cursor: pointer; }
   color: var(--muted-3);
 }
 .drawer__note[data-state="sent"] { color: var(--accent-ink); }
+.drawer__note[data-state="error"] { color: var(--accent-ink); text-transform: none; letter-spacing: .02em; }
 .drawer__fine {
   margin: clamp(12px, 1.1vw, 18px) 0 0;
   max-width: 50ch;

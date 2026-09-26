@@ -169,9 +169,10 @@
   /* ------------------------------------------------- contact drawers -- */
   /* The three closing links stay real mailto: anchors, so without JS they
      still open a composer. With JS the click is intercepted and the matching
-     drawer opens instead; on submit the same address is used, with the
-     answers written into the body. To post to a form service later, replace
-     the body of `send` — the markup and validation do not change. */
+     drawer opens instead. Submission then goes to the form provider named in
+     FORM_ENDPOINT below; while that is empty it falls back to the same
+     mailto: hand-off, which is what the fine print under each form
+     describes. */
   var drawerLinks = document.querySelectorAll("[data-form]");
 
   if (drawerLinks.length && typeof HTMLDialogElement === "function" &&
@@ -209,38 +210,155 @@
       dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
     });
 
+    /* ---------------------------------------------- lead capture: submit --
+       FORM_ENDPOINT is the one line to change to take the forms live. Paste
+       the submit URL your form provider gives you:
+
+         Formspree   https://formspree.io/f/YOUR_FORM_ID
+         Web3Forms   https://api.web3forms.com/submit
+                     (Web3Forms also needs FORM_ACCESS_KEY below)
+
+       Both accept a JSON POST from the browser and answer with JSON, and
+       both keys are public submit keys rather than secrets, so nothing
+       private is exposed here. Full steps: docs/FORMS.md
+
+       While FORM_ENDPOINT is empty the forms keep the current behaviour and
+       open the visitor's email app, and the fine print under each form says
+       exactly that. A form never reports a send that did not happen. */
+    var FORM_ENDPOINT = "";
+    var FORM_ACCESS_KEY = "";   /* Web3Forms only; leave empty for Formspree */
+
+    var formsAreLive = FORM_ENDPOINT !== "";
+
+    /* With a provider configured, the fine print no longer describes the
+       email-app hand-off, so each form carries its live wording in markup
+       and it is swapped in here. */
+    if (formsAreLive) {
+      document.querySelectorAll("[data-fine-live]").forEach(function (p) {
+        p.textContent = p.getAttribute("data-fine-live");
+      });
+    }
+
+    var setNote = function (note, text, state) {
+      if (!note) return;
+      note.textContent = text;
+      if (state) note.setAttribute("data-state", state);
+      else note.removeAttribute("data-state");
+    };
+
+    /* Field values, in markup order. Names beginning with an underscore are
+       provider plumbing (the honeypot) and are not part of the message. */
+    var readFields = function (form) {
+      var out = [];
+      Array.prototype.forEach.call(form.elements, function (el) {
+        if (!el.name || el.name.charAt(0) === "_") return;
+        /* an unchecked box still reports a value, so it is tested first */
+        if (el.type === "checkbox") {
+          if (el.checked) out.push([el.name, "Yes"]);
+          return;
+        }
+        if (!el.value) return;
+        out.push([el.name, el.value]);
+      });
+      return out;
+    };
+
+    var mailtoSend = function (form, fields, subject, note) {
+      var lines = fields.map(function (f) { return f[0] + ":\n" + f[1]; });
+      var href = "mailto:" + MAIL +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(lines.join("\n\n") + "\n\n—\nSent from axchannels.co.za");
+      setNote(note, "Opening your email app…", "sent");
+      window.location.href = href;
+    };
+
+    /* Resolves only when the provider confirms the submission. Formspree
+       answers 200 with no `success` key; Web3Forms answers with
+       `success: true`. Anything else, including a non-2xx status or an
+       `errors` array, is treated as a failure. */
+    var providerSend = function (fields, subject, honeypot) {
+      var payload = { subject: subject, _source: "axchannels.co.za" };
+      fields.forEach(function (f) { payload[f[0]] = f[1]; });
+      if (FORM_ACCESS_KEY) payload.access_key = FORM_ACCESS_KEY;
+      /* both providers reject bots server-side from their own trap field:
+         Formspree reads `_gotcha`, Web3Forms reads `botcheck`. Whichever one
+         is configured gets the value under the name it looks for. */
+      payload._gotcha = honeypot;
+      payload.botcheck = honeypot;
+
+      return fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(payload)
+      }).then(function (res) {
+        return res.json().then(function (d) { return d; }, function () { return {}; })
+          .then(function (data) {
+            if (!res.ok || data.success === false || data.errors) {
+              throw new Error("provider rejected the submission");
+            }
+            return data;
+          });
+      });
+    };
+
     document.querySelectorAll("[data-drawer-form]").forEach(function (form) {
       var note = form.querySelector("[data-drawer-note]");
+      var button = form.querySelector(".ff-submit");
+      var buttonLabel = button ? button.textContent : "";
+      var busy = false;
+
+      /* the outline clears as soon as a flagged field is corrected */
+      Array.prototype.forEach.call(form.elements, function (el) {
+        if (!el.name) return;
+        el.addEventListener("input", function () {
+          if (el.checkValidity()) el.removeAttribute("aria-invalid");
+        });
+      });
 
       form.addEventListener("submit", function (e) {
         e.preventDefault();
+        if (busy) return;
+
         form.classList.add("is-checked");
+        Array.prototype.forEach.call(form.elements, function (el) {
+          if (!el.name) return;
+          if (el.checkValidity()) el.removeAttribute("aria-invalid");
+          else el.setAttribute("aria-invalid", "true");
+        });
+
         if (!form.checkValidity()) {
-          var bad = form.querySelector(":invalid");
+          /* a <fieldset> wrapping an invalid control matches :invalid too, and
+             cannot take focus, so only the controls themselves are considered */
+          var bad = form.querySelector(".ff__control:invalid");
           if (bad) bad.focus();
-          if (note) { note.textContent = "Check the highlighted fields"; note.removeAttribute("data-state"); }
+          setNote(note, "Check the highlighted fields");
           return;
         }
 
-        var lines = [];
-        Array.prototype.forEach.call(form.elements, function (el) {
-          if (!el.name) return;
-          /* an unchecked box still reports a value, so it is tested first */
-          if (el.type === "checkbox") {
-            if (el.checked) lines.push(el.name + ":\nYes");
-            return;
-          }
-          if (!el.value) return;
-          lines.push(el.name + ":\n" + el.value);
-        });
-
+        var fields = readFields(form);
         var subject = form.getAttribute("data-subject") || "Enquiry";
-        var href = "mailto:" + MAIL +
-          "?subject=" + encodeURIComponent(subject) +
-          "&body=" + encodeURIComponent(lines.join("\n\n") + "\n\n\u2014\nSent from axchannels.co.za");
 
-        if (note) { note.textContent = "Opening your email app\u2026"; note.setAttribute("data-state", "sent"); }
-        window.location.href = href;
+        if (!formsAreLive) { mailtoSend(form, fields, subject, note); return; }
+
+        var hp = form.querySelector("[data-honeypot]");
+        busy = true;
+        form.setAttribute("aria-busy", "true");
+        if (button) { button.disabled = true; button.textContent = "Sending…"; }
+        setNote(note, "Sending…");
+
+        providerSend(fields, subject, hp ? hp.value : "").then(function () {
+          form.reset();
+          form.classList.remove("is-checked");
+          form.removeAttribute("aria-busy");
+          if (button) { button.disabled = false; button.textContent = buttonLabel; }
+          busy = false;
+          setNote(note, "Thank you — your message is with us. We reply within one working day.", "sent");
+        }, function () {
+          form.removeAttribute("aria-busy");
+          if (button) { button.disabled = false; button.textContent = buttonLabel; }
+          busy = false;
+          setNote(note, "That did not send. Please try again, or email " + MAIL + ".", "error");
+        });
       });
     });
   }
