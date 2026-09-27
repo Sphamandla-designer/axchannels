@@ -460,7 +460,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   position: relative;
   margin: var(--shell) var(--shell) 0;
   border-radius: var(--r-block);
-  background: var(--hero-ink) url("../img/home/ax-background.png") center / cover no-repeat;
+  background: var(--hero-ink) url("../img/home/ax-background.webp") center / cover no-repeat;
   color: #fff;
   overflow: hidden;
   isolation: isolate;
@@ -1880,7 +1880,7 @@ a.project__media:hover img { transform: scale(1.03); }
 .voices__pause:focus-visible { border-color: var(--accent-ink); color: var(--accent-ink); }
 
 /* Hero — rotating glow ring, aligned to the ring in the provided
-   AX Background.png (ax-background.png): centre 47.5% / 52%, a tall ellipse
+   AX Background.png (served as ax-background.webp): centre 47.5% / 52%, a tall ellipse
    ~88% of the hero's height, teal-white peak at the top and a magenta peak
    at the bottom. At rest the overlay sits on the baked ring; as it spins,
    its highlights sweep around it. Decorative (aria-hidden); the
@@ -3296,3 +3296,43 @@ html:not(.js-motion) .belt__pause { display: none; }
 }
 @media (hover: none) { .wa-float__label { display: none; } }
 @media print { .wa-float { display: none; } }
+
+/* --------------------------------------------------------------------------
+   23. Touch targets — on touch screens, the smaller controls get an
+   invisible hit area of at least 44px (iOS / Android guidance) without
+   changing how anything looks. The footer's legal links were 19px tall,
+   under the 24px WCAG 2.2 minimum, on every page.
+   -------------------------------------------------------------------------- */
+.legal__links a { position: relative; }
+.legal__links a::after {
+  content: "";
+  position: absolute;
+  inset: 50% -8px auto;
+  height: 44px;
+  translate: 0 -50%;
+}
+@media (pointer: coarse) {
+  /* .carousel-btn is absolutely positioned already, which is enough */
+  .nav-toggle,
+  .belt__pause,
+  .marquee__pause { position: relative; }
+  .nav-toggle::after,
+  .carousel-btn::after,
+  .belt__pause::after,
+  .marquee__pause::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    translate: -50% -50%;
+  }
+}
+
+/* iOS Safari zooms the page into any field set under 16px when it is
+   tapped, and leaves it zoomed. The form fields are 15px on phones, so on
+   touch screens they take 16px — one pixel, and the zoom never happens. */
+@media (pointer: coarse) {
+  .ff__control { font-size: max(16px, var(--fs-md)); }
+}

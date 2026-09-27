@@ -145,6 +145,30 @@ logo uploads — stay in the repo but are no longer served.
 stops under reduced motion. The footer links the AX-Channels LinkedIn
 company page; Instagram is removed.
 
+**Pre-launch mobile QA (Sept 2026).** Every public route was loaded
+directly under the `/axchannels/` base path at 320, 360, 375, 390, 412, 430,
+768, 1024, 1440 and 1920px wide: no horizontal overflow, no broken images or
+failed requests, no script errors, one H1 per page. Fixes made:
+- the home hero background was an 816KB PNG preloaded ahead of first paint;
+  it is now `ax-background.webp` (26KB, visually equivalent), and the home
+  page shares a 1200x630 `og-home.jpg` (24KB) for link previews;
+- the studio slideshow no longer downloads its hidden slides on page load,
+  and the case studies' featured image is lazy-loaded;
+- form fields take 16px on touch screens, so iOS no longer zooms the page
+  when one is tapped;
+- the footer's legal links were 19px tall (under WCAG 2.2's 24px); they and
+  the menu toggle, carousel arrows, pause buttons and case filters get an
+  invisible 44px hit area on touch screens, with no visual change;
+- an invalid form submit now focuses the first invalid field (it used to hit
+  the fieldset, which cannot take focus) and marks fields `aria-invalid`.
+
+Known limits: the enquiry forms have no backend — they hand off to the
+visitor's email app (`mailto:`), which needs a mail app set up on the phone.
+Canonical and `og:image` URLs point at `www.axchannels.co.za`; link previews
+only show images if that domain serves this site. There is no `404.html`, so
+a mistyped URL shows GitHub's default 404. The footer's Privacy Policy and
+Terms links point at the contact section; there are no policy pages.
+
 **Hero imagery.** The service hero photograph is atmosphere rather than a
 framed picture beside the copy: it fills the right of the block, sits under
 the text at low opacity, and is masked back with a single radial gradient so

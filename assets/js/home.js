@@ -215,8 +215,16 @@
       form.addEventListener("submit", function (e) {
         e.preventDefault();
         form.classList.add("is-checked");
+        /* aria-invalid tells a screen reader which fields failed; the
+           underline colour alone does not */
+        Array.prototype.forEach.call(form.querySelectorAll("input, select, textarea"), function (el) {
+          el.setAttribute("aria-invalid", String(!el.checkValidity()));
+        });
         if (!form.checkValidity()) {
-          var bad = form.querySelector(":invalid");
+          /* the first invalid *control*: a bare ":invalid" matches the name
+             fieldset first, which cannot take focus, so the keyboard never
+             opened on the field that needed fixing */
+          var bad = form.querySelector("input:invalid, select:invalid, textarea:invalid");
           if (bad) bad.focus();
           if (note) { note.textContent = "Check the highlighted fields"; note.removeAttribute("data-state"); }
           return;
@@ -620,18 +628,21 @@
 
       var advance = function () { show((cur + 1) % slides.length); };
 
+      /* Fetch the slides after the first one the first time the frame comes
+         into view — not on page load, which cost every phone ~250KB for
+         a slideshow most visitors had not reached. The first slide's hold
+         leaves time for the next to arrive before its cross-fade. */
+      var primed = false;
       var start = function () {
+        if (!primed) {
+          slides.forEach(function (img, i) { if (i > 0) { img.loading = "eager"; } });
+          primed = true;
+        }
         if (timer === null) timer = setInterval(advance, HOLD);
       };
       var stop = function () {
         if (timer !== null) { clearInterval(timer); timer = null; }
       };
-
-      /* Decode the slide after the current one ahead of its turn, so the
-         first pass through the set cross-fades as smoothly as later ones. */
-      slides.forEach(function (img, i) {
-        if (i > 0) { img.loading = "eager"; }
-      });
 
       /* Only run while the frame is on screen, and never in a hidden tab. */
       var vio = new IntersectionObserver(function (entries) {

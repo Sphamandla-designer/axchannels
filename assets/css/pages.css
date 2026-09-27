@@ -141,3 +141,10 @@
    On the service pages a light FAQ sits between them; here the band holds
    the closing block off by the section gap itself, so the two never touch. */
 .page-end { margin-bottom: var(--sec-gap); }
+
+/* touch screens: the filter pills keep their size, but the tappable area
+   grows to 44px tall */
+@media (pointer: coarse) {
+  .cs-filter button { position: relative; }
+  .cs-filter button::after { content: ""; position: absolute; inset: -5px -1px; }
+}
