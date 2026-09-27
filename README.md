@@ -133,6 +133,15 @@ here), *Concept* or *Exploration*, and a small inline script filters them by
 discipline (without JS every project shows). Detailed write-ups still open
 on the portfolio where they were first published.
 
+**About page.** `about/` is built from the same shell as the services
+overview and case studies (no new CSS or JS). Every statement on it is
+already published elsewhere on the site: the studio statement, founding
+(Johannesburg, 2023), the four studio figures, the four written commitments,
+the five-stage process, the four services and three verified testimonials.
+There is deliberately no team or founder section — no team details are
+published yet. Every "About Us" nav link and "About" footer link now opens
+this page, and `about` is on the deploy workflow's publish allowlist.
+
 **Older designs.** `services/web-design/` now forwards to Website Design &
 Development, and the old `site.css` / `site.js` / `ax2.*` are gone. The
 deploy workflow publishes an allowlist (`index.html`, the favicons,
