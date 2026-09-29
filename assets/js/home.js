@@ -167,12 +167,10 @@
   }
 
   /* ------------------------------------------------- contact drawers -- */
-  /* The three closing links stay real mailto: anchors, so without JS they
-     still open a composer. With JS the click is intercepted and the matching
-     drawer opens instead. Submission then goes to the form provider named in
-     FORM_ENDPOINT below; while that is empty it falls back to the same
-     mailto: hand-off, which is what the fine print under each form
-     describes. */
+  /* The closing links stay real anchors pointing at /contact/, so without JS
+     they reach a page with the same form on it. With JS the click is
+     intercepted and the matching drawer opens instead. Submission posts to
+     Web3Forms and reports a success only when Web3Forms confirms one. */
   var drawerLinks = document.querySelectorAll("[data-form]");
 
   if (drawerLinks.length && typeof HTMLDialogElement === "function" &&
@@ -211,33 +209,13 @@
     });
 
     /* ---------------------------------------------- lead capture: submit --
-       FORM_ENDPOINT is the one line to change to take the forms live. Paste
-       the submit URL your form provider gives you:
-
-         Formspree   https://formspree.io/f/YOUR_FORM_ID
-         Web3Forms   https://api.web3forms.com/submit
-                     (Web3Forms also needs FORM_ACCESS_KEY below)
-
-       Both accept a JSON POST from the browser and answer with JSON, and
-       both keys are public submit keys rather than secrets, so nothing
-       private is exposed here. Full steps: docs/FORMS.md
-
-       While FORM_ENDPOINT is empty the forms keep the current behaviour and
-       open the visitor's email app, and the fine print under each form says
-       exactly that. A form never reports a send that did not happen. */
-    var FORM_ENDPOINT = "";
-    var FORM_ACCESS_KEY = "";   /* Web3Forms only; leave empty for Formspree */
-
-    var formsAreLive = FORM_ENDPOINT !== "";
-
-    /* With a provider configured, the fine print no longer describes the
-       email-app hand-off, so each form carries its live wording in markup
-       and it is swapped in here. */
-    if (formsAreLive) {
-      document.querySelectorAll("[data-fine-live]").forEach(function (p) {
-        p.textContent = p.getAttribute("data-fine-live");
-      });
-    }
+       Posts to Web3Forms, which emails each submission to the address on the
+       account. The access key is a public submit key by design: it can only
+       be used to send a form to that account's own inbox, and it cannot read
+       submissions or reach the account. No private key belongs in this file.
+       Setup and provider notes: docs/FORMS.md */
+    var FORM_ENDPOINT   = "https://api.web3forms.com/submit";
+    var FORM_ACCESS_KEY = "de412576-cf13-442b-981c-5a69b59c43c4";
 
     var setNote = function (note, text, state) {
       if (!note) return;
@@ -252,9 +230,10 @@
       var out = [];
       Array.prototype.forEach.call(form.elements, function (el) {
         if (!el.name || el.name.charAt(0) === "_") return;
-        /* an unchecked box still reports a value, so it is tested first */
+        /* The mailing-list opt-in is recorded either way, so the answer is
+           auditable: an opt-in that was declined is a fact worth keeping. */
         if (el.type === "checkbox") {
-          if (el.checked) out.push([el.name, "Yes"]);
+          out.push([el.name, el.checked ? "Yes" : "No"]);
           return;
         }
         if (!el.value) return;
@@ -263,26 +242,22 @@
       return out;
     };
 
-    var mailtoSend = function (form, fields, subject, note) {
-      var lines = fields.map(function (f) { return f[0] + ":\n" + f[1]; });
-      var href = "mailto:" + MAIL +
-        "?subject=" + encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(lines.join("\n\n") + "\n\n—\nSent from axchannels.co.za");
-      setNote(note, "Opening your email app…", "sent");
-      window.location.href = href;
-    };
-
-    /* Resolves only when the provider confirms the submission. Formspree
-       answers 200 with no `success` key; Web3Forms answers with
-       `success: true`. Anything else, including a non-2xx status or an
-       `errors` array, is treated as a failure. */
-    var providerSend = function (fields, subject, honeypot) {
-      var payload = { subject: subject, _source: "axchannels.co.za" };
+    /* Resolves only when the provider confirms the submission. Web3Forms
+       answers `success: true`; a Formspree endpoint answers 200 with no
+       `success` key. Anything else — a non-2xx, a `success: false`, or an
+       `errors` array — is a failure, and is reported as one. */
+    var providerSend = function (fields, subject, formName, honeypot) {
+      var payload = {
+        subject: subject,
+        from_name: "AX-Channels website",
+        form_name: formName,          /* which of the three forms was used */
+        page: location.pathname,
+        _source: "axchannels.co.za"
+      };
       fields.forEach(function (f) { payload[f[0]] = f[1]; });
       if (FORM_ACCESS_KEY) payload.access_key = FORM_ACCESS_KEY;
-      /* both providers reject bots server-side from their own trap field:
-         Formspree reads `_gotcha`, Web3Forms reads `botcheck`. Whichever one
-         is configured gets the value under the name it looks for. */
+      /* the provider's own trap field, checked server-side. Web3Forms reads
+         `botcheck`; a Formspree endpoint reads `_gotcha`. */
       payload._gotcha = honeypot;
       payload.botcheck = honeypot;
 
@@ -337,16 +312,14 @@
 
         var fields = readFields(form);
         var subject = form.getAttribute("data-subject") || "Enquiry";
-
-        if (!formsAreLive) { mailtoSend(form, fields, subject, note); return; }
-
+        var formName = form.getAttribute("data-form-name") || subject;
         var hp = form.querySelector("[data-honeypot]");
         busy = true;
         form.setAttribute("aria-busy", "true");
         if (button) { button.disabled = true; button.textContent = "Sending…"; }
         setNote(note, "Sending…");
 
-        providerSend(fields, subject, hp ? hp.value : "").then(function () {
+        providerSend(fields, subject, formName, hp ? hp.value : "").then(function () {
           form.reset();
           form.classList.remove("is-checked");
           form.removeAttribute("aria-busy");
@@ -357,7 +330,17 @@
           form.removeAttribute("aria-busy");
           if (button) { button.disabled = false; button.textContent = buttonLabel; }
           busy = false;
-          setNote(note, "That did not send. Please try again, or email " + MAIL + ".", "error");
+          /* the answers stay in the form, and the fallback is one click */
+          if (note) {
+            note.textContent = "";
+            note.setAttribute("data-state", "error");
+            note.appendChild(document.createTextNode("That did not send. Try again, or email "));
+            var a = document.createElement("a");
+            a.href = "mailto:" + MAIL + "?subject=" + encodeURIComponent(subject);
+            a.textContent = MAIL;
+            note.appendChild(a);
+            note.appendChild(document.createTextNode("."));
+          }
         });
       });
     });
