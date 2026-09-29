@@ -229,7 +229,10 @@
     var readFields = function (form) {
       var out = [];
       Array.prototype.forEach.call(form.elements, function (el) {
+        /* provider plumbing — the access key, the no-JS redirect, the
+           honeypot — is not part of the visitor's message */
         if (!el.name || el.name.charAt(0) === "_") return;
+        if (el.hasAttribute("data-provider")) return;
         /* The mailing-list opt-in is recorded either way, so the answer is
            auditable: an opt-in that was declined is a fact worth keeping. */
         if (el.type === "checkbox") {

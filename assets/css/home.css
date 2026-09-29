@@ -460,7 +460,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   position: relative;
   margin: var(--shell) var(--shell) 0;
   border-radius: var(--r-block);
-  background: var(--hero-ink) url("../img/home/ax-background.webp") center / cover no-repeat;
+  background: var(--hero-ink) url("/assets/img/home/ax-background.webp") center / cover no-repeat;
   color: #fff;
   overflow: hidden;
   isolation: isolate;
