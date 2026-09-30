@@ -276,3 +276,19 @@ a.contact-list__v { color: var(--accent-ink); text-underline-offset: 3px; }
 @media (min-width: 1024px) {
   .contact-page .legal-toc { position: sticky; top: 32px; align-self: start; }
 }
+
+/* A figure that counts more than the site publishes invites the reader to
+   think the two disagree, so the stat says how many are shown. */
+.num__note {
+  display: block;          /* it hangs off the label, inside the reversed stack */
+  margin: 8px 0 0;
+  text-transform: none;
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: .04em;
+  line-height: 1.5;
+  color: var(--muted-2);
+}
+.num__note a { color: inherit; text-underline-offset: 3px; }
+.num__note a:hover,
+.num__note a:focus-visible { color: var(--accent-ink); }
