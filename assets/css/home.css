@@ -1877,7 +1877,7 @@ a.project__media:hover img { transform: scale(1.03); }
 .voices__pause:focus-visible { border-color: var(--accent-ink); color: var(--accent-ink); }
 
 /* Hero — rotating glow ring, aligned to the ring in the provided
-   AX Background.png (ax-background.png): centre 47.5% / 52%, a tall ellipse
+   AX Background.png (served as ax-background.webp): centre 47.5% / 52%, a tall ellipse
    ~88% of the hero's height, teal-white peak at the top and a magenta peak
    at the bottom. At rest the overlay sits on the baked ring; as it spins,
    its highlights sweep around it. Decorative (aria-hidden); the
@@ -3373,4 +3373,12 @@ html:not(.js-motion) .belt__pause { display: none; }
   /* form controls are tapped directly, so they take real height */
   .ff__control { min-height: 44px; }
   textarea.ff__control { min-height: 88px; }
+}
+
+/* iOS Safari zooms the page into any field set under 16px when it is tapped,
+   and leaves it zoomed. The form fields are 15px on phones, so on touch
+   screens they take 16px — one pixel, and the zoom never happens.
+   (Carried over from the live branch.) */
+@media (pointer: coarse) {
+  .ff__control { font-size: max(16px, var(--fs-md)); }
 }

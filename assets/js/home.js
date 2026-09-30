@@ -750,18 +750,21 @@
 
       var advance = function () { show((cur + 1) % slides.length); };
 
+      /* Fetch the slides after the first one the first time the frame comes
+         into view — not on page load, which cost every phone ~250KB for
+         a slideshow most visitors had not reached. The first slide's hold
+         leaves time for the next to arrive before its cross-fade. */
+      var primed = false;
       var start = function () {
+        if (!primed) {
+          slides.forEach(function (img, i) { if (i > 0) { img.loading = "eager"; } });
+          primed = true;
+        }
         if (timer === null) timer = setInterval(advance, HOLD);
       };
       var stop = function () {
         if (timer !== null) { clearInterval(timer); timer = null; }
       };
-
-      /* Decode the slide after the current one ahead of its turn, so the
-         first pass through the set cross-fades as smoothly as later ones. */
-      slides.forEach(function (img, i) {
-        if (i > 0) { img.loading = "eager"; }
-      });
 
       /* Only run while the frame is on screen, and never in a hidden tab. */
       var vio = new IntersectionObserver(function (entries) {

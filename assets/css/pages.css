@@ -292,3 +292,10 @@ a.contact-list__v { color: var(--accent-ink); text-underline-offset: 3px; }
 .num__note a { color: inherit; text-underline-offset: 3px; }
 .num__note a:hover,
 .num__note a:focus-visible { color: var(--accent-ink); }
+
+/* touch screens: the filter pills keep their size, but the tappable area
+   grows to 44px tall */
+@media (pointer: coarse) {
+  .cs-filter button { position: relative; }
+  .cs-filter button::after { content: ""; position: absolute; inset: -5px -1px; }
+}
