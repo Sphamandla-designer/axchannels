@@ -152,6 +152,21 @@
     window.addEventListener("resize", closeCard);
   }
 
+  /* ------------------------------------------- WhatsApp float yielding -- */
+  /* A fixed button covers whatever scrolls under it. While the closing CTA
+     block and footer are on screen — which is where the page's own calls to
+     action live — the float steps aside rather than sitting on top of them.
+     Gated on IntersectionObserver; without it the button just stays put. */
+  var waFloat = document.querySelector(".wa-float");
+  var waZone = document.querySelector(".block--dark") || document.querySelector("footer");
+  if (waFloat && waZone && "IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        waFloat.classList.toggle("is-yielded", e.isIntersecting);
+      });
+    }, { rootMargin: "0px 0px -35% 0px" }).observe(waZone);
+  }
+
   /* --------------------------------------------------------- SAST clock -- */
   var clockTime = document.querySelector("[data-clock-time]");
   if (clockTime && window.Intl && Intl.DateTimeFormat) {
@@ -160,10 +175,15 @@
         hour: "2-digit", minute: "2-digit", hour12: false,
         timeZone: "Africa/Johannesburg"
       });
+      var clockBox = clockTime.closest(".legal__clock");
       var tickClock = function () { clockTime.textContent = clockFmt.format(new Date()); };
       tickClock();
+      /* The clock is hidden in the markup, so without JS — or without the
+         Africa/Johannesburg timezone data — the footer never shows a dead
+         "--:--" placeholder. It is revealed only once it holds a real time. */
+      if (clockBox) clockBox.hidden = false;
       window.setInterval(tickClock, 30000);
-    } catch (e) { /* unsupported timezone data — leave the placeholder */ }
+    } catch (e) { /* unsupported timezone data — the clock stays hidden */ }
   }
 
   /* ------------------------------------------------- contact drawers -- */
