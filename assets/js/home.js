@@ -363,6 +363,12 @@
     Array.prototype.slice.call(vTrack.children).forEach(function (card) {
       var clone = card.cloneNode(true);
       clone.setAttribute("aria-hidden", "true");
+      /* aria-hidden does not remove a control from the tab order, so the
+         duplicate run would still be reachable by keyboard and readable by
+         a crawler as a second copy of every link */
+      clone.querySelectorAll("a, button, input, select, textarea").forEach(function (el) {
+        el.setAttribute("tabindex", "-1");
+      });
       vTrack.appendChild(clone);
     });
     vTrack.classList.add("is-auto");
