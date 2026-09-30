@@ -152,6 +152,21 @@
     window.addEventListener("resize", closeCard);
   }
 
+  /* ------------------------------------------- WhatsApp float yielding -- */
+  /* A fixed button covers whatever scrolls under it. While the closing CTA
+     block and footer are on screen — which is where the page's own calls to
+     action live — the float steps aside rather than sitting on top of them.
+     Gated on IntersectionObserver; without it the button just stays put. */
+  var waFloat = document.querySelector(".wa-float");
+  var waZone = document.querySelector(".block--dark") || document.querySelector("footer");
+  if (waFloat && waZone && "IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        waFloat.classList.toggle("is-yielded", e.isIntersecting);
+      });
+    }, { rootMargin: "0px 0px -35% 0px" }).observe(waZone);
+  }
+
   /* --------------------------------------------------------- SAST clock -- */
   var clockTime = document.querySelector("[data-clock-time]");
   if (clockTime && window.Intl && Intl.DateTimeFormat) {
@@ -160,18 +175,22 @@
         hour: "2-digit", minute: "2-digit", hour12: false,
         timeZone: "Africa/Johannesburg"
       });
+      var clockBox = clockTime.closest(".legal__clock");
       var tickClock = function () { clockTime.textContent = clockFmt.format(new Date()); };
       tickClock();
+      /* The clock is hidden in the markup, so without JS — or without the
+         Africa/Johannesburg timezone data — the footer never shows a dead
+         "--:--" placeholder. It is revealed only once it holds a real time. */
+      if (clockBox) clockBox.hidden = false;
       window.setInterval(tickClock, 30000);
-    } catch (e) { /* unsupported timezone data — leave the placeholder */ }
+    } catch (e) { /* unsupported timezone data — the clock stays hidden */ }
   }
 
   /* ------------------------------------------------- contact drawers -- */
-  /* The three closing links stay real mailto: anchors, so without JS they
-     still open a composer. With JS the click is intercepted and the matching
-     drawer opens instead; on submit the same address is used, with the
-     answers written into the body. To post to a form service later, replace
-     the body of `send` — the markup and validation do not change. */
+  /* The closing links stay real anchors pointing at /contact/, so without JS
+     they reach a page with the same form on it. With JS the click is
+     intercepted and the matching drawer opens instead. Submission posts to
+     Web3Forms and reports a success only when Web3Forms confirms one. */
   var drawerLinks = document.querySelectorAll("[data-form]");
 
   if (drawerLinks.length && typeof HTMLDialogElement === "function" &&
@@ -209,46 +228,143 @@
       dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
     });
 
+    /* ---------------------------------------------- lead capture: submit --
+       Posts to Web3Forms, which emails each submission to the address on the
+       account. The access key is a public submit key by design: it can only
+       be used to send a form to that account's own inbox, and it cannot read
+       submissions or reach the account. No private key belongs in this file.
+       Setup and provider notes: docs/FORMS.md */
+    var FORM_ENDPOINT   = "https://api.web3forms.com/submit";
+    var FORM_ACCESS_KEY = "de412576-cf13-442b-981c-5a69b59c43c4";
+
+    var setNote = function (note, text, state) {
+      if (!note) return;
+      note.textContent = text;
+      if (state) note.setAttribute("data-state", state);
+      else note.removeAttribute("data-state");
+    };
+
+    /* Field values, in markup order. Names beginning with an underscore are
+       provider plumbing (the honeypot) and are not part of the message. */
+    var readFields = function (form) {
+      var out = [];
+      Array.prototype.forEach.call(form.elements, function (el) {
+        /* provider plumbing — the access key, the no-JS redirect, the
+           honeypot — is not part of the visitor's message */
+        if (!el.name || el.name.charAt(0) === "_") return;
+        if (el.hasAttribute("data-provider")) return;
+        /* The mailing-list opt-in is recorded either way, so the answer is
+           auditable: an opt-in that was declined is a fact worth keeping. */
+        if (el.type === "checkbox") {
+          out.push([el.name, el.checked ? "Yes" : "No"]);
+          return;
+        }
+        if (!el.value) return;
+        out.push([el.name, el.value]);
+      });
+      return out;
+    };
+
+    /* Resolves only when the provider confirms the submission. Web3Forms
+       answers `success: true`; a Formspree endpoint answers 200 with no
+       `success` key. Anything else — a non-2xx, a `success: false`, or an
+       `errors` array — is a failure, and is reported as one. */
+    var providerSend = function (fields, subject, formName, honeypot) {
+      var payload = {
+        subject: subject,
+        from_name: "AX-Channels website",
+        form_name: formName,          /* which of the three forms was used */
+        page: location.pathname,
+        _source: "axchannels.co.za"
+      };
+      fields.forEach(function (f) { payload[f[0]] = f[1]; });
+      if (FORM_ACCESS_KEY) payload.access_key = FORM_ACCESS_KEY;
+      /* the provider's own trap field, checked server-side. Web3Forms reads
+         `botcheck`; a Formspree endpoint reads `_gotcha`. */
+      payload._gotcha = honeypot;
+      payload.botcheck = honeypot;
+
+      return fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(payload)
+      }).then(function (res) {
+        return res.json().then(function (d) { return d; }, function () { return {}; })
+          .then(function (data) {
+            if (!res.ok || data.success === false || data.errors) {
+              throw new Error("provider rejected the submission");
+            }
+            return data;
+          });
+      });
+    };
+
     document.querySelectorAll("[data-drawer-form]").forEach(function (form) {
       var note = form.querySelector("[data-drawer-note]");
+      var button = form.querySelector(".ff-submit");
+      var buttonLabel = button ? button.textContent : "";
+      var busy = false;
+
+      /* the outline clears as soon as a flagged field is corrected */
+      Array.prototype.forEach.call(form.elements, function (el) {
+        if (!el.name) return;
+        el.addEventListener("input", function () {
+          if (el.checkValidity()) el.removeAttribute("aria-invalid");
+        });
+      });
 
       form.addEventListener("submit", function (e) {
         e.preventDefault();
+        if (busy) return;
+
         form.classList.add("is-checked");
-        /* aria-invalid tells a screen reader which fields failed; the
-           underline colour alone does not */
-        Array.prototype.forEach.call(form.querySelectorAll("input, select, textarea"), function (el) {
-          el.setAttribute("aria-invalid", String(!el.checkValidity()));
+        Array.prototype.forEach.call(form.elements, function (el) {
+          if (!el.name) return;
+          if (el.checkValidity()) el.removeAttribute("aria-invalid");
+          else el.setAttribute("aria-invalid", "true");
         });
+
         if (!form.checkValidity()) {
-          /* the first invalid *control*: a bare ":invalid" matches the name
-             fieldset first, which cannot take focus, so the keyboard never
-             opened on the field that needed fixing */
-          var bad = form.querySelector("input:invalid, select:invalid, textarea:invalid");
+          /* a <fieldset> wrapping an invalid control matches :invalid too, and
+             cannot take focus, so only the controls themselves are considered */
+          var bad = form.querySelector(".ff__control:invalid");
           if (bad) bad.focus();
-          if (note) { note.textContent = "Check the highlighted fields"; note.removeAttribute("data-state"); }
+          setNote(note, "Check the highlighted fields");
           return;
         }
 
-        var lines = [];
-        Array.prototype.forEach.call(form.elements, function (el) {
-          if (!el.name) return;
-          /* an unchecked box still reports a value, so it is tested first */
-          if (el.type === "checkbox") {
-            if (el.checked) lines.push(el.name + ":\nYes");
-            return;
-          }
-          if (!el.value) return;
-          lines.push(el.name + ":\n" + el.value);
-        });
-
+        var fields = readFields(form);
         var subject = form.getAttribute("data-subject") || "Enquiry";
-        var href = "mailto:" + MAIL +
-          "?subject=" + encodeURIComponent(subject) +
-          "&body=" + encodeURIComponent(lines.join("\n\n") + "\n\n\u2014\nSent from axchannels.co.za");
+        var formName = form.getAttribute("data-form-name") || subject;
+        var hp = form.querySelector("[data-honeypot]");
+        busy = true;
+        form.setAttribute("aria-busy", "true");
+        if (button) { button.disabled = true; button.textContent = "Sending…"; }
+        setNote(note, "Sending…");
 
-        if (note) { note.textContent = "Opening your email app\u2026"; note.setAttribute("data-state", "sent"); }
-        window.location.href = href;
+        providerSend(fields, subject, formName, hp ? hp.value : "").then(function () {
+          form.reset();
+          form.classList.remove("is-checked");
+          form.removeAttribute("aria-busy");
+          if (button) { button.disabled = false; button.textContent = buttonLabel; }
+          busy = false;
+          setNote(note, "Thank you — your message is with us. We reply within one working day.", "sent");
+        }, function () {
+          form.removeAttribute("aria-busy");
+          if (button) { button.disabled = false; button.textContent = buttonLabel; }
+          busy = false;
+          /* the answers stay in the form, and the fallback is one click */
+          if (note) {
+            note.textContent = "";
+            note.setAttribute("data-state", "error");
+            note.appendChild(document.createTextNode("That did not send. Try again, or email "));
+            var a = document.createElement("a");
+            a.href = "mailto:" + MAIL + "?subject=" + encodeURIComponent(subject);
+            a.textContent = MAIL;
+            note.appendChild(a);
+            note.appendChild(document.createTextNode("."));
+          }
+        });
       });
     });
   }
@@ -267,6 +383,12 @@
     Array.prototype.slice.call(vTrack.children).forEach(function (card) {
       var clone = card.cloneNode(true);
       clone.setAttribute("aria-hidden", "true");
+      /* aria-hidden does not remove a control from the tab order, so the
+         duplicate run would still be reachable by keyboard and readable by
+         a crawler as a second copy of every link */
+      clone.querySelectorAll("a, button, input, select, textarea").forEach(function (el) {
+        el.setAttribute("tabindex", "-1");
+      });
       vTrack.appendChild(clone);
     });
     vTrack.classList.add("is-auto");
