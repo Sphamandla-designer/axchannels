@@ -39,5 +39,16 @@ jobs:
             [ "$f" = ".git" ] && continue
             case "$keep" in *" $f "*) ;; *) git rm -r -q --cached -- "$f" ;; esac
           done
+          # The pages use root-absolute paths ("/assets/...", "/contact/"),
+          # which are right for a custom domain. Without a CNAME the site is
+          # served at https://<user>.github.io/<repo>/, where those paths
+          # point at the user's root site and 404 — no CSS, JS or images.
+          # So, until a custom domain is connected, prefix them with
+          # /<repo>. The source is untouched; this only changes what is
+          # published. Adding a CNAME switches it off automatically.
+          if [ ! -f CNAME ]; then
+            python3 .github/scripts/prefix-paths.py "/${GITHUB_REPOSITORY#*/}"
+            git add -u
+          fi
           git commit -q -m "Publish the site only" || true
           git push -f origin gh-pages
