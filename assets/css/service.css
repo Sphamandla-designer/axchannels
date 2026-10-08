@@ -296,7 +296,7 @@
 }
 .svc-tile__p {
   margin: clamp(10px, 1vw, 16px) 0 0;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.72;
   color: var(--muted);
 }
@@ -373,7 +373,7 @@
 }
 .svc-step__p {
   margin: clamp(8px, .9vw, 14px) 0 0;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.66;
   color: var(--svc-text-d);
 }
@@ -381,7 +381,7 @@
   margin: clamp(12px, 1.2vw, 20px) 0 0;
   padding-top: clamp(10px, 1vw, 16px);
   border-top: 1px solid var(--svc-rule-d);
-  font-size: var(--fs-2xs);
+  font-size: var(--fs-note);
   line-height: 1.7;
   color: #fff;
 }
@@ -421,7 +421,7 @@
   margin: clamp(14px, 1.4vw, 22px) 0 0;
   padding: 0;
   list-style: none;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.6;
   color: var(--muted);
 }
@@ -451,7 +451,7 @@
   padding-top: clamp(12px, 1.2vw, 18px);
   border-top: 1px solid var(--svc-rule-d);
   font-family: var(--mono);
-  font-size: var(--fs-2xs);
+  font-size: var(--fs-note);
   line-height: 1.75;
   color: var(--svc-dim-d);
 }
@@ -472,7 +472,7 @@
   line-height: 1.5;
   letter-spacing: -.014em;
 }
-.svc-ux__link { margin: clamp(20px, 2vw, 34px) 0 0; font-size: var(--fs-sm); }
+.svc-ux__link { margin: clamp(20px, 2vw, 34px) 0 0; font-size: var(--fs-copy); }
 .svc-ux__link a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: .22em; }
 .svc-ux__list {
   display: grid;
@@ -490,7 +490,7 @@
   line-height: 1.3;
   letter-spacing: -.012em;
 }
-.svc-ux__list p { margin: 8px 0 0; font-size: var(--fs-sm); line-height: 1.7; color: var(--muted); }
+.svc-ux__list p { margin: 8px 0 0; font-size: var(--fs-copy); line-height: 1.7; color: var(--muted); }
 
 /* --------------------------------------------------------------------------
    SEO + performance
@@ -526,7 +526,7 @@
   margin: clamp(16px, 1.6vw, 28px) 0 0;
   padding: 0;
   list-style: none;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.7;
   color: var(--muted);
 }
@@ -551,7 +551,7 @@
   margin: clamp(18px, 1.8vw, 30px) 0 0;
   padding-top: clamp(14px, 1.4vw, 24px);
   border-top: 1px solid var(--svc-rule-d);
-  font-size: var(--fs-2xs);
+  font-size: var(--fs-note);
   line-height: 1.85;
   color: var(--svc-dim-d);
 }
@@ -580,7 +580,7 @@
   position: relative;
   padding: .7em 0 .7em 1.6em;
   border-top: 1px solid var(--svc-rule);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.66;
   color: var(--muted);
 }
@@ -671,7 +671,7 @@
   margin: clamp(18px, 1.8vw, 30px) 0 clamp(20px, 2vw, 34px);
   padding: 0;
   list-style: none;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.6;
   color: var(--muted);
 }
@@ -698,7 +698,7 @@
 .svc-plan__after {
   margin: clamp(14px, 1.4vw, 22px) 0 0;
   font-family: var(--mono);
-  font-size: var(--fs-2xs);
+  font-size: var(--fs-note);
   line-height: 1.75;
   color: var(--muted);
 }
@@ -720,7 +720,7 @@
   text-transform: uppercase;
   color: var(--accent-ink);
 }
-.svc-compare p { margin: 10px 0 0; font-size: var(--fs-sm); line-height: 1.72; color: var(--muted); }
+.svc-compare p { margin: 10px 0 0; font-size: var(--fs-copy); line-height: 1.72; color: var(--muted); }
 .svc-pricing__note {
   margin: clamp(26px, 2.8vw, 50px) 0 0;
   max-width: 70ch;
@@ -771,7 +771,7 @@
 .svc-case__p {
   margin: clamp(10px, 1vw, 16px) 0 clamp(14px, 1.4vw, 22px);
   max-width: 54ch;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.72;
   color: var(--muted);
 }
@@ -805,7 +805,7 @@
   margin: clamp(16px, 1.6vw, 28px) 0 0;
   padding: 0;
   list-style: none;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.66;
   color: var(--muted);
 }
@@ -830,7 +830,7 @@
   margin: clamp(16px, 1.6vw, 28px) 0 0;
   padding-top: clamp(12px, 1.2vw, 20px);
   border-top: 1px solid var(--svc-rule);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.7;
   color: var(--muted);
 }
@@ -882,7 +882,7 @@
 .svc-redesign__list li {
   padding-top: clamp(12px, 1.2vw, 20px);
   border-top: 1px solid var(--svc-rule-d);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.6;
   color: var(--svc-text-d);
 }

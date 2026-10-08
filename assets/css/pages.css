@@ -39,7 +39,7 @@
   line-height: 1.3;
   letter-spacing: -.014em;
 }
-.hub-which__list p { flex: 1; margin: 8px 0 0; font-size: var(--fs-sm); line-height: 1.72; color: var(--muted); }
+.hub-which__list p { flex: 1; margin: 8px 0 0; font-size: var(--fs-copy); line-height: 1.72; color: var(--muted); }
 .hub-which__list .tlink { margin-top: clamp(14px, 1.4vw, 22px); font-size: var(--fs-sm); color: var(--accent-ink); }
 
 /* --------------------------------------------------------------------------
@@ -98,7 +98,7 @@
 
 .svc-case[hidden] { display: none; }
 .cs-case .svc-quote { margin: 0 0 clamp(14px, 1.4vw, 22px); }
-.cs-case .svc-quote p { font-size: var(--fs-sm); }
+.cs-case .svc-quote p { font-size: var(--fs-copy); }
 .cs-soon {
   font-family: var(--mono);
   font-size: var(--fs-2xs);
@@ -124,7 +124,7 @@
   padding-top: clamp(14px, 1.4vw, 24px);
   border-top: 1px solid var(--svc-rule);
   max-width: 88ch;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.7;
   color: var(--muted);
 }
@@ -163,7 +163,7 @@
   border-radius: var(--r-card);
   background: rgba(224, 23, 107, .045);
 }
-.legal-doc__note p { margin: 0; font-size: var(--fs-sm); line-height: 1.7; color: var(--ink); }
+.legal-doc__note p { margin: 0; font-size: var(--fs-copy); line-height: 1.7; color: var(--ink); }
 .legal-doc__note b { font-weight: 600; }
 .todo {
   padding: .12em .45em;
@@ -182,7 +182,7 @@
   max-width: 1080px;   /* a document does not use the full 1812px shell */
 }
 
-.legal-toc { font-size: var(--fs-sm); }
+.legal-toc { font-size: var(--fs-copy); }
 .legal-toc__t {
   margin: 0 0 14px;
   font-family: var(--mono);
@@ -237,7 +237,7 @@
   margin: 0 0 1em;
   padding-left: clamp(14px, 1.2vw, 20px);
   border-left: 2px solid var(--svc-rule);
-  font-size: var(--fs-sm) !important;
+  font-size: var(--fs-copy) !important;
   line-height: 1.7;
 }
 .legal-back { margin-top: clamp(40px, 3.6vw, 68px); }

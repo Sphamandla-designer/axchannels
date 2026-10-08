@@ -96,7 +96,7 @@
 }
 .ux-stage__p {
   margin: clamp(8px, .8vw, 13px) 0 0;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.66;
   color: var(--muted);
 }
@@ -110,7 +110,7 @@
   padding-top: clamp(10px, 1vw, 16px);
   border-top: 1px solid var(--svc-rule);
   font-family: var(--mono);
-  font-size: var(--fs-2xs);
+  font-size: var(--fs-note);
   line-height: 1.6;
   letter-spacing: .02em;
   color: var(--accent-ink);
@@ -120,7 +120,7 @@
   padding-top: clamp(14px, 1.4vw, 24px);
   border-top: 1px solid var(--svc-rule);
   max-width: 88ch;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.7;
   color: var(--muted);
 }
@@ -168,7 +168,7 @@
 }
 .ux-plan__p {
   margin: clamp(10px, 1vw, 16px) 0 0;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.66;
   color: var(--muted);
 }
@@ -191,7 +191,7 @@
 }
 .ux-scope__p {
   margin: 0;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.76;
   color: var(--muted);
 }

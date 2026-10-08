@@ -103,7 +103,7 @@
 }
 .pd-stage__p {
   margin: .5em 0 0;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.66;
   color: var(--muted);
 }
@@ -111,7 +111,7 @@
   margin: clamp(22px, 2.2vw, 40px) 0 0;
   padding-top: clamp(14px, 1.4vw, 24px);
   border-top: 1px solid var(--svc-rule);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.7;
   color: var(--muted);
   max-width: 88ch;
@@ -166,7 +166,7 @@
 /* the description sits where the package card carries its price */
 .pd-plan__p {
   margin: clamp(10px, 1vw, 16px) 0 0;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.66;
   color: var(--muted);
 }
@@ -194,7 +194,7 @@
 }
 .pd-scope__p {
   margin: 0;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.76;
   color: var(--muted);
 }

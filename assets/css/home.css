@@ -45,7 +45,13 @@
   --fs-wm:      clamp(24px, 1.875vw, 36px);    /* 36 — EXPERIENCE watermark  */
   --fs-rail:    clamp(13px, 1.3021vw, 25px);   /* 25 — design + strategy     */
   --fs-lg:      clamp(16px, 1.25vw, 24px);     /* 24 — lead / section sub    */
-  --fs-md:      clamp(15px, 1.0417vw, 20px);   /* 20 — body / links          */
+  --fs-md:      clamp(16px, .625vw + 8px, 20px); /* 20 — body / links        */
+  /* Reading sizes. The 1920 design scale shrinks hard on laptop and phone
+     widths, which left running copy at 13px and notes at 11px. These keep
+     paragraphs at 15–17px and fine print at 13–14px; --fs-sm and --fs-2xs
+     stay for labels, chips and eyebrows. */
+  --fs-copy:    clamp(15px, .2083vw + 13px, 17px); /* 17 — card & step copy */
+  --fs-note:    clamp(13px, .1042vw + 12px, 14px); /* 14 — notes / fine print */
   --fs-sm:      clamp(13px, .8333vw, 16px);    /* 16 — small copy / eyebrow  */
   --fs-xs:      clamp(12px, .78125vw, 15px);   /* 15 — JHB indicator         */
   --fs-2xs:     clamp(11px, .625vw, 12px);     /* 12 — chips / stat footnote */
@@ -630,7 +636,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .studio__notes p {
   margin: 0;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.78;
   color: var(--muted);
 }
@@ -738,7 +744,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .stat-card__note {
   margin-top: clamp(10px, .94vw, 18px);
-  font-size: var(--fs-2xs);
+  font-size: var(--fs-note);
   line-height: 1.83;
   max-width: 30ch;
 }
@@ -931,7 +937,7 @@ a.project__media:hover img { transform: scale(1.03); }
 .work__note {
   max-width: 78ch;
   margin: clamp(26px, 2.4vw, 44px) 0 0;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.65;
   color: var(--on-dark-dim);
 }
@@ -2110,7 +2116,7 @@ a.project__media:hover img { transform: scale(1.03); }
 .hero__lead {
   margin-top: clamp(18px, 2vw, 38px);
   max-width: 52ch;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.7;
   color: rgba(255, 255, 255, .88);
 }
@@ -2387,7 +2393,7 @@ a.project__media:hover img { transform: scale(1.03); }
 .numbers__note {
   margin: 0;
   font-family: var(--mono);
-  font-size: var(--fs-2xs);
+  font-size: var(--fs-note);
   line-height: 1.5;
   letter-spacing: .04em;
   color: rgba(255, 255, 255, .62);
@@ -3118,7 +3124,7 @@ html:not(.js-motion) .belt__pause { display: none; }
 }
 .why__anchor-p {
   margin: clamp(14px, 1.3vw, 22px) 0 clamp(24px, 2.4vw, 40px);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.74;
   color: var(--on-dark-dim);
 }
@@ -3200,7 +3206,7 @@ html:not(.js-motion) .belt__pause { display: none; }
 .why-card__p {
   margin: clamp(10px, 1vw, 16px) 0 0;
   max-width: 44ch;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-copy);
   line-height: 1.72;
   color: var(--muted);
 }
