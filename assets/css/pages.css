@@ -299,3 +299,83 @@ a.contact-list__v { color: var(--accent-ink); text-underline-offset: 3px; }
   .cs-filter button { position: relative; }
   .cs-filter button::after { content: ""; position: absolute; inset: -5px -1px; }
 }
+
+/* --------------------------------------------------------------------------
+   Case-study pages (/case-studies/<project>/)
+   Built from the service-page sections; only the screen gallery, the pull
+   quote and the next-project link are new.
+   -------------------------------------------------------------------------- */
+.cs-shots { padding: var(--sec-gap) 0 0; }
+.cs-shots__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 1.4vw, 24px);
+}
+.cs-shots__grid--phones {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 1100px;
+  margin-inline: auto;
+}
+.cs-shots figure { margin: 0; }
+.cs-shots__grid > figure:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
+.cs-shots__grid--phones > figure:first-child:nth-last-child(odd) { grid-column: auto; }
+.cs-shots img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-soft);
+  border: 1px solid var(--svc-rule);
+  background: #f3f4f6;
+}
+.cs-shots figcaption {
+  margin-top: 12px;
+  font-size: var(--fs-note);
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.cs-pull { margin: clamp(28px, 3vw, 48px) 0 0; max-width: 880px; }
+
+.cs-next {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-top: var(--sec-gap);
+  padding-top: clamp(18px, 1.6vw, 28px);
+  border-top: 1px solid var(--svc-rule);
+}
+.cs-next__label {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+.cs-next a {
+  font-size: var(--fs-h5);
+  letter-spacing: -.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.cs-next a:hover, .cs-next a:focus-visible { color: var(--accent-ink); }
+.cs-next a::after { content: " \2192"; color: var(--accent-ink); }
+
+@media (max-width: 720px) {
+  .cs-shots__grid { grid-template-columns: minmax(0, 1fr); }
+  .cs-shots__grid > figure:first-child:nth-last-child(odd) { grid-column: auto; }
+  .cs-shots__grid--phones { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .cs-shots__grid--phones figcaption { display: none; }
+}
+
+/* Service pages run five steps and six "included" cards; a case study has
+   four decisions and two outcome lists, so the grids are re-counted rather
+   than left with an empty column. */
+@media (min-width: 1101px) {
+  .cs-steps { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (min-width: 721px) {
+  .cs-outcome .svc-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

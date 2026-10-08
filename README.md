@@ -32,6 +32,18 @@ assets/css/site.css           Design system for the services pages
 assets/js/site.js             Behaviour for the services pages
 ```
 
+## Case studies
+
+`case-studies/cmaxx/`, `case-studies/finos/` and `case-studies/wastemart/` are
+generated. Edit the copy in `tools/build-case-studies.py`, then run
+`python3 tools/build-case-studies.py`. The script takes the masthead, footer and
+enquiry drawers from `case-studies/index.html`, so the pages stay in step with
+the rest of the site. Each page is deliberately short: problem, four decisions,
+screens, what shipped, and what is not claimed. Concepts and explorations say
+so in the hero and the outcome.
+
+ManaGem is not shown on this site: it is GEMIS work, not AX-Channels work.
+
 ## Service pages
 
 Both service pages are built on `home.css` + `service.css`. `service.css`
