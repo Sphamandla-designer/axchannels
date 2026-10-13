@@ -7,6 +7,12 @@ The shared shell (masthead, closing CTA, footer, enquiry drawers, script)
 is lifted from case-studies/index.html so the pages never drift from the
 rest of the site. Edit the copy in PROJECTS below, then re-run. Output:
 case-studies/<slug>/index.html.
+
+Sections a project has no material for are left out rather than padded:
+set "problem", "shots", "bg_img" or "quote" to None, give a step a
+2-tuple to drop its "Shipped" line, and omit "next"/"next_t"/"fine" from
+"outcome" to drop the second column. A short case study is one we were
+given less about, not one we invent the rest of.
 """
 import html
 import json
@@ -125,7 +131,7 @@ PROJECTS = [
       "fine": "The next phase, not completed work.",
     },
     "quote": None,
-    "next": ("cmaxx", "CMAXX"),
+    "next": ("kiy-trucking", "KIY Trucking"),
   },
   {
     "slug": "wastemart",
@@ -182,6 +188,49 @@ PROJECTS = [
     "quote": None,
     "next": ("finos", "FINOS"),
   },
+  {
+    # Built from the write-up supplied for this project. The live site could not
+    # be reached from the environment this was generated in, so there are no
+    # screens, no problem framing and no per-decision outcomes: those sections
+    # are left out rather than filled with guesses.
+    "slug": "kiy-trucking",
+    "name": "KIY Trucking",
+    "title_tag": "KIY Trucking Website Case Study — Transport &amp; Logistics | AX-Channels",
+    "description": "A corporate website for KIY Trucking, a transport and logistics business: website design, UI/UX and WordPress implementation by AX-Channels.",
+    "eyebrow": "Case Study &middot; KIY Trucking",
+    "h1": 'A Corporate Site For <span class="mark">KIY Trucking</span>',
+    "lead": "KIY Trucking needed a professional website to present its transport and logistics services to prospective business customers. We designed and implemented it on WordPress, bringing the service offering, company information and contact pathways into one digital experience.",
+    "hero_img": ("/assets/img/home/work-kiy-placeholder.webp", 1500, 1125),
+    "og_img": "/assets/img/home/work-kiy-placeholder.jpg",
+    "facts": [("Project", "Client Project &middot; Live"), ("Industry", "Transport &amp; Logistics"),
+              ("Service", "Website Design, UI/UX, WordPress"), ("Status", "Live")],
+    "problem": None,
+    "bg_img": None,
+    "steps": {
+      "h2": 'Four Parts Of The <span class="mark">Approach</span>',
+      "sub": "What the project set out to do, and what each part covered.",
+      "items": [
+        ("Service presentation", "Structured the website around the company&rsquo;s transport and logistics offering, helping visitors explore its services and understand the scope of the business."),
+        ("Website design", "Developed the website&rsquo;s visual presentation and page layouts to give the company a consistent, professional digital presence."),
+        ("WordPress implementation", "Translated the design into a working WordPress website, implementing the pages and website functionality required for the project."),
+        ("Enquiry pathways", "Included contact and enquiry elements to give prospective customers a direct way to get in touch with the business."),
+      ],
+    },
+    "shots": None,
+    "outcome": {
+      "h2": 'What <span class="mark">Shipped</span>',
+      "sub": "A completed, live website. No analytics have been shared with us, so this page makes no performance claims.",
+      "done_t": "Delivered",
+      "done": ["A live corporate website, designed and implemented",
+               "The transport and logistics offering, structured for visitors",
+               "Page layouts and visual presentation across the site",
+               "A WordPress build with the pages and functionality the project required",
+               "Contact and enquiry pathways for prospective customers"],
+      "fine": "",
+    },
+    "quote": None,
+    "next": ("cmaxx", "CMAXX"),
+  },
 ]
 
 # --------------------------------------------------------------------------- shell
@@ -201,7 +250,12 @@ e = html.unescape
 def page(p):
     url = f"{SITE}/case-studies/{p['slug']}/"
     hi, hw, hh = p["hero_img"]
-    bi, bw, bh = p["bg_img"]
+    bg = ""
+    if p.get("bg_img"):
+        bi, bw, bh = p["bg_img"]
+        bg = (f'    <div class="svc-process__bg" aria-hidden="true">\n'
+              f'      <img src="{bi}" alt="" width="{bw}" height="{bh}" loading="lazy" decoding="async">\n'
+              f'    </div>\n')
     title_plain = re.sub(r"<[^>]+>", "", p["h1"])
     crumbs = json.dumps({
         "@context": "https://schema.org", "@type": "BreadcrumbList",
@@ -219,24 +273,66 @@ def page(p):
     }, indent=2, ensure_ascii=False)
 
     facts = "\n".join(f"    <div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in p["facts"])
-    prob = p["problem"]
-    prob_items = "\n".join(f"        <li><h3>{t}</h3><p>{d}</p></li>" for t, d in prob["items"])
-    steps = "\n".join(
-        f"""        <li class="svc-step">
-          <span class="svc-step__n">{i:02d}</span>
-          <h3 class="svc-step__t">{t}</h3>
-          <p class="svc-step__p">{d}</p>
-          <p class="svc-step__out"><span>Shipped</span> {o}</p>
-        </li>""" for i, (t, d, o) in enumerate(p["steps"]["items"], 1))
-    shots = p["shots"]
-    shot_items = "\n".join(
-        f"""        <figure data-reveal="fade">
-          <img src="{s}" alt="{alt}" width="{w}" height="{h}" loading="lazy" decoding="async">
+    problem = ""
+    if p.get("problem"):
+        prob = p["problem"]
+        prob_items = "\n".join(f"        <li><h3>{t}</h3><p>{d}</p></li>" for t, d in prob["items"])
+        problem = f"""  <!-- ============================================================ PROBLEM -->
+  <section class="svc-ux" aria-labelledby="problem-t">
+    <div class="wrap svc-ux__in">
+      <div class="svc-ux__copy" data-stagger>
+        <p class="svc-eyebrow">{prob['eyebrow']}</p>
+        <h2 class="h2" id="problem-t">{prob['h2']}</h2>
+        <p class="svc-ux__lead">{prob['lead']}</p>
+        <p class="svc-body">{prob['body']}</p>
+      </div>
+
+      <ul class="svc-ux__list" data-stagger>
+{prob_items}
+      </ul>
+    </div>
+  </section>
+"""
+    def step(i, item):
+        t, d = item[0], item[1]
+        out = item[2] if len(item) > 2 and item[2] else None
+        shipped = f'\n          <p class="svc-step__out"><span>Shipped</span> {out}</p>' if out else ""
+        return (f'        <li class="svc-step">\n'
+                f'          <span class="svc-step__n">{i:02d}</span>\n'
+                f'          <h3 class="svc-step__t">{t}</h3>\n'
+                f'          <p class="svc-step__p">{d}</p>{shipped}\n'
+                f'        </li>')
+    steps = "\n".join(step(i, it) for i, it in enumerate(p["steps"]["items"], 1))
+    screens = ""
+    if p.get("shots"):
+        shots = p["shots"]
+        shot_items = "\n".join(
+            f"""        <figure data-reveal="fade">
+          <img src="{src}" alt="{alt}" width="{w}" height="{h}" loading="lazy" decoding="async">
           <figcaption>{cap}</figcaption>
-        </figure>""" for s, w, h, alt, cap in shots["items"])
+        </figure>""" for src, w, h, alt, cap in shots["items"])
+        phones = " cs-shots__grid--phones" if shots["phones"] else ""
+        screens = f"""  <!-- ============================================================ SCREENS -->
+  <section class="cs-shots" aria-label="Screens from {p['name']}">
+    <div class="wrap">
+      <div class="cs-shots__grid{phones}">
+{shot_items}
+      </div>
+    </div>
+  </section>
+"""
     o = p["outcome"]
     done = "\n".join(f"            <li>{x}</li>" for x in o["done"])
-    nxt = "\n".join(f"            <li>{x}</li>" for x in o["next"])
+    measure = ""
+    if o.get("next"):
+        nxt = "\n".join(f"            <li>{x}</li>" for x in o["next"])
+        measure = f"""        <section class="svc-col svc-col--note" aria-labelledby="next-t">
+          <h3 class="svc-col__t" id="next-t">{o['next_t']}</h3>
+          <ul class="svc-col__list">
+{nxt}
+          </ul>
+          <p class="svc-col__fine">{o['fine']}</p>
+        </section>"""
     quote = ""
     if p["quote"]:
         q, who, role = p["quote"]
@@ -314,28 +410,10 @@ def page(p):
 
 <main id="main">
 
-  <!-- ============================================================ PROBLEM -->
-  <section class="svc-ux" aria-labelledby="problem-t">
-    <div class="wrap svc-ux__in">
-      <div class="svc-ux__copy" data-stagger>
-        <p class="svc-eyebrow">{prob['eyebrow']}</p>
-        <h2 class="h2" id="problem-t">{prob['h2']}</h2>
-        <p class="svc-ux__lead">{prob['lead']}</p>
-        <p class="svc-body">{prob['body']}</p>
-      </div>
-
-      <ul class="svc-ux__list" data-stagger>
-{prob_items}
-      </ul>
-    </div>
-  </section>
-
+{problem}
   <!-- ======================================================= WHAT WE DID -->
   <section class="svc-process" aria-labelledby="did-t">
-    <div class="svc-process__bg" aria-hidden="true">
-      <img src="{bi}" alt="" width="{bw}" height="{bh}" loading="lazy" decoding="async">
-    </div>
-    <div class="wrap svc-process__in">
+{bg}    <div class="wrap svc-process__in">
       <div class="sec-head" data-stagger>
         <h2 class="h2" id="did-t">{p['steps']['h2']}</h2>
         <p class="sec-head__sub">{p['steps']['sub']}</p>
@@ -347,15 +425,7 @@ def page(p):
     </div>
   </section>
 
-  <!-- ============================================================ SCREENS -->
-  <section class="cs-shots" aria-label="Screens from {p['name']}">
-    <div class="wrap">
-      <div class="cs-shots__grid{' cs-shots__grid--phones' if shots['phones'] else ''}">
-{shot_items}
-      </div>
-    </div>
-  </section>
-
+{screens}
   <!-- ============================================================ OUTCOME -->
   <section class="svc-included cs-outcome" aria-labelledby="outcome-t">
     <div class="wrap">
@@ -372,13 +442,7 @@ def page(p):
           </ul>
         </section>
 
-        <section class="svc-col svc-col--note" aria-labelledby="next-t">
-          <h3 class="svc-col__t" id="next-t">{o['next_t']}</h3>
-          <ul class="svc-col__list">
-{nxt}
-          </ul>
-          <p class="svc-col__fine">{o['fine']}</p>
-        </section>
+{measure}
       </div>
 {quote}
 
