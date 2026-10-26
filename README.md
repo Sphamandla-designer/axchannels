@@ -10,8 +10,11 @@ of truth for the home page.
 ## Structure
 
 ```
-index.html                    Home — implementation of AX DESIGN HOME PAGE.pdf
+index.html                    Home — studio-dashboard homepage (see below)
 assets/css/home.css           Home design system (tokens + components)
+assets/css/home-dash.css      Home-only layer: hero overview panel, capabilities
+                              index, editorial work layout, service board,
+                              pricing module, approach timeline, closing CTA
 assets/js/home.js             Mobile nav panel + selected-work swap
 assets/img/home/              Images taken from the uploaded design materials
 services/                     Services overview  (Service page.png)
@@ -236,6 +239,25 @@ WasteMart, Automation Conversation) carry the proof visually, and the two
 that were explorations rather than client deliveries still say so.
 
 ## Home page implementation notes
+
+**Studio-dashboard homepage (Oct 2026).** The home page now presents the
+studio through the interface language of a product dashboard. `home-dash.css`
+is loaded after `home.css` on the home page only and invents no tokens.
+Section order: hero (copy + studio overview panel built from the FINOS and
+WasteMart case-study screens) · capabilities index (3+ years, four
+disciplines as links) · studio introduction · selected work (FINOS feature,
+asymmetric grid, index rows) · service board (Website Design & Development,
+Mobile App Design, SaaS & Enterprise Systems, Brand Identity & Design) ·
+pricing (Basic R2,999 / Professional R5,999 / Advanced R8,999+, custom quotes
+for product and brand work) · four-stage approach · work in numbers ·
+testimonials · FAQ · closing CTA · footer. The project belt, word marquee and
+"Why us" grid were retired; the two-working-day reply and CMS ownership
+commitments moved into the pricing note and closing CTA. The home nav is
+Work / Services / Pricing / About with a Start a Project action; the other
+pages keep their earlier nav. Package names on the home page follow the
+latest brief (Basic / Professional / Advanced); the website service page
+still says Starter / Growth / Established at the same prices.
+
 
 **Typeface** — Archivo (variable, Google Fonts). Weights were matched to the
 design by measuring stem widths and line widths in the PDF: headings 500,
