@@ -3,23 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AX-Channels — UX-Led Digital Design Studio in Johannesburg</title>
-<meta name="description" content="Web, app and product design studio in Johannesburg. UX-led web design for South African businesses: websites, digital products, UX strategy and brand.">
+<title>AX-Channels — UI/UX Digital Design Studio in Johannesburg, South Africa</title>
+<meta name="description" content="AX-Channels is a UI/UX-focused digital design studio in Johannesburg. We design websites, mobile apps, SaaS and enterprise systems, and brand identities for South African businesses.">
 <link rel="canonical" href="https://www.axchannels.co.za/">
 <meta name="theme-color" content="#ffffff">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AX-Channels">
-<meta property="og:title" content="AX-Channels — UX-Led Digital Design Studio in Johannesburg">
-<meta property="og:description" content="We design websites, user interfaces and digital products that are easy to understand, easy to use and built to perform.">
+<meta property="og:title" content="AX-Channels — UI/UX Digital Design Studio in Johannesburg, South Africa">
+<meta property="og:description" content="Digital products and experiences, designed around real business needs: websites, mobile apps, business software interfaces and brand identities.">
 <meta property="og:url" content="https://www.axchannels.co.za/">
 <meta property="og:image" content="https://www.axchannels.co.za/assets/img/home/og-home.jpg">
 <meta property="og:image:alt" content="The AX-Channels studio mark on a dark gradient">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AX-Channels — UX-Led Digital Design Studio in Johannesburg">
-<meta name="twitter:description" content="We design websites, user interfaces and digital products that are easy to understand, easy to use and built to perform.">
+<meta name="twitter:title" content="AX-Channels — UI/UX Digital Design Studio in Johannesburg, South Africa">
+<meta name="twitter:description" content="Digital products and experiences, designed around real business needs: websites, mobile apps, business software interfaces and brand identities.">
 <meta name="twitter:image" content="https://www.axchannels.co.za/assets/img/home/og-home.jpg">
 <meta name="twitter:image:alt" content="The AX-Channels studio mark on a dark gradient">
 
@@ -32,13 +32,14 @@
 <link rel="preload" as="image" href="/assets/img/home/ax-background.webp" type="image/webp" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/home.css?v=54">
+<link rel="stylesheet" href="/assets/css/home-dash.css?v=1">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "@id": "https://www.axchannels.co.za/#studio",
   "name": "AX-Channels",
-  "description": "UX-led web design and digital product design studio in Johannesburg, working with South African businesses.",
+  "description": "UI/UX-focused digital design studio in Johannesburg, designing websites, mobile apps, SaaS and enterprise systems and brand identities for South African businesses.",
   "url": "https://www.axchannels.co.za/",
   "logo": "https://www.axchannels.co.za/assets/img/logo/ax-logo.png",
   "image": "https://www.axchannels.co.za/assets/img/home/og-home.jpg",
@@ -69,10 +70,11 @@
     "https://www.linkedin.com/company/ax-channels-web-design/"
   ],
   "knowsAbout": [
-    "Web design",
+    "Website design and development",
+    "Mobile app design",
+    "SaaS and enterprise systems design",
     "UX strategy",
     "UI design",
-    "Digital product design",
     "Brand identity"
   ],
   "priceRange": "R2999+"
@@ -88,7 +90,7 @@
       "name": "What services do you offer?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Four, and they overlap: website design and development, digital product design, UI/UX design and UX strategy, and brand identity systems. Most projects start with one and draw on the others — a website usually needs the brand system behind it, and a product needs the UX work before any interface is drawn."
+        "text": "Four, and they overlap: website design and development, mobile app design, SaaS and enterprise systems design, and brand identity and design. Most projects start with one and draw on the others — a website usually needs the brand system behind it, and a product needs the UX work before any interface is drawn."
       }
     },
     {
@@ -136,7 +138,7 @@
       "name": "What happens after the site goes live?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Every package includes free maintenance after launch — one week on Starter, two on Growth, a month on Established. After that, ongoing maintenance is optional at R399 to R1,200 a month, and only charged if you ask for it. We do not lock anyone into a retainer to keep their own website running."
+        "text": "Every website package includes free maintenance after launch — one week on Basic, two on Professional, a month on Advanced. After that, ongoing maintenance is optional at R399 to R1,200 a month, and only charged if you ask for it. We do not lock anyone into a retainer to keep their own website running."
       }
     }
   ]
@@ -147,11 +149,7 @@
 <a class="skip-link" href="#main">Skip to content</a>
 
 <!-- ======================================================== HERO / HEADER -->
-<header class="hero" id="top">
-  <!-- portrait removed for now; restore by uncommenting:
-  <img class="hero__portrait" src="/assets/img/home/hero-portrait.webp"
-       alt="AX-Channels client portrait" width="888" height="940" fetchpriority="high" decoding="async">
-  -->
+<header class="hero hero--dash" id="top">
   <span class="hero__atmo" aria-hidden="true"><i class="hero__atmo-cy"></i><i class="hero__atmo-mg"></i></span>
   <span class="hero__ring" aria-hidden="true"><span></span></span>
   <span class="hero__cloudlight" aria-hidden="true"><i></i><i></i></span>
@@ -161,14 +159,13 @@
     <a class="brand brand--logo" href="/"><img src="/assets/img/logo/ax-mark-reversed.png" alt="AX-Channels home" width="618" height="303"></a>
 
     <nav class="nav" id="site-nav" aria-label="Primary">
-      <a class="nav__link" href="/" aria-current="page">Home</a>
-      <a class="nav__link" href="/about/">About Us</a>
+      <a class="nav__link" href="/case-studies/">Work</a>
       <a class="nav__link" href="/services/">Services</a>
-      <a class="nav__link" href="/case-studies/">Case Studies</a>
-      <a class="nav__link" href="/contact/">Contact Us</a>
+      <a class="nav__link" href="/services/website-design-development/#packages">Pricing</a>
+      <a class="nav__link" href="/about/">About</a>
     </nav>
 
-    <a class="cta-pill cta-pill--light masthead__cta" href="https://calendly.com/sphamandlax19/30min" target="_blank" rel="noopener">Book a Call <span class="cta-pill__arr" aria-hidden="true">&#8599;</span></a>
+    <a class="cta-pill cta-pill--accent masthead__cta cta__link" data-form="project" href="/contact/">Start a Project <span class="cta-pill__arr" aria-hidden="true">&#8599;</span></a>
 
     <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
       <span class="visually-hidden">Menu</span>
@@ -178,115 +175,76 @@
   </div>
 
   <div class="hero__body">
-    <p class="hero__badge"><span class="hero__badge-ic" aria-hidden="true">+</span>UX-Led Design Studio</p>
-    <h1 class="h1"><span class="h1__line"><span class="h1__seg">Designing the</span></span> <span class="h1__line"><span class="h1__seg">Next Generation</span></span> <span class="h1__line"><span class="h1__seg">of Digital Experiences</span></span></h1>
-    <p class="hero__lead">A web design and digital product studio in Johannesburg, building websites, interfaces and products that are easy to understand, easy to use and built to perform.</p>
-  </div>
+    <div class="hero__grid">
 
-  <div class="hero__corner">
-    <p class="hero__statement">Web, App &amp; Product Design<br>For Ambitious South African Businesses</p>
-    <div class="hero__cta">
-      <a class="cta-pill cta-pill--accent cta__link" data-form="project" href="/contact/">Start a Project <span class="cta-pill__arr" aria-hidden="true">&#8599;</span></a>
+      <div class="hero__copy">
+        <p class="hero__badge"><span class="hero__badge-ic" aria-hidden="true">+</span>Digital Design Studio &middot; South Africa</p>
+        <h1 class="h1"><span class="h1__line"><span class="h1__seg">Digital products and experiences,</span></span> <span class="h1__line"><span class="h1__seg">designed around real business needs.</span></span></h1>
+        <p class="hero__lead">AX-Channels designs websites, mobile experiences, business software interfaces and brand identities with a focus on usability, clarity and purposeful design.</p>
+        <div class="hero__cta">
+          <a class="cta-pill cta-pill--accent cta__link" data-form="project" href="/contact/">Start a Project <span class="cta-pill__arr" aria-hidden="true">&#8599;</span></a>
+          <a class="cta-pill cta-pill--ghost" href="/case-studies/">Explore Our Work <span class="cta-pill__arr" aria-hidden="true">&#8599;</span></a>
+        </div>
+        <p class="hero__signal"><b>3+</b><span>Years of<br>experience</span><i aria-hidden="true"></i><span>Johannesburg,<br>working nationwide</span></p>
+      </div>
+
+      <!-- Studio overview panel. Every label here is real: the FINOS dashboard
+           and WasteMart app are the studio's own case studies (both labelled
+           for what they are), the four disciplines are the four services, and
+           the facts are the ones published on the About page. -->
+      <figure class="panel" aria-labelledby="panel-cap">
+        <div class="panel__bar">
+          <span class="panel__id"><span class="panel__dot" aria-hidden="true"></span>AX-Channels <b>Studio Overview</b></span>
+          <span class="panel__state">Selected Work</span>
+        </div>
+
+        <a class="panel__main" href="/case-studies/finos/">
+          <img src="/assets/img/cases/finos-command.webp" alt="The FINOS command centre dashboard: a financial position summary, items needing attention and a briefing panel" width="1600" height="1056" fetchpriority="high" decoding="async">
+          <span class="panel__cap">
+            <span><b>FINOS</b><span class="panel__cap-d"> &middot; Financial operating system</span></span>
+            <span class="panel__tag">Exploration</span>
+          </span>
+        </a>
+
+        <a class="panel__phone" href="/case-studies/wastemart/">
+          <img src="/assets/img/cases/wastemart-scan.webp" alt="WasteMart driver app: the scan recycling bags screen" width="780" height="1688" loading="lazy" decoding="async">
+          <span class="panel__phone-cap"><b>WasteMart</b> &middot; Concept</span>
+        </a>
+
+        <ol class="panel__rail" aria-label="Disciplines">
+          <li><span>01</span>Website Design &amp; Development</li>
+          <li><span>02</span>Mobile App Design</li>
+          <li class="is-on" aria-current="true"><span>03</span>SaaS &amp; Enterprise Systems</li>
+          <li><span>04</span>Brand Identity &amp; Design</li>
+        </ol>
+
+        <dl class="panel__foot">
+          <div><dt>Experience</dt><dd>3+ years</dd></div>
+          <div><dt>Based in</dt><dd>Johannesburg</dd></div>
+          <div><dt>Disciplines</dt><dd>Four, one studio</dd></div>
+        </dl>
+        <figcaption class="visually-hidden" id="panel-cap">Studio overview: selected work from the FINOS and WasteMart case studies, the four disciplines, and the studio's experience and location.</figcaption>
+      </figure>
+
     </div>
   </div>
-
-  <p class="hero__micro">
-    <span>+ Design &amp; Strategy</span>
-    <span>+ Est. JHB 2023</span>
-    <span>+ System: AX-Channels Studio</span>
-  </p>
 </header>
 
 <main id="main">
 
-  <!-- ========================================================= WORK BELT -->
-  <!-- Names the projects on a loop. Hovering or focusing a name stops the
-       belt and raises a card with what the project was. Without JS, or under
-       prefers-reduced-motion, the same names render as a static wrapped list
-       and the duplicate run is dropped. -->
-  <section class="belt" data-ticker aria-label="Projects we have delivered">
-    <div class="belt__in">
-      <p class="belt__label">
-        <span class="belt__spark" aria-hidden="true"></span>
-        Selected Work. 25+ Projects Delivered Since 2023. 6 Shown In Our Case Studies.
+  <!-- ================================================= CAPABILITIES INDEX -->
+  <nav class="index" aria-label="Studio at a glance">
+    <div class="wrap index__grid">
+      <p class="index__cell index__fact">
+        <b>3<sup>+</sup></b>
+        <span>Years of experience<br><small>Design studio &middot; Est. Johannesburg 2023</small></span>
       </p>
-
-      <div class="belt__viewport">
-        <div class="belt__row">
-        <ul class="belt__seq">
-          <li class="belt__item"><a class="belt__chip" href="/case-studies/kiy-trucking/"
-              data-type="Website &middot; Transport &amp; Logistics" data-two="Corporate Website"
-              data-img="assets/img/home/work-kiy-placeholder.jpg" data-alt="A project plate for the KIY Trucking website"
-              data-w="1500" data-h="1125">KIY Trucking</a></li>
-          <li class="belt__item"><a class="belt__chip" href="/case-studies/finos/"
-              data-type="Web Platform &middot; Fintech &amp; AI" data-two="Financial Intelligence"
-              data-img="assets/img/home/work-finos.jpg" data-alt="The FINOS financial operating system dashboard shown on a laptop"
-              data-w="1500" data-h="1125">FINOS</a></li>
-          <li class="belt__item"><a class="belt__chip" href="/case-studies/wastemart/"
-              data-type="Mobile App &middot; Service Design" data-two="Operations Simplified"
-              data-img="assets/img/home/work-wastemart.jpg" data-alt="WasteMart driver app open on a phone showing a collection workflow"
-              data-w="1100" data-h="825">WasteMart</a></li>
-          <li class="belt__item"><a class="belt__chip" href="/case-studies/cmaxx/"
-              data-type="Website &middot; Connectivity &amp; Security" data-two="Plainly Explained"
-              data-img="assets/img/home/work-cmaxx.jpg" data-alt="The CMAXX website homepage shown on a laptop in a dark studio setting"
-              data-w="1500" data-h="1125">CMAXX</a></li>
-          <li class="belt__item"><a class="belt__chip" href="/case-studies/#automation-conversation"
-              data-type="WhatsApp System &middot; Conversational AI" data-two="Conversational Service"
-              data-img="assets/img/home/work-whatsapp.jpg" data-alt="WhatsApp Home Assist conversation open on a phone"
-              data-w="1000" data-h="750">Automation Conversation</a></li>
-          <li class="belt__item"><a class="belt__chip" href="/case-studies/#inceku"
-              data-type="Website &middot; Energy Infrastructure" data-two="Complexity Clarified"
-              data-img="assets/img/home/svc-website.jpg" data-alt="Inceku energy infrastructure website shown on a laptop"
-              data-w="1400" data-h="1054">Inceku Energy</a></li>
-          <li class="belt__item"><a class="belt__chip" href="/case-studies/#castro"
-              data-type="Brand Identity System" data-two="Consistent Everywhere"
-              data-img="assets/img/home/svc-brand.jpg" data-alt="Castro Capital printed brand identity collateral"
-              data-w="1400" data-h="788">Castro Capital</a></li>
-        </ul>
-        <ul class="belt__seq" aria-hidden="true">
-          <li class="belt__item"><a class="belt__chip" href="/case-studies/kiy-trucking/" tabindex="-1"
-              data-type="Website &middot; Transport &amp; Logistics" data-two="Corporate Website"
-              data-img="assets/img/home/work-kiy-placeholder.jpg" data-alt="A project plate for the KIY Trucking website"
-              data-w="1500" data-h="1125">KIY Trucking</a></li>
-          <li class="belt__item"><a class="belt__chip" href="/case-studies/finos/" tabindex="-1"
-              data-type="Web Platform &middot; Fintech &amp; AI" data-two="Financial Intelligence"
-              data-img="assets/img/home/work-finos.jpg" data-alt="The FINOS financial operating system dashboard shown on a laptop"
-              data-w="1500" data-h="1125">FINOS</a></li>
-          <li class="belt__item"><a class="belt__chip" href="/case-studies/wastemart/" tabindex="-1"
-              data-type="Mobile App &middot; Service Design" data-two="Operations Simplified"
-              data-img="assets/img/home/work-wastemart.jpg" data-alt="WasteMart driver app open on a phone showing a collection workflow"
-              data-w="1100" data-h="825">WasteMart</a></li>
-          <li class="belt__item"><a class="belt__chip" href="/case-studies/cmaxx/" tabindex="-1"
-              data-type="Website &middot; Connectivity &amp; Security" data-two="Plainly Explained"
-              data-img="assets/img/home/work-cmaxx.jpg" data-alt="The CMAXX website homepage shown on a laptop in a dark studio setting"
-              data-w="1500" data-h="1125">CMAXX</a></li>
-          <li class="belt__item"><a class="belt__chip" href="/case-studies/#automation-conversation" tabindex="-1"
-              data-type="WhatsApp System &middot; Conversational AI" data-two="Conversational Service"
-              data-img="assets/img/home/work-whatsapp.jpg" data-alt="WhatsApp Home Assist conversation open on a phone"
-              data-w="1000" data-h="750">Automation Conversation</a></li>
-          <li class="belt__item"><a class="belt__chip" href="/case-studies/#inceku" tabindex="-1"
-              data-type="Website &middot; Energy Infrastructure" data-two="Complexity Clarified"
-              data-img="assets/img/home/svc-website.jpg" data-alt="Inceku energy infrastructure website shown on a laptop"
-              data-w="1400" data-h="1054">Inceku Energy</a></li>
-          <li class="belt__item"><a class="belt__chip" href="/case-studies/#castro" tabindex="-1"
-              data-type="Brand Identity System" data-two="Consistent Everywhere"
-              data-img="assets/img/home/svc-brand.jpg" data-alt="Castro Capital printed brand identity collateral"
-              data-w="1400" data-h="788">Castro Capital</a></li>
-        </ul>
-        </div>
-      </div>
-
-      <button class="belt__pause" type="button" data-ticker-pause aria-pressed="false">Pause Motion</button>
+      <a class="index__cell index__link" href="/services/website-design-development/"><span class="index__n">01</span><span class="index__t">Website Design &amp; Development</span><span class="index__arr" aria-hidden="true">&rarr;</span></a>
+      <a class="index__cell index__link" href="/services/digital-product-design/"><span class="index__n">02</span><span class="index__t">Mobile App Design</span><span class="index__arr" aria-hidden="true">&rarr;</span></a>
+      <a class="index__cell index__link" href="/services/digital-product-design/"><span class="index__n">03</span><span class="index__t">SaaS &amp; Enterprise Systems</span><span class="index__arr" aria-hidden="true">&rarr;</span></a>
+      <a class="index__cell index__link" href="/services/brand-identity-systems/"><span class="index__n">04</span><span class="index__t">Brand Identity &amp; Design</span><span class="index__arr" aria-hidden="true">&rarr;</span></a>
     </div>
-
-    <div class="belt__card" data-belt-card hidden>
-      <img class="belt__card-img" src="" alt="" width="1" height="1" decoding="async">
-      <div class="belt__card-body">
-        <p class="belt__card-type"></p>
-        <p class="belt__card-two"></p>
-      </div>
-    </div>
-  </section>
+  </nav>
 
   <!-- ================================================ UX-LED STUDIO INTRO -->
   <section class="studio" id="about" aria-labelledby="studio-title">
@@ -345,6 +303,246 @@
     </div>
   </section>
 
+  <!-- ======================================================= SELECTED WORK -->
+  <section class="wk band--dark" id="case-studies" aria-labelledby="work-title">
+    <div class="wrap">
+      <p class="wk__eyebrow" data-reveal="fade"><span>Selected Work</span><span class="wk__eyebrow-n">Index 01 &mdash; 07</span></p>
+
+      <div class="sec-head" data-stagger>
+        <h2 class="h2" id="work-title">The proof is in the <span class="mark">work</span>: websites, products and brands, designed through.</h2>
+        <p class="sec-head__sub">Selected projects across business websites, mobile apps, software interfaces and brand identity, each labelled for what it is.</p>
+      </div>
+
+      <!-- Feature -->
+      <article class="wk__feature" data-reveal>
+        <a class="wk__feature-media" href="/case-studies/finos/">
+          <img src="/assets/img/home/work-finos.webp" alt="The FINOS financial operating system dashboard shown on a laptop" width="1500" height="1125" loading="lazy" decoding="async">
+        </a>
+        <div class="wk__feature-body">
+          <p class="wk__meta"><span class="wk__id">01 &middot; Web Platform &middot; Fintech &amp; AI</span><span class="wk__tag">Exploration</span></p>
+          <h3 class="wk__title">Financial Operating System: FINOS</h3>
+          <p class="wk__desc">Designing an AI-powered financial operating system that brings financial intelligence, decision-making and portfolio management into one connected experience.</p>
+          <ul class="wk__screens" aria-label="Further FINOS screens">
+            <li><img src="/assets/img/cases/finos-decision.webp" alt="FINOS decision room: a property purchase assessed against financial goals" width="1600" height="1056" loading="lazy" decoding="async"><span>Decision room</span></li>
+            <li><img src="/assets/img/cases/finos-scenarios.webp" alt="FINOS scenarios view comparing financial outcomes" width="1600" height="1056" loading="lazy" decoding="async"><span>Scenarios</span></li>
+          </ul>
+          <a class="tlink" href="/case-studies/finos/">View Case Study</a>
+        </div>
+      </article>
+
+      <!-- Secondary grid -->
+      <div class="wk__grid" data-stagger>
+
+        <article class="wk__tile wk__tile--tall">
+          <a class="wk__media" href="/case-studies/wastemart/">
+            <img src="/assets/img/cases/wastemart-scan.webp" alt="WasteMart driver app: scanning recycling bags before confirming a collection" width="780" height="1688" loading="lazy" decoding="async">
+          </a>
+          <div class="wk__body">
+            <p class="wk__meta"><span class="wk__id">02 &middot; Mobile App</span><span class="wk__tag">Concept</span></p>
+            <h3 class="wk__title">Smarter Waste Systems: WasteMart</h3>
+            <p class="wk__desc">A mobile app concept that guides waste-collection drivers through the working day and leaves a record the office can trust.</p>
+            <a class="tlink" href="/case-studies/wastemart/">View Case Study</a>
+          </div>
+        </article>
+
+        <article class="wk__tile wk__tile--wide">
+          <a class="wk__media" href="/case-studies/cmaxx/">
+            <img src="/assets/img/home/work-cmaxx.webp" alt="The CMAXX website homepage shown on a laptop in a dark studio setting" width="1500" height="1125" loading="lazy" decoding="async">
+          </a>
+          <div class="wk__body">
+            <p class="wk__meta"><span class="wk__id">03 &middot; Website &middot; WiFi, Network &amp; Security</span><span class="wk__tag wk__tag--client">Client Project</span></p>
+            <h3 class="wk__title">Connectivity, Made Clear: CMAXX</h3>
+            <p class="wk__desc">Redesigning the CMAXX digital experience to make its connectivity offering easier to understand, with a stronger path from discovery to conversion.</p>
+            <a class="tlink" href="/case-studies/cmaxx/">View Case Study</a>
+          </div>
+        </article>
+
+        <article class="wk__tile">
+          <a class="wk__media" href="/case-studies/#castro">
+            <img src="/assets/img/home/svc-brand.webp" alt="Castro Capital printed brand identity collateral" width="1400" height="788" loading="lazy" decoding="async">
+          </a>
+          <div class="wk__body">
+            <p class="wk__meta"><span class="wk__id">04 &middot; Brand Identity</span><span class="wk__tag wk__tag--client">Client Project</span></p>
+            <h3 class="wk__title">Castro Capital</h3>
+            <p class="wk__desc">A brand identity system carried across documents, decks and social media.</p>
+            <a class="tlink" href="/case-studies/#castro">View Project</a>
+          </div>
+        </article>
+
+        <article class="wk__tile">
+          <a class="wk__media" href="/case-studies/kiy-trucking/">
+            <img src="/assets/img/home/work-kiy-placeholder.webp" alt="A project plate for the KIY Trucking website. A preview of the live site is still to be added here." width="1500" height="1125" loading="lazy" decoding="async">
+          </a>
+          <div class="wk__body">
+            <p class="wk__meta"><span class="wk__id">05 &middot; Website &middot; Transport &amp; Logistics</span><span class="wk__tag wk__tag--client">Client Project</span></p>
+            <h3 class="wk__title">A Corporate Site: KIY Trucking</h3>
+            <p class="wk__desc">A corporate website presenting a transport and logistics business to prospective customers, designed and implemented on WordPress.</p>
+            <a class="tlink" href="/case-studies/kiy-trucking/">View Case Study</a>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Index rows for the rest -->
+      <ol class="wk__index" data-stagger>
+        <li><a class="wk__row" href="/case-studies/#inceku"><span class="wk__row-n">06</span><span class="wk__row-t">Inceku Energy</span><span class="wk__row-d">Website &middot; Energy infrastructure</span><span class="wk__tag wk__tag--client">Client Project</span><span class="wk__row-arr" aria-hidden="true">&rarr;</span></a></li>
+        <li><a class="wk__row" href="/case-studies/#automation-conversation"><span class="wk__row-n">07</span><span class="wk__row-t">Automation Conversation</span><span class="wk__row-d">WhatsApp system &middot; Conversational AI</span><span class="wk__tag">Exploration</span><span class="wk__row-arr" aria-hidden="true">&rarr;</span></a></li>
+      </ol>
+
+      <div class="wk__foot" data-reveal="fade">
+        <p class="wk__note"><b>Client Project</b> marks work delivered for a client whose feedback is published on this site. <b>Concept</b> and <b>Exploration</b> mark self-initiated work, shown for the thinking rather than presented as a commission.</p>
+        <a class="cta-pill cta-pill--light" href="/case-studies/">See All Projects <span class="cta-pill__arr" aria-hidden="true">&#8599;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ SERVICES -->
+  <section class="svcb" id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <p class="sec-eyebrow" data-reveal="fade"><span>Services</span><span>Four disciplines</span></p>
+      <div class="sec-head" data-stagger>
+        <h2 class="h2" id="services-title">One studio. Four ways to move your business <span class="mark">forward</span>.</h2>
+        <p class="sec-head__sub">From customer-facing websites to complex digital products, we design experiences around the people who use them and the businesses that depend on them.</p>
+      </div>
+
+      <div class="svcb__board" data-stagger>
+
+        <article class="svcm">
+          <p class="svcm__head"><span class="svcm__n">01</span><span class="svcm__price">From R2,999</span></p>
+          <h3 class="svcm__title">Website Design &amp; Development</h3>
+          <p class="svcm__desc">Business websites, landing pages, e-commerce websites, website redesigns and CMS websites.</p>
+          <div class="svcm__media"><img src="/assets/img/home/svc-website.webp" alt="Inceku energy infrastructure website shown on a laptop" width="1400" height="1054" loading="lazy" decoding="async"></div>
+          <a class="tlink" href="/services/website-design-development/">Explore Website Design</a>
+        </article>
+
+        <article class="svcm">
+          <p class="svcm__head"><span class="svcm__n">02</span><span class="svcm__price">Custom quote</span></p>
+          <h3 class="svcm__title">Mobile App Design</h3>
+          <p class="svcm__desc">Mobile UX, user flows, interface design, interactive prototypes and design systems.</p>
+          <div class="svcm__media"><img src="/assets/img/home/svc-product.webp" alt="A mobile product interface displayed on a phone resting on concrete" width="1400" height="1050" loading="lazy" decoding="async"></div>
+          <a class="tlink" href="/services/digital-product-design/">Explore Product Design</a>
+        </article>
+
+        <article class="svcm">
+          <p class="svcm__head"><span class="svcm__n">03</span><span class="svcm__price">Custom quote</span></p>
+          <h3 class="svcm__title">SaaS &amp; Enterprise Systems</h3>
+          <p class="svcm__desc">SaaS dashboards, admin interfaces, business management systems, complex workflows and reusable design systems.</p>
+          <div class="svcm__media"><img src="/assets/img/cases/finos-decision.webp" alt="FINOS decision room: a dashboard screen assessing a property purchase" width="1600" height="1056" loading="lazy" decoding="async"></div>
+          <a class="tlink" href="/services/digital-product-design/">Explore Product Design</a>
+        </article>
+
+        <article class="svcm">
+          <p class="svcm__head"><span class="svcm__n">04</span><span class="svcm__price">Packages &amp; quotes</span></p>
+          <h3 class="svcm__title">Brand Identity &amp; Design</h3>
+          <p class="svcm__desc">Logo design, visual identity, typography, colour systems, brand guidelines and agreed supporting assets.</p>
+          <div class="svcm__media"><img src="/assets/img/home/svc-brand.webp" alt="Castro Capital printed brand identity collateral" width="1400" height="788" loading="lazy" decoding="async"></div>
+          <a class="tlink" href="/services/brand-identity-systems/">Explore Brand Identity</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= PRICING -->
+  <section class="price" id="pricing" aria-labelledby="pricing-title">
+    <div class="wrap">
+      <p class="sec-eyebrow" data-reveal="fade"><span>Pricing</span><span>Fixed where it can be, scoped where it varies</span></p>
+      <div class="sec-head" data-stagger>
+        <h2 class="h2" id="pricing-title">Clear website pricing. Scoped quotes for product and <span class="mark">brand</span> work.</h2>
+        <p class="sec-head__sub">Website packages are a straightforward way to start. Software, mobile and brand engagements are priced against the scope of each project.</p>
+      </div>
+
+      <div class="price__grid" data-stagger>
+
+        <div class="price__web">
+          <p class="price__bar"><span><b>Website Design &amp; Development</b> &middot; Three packages</span><span>Priced in ZAR</span></p>
+          <div class="price__tiers">
+            <article class="tier">
+              <p class="tier__name">Basic</p>
+              <p class="tier__amt">R2,999</p>
+              <p class="tier__for">An entry point for a focused business website that needs to be clear, credible and easy to find.</p>
+              <a class="tlink cta__link" data-form="project" href="/contact/">Enquire</a>
+            </article>
+            <article class="tier tier--lead">
+              <p class="tier__name">Professional</p>
+              <p class="tier__amt">R5,999</p>
+              <p class="tier__for">A fuller engagement for growing businesses, with more room for structure, content and UX attention.</p>
+              <a class="tlink cta__link" data-form="project" href="/contact/">Enquire</a>
+            </article>
+            <article class="tier">
+              <p class="tier__name">Advanced</p>
+              <p class="tier__amt">R8,999<span class="tier__plus">+</span></p>
+              <p class="tier__for">Larger sites with custom design throughout. The final price is set against the agreed scope.</p>
+              <p class="tier__scope">Final pricing depends on scope</p>
+              <a class="tlink cta__link" data-form="project" href="/contact/">Enquire</a>
+            </article>
+          </div>
+          <p class="price__foot"><span>Pay in full or split over three months.</span><a href="/services/website-design-development/#packages">See what each package includes <span aria-hidden="true">&rarr;</span></a></p>
+        </div>
+
+        <div class="price__custom">
+          <p class="price__bar price__bar--light"><span><b>Product &amp; brand work</b> &middot; Scoped per project</span></p>
+          <article class="quote">
+            <h3 class="quote__t">SaaS &amp; Enterprise Systems</h3>
+            <p class="quote__v">Custom quote</p>
+            <p class="quote__d">The investment depends on the system, its workflows and the project scope.</p>
+            <a class="tlink" href="/services/digital-product-design/">About product design</a>
+          </article>
+          <article class="quote">
+            <h3 class="quote__t">Mobile App Design</h3>
+            <p class="quote__v">Custom quote</p>
+            <p class="quote__d">The investment depends on the product scope and the design requirements.</p>
+            <a class="tlink cta__link" data-form="project" href="/contact/">Describe your app</a>
+          </article>
+          <article class="quote">
+            <h3 class="quote__t">Brand Identity &amp; Design</h3>
+            <p class="quote__v">Packages and custom quotes</p>
+            <p class="quote__d">Scope, feedback rounds and timeline are set per proposal.</p>
+            <a class="tlink" href="/services/brand-identity-systems/">About brand identity</a>
+          </article>
+          <p class="price__note">Every proposal carries a scope, a timeline and a price in writing. Websites are handed over on a CMS with admin access, so you own what we build.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ APPROACH -->
+  <section class="steps" id="approach" aria-labelledby="approach-title">
+    <div class="wrap">
+      <p class="sec-eyebrow" data-reveal="fade"><span>The AX-Channels approach</span><span>Four stages</span></p>
+      <div class="sec-head" data-stagger>
+        <h2 class="h2" id="approach-title">How the work <span class="mark">moves</span>, from first conversation to handoff.</h2>
+        <p class="sec-head__sub">A general picture of how engagements run. Which stages a project includes, and how deep each goes, is agreed with the scope.</p>
+      </div>
+
+      <ol class="steps__row" data-stagger>
+        <li class="step">
+          <p class="step__n">Stage 01</p>
+          <h3 class="step__t">Understand</h3>
+          <p class="step__d">Clarify the business context, users, goals and constraints.</p>
+        </li>
+        <li class="step">
+          <p class="step__n">Stage 02</p>
+          <h3 class="step__t">Structure</h3>
+          <p class="step__d">Define the experience, workflows and information architecture.</p>
+        </li>
+        <li class="step">
+          <p class="step__n">Stage 03</p>
+          <h3 class="step__t">Design</h3>
+          <p class="step__d">Develop the interface, visual system and interactive prototype.</p>
+        </li>
+        <li class="step">
+          <p class="step__n">Stage 04</p>
+          <h3 class="step__t">Deliver</h3>
+          <p class="step__d">Prepare the agreed assets and handoff appropriate to the engagement.</p>
+        </li>
+      </ol>
+
+      <p class="steps__note" data-reveal="fade"><span>Work is shown at the end of each stage rather than saved for a reveal, so direction is agreed while it is still cheap to change.</span><a class="tlink" href="/about/#process">See the full process</a></p>
+    </div>
+  </section>
+
   <!-- ===================================================== WORK IN NUMBERS -->
   <section class="numbers" aria-labelledby="numbers-title">
     <div class="wrap">
@@ -387,284 +585,6 @@
           <img src="/assets/img/home/clients-phone.webp" alt="" width="1000" height="750" loading="lazy" decoding="async">
         </div>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ SERVICES -->
-  <section class="services" id="services" aria-labelledby="services-title">
-    <div class="wrap">
-      <div class="sec-head" data-stagger>
-        <h2 class="h2" id="services-title">Services Built On <span class="mark">UX</span>,<br>Not Decoration</h2>
-        <p class="sec-head__sub">We design the structure, interface and experience behind websites, applications and digital products, from the first idea to the final experience</p>
-      </div>
-
-      <div class="services__grid" data-stagger>
-
-        <article class="svc">
-          <div class="svc__head"><p class="eyebrow">UX - Led Process</p><span class="svc__num" aria-hidden="true">01</span></div>
-          <div class="svc__body">
-            <h3 class="svc__title">Website Design &amp; Development</h3>
-            <p class="svc__desc">Conversion-driven architecture, SEO structure, performance optimisation&hellip;</p>
-            <ul class="chips">
-              <li class="chip">Responsive design</li>
-              <li class="chip">UI/UX Design</li>
-              <li class="chip">CMS</li>
-              <li class="chip">Development</li>
-              <li class="chip">Testing</li>
-              <li class="chip">Launch</li>
-              <li class="chip">WordPress</li>
-            </ul>
-          </div>
-          <div class="svc__media">
-            <img src="/assets/img/home/svc-website.webp" alt="Inceku energy infrastructure website shown on a laptop" width="1400" height="1054" loading="lazy" decoding="async">
-            <a class="cta-pill cta-pill--light svc__cta" href="/services/website-design-development/">Explore Web Design <span class="cta-pill__arr" aria-hidden="true">&#8599;</span>
-            </a>
-          </div>
-        </article>
-
-        <article class="svc">
-          <div class="svc__head"><p class="eyebrow">UX - Led Process</p><span class="svc__num" aria-hidden="true">02</span></div>
-          <div class="svc__body">
-            <h3 class="svc__title">Digital Product Design</h3>
-            <p class="svc__desc">Experiences for apps, platforms, SaaS products and digital services.</p>
-            <ul class="chips">
-              <li class="chip">Product UX</li>
-              <li class="chip">User Journeys</li>
-              <li class="chip">Feature architecture</li>
-              <li class="chip">UI Systems</li>
-              <li class="chip">Interaction design</li>
-            </ul>
-          </div>
-          <div class="svc__media">
-            <img src="/assets/img/home/svc-product.webp" alt="A mobile product interface displayed on a phone resting on concrete" width="1400" height="1050" loading="lazy" decoding="async">
-            <a class="cta-pill cta-pill--light svc__cta" href="/services/digital-product-design/">Explore Product Design <span class="cta-pill__arr" aria-hidden="true">&#8599;</span>
-            </a>
-          </div>
-        </article>
-
-        <article class="svc">
-          <div class="svc__head"><p class="eyebrow">UX - Led Process</p><span class="svc__num" aria-hidden="true">03</span></div>
-          <div class="svc__body">
-            <h3 class="svc__title">UI/UX Design &amp; UX Strategy</h3>
-            <p class="svc__desc">Clear interfaces built around how people actually use digital products.</p>
-            <ul class="chips">
-              <li class="chip">UX Strategy</li>
-              <li class="chip">User Flow</li>
-              <li class="chip">Prototypes</li>
-              <li class="chip">IA</li>
-              <li class="chip">Wireframes</li>
-            </ul>
-          </div>
-          <div class="svc__media">
-            <img src="/assets/img/home/svc-uxui.webp" alt="UI and UX interface panels being arranged on screen" width="1280" height="720" loading="lazy" decoding="async">
-            <a class="cta-pill cta-pill--light svc__cta" href="/services/ui-ux-design-ux-strategy/">Explore UX/UI Design <span class="cta-pill__arr" aria-hidden="true">&#8599;</span>
-            </a>
-          </div>
-        </article>
-
-        <article class="svc">
-          <div class="svc__head"><p class="eyebrow">UX - Led Process</p><span class="svc__num" aria-hidden="true">04</span></div>
-          <div class="svc__body">
-            <h3 class="svc__title">Brand Identity Systems</h3>
-            <p class="svc__desc">Digital-first brand systems built for clarity, consistency, and growth.</p>
-            <ul class="chips">
-              <li class="chip">Social media system</li>
-              <li class="chip">Brand strategy</li>
-              <li class="chip">Graphic elements</li>
-              <li class="chip">Email Signature</li>
-              <li class="chip">Brand guidelines</li>
-              <li class="chip">Colour system</li>
-            </ul>
-          </div>
-          <div class="svc__media">
-            <img src="/assets/img/home/svc-brand.webp" alt="Castro Capital printed brand identity collateral" width="1400" height="788" loading="lazy" decoding="async">
-            <a class="cta-pill cta-pill--light svc__cta" href="/services/brand-identity-systems/">Explore Brand Systems <span class="cta-pill__arr" aria-hidden="true">&#8599;</span>
-            </a>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============================================================== WHY US -->
-  <section class="why" id="why" aria-labelledby="why-title">
-    <div class="wrap">
-      <div class="sec-head" data-stagger>
-        <h2 class="h2" id="why-title">Why Businesses Choose <span class="mark">AX-Channels</span></h2>
-        <p class="sec-head__sub">Four things you can hold us to, written down before you have spent a cent.</p>
-      </div>
-
-      <div class="why__grid" data-stagger>
-
-        <article class="why__anchor">
-          <span class="why__anchor-wm" aria-hidden="true">AX</span>
-          <p class="eyebrow">The Commitment</p>
-          <h3 class="why__anchor-t">A reply in two working days, and a real date in writing.</h3>
-          <p class="why__anchor-p">Every enquiry gets an answer within two working days. Every proposal carries a timeline, a scope and a price, worked out after discovery rather than guessed before it. Website packages start at R2,999, and anything quoted against scope is quoted in writing.</p>
-          <a class="cta-pill cta-pill--accent cta__link" data-form="project" href="/contact/">Start a Project <span class="cta-pill__arr" aria-hidden="true">&#8599;</span></a>
-        </article>
-
-        <article class="why-card">
-          <span class="why-card__wm" aria-hidden="true">01</span>
-          <span class="why-card__n" aria-hidden="true">01</span>
-          <h3 class="why-card__t">UX decides the layout</h3>
-          <p class="why-card__p">Research and structure come first, interface second. A layout drawn before the architecture is a guess with a colour scheme, and it is the visitor who pays for it.</p>
-        </article>
-
-        <article class="why-card">
-          <span class="why-card__wm" aria-hidden="true">02</span>
-          <span class="why-card__n" aria-hidden="true">02</span>
-          <h3 class="why-card__t">You see it at every stage</h3>
-          <p class="why-card__p">Five stages, and work is shown at the end of each one rather than saved for a reveal. Direction gets agreed while it is still cheap to change.</p>
-        </article>
-
-        <article class="why-card">
-          <span class="why-card__wm" aria-hidden="true">03</span>
-          <span class="why-card__n" aria-hidden="true">03</span>
-          <h3 class="why-card__t">You own what we build</h3>
-          <p class="why-card__p">Sites are handed over on a CMS with admin access and a walk-through. Maintenance is free after launch and optional after that, never a condition of keeping your own site running.</p>
-        </article>
-
-        <article class="why-card">
-          <span class="why-card__wm" aria-hidden="true">04</span>
-          <span class="why-card__n" aria-hidden="true">04</span>
-          <h3 class="why-card__t">Built to be found</h3>
-          <p class="why-card__p">The SEO structure is mapped alongside the UX architecture, before anything is drawn, then the build is tuned for speed, devices and search.</p>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ====================================================== MARQUEE TICKER -->
-  <section class="marquee band--dark" data-ticker aria-label="What we design">
-    <div class="marquee__viewport">
-      <div class="marquee__row">
-        <span class="marquee__seq">
-          <span class="marquee__word">Websites</span><span class="marquee__plus" aria-hidden="true">+</span>
-          <span class="marquee__word marquee__word--acc">Products</span><span class="marquee__plus" aria-hidden="true">+</span>
-          <span class="marquee__word">Interfaces</span><span class="marquee__plus" aria-hidden="true">+</span>
-          <span class="marquee__word">Brands</span><span class="marquee__plus" aria-hidden="true">+</span>
-          <span class="marquee__word">Dashboards</span><span class="marquee__plus" aria-hidden="true">+</span>
-        </span>
-        <span class="marquee__seq" aria-hidden="true">
-          <span class="marquee__word">Websites</span><span class="marquee__plus">+</span>
-          <span class="marquee__word marquee__word--acc">Products</span><span class="marquee__plus">+</span>
-          <span class="marquee__word">Interfaces</span><span class="marquee__plus">+</span>
-          <span class="marquee__word">Brands</span><span class="marquee__plus">+</span>
-          <span class="marquee__word">Dashboards</span><span class="marquee__plus">+</span>
-        </span>
-      </div>
-    </div>
-    <div class="wrap marquee__foot">
-      <p class="marquee__micro">&#10022; Research. Design. Build. Perform.</p>
-      <button class="marquee__pause" type="button" data-ticker-pause aria-pressed="false">Pause Motion</button>
-    </div>
-  </section>
-
-  <!-- ======================================================= SELECTED WORK -->
-  <section class="work band--dark" id="case-studies" aria-labelledby="work-title">
-    <span class="work__wm" aria-hidden="true">AX</span>
-
-    <div class="wrap">
-      <p class="work__eyebrow" data-reveal="fade">Selected Work</p>
-
-      <div class="sec-head" data-stagger>
-        <h2 class="h2" id="work-title">A Look At The Digital Experiences We Have <span class="mark">Designed</span> For Businesses And Products.</h2>
-        <p class="sec-head__sub">Explore selected projects across websites, applications, dashboards and digital products, and see how we approach real design problems.</p>
-      </div>
-
-      <div class="work__viewport">
-        <div class="work__track" id="work-track" tabindex="0" role="group" aria-label="Selected projects" data-stagger>
-
-          <article class="project">
-            <a class="project__media" href="/case-studies/finos/">
-              <img src="/assets/img/home/work-finos.webp" alt="The FINOS financial operating system dashboard shown on a laptop" width="1500" height="1125" loading="lazy" decoding="async">
-            </a>
-            <span class="project__meta">
-              <span class="project__cat">Web Platform · Fintech &amp; AI</span>
-              <span class="project__tag">Exploration</span>
-            </span>
-            <h3 class="project__title">Financial Operating System: FINOS</h3>
-            <p class="project__desc">Designing an AI-powered financial operating system that brings financial intelligence, decision-making and portfolio management into one connected experience.</p>
-            <a class="tlink" href="/case-studies/finos/">View Case Study</a>
-          </article>
-
-          <article class="project">
-            <a class="project__media" href="/case-studies/wastemart/">
-              <img src="/assets/img/home/work-wastemart.webp" alt="WasteMart driver app open on a phone showing a collection workflow" width="1100" height="825" loading="lazy" decoding="async">
-            </a>
-            <span class="project__meta">
-              <span class="project__cat">Mobile App · Service Design &amp; Operations</span>
-              <span class="project__tag">Concept</span>
-            </span>
-            <h3 class="project__title">Smarter Waste Systems: WasteMart</h3>
-            <p class="project__desc">A mobile app concept that guides waste-collection drivers through the working day and leaves a record the office can trust.</p>
-            <a class="tlink" href="/case-studies/wastemart/">View Case Study</a>
-          </article>
-
-          <article class="project">
-            <span class="project__media">
-              <img src="/assets/img/home/work-whatsapp.webp" alt="WhatsApp Home Assist conversation open on a phone" width="1000" height="750" loading="lazy" decoding="async">
-            </span>
-            <span class="project__meta">
-              <span class="project__cat">WhatsApp System · Conversational AI</span>
-              <span class="project__tag">Exploration</span>
-            </span>
-            <h3 class="project__title">Automation Conversation</h3>
-            <p class="project__desc">Exploring how conversational interfaces can simplify everyday service interactions through WhatsApp.</p>
-            <span class="tlink tlink--soon">Case Study Coming Soon</span>
-          </article>
-
-
-          <article class="project">
-            <a class="project__media" href="/case-studies/kiy-trucking/">
-              <img src="/assets/img/home/work-kiy-placeholder.webp" alt="A project plate for the KIY Trucking website. A preview of the live site is still to be added here." width="1500" height="1125" loading="lazy" decoding="async">
-            </a>
-            <span class="project__meta">
-              <span class="project__cat">Website &middot; Transport &amp; Logistics</span>
-              <span class="project__tag project__tag--client">Client Project</span>
-            </span>
-            <h3 class="project__title">A Corporate Site: KIY Trucking</h3>
-            <p class="project__desc">A corporate website presenting a transport and logistics business to prospective customers, designed and implemented on WordPress.</p>
-            <a class="tlink" href="/case-studies/kiy-trucking/">View Case Study</a>
-          </article>
-
-          <article class="project">
-            <a class="project__media" href="/case-studies/cmaxx/">
-              <img src="/assets/img/home/work-cmaxx.webp" alt="The CMAXX website homepage shown on a laptop in a dark studio setting" width="1500" height="1125" loading="lazy" decoding="async">
-            </a>
-            <span class="project__meta">
-              <span class="project__cat">Website · WiFi, Network &amp; Security</span>
-              <span class="project__tag project__tag--client">Client Project</span>
-            </span>
-            <h3 class="project__title">Connectivity, Made Clear: CMAXX</h3>
-            <p class="project__desc">Redesigning the CMAXX digital experience to make its connectivity offering easier to understand, with a stronger path from discovery to conversion.</p>
-            <a class="tlink" href="/case-studies/cmaxx/">View Case Study</a>
-          </article>
-
-        </div>
-
-        <div class="work__nav">
-          <button class="carousel-btn carousel-btn--prev" type="button" data-work-prev>
-            <span class="visually-hidden">Previous projects</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
-          </button>
-          <button class="carousel-btn carousel-btn--next" type="button" data-work-next>
-            <span class="visually-hidden">Next projects</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
-        </div>
-      </div>
-
-      <p class="work__note" data-reveal="fade"><b>Client Project</b> marks work delivered for a client whose feedback is published on this site. <b>Concept</b> and <b>Exploration</b> mark self-initiated work, shown for the thinking rather than presented as a commission.</p>
-
-      <div class="work__more" data-reveal>
-        <a class="cta-pill cta-pill--light" href="/case-studies/">See All Projects <span class="cta-pill__arr" aria-hidden="true">&#8599;</span>
-        </a>
       </div>
     </div>
   </section>
@@ -800,7 +720,6 @@
   </section>
 
 
-
   <!-- ================================================================= FAQ -->
   <section class="faq" id="faq" aria-labelledby="faq-title">
     <div class="wrap">
@@ -822,7 +741,7 @@
             <span>What services do you offer?</span>
             <span class="faq__mark" aria-hidden="true"></span>
           </summary>
-          <div class="faq__a"><p>Four, and they overlap: website design and development, digital product design, UI/UX design and UX strategy, and brand identity systems. Most projects start with one and draw on the others — a website usually needs the brand system behind it, and a product needs the UX work before any interface is drawn.</p></div>
+          <div class="faq__a"><p>Four, and they overlap: website design and development, mobile app design, SaaS and enterprise systems design, and brand identity and design. Most projects start with one and draw on the others — a website usually needs the brand system behind it, and a product needs the UX work before any interface is drawn.</p></div>
         </details>
         <details class="faq__item" name="faq">
           <summary class="faq__q">
@@ -864,7 +783,7 @@
             <span>What happens after the site goes live?</span>
             <span class="faq__mark" aria-hidden="true"></span>
           </summary>
-          <div class="faq__a"><p>Every package includes free maintenance after launch — one week on Starter, two on Growth, a month on Established. After that, ongoing maintenance is optional at R399 to R1,200 a month, and only charged if you ask for it. We do not lock anyone into a retainer to keep their own website running.</p></div>
+          <div class="faq__a"><p>Every website package includes free maintenance after launch — one week on Basic, two on Professional, a month on Advanced. After that, ongoing maintenance is optional at R399 to R1,200 a month, and only charged if you ask for it. We do not lock anyone into a retainer to keep their own website running.</p></div>
         </details>
         </div>
       </div>
@@ -877,17 +796,22 @@
 <div class="block--dark" id="contact">
   <div class="closing">
 
-    <section class="cta" aria-labelledby="cta-title">
+    <section class="cta cta--dash" aria-labelledby="cta-title">
       <div data-stagger>
-        <h2 class="h2 cta__title" id="cta-title">Have A Digital Experience That Needs <span class="mark">Rethinking?</span></h2>
-        <p class="cta__text">Whether you are building something new or improving something that already exists, let's start with the problem. We reply within two working days.</p>
+        <p class="cta__eyebrow">Start a project</p>
+        <h2 class="h2 cta__title" id="cta-title">Have a project in <span class="mark">mind?</span></h2>
+        <p class="cta__text">Tell us what you're building, improving or trying to solve. We'll help define the right design engagement for your needs.</p>
       </div>
-      <div class="cta__links" data-stagger>
-        <a class="cta__link" data-form="project" href="/contact/">Discuss A Project<span class="cta__arr" aria-hidden="true">&#8599;</span></a>
-        <a class="cta__link" data-form="partner" href="/contact/">Partner With Us<span class="cta__arr" aria-hidden="true">&#8599;</span></a>
-        <a class="cta__link" data-form="hello" href="/contact/">Just Want To Say Hi<span class="cta__arr" aria-hidden="true">&#8599;</span></a>
+      <div class="cta__actions" data-stagger>
+        <div class="cta__pills">
+          <a class="cta-pill cta-pill--accent cta__link" data-form="project" href="/contact/">Start a Project <span class="cta-pill__arr" aria-hidden="true">&#8599;</span></a>
+          <a class="cta-pill cta-pill--ghost" href="/case-studies/">Explore Our Work <span class="cta-pill__arr" aria-hidden="true">&#8599;</span></a>
+        </div>
+        <p class="cta__alt">Not a brief yet? <a class="cta__link" data-form="partner" href="/contact/">Partner with us</a> or <a class="cta__link" data-form="hello" href="/contact/">just say hi</a>.</p>
+        <p class="cta__reply">We reply within two working days.</p>
       </div>
     </section>
+
 
     <footer class="footer">
       <div class="footer__grid" data-stagger>
