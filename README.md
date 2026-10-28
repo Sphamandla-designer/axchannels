@@ -13,6 +13,7 @@ of truth for the home page.
 index.html                    Home — implementation of AX DESIGN HOME PAGE.pdf
 assets/css/home.css           Home design system (tokens + components)
 assets/js/home.js             Mobile nav panel + selected-work swap
+assets/css/system.css         Tile system (opt-in with body.sys) — home page
 assets/img/home/              Images taken from the uploaded design materials
 services/                     Services overview  (Service page.png)
 services/web-design/          Web design service (web design.png)
@@ -31,6 +32,21 @@ assets/css/brand.css          Brand-page-only additions (specimen board, system 
 assets/css/site.css           Design system for the services pages
 assets/js/site.js             Behaviour for the services pages
 ```
+
+## Tile system (home page)
+
+`assets/css/system.css` restyles a page as full-bleed tiles: white, parchment
+(`#f5f5f7`) and near-black (`#272729`) sections that touch, so the change of
+surface is the only divider. Type is SF Pro where the platform has it and
+Inter elsewhere (600 headlines with tight tracking, 17px / 1.47 body). AX
+magenta is the one accent and is kept for things you can press: pills, text
+links, focus rings. Cards are white with a hairline at 18px, actions are
+pills, and the only shadow sits under photography.
+
+It loads after `home.css` and every rule is scoped under `.sys`, so a page
+opts in with `<body class="sys">` plus the stylesheet link. Only the home page
+does so far; the other pages keep their current design until they are moved
+across.
 
 ## Case studies
 
