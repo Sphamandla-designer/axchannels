@@ -1,0 +1,146 @@
+/* ==========================================================================
+   AX-Channels — homepage-only additions
+   Loaded by index.html after home.css. home.css is shared by every page, so
+   the homepage's offer hero, proof strip and grouped work section live here
+   instead. Everything reuses home.css tokens: colours, mono labels, pills,
+   spacing steps and radii. Nothing here is new to the visual system.
+   ========================================================================== */
+
+/* ---- Hero: the offer ------------------------------------------------------ */
+/* The headline is a sentence rather than a slogan, so it runs a step below the
+   old display size to keep three lines at desktop and stay readable on phones. */
+.h1--offer { font-size: clamp(32px, 4.4vw, 88px); }
+
+.hero__lead { max-width: 58ch; }
+
+.hero__actions {
+  margin-top: clamp(22px, 2.2vw, 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+.hero__actions .hero__cta { margin: 0; }
+.hero__reply {
+  font-size: var(--fs-note);
+  line-height: 1.5;
+  color: var(--on-dark-dim);
+}
+
+/* The eyebrow is longer than the old label: let it wrap on narrow phones
+   instead of running off the screen. */
+@media (max-width: 479px) {
+  .hero__badge { white-space: normal; text-align: left; line-height: 1.4; }
+}
+
+/* ---- Hero: proof strip --------------------------------------------------- */
+/* The fact row's position and mono type, carrying three checkable practices
+   instead of decorative labels. Supporting evidence, so it stays small. */
+.hero__proof {
+  padding: 0;
+  list-style: none;
+  flex-wrap: wrap;
+  gap: 10px clamp(22px, 3vw, 56px);
+  max-width: calc(100% - 2 * var(--block-pad));
+}
+.hero__proof li {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .6em;
+}
+.hero__proof li::before {
+  content: "+";
+  color: var(--accent);
+  font-weight: 700;
+}
+@media (min-width: 1101px) {
+  .hero__proof { margin: 0; }
+}
+@media (max-width: 1100px) {
+  .hero__proof {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: clamp(28px, 6vw, 44px);
+    padding-inline: var(--block-pad);
+  }
+}
+
+/* The corner block is gone, so the body no longer reserves room for it at
+   desktop beyond what the proof strip needs. */
+@media (min-width: 1101px) {
+  .hero__body { padding-bottom: clamp(96px, 8vw, 150px); }
+}
+
+/* ---- Selected work: grouped grids ----------------------------------------- */
+.work .sec-head .h2 { max-width: none; }
+
+.work__group { margin-top: var(--sp-91); }
+.work__group + .work__group { margin-top: var(--sp-128); }
+
+.work__group-t {
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule-dark);
+  font-family: var(--mono);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.work__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 2.4vw, 46px) clamp(16px, 1.77vw, 34px);
+  margin-top: clamp(24px, 2.2vw, 40px);
+  align-items: start;
+}
+
+/* In a grid the cards read as editorial entries, left-aligned, rather than
+   centred carousel slides. */
+.work__grid .project {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+.work__grid .project__media { width: 100%; }
+.work__grid .project__media img { aspect-ratio: 4 / 3; }
+.work__grid .project__meta { margin-top: clamp(16px, 1.4vw, 24px); }
+.work__grid .project__cat { font-size: var(--fs-2xs); }
+.work__grid .project__title { margin-top: 12px; font-size: var(--fs-h5); }
+.work__grid .project__desc {
+  margin: 10px 0 0;
+  max-width: none;
+  font-size: var(--fs-copy);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, .86);
+}
+/* the evidence line: what was delivered, or what the client said */
+.project__proof {
+  margin-top: 12px;
+  padding-left: 12px;
+  border-left: 2px solid var(--accent);
+  font-size: var(--fs-note);
+  line-height: 1.55;
+  color: var(--on-dark-dim);
+}
+.work__grid .project .tlink { margin-top: 16px; }
+
+@media (max-width: 1023px) {
+  .work__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 639px) {
+  .work__grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* On phones the three set lines would strand a word ("priced,") on its own
+   line, so the headline flows as one sentence there. */
+@media (max-width: 639px) {
+  .h1--offer .h1__line,
+  .h1--offer .h1__seg { display: inline; overflow: visible; }
+}
+
+/* The strip crosses the lit ring at desktop: a lighter tone keeps it legible
+   over the brightest part of the background image. */
+.hero__proof { color: rgba(255, 255, 255, .8); }
